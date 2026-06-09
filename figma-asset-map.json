@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "figmaFileKey": "oHz7tEIPOrGs9CYZLpYeYV",
+  "rootNodeId": "1002:8766",
+  "strategy": "Use figmaNodeId as the stable key. Layer names may change for implementation clarity, but exported local asset paths should not be inferred from layer names.",
+  "assets": {
+    "1002:8774": {
+      "currentName": "images/categories/korean",
+      "localPath": "assets/images/categories/korean.png",
+      "kind": "category",
+      "alias": "category_korean"
+    },
+    "1002:8779": {
+      "currentName": "images/categories/chicken",
+      "localPath": "assets/images/categories/chicken.png",
+      "kind": "category",
+      "alias": "category_chicken"
+    },
+    "1151:2702": {
+      "previousName": "image 1",
+      "currentName": "images/categories/pizza",
+      "localPath": "assets/images/categories/pizza.png",
+      "kind": "category",
+      "alias": "category_pizza"
+    },
+    "1151:2698": {
+      "previousName": "chinese 1",
+      "currentName": "images/categories/chinese",
+      "localPath": "assets/images/categories/chinese.png",
+      "kind": "category",
+      "alias": "category_chinese"
+    },
+    "1151:2700": {
+      "previousName": "snack 1",
+      "currentName": "images/categories/snack_food",
+      "localPath": "assets/images/categories/snack.png",
+      "kind": "category",
+      "alias": "category_snack_food"
+    },
+    "1002:8799": {
+      "currentName": "images/categories/japanese",
+      "localPath": "assets/images/categories/japanese.png",
+      "kind": "category",
+      "alias": "category_japanese"
+    },
+    "1151:2690": {
+      "previousName": "burger 1",
+      "currentName": "images/categories/burger",
+      "localPath": "assets/images/categories/burger.png",
+      "kind": "category",
+      "alias": "category_burger"
+    },
+    "1151:2692": {
+      "previousName": "dessert 1",
+      "currentName": "images/categories/dessert",
+      "localPath": "assets/images/categories/dessert.png",
+      "kind": "category",
+      "alias": "category_dessert"
+    },
+    "1151:2694": {
+      "previousName": "late-night 1",
+      "currentName": "images/categories/late_night",
+      "localPath": "assets/images/categories/late-night.png",
+      "kind": "category",
+      "alias": "category_late_night"
+    },
+    "1151:2696": {
+      "previousName": "salad 1",
+      "currentName": "images/categories/salad",
+      "localPath": "assets/images/categories/salad.png",
+      "kind": "category",
+      "alias": "category_salad"
+    },
+    "1151:2704": {
+      "currentName": "coupon-box 1",
+      "localPath": "assets/images/benefits/images/benefits/coupon-box.png",
+      "kind": "benefit",
+      "alias": "benefit_coupon_box"
+    },
+    "1151:2706": {
+      "currentName": "event-gift 1",
+      "localPath": "assets/images/benefits/images/benefits/event-gift.png",
+      "kind": "benefit",
+      "alias": "benefit_event_gift"
+    },
+    "1151:2708": {
+      "currentName": "local-currency 1",
+      "localPath": "assets/images/benefits/images/benefits/local-currency.png",
+      "kind": "benefit",
+      "alias": "benefit_local_currency"
+    },
+    "1151:2710": {
+      "currentName": "onnuri 1",
+      "localPath": "assets/images/benefits/images/benefits/onnuri.png",
+      "kind": "benefit",
+      "alias": "benefit_onnuri"
+    },
+    "1151:2712": {
+      "currentName": "gdream-card 1",
+      "localPath": "assets/images/benefits/images/benefits/gdream-card.png",
+      "kind": "benefit",
+      "alias": "benefit_gdream_card"
+    },
+    "1119:11203": {
+      "previousName": "Generated Image April 21, 2026 - 11_16PM 1",
+      "currentName": "images/hero/onnuri_coupon_3d",
+      "localPath": "assets/images/decor/onnuri-coupon-banner.png",
+      "kind": "hero",
+      "alias": "hero_onnuri_coupon"
+    },
+    "1151:2731": {
+      "currentName": "images/menus/menu-side-01",
+      "localPath": "assets/images/menus/menu-side-01.png",
+      "kind": "promotion",
+      "alias": "promotion_bhc_side_menu"
+    },
+    "1119:11513": {
+      "currentName": "images/menus/roast-chicken-leg",
+      "localPath": "assets/images/menus/roast-chicken-leg.png",
+      "kind": "promotion",
+      "alias": "promotion_salady_main_menu"
+    },
+    "1152:2748": {
+      "currentName": "images/menus/menu-side-02",
+      "localPath": "assets/images/menus/menu-side-02.png",
+      "kind": "promotion",
+      "alias": "promotion_pizza_hut_side_menu"
+    },
+    "1119:9373": {
+      "previousName": "Component 9",
+      "currentName": "home_stamp_progress_stamp_step_02",
+      "localPath": "assets/Component 9.png",
+      "kind": "stamp",
+      "alias": "stamp_step_02"
+    },
+    "1119:9380": {
+      "previousName": "Component 10",
+      "currentName": "home_stamp_progress_stamp_step_03",
+      "localPath": "assets/Component 10.png",
+      "kind": "stamp",
+      "alias": "stamp_step_03"
+    },
+    "1119:9448": {
+      "previousName": "Component 11",
+      "currentName": "home_stamp_progress_reward_step_04",
+      "localPath": "assets/Component 11.png",
+      "kind": "stamp",
+      "alias": "stamp_reward_step_04"
+    },
+    "1002:9879": {
+      "currentName": "images/cart/checkout-cart-item-thumb",
+      "localPath": "assets/images/menus/salad-bowl.png",
+      "kind": "cart",
+      "alias": "checkout_cart_item_thumb"
+    },
+    "1002:9923": {
+      "currentName": "images/logos/kakao-pay",
+      "localPath": "assets/images/logos/kakao-pay.png",
+      "kind": "logo",
+      "alias": "logo_kakao_pay"
+    },
+    "1002:9926": {
+      "currentName": "images/logos/naver-pay",
+      "localPath": "assets/images/logos/naver-pay.png",
+      "kind": "logo",
+      "alias": "logo_naver_pay"
+    },
+    "1002:9929": {
+      "currentName": "images/logos/toss-pay",
+      "localPath": "assets/images/logos/toss-pay.png",
+      "kind": "logo",
+      "alias": "logo_toss_pay"
+    }
+  },
+  "icons": {
+    "icons/status/cellular/black": "icons/status/cellular/black.svg",
+    "icons/status/wifi/black": "icons/status/wifi/black.svg",
+    "icons/status/battery/black": "icons/status/battery/black.svg",
+    "icons/16/chevron-right": "icons/16/chevron-right.svg",
+    "icons/20/chevron-down": "icons/20/chevron-down.svg",
+    "icons/20/chevron-right": "icons/20/chevron-right.svg",
+    "icons/20/map-pin": "icons/20/map-pin.svg",
+    "icons/20/search-magnifying-glass": "icons/20/search-magnifying-glass.svg",
+    "icons/24/bell": "icons/24/bell.svg",
+    "icons/24/shopping-cart-02": "icons/24/shopping-cart-02.svg",
+    "icons/24/checkbox/active": "icons/24/checkbox/active.svg",
+    "icons/24/chevron-left": "icons/24/chevron-left.svg",
+    "icons/24/minus": "icons/24/minus.svg",
+    "icons/24/plus": "icons/24/plus.svg",
+    "icon_drafts/14/badge-icon-gold": "icon_drafts/14/badge-icon-gold.svg",
+    "icon_drafts/14/badge-icon-silver": "icon_drafts/14/badge-icon-silver.svg",
+    "icon_drafts/14/badge-icon-copper": "icon_drafts/14/badge-icon-copper.svg"
+  }
+}
