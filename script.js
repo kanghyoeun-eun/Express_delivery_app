@@ -91,7 +91,7 @@ const keywords = [
   { rank: 9, label: "피자", trend: "up", delta: "1" },
   { rank: 10, label: "아폴로 피자", trend: "up", delta: "1" },
 ];
-const recommendKeywords = ["저녁", "매운 음식", "파티 음식", "엽기떡볶이", "건강식", "두바이 쫀득 쿠키", "베트남 음식"];
+const recommendKeywords = ["저녁", "매운 음식", "쿠폰 할인", "엽기떡볶이", "건강식", "두바이 쫀득 쿠키", "베트남 음식"];
 
 const stores = [
   {
@@ -394,7 +394,7 @@ function renderFamous() {
 
 function renderSearchScreens() {
   document.querySelector("#keywordGrid").innerHTML = keywords.map((item) => `<li><button type="button" data-target="search-result"><span><strong class="${item.tone || ""}">${item.rank}</strong><em>${item.label}</em></span>${trendMarkup(item)}</button></li>`).join("");
-  document.querySelector("#recommendChips").innerHTML = recommendKeywords.map((word) => `<button type="button" data-target="search-result">${word}</button>`).join("");
+  document.querySelector("#recommendChips").innerHTML = recommendKeywords.map((word) => `<button type="button" data-target="${word.includes("쿠폰") ? "portfolio-search" : "search-result"}">${word}</button>`).join("");
   document.querySelector("#searchRecommendList").innerHTML = searchRecommendations.map(largeStoreCard).join("");
   document.querySelector("#resultStoreList").innerHTML = saladResults.map(largeStoreCard).join("");
   const favoriteList = document.querySelector("#favoriteList");
@@ -461,10 +461,10 @@ function bindInteractions() {
 
   document.querySelector("#homeSearchInput").addEventListener("focus", () => showScreen("search"));
   document.querySelector("#homeSearchInput").addEventListener("keydown", (event) => {
-    if (event.key === "Enter") showScreen("search-result");
+    if (event.key === "Enter") showScreen(event.currentTarget.value.includes("쿠폰") ? "portfolio-search" : "search-result");
   });
   document.querySelector("#searchInput").addEventListener("keydown", (event) => {
-    if (event.key === "Enter" && event.currentTarget.value.trim()) showScreen("search-result");
+    if (event.key === "Enter" && event.currentTarget.value.trim()) showScreen(event.currentTarget.value.includes("쿠폰") ? "portfolio-search" : "search-result");
   });
 
   document.querySelector("#categoryGrid").addEventListener("click", (event) => {

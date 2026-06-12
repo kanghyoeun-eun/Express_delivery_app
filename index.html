@@ -115,16 +115,16 @@
         <header class="search-header">
           <label class="search-field"><img src="./icons/20/search-magnifying-glass.svg" alt="" /><input id="searchInput" type="search" placeholder="검색어를 입력하세요" /></label>
         </header>
-        <section class="scroll-area app-content nav-offset search-content">
+        <section class="scroll-area app-content nav-offset search-content portfolio-search-main">
+          <div class="keyword-section recommended-keyword-section">
+            <div class="screen-section-title"><h2>추천 키워드</h2></div>
+            <div class="recommend-chips" id="recommendChips"></div>
+          </div>
           <div class="keyword-section popular-keyword-section">
             <div class="screen-section-title"><h2>인기 검색어</h2><span>오후 12:16분 업데이트</span></div>
             <ol class="keyword-grid" id="keywordGrid"></ol>
           </div>
-          <div class="keyword-section">
-            <div class="screen-section-title"><h2>추천 키워드</h2></div>
-            <div class="recommend-chips" id="recommendChips"></div>
-          </div>
-          <div class="keyword-section">
+          <div class="keyword-section search-recommendation-section">
             <div class="screen-section-title"><h2>나를 위한 추천</h2></div>
             <div class="large-store-list" id="searchRecommendList"></div>
           </div>
@@ -149,6 +149,40 @@
         <div class="filter-strip"><button>추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button>지역화폐</button><button>온누리상품권</button><button>가격 설정</button><button>바로 할인</button></div>
         <section class="scroll-area result-scroll">
           <div class="large-store-list" id="resultStoreList"></div>
+        </section>
+      </section>
+
+      <section class="app-screen" data-screen="portfolio-search" aria-label="쿠폰 할인 검색 결과">
+        <div class="status-bar plain portfolio-status"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/black.svg" alt="" /><img src="./icons/status/wifi/black.svg" alt="" /><img src="./icons/status/battery/black.svg" alt="" /></div></div>
+        <header class="portfolio-search-header">
+          <button class="portfolio-back" type="button" data-back aria-label="뒤로"><img src="./icons/24/chevron-left.svg" alt="" /></button>
+          <label class="portfolio-search-field"><span>쿠폰 할인</span></label>
+          <button class="portfolio-cancel" type="button" data-target="search">취소</button>
+        </header>
+        <section class="portfolio-related" aria-label="관련 검색어">
+          <span class="portfolio-related-label">관련 검색어</span>
+          <div class="portfolio-keyword-viewport">
+            <div class="portfolio-keyword-track">
+              <button type="button">쿠폰 최대 할인</button><button type="button">오늘 특가</button><button type="button">저렴한 저녁</button><button type="button">정부 지원금</button>
+            </div>
+          </div>
+        </section>
+        <div class="portfolio-filter-strip"><button type="button">추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">가격 설정</button><button type="button">바로 할인</button></div>
+        <section class="scroll-area portfolio-result-scroll">
+          <div class="portfolio-store-list">
+            <button class="portfolio-store-card" type="button" data-target="store">
+              <span class="portfolio-store-media"><img src="./assets/images/banners/payment-benefit-banner.png" alt="" /><span class="portfolio-ribbon">배달특급 10% 즉시 할인 매장</span></span>
+              <span class="portfolio-store-copy"><span class="portfolio-title-row"><strong>샐러디 성대점</strong><span class="portfolio-rating"><img src="./icons/14/star.svg" alt="" />5.0<em>(342)</em></span><span class="portfolio-time"><img src="./icons/14/clock.svg" alt="" />35분 소요</span></span><span class="portfolio-badges"><em class="pay">수원페이</em><em class="coupon">1000원 쿠폰</em><span><img src="./icons/14/wavy-check.svg" alt="" />최대 3000원 할인</span></span></span>
+            </button>
+            <button class="portfolio-store-card" type="button" data-target="store">
+              <span class="portfolio-store-media"><img src="./assets/images/banners/salady-promotion-banner.png" alt="" /></span>
+              <span class="portfolio-store-copy"><span class="portfolio-title-row"><strong>샐러리아 호매실점</strong><span class="portfolio-rating"><img src="./icons/14/star.svg" alt="" />5.0<em>(342)</em></span><span class="portfolio-time"><img src="./icons/14/clock.svg" alt="" />35분 소요</span></span><span class="portfolio-badges"><em class="pay">수원페이</em><em class="coupon">1000원 쿠폰</em><span><img src="./icons/14/wavy-check.svg" alt="" />최대 3000원 할인</span></span></span>
+            </button>
+            <button class="portfolio-store-card" type="button" data-target="store">
+              <span class="portfolio-store-media"><img src="./assets/images/banners/salady-menu-banner.png" alt="" /><span class="portfolio-ribbon">배달특급 10% 즉시 할인 매장</span></span>
+              <span class="portfolio-store-copy"><span class="portfolio-title-row"><strong>Poke all day 포케&amp;샐러드 호매실점</strong><span class="portfolio-rating"><img src="./icons/14/star.svg" alt="" />5.0<em>(342)</em></span><span class="portfolio-time"><img src="./icons/14/clock.svg" alt="" />35분 소요</span></span><span class="portfolio-badges"><em class="pay">수원페이</em><em class="coupon">1000원 쿠폰</em><span><img src="./icons/14/wavy-check.svg" alt="" />최대 3000원 할인</span></span></span>
+            </button>
+          </div>
         </section>
       </section>
 
@@ -347,7 +381,7 @@
 
       <section class="app-screen" data-screen="favorites" aria-label="찜 화면">
         <div class="status-bar plain"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/black.svg" alt="" /><img src="./icons/status/wifi/black.svg" alt="" /><img src="./icons/status/battery/black.svg" alt="" /></div></div>
-        <header class="title-header"><span class="header-spacer"></span><h1>즐겨찾기</h1><div class="header-actions"><button type="button" aria-label="알림"><img src="./icons/24/bell.svg" alt="" /></button><button type="button" data-target="cart" aria-label="장바구니"><img src="./icons/24/shopping-cart-02.svg" alt="" /></button></div></header>
+        <header class="title-header"><span class="header-spacer"></span><h1>찜</h1><span class="header-spacer"></span></header>
         <div class="favorite-filter-strip"><button class="active" type="button">추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">가격 설정</button><button type="button">바로 할인</button></div>
         <section class="scroll-area favorite-scroll">
           <p class="favorite-count">총 12개</p>
@@ -355,6 +389,7 @@
             <article class="favorite-store-card"><div class="favorite-thumb"><img src="./assets/images/stores/pyeongjidam/thumb.png" alt="" /><span>5회 주문</span></div><div class="favorite-card-copy"><h2>평지담 <small><img src="./icons/14/star.svg" alt="" />5.0(342)</small></h2><p><img src="./icons/14/clock.svg" alt="" />35분 소요 <img src="./icons/14/wavy-check.svg" alt="" />최대 3000원 할인</p><div class="favorite-tags"><span>G드림 쿠폰</span><span>1000원 쿠폰</span></div><div class="favorite-actions"><button class="recommend-order" type="button" data-target="store"><img src="./icons/24/thunder.svg" alt="" />추천메뉴 주문</button><button class="like-toggle" type="button"><img src="./icons/24/like/red-solid.svg" alt="" /></button></div></div></article>
             <article class="favorite-store-card"><div class="favorite-thumb"><img src="./assets/images/stores/cafe-maiden2/thumb.png" alt="" /><span>3회 주문</span></div><div class="favorite-card-copy"><h2>니드스윗 <small><img src="./icons/14/star.svg" alt="" />5.0(342)</small></h2><p><img src="./icons/14/clock.svg" alt="" />35분 소요 <img src="./icons/14/wavy-check.svg" alt="" />최대 3000원 할인</p><div class="favorite-tags"><span>온누리 상품권</span></div><div class="favorite-actions"><button class="recommend-order" type="button" data-target="store"><img src="./icons/24/thunder.svg" alt="" />추천메뉴 주문</button><button class="like-toggle" type="button"><img src="./icons/24/like/red-solid.svg" alt="" /></button></div></div></article>
             <article class="favorite-store-card"><div class="favorite-thumb"><img src="./assets/images/banners/salady-menu-banner.png" alt="" /></div><div class="favorite-card-copy"><h2>샐러디 성대점 <small><img src="./icons/14/star.svg" alt="" />5.0(342)</small></h2><p><img src="./icons/14/clock.svg" alt="" />35분 소요 <img src="./icons/14/wavy-check.svg" alt="" />최대 3000원 할인</p><div class="favorite-tags"><span>1000원 쿠폰</span></div><div class="favorite-actions"><button class="recommend-order" type="button" data-target="store"><img src="./icons/24/thunder.svg" alt="" />추천메뉴 주문</button><button class="like-toggle" type="button"><img src="./icons/24/like/red-solid.svg" alt="" /></button></div></div></article>
+            <article class="favorite-store-card"><div class="favorite-thumb"><img src="./assets/images/stores/teddy-plate-haenggung/thumb.png" alt="" /></div><div class="favorite-card-copy"><h2>테디플레이트 <small><img src="./icons/14/star.svg" alt="" />5.0(342)</small></h2><p><img src="./icons/14/clock.svg" alt="" />35분 소요 <img src="./icons/14/wavy-check.svg" alt="" />최대 3000원 할인</p><div class="favorite-tags"><span>1000원 쿠폰</span></div><div class="favorite-actions"><button class="recommend-order" type="button" data-target="store"><img src="./icons/24/thunder.svg" alt="" />추천메뉴 주문</button><button class="like-toggle" type="button"><img src="./icons/24/like/red-solid.svg" alt="" /></button></div></div></article>
           </div>
         </section>
         <nav class="bottom-nav" aria-label="찜 하단 탭">
@@ -364,13 +399,13 @@
 
       <section class="app-screen" data-screen="orders" aria-label="주문내역">
         <div class="status-bar plain"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/black.svg" alt="" /><img src="./icons/status/wifi/black.svg" alt="" /><img src="./icons/status/battery/black.svg" alt="" /></div></div>
-        <header class="title-header"><span class="header-spacer"></span><h1>주문내역</h1><button class="icon-button" type="button" data-target="cart"><img src="./icons/24/shopping-cart-02.svg" alt="" /></button></header>
+        <header class="title-header"><span class="header-spacer"></span><h1>주문내역</h1><span class="header-spacer"></span></header>
         <div class="order-tabs"><button class="active" type="button">과거 주문 내역</button><button type="button" data-target="preparing">준비중</button></div>
-        <div class="order-filter-strip"><button class="active" type="button">추천순</button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">가격 설정</button><button type="button">바로 할인</button></div>
+        <div class="order-filter-strip"><button class="active" type="button">추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">바로 할인</button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">가격 설정</button></div>
         <section class="scroll-area order-history-scroll">
-          <article class="history-card"><div class="history-head"><img src="./assets/images/stores/jeongsotbap-suwon-haenggung/thumb.png" alt="" /><div><p><span>2023.11.24</span> <span>(금)</span><button type="button">영수증 보기</button></p><h2>정솥밥 수원 행궁동점</h2><small>한방 삼계탕 · 외 1개</small></div></div><div class="history-price"><span>결제금액</span><strong>1,8000원</strong></div><div class="history-actions"><button type="button" data-target="store">재주문 하기</button><button type="button">리뷰 쓰기</button></div></article>
-          <article class="history-card"><div class="history-head"><img src="./assets/images/stores/pyeongjidam/thumb.png" alt="" /><div><p><span>2023.11.24</span> <span>(금)</span><button type="button">영수증 보기</button></p><h2>평지담</h2><small>한방 삼계탕 · 외 1개</small></div></div><div class="history-price"><span>결제금액</span><strong>1,8000원</strong></div><div class="history-actions"><button type="button" data-target="store">재주문 하기</button><button type="button">리뷰 쓰기</button></div></article>
-          <article class="history-card"><div class="history-head"><img src="./assets/images/stores/amigo-taco/thumb.png" alt="" /><div><p><span>2023.11.24</span> <span>(금)</span><button type="button">영수증 보기</button></p><h2>아미고타코</h2><small>한방 삼계탕 · 외 1개</small></div></div><div class="history-price"><span>결제금액</span><strong>1,8000원</strong></div><div class="history-actions"><button type="button" data-target="store">재주문 하기</button><button type="button">리뷰 쓰기</button></div></article>
+          <article class="history-card"><div class="history-head"><img src="./assets/images/stores/jeongsotbap-suwon-haenggung/thumb.png" alt="" /><div><p><span>2023.11.24</span> <span>(금)</span><button type="button">영수증 보기</button></p><h2>정솥밥 수원 행궁동점</h2><small>한방 삼계탕 · 외 1개</small></div></div><div class="history-price-panel"><p class="history-price-line"><span>결제금액</span><strong>18,000원</strong></p><p class="history-discount-line"><span>재주문 시 10% 할인</span><strong>16,200원</strong></p></div><div class="history-actions"><button type="button" data-target="store">재주문 하기</button><button type="button">리뷰 쓰기</button></div></article>
+          <article class="history-card"><div class="history-head"><img src="./assets/images/stores/pyeongjidam/thumb.png" alt="" /><div><p><span>2023.11.24</span> <span>(금)</span><button type="button">영수증 보기</button></p><h2>평지담</h2><small>한방 삼계탕 · 외 1개</small></div></div><div class="history-price-panel"><p class="history-price-line"><span>결제금액</span><strong>20,000원</strong></p><p class="history-discount-line"><span>재주문 시 10% 할인</span><strong>18,000원</strong></p></div><div class="history-actions"><button type="button" data-target="store">재주문 하기</button><button type="button">리뷰 쓰기</button></div></article>
+          <article class="history-card compact"><div class="history-head"><img src="./assets/images/stores/amigo-taco/thumb.png" alt="" /><div><p><span>2023.11.24</span> <span>(금)</span><button type="button">영수증 보기</button></p><h2>아미고타코</h2><small>한방 삼계탕 · 외 1개</small></div></div><div class="history-price-panel"><p class="history-price-line"><span>결제금액</span><strong>18,000원</strong></p></div><div class="history-actions"><button type="button" data-target="store">재주문 하기</button><button type="button">리뷰 쓰기</button></div></article>
         </section>
         <nav class="bottom-nav" aria-label="주문내역 하단 탭">
           <button type="button" data-target="home"><img data-active="./icons/28/bottom-nav/home-solid.svg" data-line="./icons/28/bottom-nav/home-line.svg" src="./icons/28/bottom-nav/home-line.svg" alt="" /><span>홈</span></button><button type="button" data-target="search"><img data-active="./icons/28/bottom-nav/search-solid.svg" data-line="./icons/28/bottom-nav/search-line.svg" src="./icons/28/bottom-nav/search-line.svg" alt="" /><span>검색</span></button><button type="button" data-target="favorites"><img data-active="./icons/28/bottom-nav/like-solid.svg" data-line="./icons/28/bottom-nav/like-line.svg" src="./icons/28/bottom-nav/like-line.svg" alt="" /><span>찜</span></button><button class="active" type="button" data-target="orders"><img data-active="./icons/28/bottom-nav/file-solid.svg" data-line="./icons/28/bottom-nav/file-line.svg" src="./icons/28/bottom-nav/file-solid.svg" alt="" /><span>주문내역</span></button><button type="button" data-target="my"><img data-active="./icons/28/bottom-nav/user-solid.svg" data-line="./icons/28/bottom-nav/user-line.svg" src="./icons/28/bottom-nav/user-line.svg" alt="" /><span>MY</span></button>

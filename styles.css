@@ -100,7 +100,7 @@ img {
   width: 80px;
   font-size: 17px;
   line-height: 22px;
-  font-weight: 800;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -149,7 +149,7 @@ img {
   color: var(--gray-900);
   font-size: 16px;
   line-height: 22px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .location img {
@@ -185,7 +185,7 @@ img {
   margin: 0 0 10px;
   font-size: 22px;
   line-height: 28px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0;
 }
 
@@ -358,7 +358,7 @@ img {
 
 .benefit-wrap {
   margin-top: 10px;
-  padding: 20px 20px 19px;
+  padding: 20px 20px 18px;
   background: #fff;
 }
 
@@ -426,7 +426,7 @@ img {
   font-size: 11px;
   line-height: 20px;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -485,14 +485,14 @@ img {
   margin-bottom: 8px;
   font-size: 14px;
   line-height: 20px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .event-card strong {
   max-width: 236px;
   font-size: 22px;
   line-height: 28px;
-  font-weight: 900;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -594,7 +594,7 @@ img {
   color: var(--gray-800);
   font-size: 12px;
   line-height: 18px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .section-title h2 {
@@ -604,7 +604,7 @@ img {
   color: var(--gray-900);
   font-size: 20px;
   line-height: 28px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .section-title.compact h2 {
@@ -666,7 +666,7 @@ img {
   color: var(--gray-900);
   font-size: 15px;
   line-height: 21px;
-  font-weight: 900;
+  font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -676,7 +676,7 @@ img {
   color: var(--gray-800);
   font-size: 12px;
   line-height: 18px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .hot-card h3 img,
@@ -762,7 +762,7 @@ img {
   color: var(--gray-800);
   font-size: 13px;
   line-height: 18px;
-  font-weight: 800;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -860,7 +860,7 @@ img {
   color: #fff;
   font-size: 14px;
   line-height: 20px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .famous-section {
@@ -908,7 +908,7 @@ img {
   color: #fff;
   font-size: 12px;
   line-height: 18px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .rank-pill img {
@@ -1014,7 +1014,7 @@ img {
   color: var(--gray-900);
   font-size: 20px;
   line-height: 28px;
-  font-weight: 800;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -1151,7 +1151,7 @@ img {
   color: var(--gray-900);
   font-size: 20px;
   line-height: 28px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .screen-section-title span {
@@ -1217,7 +1217,7 @@ img {
   color: var(--gray-900);
   font-size: 14px;
   line-height: 20px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .keyword-grid strong.hot {
@@ -1388,7 +1388,7 @@ img {
   color: #fff;
   font-size: 13px;
   line-height: 28px;
-  font-weight: 800;
+  font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1417,7 +1417,7 @@ img {
   color: var(--gray-800);
   font-size: 18px;
   line-height: 26px;
-  font-weight: 800;
+  font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1514,7 +1514,7 @@ img {
   margin: 0;
   font-size: 24px;
   line-height: 32px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .store-title-row button {
@@ -1580,7 +1580,7 @@ img {
   border-bottom: 1px solid var(--gray-200);
   color: var(--gray-800);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .instant-discount img {
@@ -1606,7 +1606,7 @@ img {
   border-radius: 6px;
   color: var(--gray-500);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .delivery-tabs .active {
@@ -1637,7 +1637,7 @@ img {
 
 .delivery-card dd {
   color: var(--gray-900);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .delivery-card dd button {
@@ -1679,7 +1679,7 @@ img {
   background: #fff;
   color: var(--gray-800);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .store-info-card small {
@@ -1707,7 +1707,7 @@ img {
   background: linear-gradient(90deg, #ffe35a, #fff2b8);
   color: #8f6500;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .store-review-strip {
@@ -1772,7 +1772,7 @@ img {
   border-bottom: 2px solid transparent;
   color: var(--gray-500);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .store-menu-tabs .active {
@@ -1807,7 +1807,7 @@ img {
   gap: 4px;
   color: var(--gray-800);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .store-filter-row input {
@@ -1823,7 +1823,7 @@ img {
   background: #fff;
   color: var(--gray-800);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .detail-band {
@@ -1837,7 +1837,7 @@ img {
   color: var(--gray-900);
   font-size: 18px;
   line-height: 26px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .menu-grid {
@@ -1883,7 +1883,7 @@ img {
   color: #ff6a00;
   font-size: 12px;
   line-height: 20px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .menu-card h3,
@@ -1893,7 +1893,7 @@ img {
   color: var(--gray-900);
   font-size: 16px;
   line-height: 22px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .menu-card p,
@@ -1923,7 +1923,7 @@ img {
   color: var(--gray-900);
   font-size: 15px;
   line-height: 22px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .menu-card img,
@@ -1990,7 +1990,7 @@ img {
   color: var(--gray-900);
   font-size: 16px;
   line-height: 24px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .sticky-cta.split button:first-child {
@@ -2010,7 +2010,7 @@ img {
   margin-top: 14px;
   font-size: 22px;
   line-height: 30px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .option-panel {
@@ -2518,7 +2518,7 @@ img {
   border-radius: 8px;
   background: #fff;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .pay-grid img {
@@ -2531,7 +2531,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .coupon-row strong {
@@ -2557,7 +2557,7 @@ img {
   border-top: 1px solid var(--gray-200);
   font-size: 18px;
   line-height: 26px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .price-list .total strong {
@@ -2569,7 +2569,7 @@ img {
   color: var(--gray-900);
   font-size: 15px;
   line-height: 22px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .title-header.simple {
@@ -2593,7 +2593,7 @@ img {
   color: var(--gray-900);
   font-size: 18px;
   line-height: 26px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .cart-store-section,
@@ -2653,7 +2653,7 @@ img {
   color: var(--gray-800);
   font-size: 14px;
   line-height: 20px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .cart-option-box,
@@ -2688,7 +2688,7 @@ img {
   color: var(--gray-800);
   font-size: 16px;
   line-height: 24px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .qty-stepper {
@@ -2720,7 +2720,7 @@ img {
   height: 30px;
   color: var(--gray-800);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .qty-stepper.small span {
@@ -2737,7 +2737,7 @@ img {
   background: #fff;
   color: var(--gray-800);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .cart-add-menu {
@@ -2751,7 +2751,7 @@ img {
   background: #fff;
   color: var(--gray-800);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .cart-add-menu img {
@@ -2825,7 +2825,7 @@ img {
   font-size: 13px;
   line-height: 18px;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .cart-recommend-card em {
@@ -2900,7 +2900,7 @@ img {
   border-top: 1px solid var(--gray-300);
   font-size: 18px;
   line-height: 26px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .figma-order-bar {
@@ -2932,7 +2932,7 @@ img {
   color: var(--gray-900);
   font-size: 18px;
   line-height: 26px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .figma-order-bar span {
@@ -2950,7 +2950,7 @@ img {
   color: var(--gray-800);
   font-size: 18px;
   line-height: 26px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .checkout-screen-scroll {
@@ -3013,7 +3013,7 @@ img {
   color: var(--gray-900);
   font-size: 14px;
   line-height: 20px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .checkout-address-card h3 img {
@@ -3036,7 +3036,7 @@ img {
   background: #fff;
   color: var(--gray-800);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .select-row,
@@ -3177,7 +3177,7 @@ img {
   color: var(--gray-800);
   font-size: 11px;
   line-height: 16px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .payment-grid img {
@@ -3197,7 +3197,7 @@ img {
   font-size: 9px;
   line-height: 12px;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .cash-receipt-row {
@@ -3222,7 +3222,7 @@ img {
   color: var(--gray-800);
   font-size: 16px;
   line-height: 22px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .discount-field button {
@@ -3262,14 +3262,14 @@ img {
   padding: 0 6px;
   border-radius: 4px;
   background: #e2faf1;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .checkout-total {
   align-items: center;
   font-size: 18px;
   line-height: 26px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .checkout-total strong {
@@ -3365,14 +3365,14 @@ img {
   color: var(--gray-800);
   font-size: 18px;
   line-height: 26px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .delivery-time-copy strong {
   color: var(--gray-900);
   font-size: 36px;
   line-height: 32px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .delivery-scooter-img {
@@ -3391,7 +3391,7 @@ img {
   color: var(--gray-800);
   font-size: 14px;
   line-height: 20px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .delivery-track {
@@ -3454,7 +3454,7 @@ img {
   color: var(--gray-800);
   font-size: 14px;
   line-height: 20px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .preparing-help-card img {
@@ -3483,7 +3483,7 @@ img {
   color: var(--gray-800);
   font-size: 18px;
   line-height: 26px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .preparing-stamp-head button {
@@ -3552,7 +3552,7 @@ img {
   border-radius: 8px;
   background: var(--gray-800);
   color: #fff;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .my-menu {
@@ -3566,7 +3566,7 @@ img {
   border-bottom: 1px solid var(--gray-200);
   color: var(--gray-800);
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   text-align: left;
 }
 
@@ -3612,7 +3612,7 @@ img {
   color: var(--gray-900);
   font-size: 20px;
   line-height: 28px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .my-profile-row h2 img {
@@ -3631,7 +3631,7 @@ img {
 .my-profile-row p strong {
   margin-right: 4px;
   color: var(--gray-600);
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .my-profile-row > button {
@@ -3661,7 +3661,7 @@ img {
   color: var(--gray-600);
   font-size: 14px;
   line-height: 20px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .my-progress-card p strong {
@@ -3696,7 +3696,7 @@ img {
   color: #008b60;
   font-size: 14px;
   line-height: 20px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .my-address-card {
@@ -3740,7 +3740,7 @@ img {
   color: var(--gray-800);
   font-size: 14px;
   line-height: 20px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .my-quick-grid {
@@ -3802,7 +3802,7 @@ img {
   color: var(--gray-800);
   font-size: 16px;
   line-height: 24px;
-  font-weight: 900;
+  font-weight: 600;
   text-align: left;
 }
 
@@ -4538,4 +4538,560 @@ img {
 .sheet-action-row .primary {
   border-color: #ffe35a;
   background: #ffe35a;
+}
+
+
+/* Figma font/spacing correction pass. */
+.category-item,
+.benefit-item {
+  font-weight: 500;
+}
+
+.benefit-wrap {
+  padding: 20px 20px 18px;
+}
+
+.benefit-grid {
+  grid-template-columns: repeat(5, 62px);
+  gap: 10px;
+}
+
+.benefit-item {
+  width: 62px;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0;
+}
+
+.benefit-art {
+  width: 60px;
+  height: 60px;
+  border-width: 0.6px;
+  border-radius: 20px;
+}
+
+.benefit-art img {
+  width: var(--benefit-size, 60px);
+  height: var(--benefit-size, 60px);
+}
+
+.benefit-item em {
+  top: -16px;
+  left: 50%;
+  height: 24px;
+  padding: 0 10px;
+  transform: translateX(-50%);
+  font-size: 12px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.event-card span,
+.event-card strong {
+  padding-left: 20px;
+}
+
+.event-card span {
+  padding-top: 17px;
+  margin-bottom: 6px;
+}
+
+.event-card strong {
+  max-width: 236px;
+}
+
+.event-bag-bhc { right: 102px; }
+.event-food-bhc { right: -10px; }
+.event-bag-salady { right: 100px; }
+.event-food-salady { right: -4px; }
+.event-bag-pizza { right: 104px; }
+.event-food-pizza { right: -10px; }
+
+
+/* Portfolio search result screen from Figma frame screen_search_result. */
+.app-screen[data-screen="portfolio-search"] {
+  background: #fff;
+}
+
+.portfolio-status {
+  height: 54px;
+  padding: 15px 32px 0 54px;
+}
+
+.portfolio-search-header {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 43px;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 20px;
+  background: #fff;
+}
+
+.portfolio-back,
+.portfolio-cancel {
+  height: 32px;
+  padding: 0;
+}
+
+.portfolio-back {
+  display: grid;
+  place-items: center;
+}
+
+.portfolio-back img {
+  width: 24px;
+  height: 24px;
+}
+
+.portfolio-cancel {
+  color: #2a2924;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  text-align: right;
+}
+
+.portfolio-search-field {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: #f5f5f5;
+  color: #8b8a87;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.portfolio-related {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding-left: 20px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.portfolio-related-label {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  width: 80px;
+  background: #fff;
+  color: #2a2924;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.portfolio-keyword-viewport {
+  min-width: 0;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.portfolio-keyword-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.portfolio-keyword-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: max-content;
+  padding-right: 20px;
+}
+
+.portfolio-keyword-track button {
+  flex: 0 0 auto;
+  padding: 0;
+  color: #008f62;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+
+.portfolio-filter-strip {
+  display: flex;
+  gap: 8px;
+  height: 56px;
+  padding: 10px 20px;
+  overflow-x: auto;
+  border-bottom: 1px solid #e7e5e3;
+  background: #fff;
+  scrollbar-width: none;
+}
+
+.portfolio-filter-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.portfolio-filter-strip button {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #e7e5e3;
+  border-radius: 999px;
+  background: #fff;
+  color: #2a2924;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.portfolio-filter-strip img {
+  width: 18px;
+  height: 18px;
+}
+
+.portfolio-result-scroll {
+  height: calc(100% - 206px);
+  padding: 16px 20px 34px;
+  background: #fff;
+}
+
+.portfolio-store-list {
+  display: grid;
+  gap: 28px;
+}
+
+.portfolio-store-card {
+  display: block;
+  width: 100%;
+  color: #2a2924;
+  text-align: left;
+}
+
+.portfolio-store-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 188px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
+.portfolio-store-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portfolio-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 28px;
+  max-width: calc(100% - 10px);
+  padding: 0 8px;
+  overflow: hidden;
+  border-radius: 8px 0 6px 0;
+  background: #ff6a00;
+  color: #fff;
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portfolio-store-copy {
+  display: block;
+  padding-top: 12px;
+}
+
+.portfolio-title-row {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 2px;
+}
+
+.portfolio-title-row > strong {
+  min-width: 0;
+  max-width: 190px;
+  overflow: hidden;
+  color: #111;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portfolio-rating,
+.portfolio-time {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  color: #2a2924;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.portfolio-rating img,
+.portfolio-time img,
+.portfolio-badges img {
+  width: 14px;
+  height: 14px;
+}
+
+.portfolio-rating em {
+  color: #62615d;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.portfolio-time {
+  margin-left: auto;
+  color: #62615d;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.portfolio-badges {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  color: #2a2924;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.portfolio-badges em {
+  height: 20px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-style: normal;
+  line-height: 18px;
+}
+
+.portfolio-badges .pay {
+  background: #dfefff;
+  color: #355371;
+}
+
+.portfolio-badges .coupon {
+  background: #ffe6d7;
+  color: #ff6a00;
+}
+
+.portfolio-badges span {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+
+
+/* Portfolio polish for search, favorites, and order-history frames. */
+.app-screen[data-screen="search"] .search-header {
+  height: 56px;
+  padding: 6px 20px;
+}
+
+.portfolio-search-main {
+  padding-top: 0;
+}
+
+.recommended-keyword-section {
+  margin: 0 -20px 0;
+  padding: 24px 20px 26px;
+}
+
+.recommended-keyword-section .screen-section-title {
+  margin-bottom: 18px;
+}
+
+.recommended-keyword-section .recommend-chips {
+  gap: 12px 8px;
+}
+
+.recommended-keyword-section .recommend-chips button {
+  height: 40px;
+  padding: 0 16px;
+  background: #fafafa;
+}
+
+.portfolio-search-main .popular-keyword-section {
+  margin: 0 -20px 0;
+  padding: 24px 20px;
+}
+
+.portfolio-search-main .keyword-grid {
+  grid-template-rows: repeat(5, 28px);
+  row-gap: 16px;
+}
+
+.search-recommendation-section {
+  margin: 0 -20px;
+  padding: 0 20px 120px;
+}
+
+.search-recommendation-section .screen-section-title {
+  margin-bottom: 18px;
+}
+
+.app-screen[data-screen="favorites"] .title-header,
+.app-screen[data-screen="orders"] .title-header {
+  border-bottom: 0;
+}
+
+.app-screen[data-screen="favorites"] .favorite-filter-strip {
+  height: 56px;
+  padding: 11px 20px;
+}
+
+.app-screen[data-screen="favorites"] .favorite-filter-strip img,
+.app-screen[data-screen="orders"] .order-filter-strip img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+.favorite-scroll {
+  height: calc(100% - 156px);
+  padding: 20px 20px 116px;
+}
+
+.favorite-count {
+  margin-bottom: 8px;
+}
+
+.favorite-card-list {
+  gap: 24px;
+}
+
+.favorite-store-card {
+  grid-template-columns: 128px minmax(0, 1fr);
+  min-height: 160px;
+}
+
+.favorite-thumb,
+.favorite-thumb img {
+  width: 128px;
+  height: 160px;
+}
+
+.favorite-card-copy h2 {
+  padding-top: 1px;
+}
+
+.favorite-tags span {
+  color: #62615d;
+}
+
+.favorite-tags span:nth-child(1) {
+  background: #e8e4dc;
+}
+
+.favorite-tags span:nth-child(2) {
+  background: #e8e4dc;
+}
+
+.recommend-order {
+  width: 166px;
+  background: #ffe35a;
+}
+
+.app-screen[data-screen="orders"] .order-tabs {
+  height: 56px;
+}
+
+.app-screen[data-screen="orders"] .order-filter-strip {
+  height: 56px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.order-history-scroll {
+  height: calc(100% - 212px);
+  padding: 0 0 116px;
+  background: #f5f5f5;
+}
+
+.history-card {
+  gap: 16px;
+  min-height: 256px;
+  margin-bottom: 10px;
+  padding: 24px 20px;
+}
+
+.history-card.compact {
+  min-height: 204px;
+}
+
+.history-head h2 {
+  color: #2a2924;
+}
+
+.history-price-panel {
+  display: grid;
+  gap: 4px;
+}
+
+.history-price-line,
+.history-discount-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 34px;
+  margin: 0;
+  padding: 0 10px;
+  color: #474747;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.history-price-line {
+  border: 1px solid #e7e5e3;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.history-price-line strong {
+  color: #474747;
+  font-weight: 600;
+}
+
+.history-discount-line {
+  border-radius: 4px;
+  background: #dff8ef;
+  color: #2a2924;
+}
+
+.history-discount-line strong {
+  color: #008b60;
+  font-weight: 700;
+}
+
+.history-actions {
+  gap: 9px;
+}
+
+.history-actions button {
+  height: 36px;
 }
