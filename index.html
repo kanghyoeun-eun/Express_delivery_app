@@ -2,9 +2,29 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffc20d" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="배달특급" />
     <title>배달특급 하이파이 프로토타입</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
     <link rel="stylesheet" href="./styles.css" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXX");
+    </script>
+    <script>
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "YOUR_CLARITY_ID");
+    </script>
   </head>
   <body>
     <main class="screen" aria-label="배달특급 앱 프로토타입">
@@ -237,7 +257,7 @@
       <section class="app-screen" data-screen="menu" aria-label="메뉴 상세">
         <section class="scroll-area menu-detail-scroll">
           <div class="menu-detail-hero">
-            <img class="menu-detail-main-img" src="./assets/images/menus/salad-bowl.png" alt="" />
+            <img class="menu-detail-main-img" src="./assets/images/menus/menu-detail-main-thumb.png" alt="" />
           </div>
           <div class="menu-top-overlay">
             <div class="status-bar overlay"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/white.svg" alt="" /><img src="./icons/status/wifi/white.svg" alt="" /><img src="./icons/status/battery/white.svg" alt="" /></div></div>

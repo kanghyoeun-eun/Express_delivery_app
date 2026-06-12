@@ -243,6 +243,10 @@ function showScreen(screenName, push = true) {
   syncBottomNav(screenName);
 }
 
+function resetActiveScroll() {
+  document.querySelector(".app-screen.active .scroll-area")?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+}
+
 function goBack() {
   if (historyStack.length <= 1) {
     showScreen("home", false);
@@ -514,4 +518,19 @@ renderFamous();
 renderSearchScreens();
 renderStoreDetail();
 bindInteractions();
-syncBottomNav("home");
+showScreen("home", false);
+
+window.addEventListener("load", () => {
+  showScreen("home", false);
+  requestAnimationFrame(resetActiveScroll);
+});
+
+window.addEventListener("pageshow", () => {
+  requestAnimationFrame(resetActiveScroll);
+});
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}

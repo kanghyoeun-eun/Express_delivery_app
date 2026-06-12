@@ -1,5 +1,8 @@
 :root {
   --primary: #ffc20d;
+  --screen-max-width: 480px;
+  --status-bar-height: calc(50px + env(safe-area-inset-top));
+  --bottom-nav-height: calc(82px + env(safe-area-inset-bottom));
   --gray-50: #fafafa;
   --gray-100: #f5f5f5;
   --gray-200: #e7e6e3;
@@ -46,10 +49,11 @@ img {
 
 .screen {
   position: relative;
-  width: 393px;
-  height: 852px;
-  max-width: 100vw;
-  max-height: 100vh;
+  width: min(100vw, var(--screen-max-width));
+  height: 100dvh;
+  min-height: 0;
+  max-width: var(--screen-max-width);
+  max-height: 100dvh;
   overflow: hidden;
   background: #fff;
 }
@@ -69,7 +73,7 @@ img {
 
 .hero {
   position: relative;
-  height: 264px;
+  height: clamp(244px, 31dvh, 280px);
   overflow: hidden;
   padding: 0 20px 12px;
   background: linear-gradient(180deg, #ffc20d 12%, #ffd85d 55%, #fff 95%);
@@ -92,7 +96,7 @@ img {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  height: 50px;
+  height: var(--status-bar-height);
   padding: 0 16px 8px;
 }
 
@@ -978,11 +982,11 @@ img {
 }
 
 .app-screen[data-screen="home"] > .scroll-area {
-  padding-bottom: 104px;
+  padding-bottom: var(--bottom-nav-height);
 }
 
 .plain {
-  height: 50px;
+  height: var(--status-bar-height);
   background: #fff;
 }
 
@@ -1099,8 +1103,8 @@ img {
   z-index: 20;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  height: 104px;
-  padding: 8px 8px 22px;
+  height: var(--bottom-nav-height);
+  padding: 8px 8px calc(10px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--gray-200);
   background: #fff;
 }
@@ -1465,7 +1469,7 @@ img {
 
 .store-hero-actions {
   position: absolute;
-  top: 58px;
+  top: calc(58px + env(safe-area-inset-top));
   right: 20px;
   left: 20px;
   z-index: 3;
@@ -2081,6 +2085,28 @@ img {
   height: 50px;
   padding: 0 20px;
   pointer-events: auto;
+}
+
+@media all and (display-mode: standalone) {
+  .status-bar {
+    display: none;
+  }
+
+  .hero {
+    height: clamp(214px, 27dvh, 244px);
+  }
+
+  .plain {
+    height: 0;
+  }
+
+  .store-hero-actions {
+    top: calc(16px + env(safe-area-inset-top));
+  }
+
+  .menu-overlay-header {
+    padding-top: env(safe-area-inset-top);
+  }
 }
 
 .menu-overlay-header button {
