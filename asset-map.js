@@ -21,6 +21,7 @@ window.BAEDAL_FIGMA_ASSET_MAP = {
   "1119:9373": "./assets/Component 9.png",
   "1119:9380": "./assets/Component 10.png",
   "1119:9448": "./assets/Component 11.png",
+  "633:6086": "./assets/images/menus/menu-detail-main-thumb.png",
   "1002:9879": "./assets/images/menus/salad-bowl.png",
   "1002:9923": "./assets/images/logos/kakao-pay.png",
   "1002:9926": "./assets/images/logos/naver-pay.png",
@@ -49,5 +50,6 @@ window.BAEDAL_ASSET_BY_ALIAS = {
   promotion_pizza_hut_side_menu: window.BAEDAL_FIGMA_ASSET_MAP["1152:2748"],
   stamp_step_02: window.BAEDAL_FIGMA_ASSET_MAP["1119:9373"],
   stamp_step_03: window.BAEDAL_FIGMA_ASSET_MAP["1119:9380"],
-  stamp_reward_step_04: window.BAEDAL_FIGMA_ASSET_MAP["1119:9448"]
+  stamp_reward_step_04: window.BAEDAL_FIGMA_ASSET_MAP["1119:9448"],
+  menu_detail_main_thumb: window.BAEDAL_FIGMA_ASSET_MAP["633:6086"]
 };
