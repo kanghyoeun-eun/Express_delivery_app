@@ -269,6 +269,26 @@ function openModal(name) {
   document.querySelector(`[data-overlay="${name}"]`)?.classList.add("show");
 }
 
+function setResultContext(label = "샐러드") {
+  document.querySelector('[data-screen="search-result"] .title-header h1').textContent = label;
+  const firstTab = document.querySelector(".tab-list button:first-child");
+  if (firstTab) firstTab.textContent = label;
+}
+
+function setPortfolioContext(label = "쿠폰 할인") {
+  document.querySelector(".portfolio-search-field span").textContent = label;
+}
+
+function routeToSearchResult(label) {
+  setResultContext(label);
+  showScreen("search-result");
+}
+
+function routeToBenefit(label) {
+  setPortfolioContext(label);
+  showScreen("portfolio-search");
+}
+
 function renderCategories() {
   document.querySelector("#categoryGrid").innerHTML = categories
     .map(
@@ -397,8 +417,8 @@ function renderFamous() {
 }
 
 function renderSearchScreens() {
-  document.querySelector("#keywordGrid").innerHTML = keywords.map((item) => `<li><button type="button" data-target="search-result"><span><strong class="${item.tone || ""}">${item.rank}</strong><em>${item.label}</em></span>${trendMarkup(item)}</button></li>`).join("");
-  document.querySelector("#recommendChips").innerHTML = recommendKeywords.map((word) => `<button type="button" data-target="${word.includes("쿠폰") ? "portfolio-search" : "search-result"}">${word}</button>`).join("");
+  document.querySelector("#keywordGrid").innerHTML = keywords.map((item) => `<li><button type="button" data-target="search-result" data-label="${item.label}"><span><strong class="${item.tone || ""}">${item.rank}</strong><em>${item.label}</em></span>${trendMarkup(item)}</button></li>`).join("");
+  document.querySelector("#recommendChips").innerHTML = recommendKeywords.map((word) => `<button type="button" data-target="${word.includes("쿠폰") ? "portfolio-search" : "search-result"}" data-label="${word}">${word}</button>`).join("");
   document.querySelector("#searchRecommendList").innerHTML = searchRecommendations.map(largeStoreCard).join("");
   document.querySelector("#resultStoreList").innerHTML = saladResults.map(largeStoreCard).join("");
   const favoriteList = document.querySelector("#favoriteList");
@@ -452,7 +472,13 @@ function bindInteractions() {
 
     const targetButton = event.target.closest("[data-target]");
     if (targetButton) {
-      showScreen(targetButton.dataset.target);
+      if (targetButton.dataset.target === "search-result") {
+        routeToSearchResult(targetButton.dataset.label || "샐러드");
+      } else if (targetButton.dataset.target === "portfolio-search") {
+        routeToBenefit(targetButton.dataset.label || "쿠폰 할인");
+      } else {
+        showScreen(targetButton.dataset.target);
+      }
     }
   });
 
@@ -476,8 +502,7 @@ function bindInteractions() {
     if (!item) return;
     document.querySelectorAll(".category-item").forEach((node) => node.classList.remove("selected"));
     item.classList.add("selected");
-    if (item.dataset.slug === "salad" || item.dataset.slug === "burger") showScreen("search-result");
-    else showToast(`${item.dataset.label} 카테고리 선택`);
+    routeToSearchResult(item.dataset.label);
   });
 
   document.querySelector("#benefitGrid").addEventListener("click", (event) => {
@@ -486,7 +511,7 @@ function bindInteractions() {
     document.querySelectorAll(".benefit-item").forEach((node) => node.classList.remove("selected"));
     item.classList.add("selected");
     if (item.dataset.slug === "coupon") openModal("coupon-sheet");
-    else showToast(`${item.dataset.label} 혜택 보기`);
+    else routeToBenefit(item.dataset.label);
   });
 
   document.querySelector("#eventTrack").addEventListener("click", (event) => {
