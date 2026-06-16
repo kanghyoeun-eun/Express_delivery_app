@@ -73,11 +73,11 @@ img {
 
 .hero {
   position: relative;
-  height: clamp(244px, 31dvh, 280px);
+  height: 270px;
   overflow: hidden;
   padding: 0 20px 12px;
   background: linear-gradient(180deg, #ffc20d 12%, #ffd85d 55%, #fff 95%);
-  border-radius: 0 0 20px 20px;
+  border-radius: 0;
 }
 
 .hero-glow {
@@ -254,6 +254,7 @@ img {
 }
 
 .category-wrap {
+  margin-top: -6px;
   background: #fff;
 }
 
@@ -262,7 +263,7 @@ img {
   grid-template-columns: repeat(5, 62px);
   gap: 10px;
   justify-content: center;
-  padding: 20px 20px 18px;
+  padding: 20px 20px;
 }
 
 .category-item,
@@ -347,7 +348,7 @@ img {
   justify-content: center;
   gap: 2px;
   width: 100%;
-  height: 40px;
+  height: 36px;
   border-top: 1px solid rgba(231, 230, 227, 0.72);
   color: var(--gray-800);
   font-size: 14px;
@@ -362,7 +363,7 @@ img {
 
 .benefit-wrap {
   margin-top: 10px;
-  padding: 20px 20px 18px;
+  padding: 20px 20px 20px;
   background: #fff;
 }
 
@@ -380,8 +381,8 @@ img {
 .benefit-art {
   display: grid;
   place-items: center;
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   overflow: hidden;
   border: 1px solid #ead8e7;
   border-radius: 20px;
@@ -436,7 +437,7 @@ img {
 
 .event-wrap {
   position: relative;
-  height: 158px;
+  height: 160px;
   margin-top: 10px;
   overflow: hidden;
   background: var(--gray-100);
@@ -448,7 +449,7 @@ img {
   height: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 20px 24px 18px;
+  padding: 20px 24px;
   scroll-padding: 24px;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -579,7 +580,8 @@ img {
 }
 
 .hot-section {
-  margin-top: 0;
+  margin-top: 10px;
+  min-height: 325px;
   background: #fffde9;
 }
 
@@ -657,7 +659,7 @@ img {
 
 .hot-card > img {
   width: 220px;
-  height: 126px;
+  height: 139px;
   border-radius: 6px;
   object-fit: cover;
 }
@@ -750,15 +752,16 @@ img {
 .chip-list {
   display: flex;
   gap: 8px;
+  height: 40px;
   overflow-x: auto;
-  margin: 0 -20px 18px;
+  margin: 0 -20px 20px;
   padding: 0 20px;
   scrollbar-width: none;
 }
 
 .chip-list button {
   flex: 0 0 auto;
-  height: 36px;
+  height: 40px;
   padding: 0 14px;
   border: 1px solid var(--gray-200);
   border-radius: 999px;
@@ -778,14 +781,15 @@ img {
 
 .store-list {
   display: grid;
-  gap: 16px;
+  gap: 24px;
 }
 
 .store-card {
   display: grid;
   grid-template-columns: 100px minmax(0, 1fr);
   gap: 12px;
-  padding-bottom: 16px;
+  height: 101px;
+  padding-bottom: 0;
   border-bottom: 1px solid rgba(231, 230, 227, 0.72);
   border-left: 0;
   border-right: 0;
@@ -829,7 +833,7 @@ img {
   flex-direction: column;
   align-items: center;
   min-height: 154px;
-  padding: 28px 28px 28px;
+  padding: 28px 28px 20px;
   border: 1px solid var(--gray-200);
   border-radius: 12px;
   background: var(--gray-50);
@@ -841,7 +845,7 @@ img {
   justify-content: center;
   width: 296px;
   height: 58px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .stamp-row img {
@@ -857,7 +861,7 @@ img {
 }
 
 .stamp-card button {
-  height: 44px;
+  height: 30px;
   padding: 0 24px;
   border-radius: 999px;
   background: var(--gray-800);
@@ -868,7 +872,13 @@ img {
 }
 
 .famous-section {
-  padding-bottom: 48px;
+  padding-bottom: 20px;
+}
+
+.famous-section .section-title,
+.store-section .section-title,
+.stamp-section .section-title {
+  margin-bottom: 20px;
 }
 
 .famous-card {
@@ -4556,7 +4566,7 @@ img {
 }
 
 .benefit-wrap {
-  padding: 20px 20px 18px;
+  padding: 20px 20px 20px;
 }
 
 .benefit-grid {
@@ -4573,8 +4583,8 @@ img {
 }
 
 .benefit-art {
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   border-width: 0.6px;
   border-radius: 20px;
 }
