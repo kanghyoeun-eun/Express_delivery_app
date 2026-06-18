@@ -718,6 +718,7 @@ img {
 
 .tags {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
   margin-top: 4px;
 }
@@ -741,6 +742,11 @@ img {
 .tags .coupon {
   background: #fff1d8;
   color: #ff6f16;
+}
+
+.tags .benefit-label {
+  background: #eef8e7;
+  color: #4f8a1f;
 }
 
 .tags .discount {
@@ -1419,6 +1425,26 @@ img {
 
 .large-store-copy {
   padding-top: 12px;
+}
+
+.store-status-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.store-status-badges span {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: #f2f3f5;
+  color: #555c66;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
 }
 
 .large-store-title-row {

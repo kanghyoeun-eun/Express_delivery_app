@@ -151,7 +151,7 @@ const categoryPages = {
     title: "한식",
     tabs: ["백반", "국밥", "도시락"],
     stores: [
-      { name: "정솥밥 수원 행궁동점", rating: "5.0(342)", time: "32분 소요", discount: "최대 3000원 할인", image: "stores/jeongsotbap-suwon-haenggung/thumb.png", ribbon: "오늘의 한식 추천" },
+      { name: "정솥밥 수원 행궁동점", rating: "5.0(342)", time: "32분 소요", discount: "최대 3000원 할인", image: "stores/jeongsotbap-suwon-haenggung/thumb.png", badges: ["추천"] },
       { name: "평지담", rating: "5.0(342)", time: "35분 소요", discount: "최대 2000원 할인", image: "stores/pyeongjidam/thumb.png" },
       { name: "봄동비빔밥 상점", rating: "4.9(221)", time: "28분 소요", discount: "최대 1000원 할인", image: "menus/salad-bowl.png" },
     ],
@@ -160,7 +160,7 @@ const categoryPages = {
     title: "치킨",
     tabs: ["후라이드", "양념", "순살"],
     stores: [
-      { name: "BHC 광교중앙점", rating: "5.0(342)", time: "35분 소요", discount: "최대 2000원 할인", image: "menus/chicken-platter-large.png", ribbon: "오늘 저녁 마감 할인" },
+      { name: "BHC 광교중앙점", rating: "5.0(342)", time: "35분 소요", discount: "최대 2000원 할인", image: "menus/chicken-platter-large.png", badges: ["이벤트"] },
       { name: "치킨파티 수원점", rating: "4.9(188)", time: "31분 소요", discount: "최대 3000원 할인", image: "menus/roast-chicken-leg.png" },
       { name: "바삭한닭 행궁점", rating: "4.8(156)", time: "40분 소요", discount: "1000원 쿠폰", image: "menus/menu-side-01.png" },
     ],
@@ -178,7 +178,7 @@ const categoryPages = {
     title: "중식",
     tabs: ["짜장면", "짬뽕", "탕수육"],
     stores: [
-      { name: "차이797 스타필드 수원", rating: "5.0(342)", time: "36분 소요", discount: "최대 3000원 할인", image: "stores/chai797-starfield-suwon/thumb.png", ribbon: "지역화폐 가능" },
+      { name: "차이797 스타필드 수원", rating: "5.0(342)", time: "36분 소요", discount: "최대 3000원 할인", image: "stores/chai797-starfield-suwon/thumb.png", labels: ["지역화폐"] },
       { name: "마라공방 광교점", rating: "4.9(203)", time: "33분 소요", discount: "1000원 쿠폰", image: "banners/party-food-banner.png" },
       { name: "홍콩반점 수원시청점", rating: "4.8(146)", time: "29분 소요", discount: "최대 2000원 할인", image: "banners/cream-pasta-banner.png" },
     ],
@@ -187,7 +187,7 @@ const categoryPages = {
     title: "분식",
     tabs: ["떡볶이", "김밥", "튀김"],
     stores: [
-      { name: "엽기떡볶이 영통점", rating: "5.0(342)", time: "30분 소요", discount: "최대 2000원 할인", image: "banners/party-food-banner.png", ribbon: "인기 검색어 2위" },
+      { name: "엽기떡볶이 영통점", rating: "5.0(342)", time: "30분 소요", discount: "최대 2000원 할인", image: "banners/party-food-banner.png", badges: ["인기"] },
       { name: "꼬마김밥 연구소", rating: "4.9(188)", time: "24분 소요", discount: "1000원 쿠폰", image: "stores/ccomon-haenggung/thumb.png" },
       { name: "튀김상회 행궁점", rating: "4.8(121)", time: "27분 소요", discount: "최대 1000원 할인", image: "menus/menu-side-01.png" },
     ],
@@ -196,7 +196,7 @@ const categoryPages = {
     title: "일식",
     tabs: ["초밥", "돈카츠", "라멘"],
     stores: [
-      { name: "시라유키 행궁점", rating: "5.0(342)", time: "34분 소요", discount: "최대 3000원 할인", image: "stores/shirayuki-haenggung/thumb.png", ribbon: "오늘의 일식 추천" },
+      { name: "시라유키 행궁점", rating: "5.0(342)", time: "34분 소요", discount: "최대 3000원 할인", image: "stores/shirayuki-haenggung/thumb.png", badges: ["추천"] },
       { name: "멘야하나비 수원점", rating: "4.9(204)", time: "39분 소요", discount: "1000원 쿠폰", image: "menus/buckwheat-noodle-bowl.png" },
       { name: "카츠오모이 광교점", rating: "4.8(166)", time: "31분 소요", discount: "최대 2000원 할인", image: "stores/store-food-card-02/thumb.png" },
     ],
@@ -205,7 +205,7 @@ const categoryPages = {
     title: "햄버거",
     tabs: ["수제버거", "치킨버거", "세트"],
     stores: [
-      { name: "테디플레이트", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "stores/teddy-plate-haenggung/thumb.png", ribbon: "추천메뉴 주문 가능" },
+      { name: "테디플레이트", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "stores/teddy-plate-haenggung/thumb.png", badges: ["추천"] },
       { name: "버거앤프라이즈 수원점", rating: "4.9(198)", time: "29분 소요", discount: "1000원 쿠폰", image: "stores/store-food-card-01/thumb.png" },
       { name: "맘스터치 광교점", rating: "4.8(151)", time: "25분 소요", discount: "최대 2000원 할인", image: "menus/wrap.png" },
     ],
@@ -214,7 +214,7 @@ const categoryPages = {
     title: "디저트",
     tabs: ["카페", "쿠키", "케이크"],
     stores: [
-      { name: "투썸플레이스 영통점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/dessert-drinks-banner.png", ribbon: "오늘 반짝 할인" },
+      { name: "투썸플레이스 영통점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/dessert-drinks-banner.png", badges: ["이벤트"] },
       { name: "니드스윗", rating: "4.9(220)", time: "26분 소요", discount: "1000원 쿠폰", image: "stores/cafe-maiden2/thumb.png" },
       { name: "디저트파티", rating: "4.9(188)", time: "28분 소요", discount: "최대 1000원 할인", image: "stores/dessert-party/thumb.png" },
     ],
@@ -223,7 +223,7 @@ const categoryPages = {
     title: "야식",
     tabs: ["족발보쌈", "닭발", "야식세트"],
     stores: [
-      { name: "동탄 할머니 보쌈", rating: "5.0(342)", time: "36분 소요", discount: "재주문 10% 할인", image: "stores/pyeongjidam/thumb.png", ribbon: "밤 11시까지 할인" },
+      { name: "동탄 할머니 보쌈", rating: "5.0(342)", time: "36분 소요", discount: "재주문 10% 할인", image: "stores/pyeongjidam/thumb.png", badges: ["야식"] },
       { name: "아미고타코 야식점", rating: "4.9(178)", time: "32분 소요", discount: "1000원 쿠폰", image: "stores/amigo-taco/thumb.png" },
       { name: "심야분식 수원점", rating: "4.8(144)", time: "27분 소요", discount: "최대 2000원 할인", image: "menus/menu-side-02.png" },
     ],
@@ -241,8 +241,8 @@ const benefitPages = {
     tabs: ["쿠폰함", "3000원 할인", "중복쿠폰"],
     note: "다운로드하거나 바로 쓸 수 있는 쿠폰 가게예요.",
     stores: [
-      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "3000원 쿠폰", image: "banners/payment-benefit-banner.png", ribbon: "중복 가능한 할인" },
-      { name: "존앤진피자펍 행궁본점", rating: "5.0(342)", time: "35분 소요", discount: "2000원 쿠폰", image: "stores/john-and-jin-pizza-pub-haenggung/thumb.png", ribbon: "오늘만 쿠폰" },
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "3000원 쿠폰", image: "banners/payment-benefit-banner.png", badges: ["중복쿠폰"] },
+      { name: "존앤진피자펍 행궁본점", rating: "5.0(342)", time: "35분 소요", discount: "2000원 쿠폰", image: "stores/john-and-jin-pizza-pub-haenggung/thumb.png", badges: ["오늘만"] },
       { name: "투썸플레이스 영통점", rating: "5.0(342)", time: "35분 소요", discount: "1000원 쿠폰", image: "banners/dessert-drinks-banner.png" },
     ],
   },
@@ -251,8 +251,8 @@ const benefitPages = {
     tabs: ["이벤트", "오늘 특가", "선착순"],
     note: "지금 진행 중인 이벤트 혜택 매장이에요.",
     stores: [
-      { name: "BHC 광교중앙점", rating: "5.0(342)", time: "35분 소요", discount: "오늘 저녁 2000원 할인", image: "menus/chicken-platter-large.png", ribbon: "오늘 저녁 마감" },
-      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "4000원 이벤트 할인", image: "banners/salady-promotion-banner.png", ribbon: "이번 달 특별 이벤트" },
+      { name: "BHC 광교중앙점", rating: "5.0(342)", time: "35분 소요", discount: "오늘 저녁 2000원 할인", image: "menus/chicken-platter-large.png", badges: ["이벤트"] },
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "4000원 이벤트 할인", image: "banners/salady-promotion-banner.png", badges: ["이벤트"] },
       { name: "피자헛 수원역점", rating: "4.8(177)", time: "42분 소요", discount: "2000원 할인", image: "menus/menu-side-02.png" },
     ],
   },
@@ -261,7 +261,7 @@ const benefitPages = {
     tabs: ["지역화폐", "10% 할인", "수원페이"],
     note: "지역화폐 결제와 추가 할인을 받을 수 있는 가게예요.",
     stores: [
-      { name: "차이797 스타필드 수원", rating: "5.0(342)", time: "36분 소요", discount: "지역화폐 10% 할인", image: "stores/chai797-starfield-suwon/thumb.png", ribbon: "지역화폐 가능" },
+      { name: "차이797 스타필드 수원", rating: "5.0(342)", time: "36분 소요", discount: "지역화폐 10% 할인", image: "stores/chai797-starfield-suwon/thumb.png", labels: ["지역화폐"] },
       { name: "정솥밥 수원 행궁동점", rating: "5.0(342)", time: "32분 소요", discount: "수원페이 가능", image: "stores/jeongsotbap-suwon-haenggung/thumb.png" },
       { name: "아미고타코", rating: "5.0(342)", time: "32분 소요", discount: "지역화폐 결제 가능", image: "stores/amigo-taco/thumb.png" },
     ],
@@ -271,7 +271,7 @@ const benefitPages = {
     tabs: ["온누리", "상품권", "선착순"],
     note: "온누리 상품권 혜택을 쓸 수 있는 가게예요.",
     stores: [
-      { name: "평지담", rating: "5.0(342)", time: "35분 소요", discount: "온누리 상품권 가능", image: "stores/pyeongjidam/thumb.png", ribbon: "선착순 혜택" },
+      { name: "평지담", rating: "5.0(342)", time: "35분 소요", discount: "온누리 상품권 가능", image: "stores/pyeongjidam/thumb.png", badges: ["선착순"], labels: ["온누리"] },
       { name: "시라유키 행궁점", rating: "5.0(342)", time: "34분 소요", discount: "온누리 결제 가능", image: "stores/shirayuki-haenggung/thumb.png" },
       { name: "꼬모온 행궁점", rating: "4.9(188)", time: "24분 소요", discount: "상품권 혜택", image: "stores/ccomon-haenggung/thumb.png" },
     ],
@@ -281,7 +281,7 @@ const benefitPages = {
     tabs: ["G드림카드", "지원금", "추천가게"],
     note: "G드림카드로 결제 가능한 추천 가게예요.",
     stores: [
-      { name: "샐러리아 호매실점", rating: "5.0(342)", time: "35분 소요", discount: "G드림카드 쿠폰", image: "banners/salady-menu-banner.png", ribbon: "G드림카드 가능" },
+      { name: "샐러리아 호매실점", rating: "5.0(342)", time: "35분 소요", discount: "G드림카드 쿠폰", image: "banners/salady-menu-banner.png", labels: ["G드림카드"] },
       { name: "버거앤프라이즈 수원점", rating: "4.9(198)", time: "29분 소요", discount: "지원금 결제 가능", image: "stores/store-food-card-01/thumb.png" },
       { name: "디저트파티", rating: "4.9(188)", time: "28분 소요", discount: "1000원 쿠폰", image: "stores/dessert-party/thumb.png" },
     ],
@@ -514,20 +514,31 @@ function smallStoreCard(store) {
   `;
 }
 
+function renderStoreLabels(store) {
+  return (store.labels || []).map((label) => `<span class="benefit-label">${label}</span>`).join("");
+}
+
+function renderStoreBadges(store) {
+  const badges = (store.badges || []).map((badge) => `<span>${badge}</span>`).join("");
+  return badges ? `<div class="store-status-badges">${badges}</div>` : "";
+}
+
 function largeStoreCard(store) {
+  const ribbonText = store.ribbon && store.ribbon.includes("배달특급") && store.ribbon.includes("할인") ? store.ribbon : "";
   return `
     <button class="large-store-card" type="button" data-target="store">
       <span class="large-store-media">
-        <span class="${store.ribbon ? "ribbon" : "ribbon hidden"}">${store.ribbon || ""}</span>
+        <span class="${ribbonText ? "ribbon" : "ribbon hidden"}">${ribbonText}</span>
         <img src="${imageRoot}${store.image}" alt="" />
       </span>
       <div class="large-store-copy">
+        ${renderStoreBadges(store)}
         <div class="large-store-title-row">
           <h3>${store.name}</h3>
           <span class="store-rating"><img src="./icons/14/star.svg" alt="" />${store.rating}</span>
           <span class="store-time"><img src="./icons/14/clock.svg" alt="" />${store.time}</span>
         </div>
-        <div class="tags"><span class="pay">수원페이</span><span class="coupon">1000원 쿠폰</span><span class="discount"><img src="./icons/14/wavy-check.svg" alt="" />${store.discount}</span></div>
+        <div class="tags"><span class="pay">수원페이</span><span class="coupon">1000원 쿠폰</span>${renderStoreLabels(store)}<span class="discount"><img src="./icons/14/wavy-check.svg" alt="" />${store.discount}</span></div>
       </div>
     </button>
   `;
