@@ -740,13 +740,23 @@ img {
 }
 
 .tags .coupon {
-  background: #fff1d8;
-  color: #ff6f16;
+  background: #fff2b8;
+  color: #8f6500;
 }
 
 .tags .benefit-label {
-  background: #eef8e7;
-  color: #4f8a1f;
+  background: #dfefff;
+  color: #355371;
+}
+
+.tags .onnuri-coupon {
+  background: #ffdcbb;
+  color: #d85700;
+}
+
+.tags .gdream-label {
+  background: #baf1e0;
+  color: #008b60;
 }
 
 .tags .discount {
@@ -4979,8 +4989,8 @@ img {
 }
 
 .portfolio-badges .coupon {
-  background: #ffe6d7;
-  color: #ff6a00;
+  background: #fff2b8;
+  color: #8f6500;
 }
 
 .portfolio-badges span {
@@ -5086,15 +5096,30 @@ img {
 }
 
 .favorite-tags span {
-  color: #62615d;
+  color: #5c5b54;
 }
 
 .favorite-tags span:nth-child(1) {
-  background: #e8e4dc;
+  background: #e7e6e3;
 }
 
 .favorite-tags span:nth-child(2) {
-  background: #e8e4dc;
+  background: #e7e6e3;
+}
+
+.favorite-tags span.primary-badge {
+  background: #fff2b8;
+  color: #8f6500;
+}
+
+.favorite-tags span.red-badge {
+  background: #ffdcbb;
+  color: #d85700;
+}
+
+.favorite-tags span.secondary-badge {
+  background: #baf1e0;
+  color: #008b60;
 }
 
 .recommend-order {

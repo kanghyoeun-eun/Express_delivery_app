@@ -515,7 +515,13 @@ function smallStoreCard(store) {
 }
 
 function renderStoreLabels(store) {
-  return (store.labels || []).map((label) => `<span class="benefit-label">${label}</span>`).join("");
+  return (store.labels || [])
+    .map((label) => {
+      if (label.includes("온누리")) return `<span class="onnuri-coupon">온누리 쿠폰</span>`;
+      if (label.includes("G드림")) return `<span class="gdream-label">${label}</span>`;
+      return `<span class="benefit-label">${label}</span>`;
+    })
+    .join("");
 }
 
 function renderStoreBadges(store) {
