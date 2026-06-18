@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v2-category-pages";
+const CACHE_NAME = "baedal-prototype-v3-benefit-pages";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260618-category-pages",
-  "/script.js?v=20260618-category-pages",
-  "/asset-map.js?v=20260618-category-pages",
+  "/styles.css?v=20260618-benefit-pages",
+  "/script.js?v=20260618-benefit-pages",
+  "/asset-map.js?v=20260618-benefit-pages",
   "/manifest.json"
 ];
 

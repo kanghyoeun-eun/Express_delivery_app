@@ -10,7 +10,7 @@
     <title>배달특급 하이파이 프로토타입</title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260618-category-pages" />
+    <link rel="stylesheet" href="./styles.css?v=20260618-benefit-pages" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZR2K930ZE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -206,6 +206,21 @@
               <span class="portfolio-store-copy"><span class="portfolio-title-row"><strong>Poke all day 포케&amp;샐러드 호매실점</strong><span class="portfolio-rating"><img src="./icons/14/star.svg" alt="" />5.0<em>(342)</em></span><span class="portfolio-time"><img src="./icons/14/clock.svg" alt="" />35분 소요</span></span><span class="portfolio-badges"><em class="pay">수원페이</em><em class="coupon">1000원 쿠폰</em><span><img src="./icons/14/wavy-check.svg" alt="" />최대 3000원 할인</span></span></span>
             </button>
           </div>
+        </section>
+      </section>
+
+      <section class="app-screen" data-screen="benefit-list" aria-label="혜택별 가게 리스트">
+        <div class="status-bar plain"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/black.svg" alt="" /><img src="./icons/status/wifi/black.svg" alt="" /><img src="./icons/status/battery/black.svg" alt="" /></div></div>
+        <header class="title-header">
+          <button class="icon-button" type="button" data-back><img src="./icons/24/chevron-left.svg" alt="" /></button>
+          <h1>쿠폰함</h1>
+          <button class="icon-button" type="button" data-target="cart"><img src="./icons/24/shopping-cart-02.svg" alt="" /></button>
+        </header>
+        <div class="tab-list benefit-tab-list"><button class="active" type="button">쿠폰함</button><button type="button">3000원 할인</button><button type="button">중복쿠폰</button></div>
+        <div class="filter-strip"><button type="button">혜택 큰 순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">빠른 배달</button><button type="button">바로 할인</button></div>
+        <section class="scroll-area result-scroll benefit-result-scroll">
+          <div class="benefit-page-note"><strong>받을 수 있는 혜택이 있는 가게</strong><span>마음에 드는 메뉴를 고르고 주문 직전 화면까지 이동해보세요.</span></div>
+          <div class="large-store-list" id="benefitStoreList"></div>
         </section>
       </section>
 
@@ -519,7 +534,7 @@
 
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
-    <script src="./asset-map.js?v=20260618-category-pages"></script>
-    <script src="./script.js?v=20260618-category-pages"></script>
+    <script src="./asset-map.js?v=20260618-benefit-pages"></script>
+    <script src="./script.js?v=20260618-benefit-pages"></script>
   </body>
 </html>

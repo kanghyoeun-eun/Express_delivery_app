@@ -235,6 +235,59 @@ const categoryPages = {
   },
 };
 
+const benefitPages = {
+  coupon: {
+    title: "쿠폰함",
+    tabs: ["쿠폰함", "3000원 할인", "중복쿠폰"],
+    note: "다운로드하거나 바로 쓸 수 있는 쿠폰 가게예요.",
+    stores: [
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "3000원 쿠폰", image: "banners/payment-benefit-banner.png", ribbon: "중복 가능한 할인" },
+      { name: "존앤진피자펍 행궁본점", rating: "5.0(342)", time: "35분 소요", discount: "2000원 쿠폰", image: "stores/john-and-jin-pizza-pub-haenggung/thumb.png", ribbon: "오늘만 쿠폰" },
+      { name: "투썸플레이스 영통점", rating: "5.0(342)", time: "35분 소요", discount: "1000원 쿠폰", image: "banners/dessert-drinks-banner.png" },
+    ],
+  },
+  event: {
+    title: "이벤트",
+    tabs: ["이벤트", "오늘 특가", "선착순"],
+    note: "지금 진행 중인 이벤트 혜택 매장이에요.",
+    stores: [
+      { name: "BHC 광교중앙점", rating: "5.0(342)", time: "35분 소요", discount: "오늘 저녁 2000원 할인", image: "menus/chicken-platter-large.png", ribbon: "오늘 저녁 마감" },
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "4000원 이벤트 할인", image: "banners/salady-promotion-banner.png", ribbon: "이번 달 특별 이벤트" },
+      { name: "피자헛 수원역점", rating: "4.8(177)", time: "42분 소요", discount: "2000원 할인", image: "menus/menu-side-02.png" },
+    ],
+  },
+  local: {
+    title: "지역화폐",
+    tabs: ["지역화폐", "10% 할인", "수원페이"],
+    note: "지역화폐 결제와 추가 할인을 받을 수 있는 가게예요.",
+    stores: [
+      { name: "차이797 스타필드 수원", rating: "5.0(342)", time: "36분 소요", discount: "지역화폐 10% 할인", image: "stores/chai797-starfield-suwon/thumb.png", ribbon: "지역화폐 가능" },
+      { name: "정솥밥 수원 행궁동점", rating: "5.0(342)", time: "32분 소요", discount: "수원페이 가능", image: "stores/jeongsotbap-suwon-haenggung/thumb.png" },
+      { name: "아미고타코", rating: "5.0(342)", time: "32분 소요", discount: "지역화폐 결제 가능", image: "stores/amigo-taco/thumb.png" },
+    ],
+  },
+  onnuri: {
+    title: "온누리",
+    tabs: ["온누리", "상품권", "선착순"],
+    note: "온누리 상품권 혜택을 쓸 수 있는 가게예요.",
+    stores: [
+      { name: "평지담", rating: "5.0(342)", time: "35분 소요", discount: "온누리 상품권 가능", image: "stores/pyeongjidam/thumb.png", ribbon: "선착순 혜택" },
+      { name: "시라유키 행궁점", rating: "5.0(342)", time: "34분 소요", discount: "온누리 결제 가능", image: "stores/shirayuki-haenggung/thumb.png" },
+      { name: "꼬모온 행궁점", rating: "4.9(188)", time: "24분 소요", discount: "상품권 혜택", image: "stores/ccomon-haenggung/thumb.png" },
+    ],
+  },
+  gdream: {
+    title: "G드림카드",
+    tabs: ["G드림카드", "지원금", "추천가게"],
+    note: "G드림카드로 결제 가능한 추천 가게예요.",
+    stores: [
+      { name: "샐러리아 호매실점", rating: "5.0(342)", time: "35분 소요", discount: "G드림카드 쿠폰", image: "banners/salady-menu-banner.png", ribbon: "G드림카드 가능" },
+      { name: "버거앤프라이즈 수원점", rating: "4.9(198)", time: "29분 소요", discount: "지원금 결제 가능", image: "stores/store-food-card-01/thumb.png" },
+      { name: "디저트파티", rating: "4.9(188)", time: "28분 소요", discount: "1000원 쿠폰", image: "stores/dessert-party/thumb.png" },
+    ],
+  },
+};
+
 const searchRecommendations = [
   {
     name: "존앤진피자펍 행궁본점",
@@ -380,14 +433,26 @@ function setPortfolioContext(label = "쿠폰 할인") {
   document.querySelector(".portfolio-search-field span").textContent = label;
 }
 
+function setBenefitContext(label = "쿠폰함", slug = "coupon") {
+  const page = benefitPages[slug] || benefitPages.coupon;
+  const benefitScreen = document.querySelector('[data-screen="benefit-list"]');
+  benefitScreen.querySelector(".title-header h1").textContent = page.title;
+  benefitScreen.querySelector(".tab-list").innerHTML = page.tabs.map((tab, index) => `<button class="${index === 0 ? "active" : ""}" type="button">${tab}</button>`).join("");
+  const note = benefitScreen.querySelector(".benefit-page-note");
+  note.querySelector("strong").textContent = `${page.title} 혜택 가게`;
+  note.querySelector("span").textContent = page.note;
+  benefitScreen.querySelector("#benefitStoreList").innerHTML = page.stores.map(largeStoreCard).join("");
+  benefitScreen.setAttribute("aria-label", `${label} 혜택 가게 리스트`);
+}
+
 function routeToSearchResult(label, slug) {
   setResultContext(label, slug);
   showScreen("search-result");
 }
 
-function routeToBenefit(label) {
-  setPortfolioContext(label);
-  showScreen("portfolio-search");
+function routeToBenefit(label, slug = "coupon") {
+  setBenefitContext(label, slug);
+  showScreen("benefit-list");
 }
 
 function renderCategories() {
@@ -407,7 +472,7 @@ function renderBenefits() {
   document.querySelector("#benefitGrid").innerHTML = benefits
     .map(
       ([label, figmaNodeId, image, slug, badge]) => `
-        <button class="benefit-item" type="button" data-label="${label}" data-slug="${slug}">
+        <button class="benefit-item" type="button" data-target="benefit-list" data-label="${label}" data-slug="${slug}">
           ${badge ? `<em>${badge}</em>` : ""}
           <span class="benefit-art benefit-${slug}"><img src="${mappedAsset(figmaNodeId, imageRoot + image)}" alt="" /></span>
           <span>${label}</span>
@@ -576,7 +641,10 @@ function bindInteractions() {
       if (targetButton.dataset.target === "search-result") {
         routeToSearchResult(targetButton.dataset.label || "샐러드", targetButton.dataset.slug);
       } else if (targetButton.dataset.target === "portfolio-search") {
-        routeToBenefit(targetButton.dataset.label || "쿠폰 할인");
+        setPortfolioContext(targetButton.dataset.label || "쿠폰 할인");
+        showScreen("portfolio-search");
+      } else if (targetButton.dataset.target === "benefit-list") {
+        routeToBenefit(targetButton.dataset.label || "쿠폰함", targetButton.dataset.slug);
       } else {
         showScreen(targetButton.dataset.target);
       }
@@ -594,14 +662,14 @@ function bindInteractions() {
   document.querySelector("#homeSearchInput").addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       const value = event.currentTarget.value.trim() || "샐러드";
-      if (value.includes("쿠폰")) routeToBenefit("쿠폰 할인");
+      if (value.includes("쿠폰")) routeToBenefit("쿠폰함", "coupon");
       else routeToSearchResult(value);
     }
   });
   document.querySelector("#searchInput").addEventListener("keydown", (event) => {
     if (event.key === "Enter" && event.currentTarget.value.trim()) {
       const value = event.currentTarget.value.trim();
-      if (value.includes("쿠폰")) routeToBenefit("쿠폰 할인");
+      if (value.includes("쿠폰")) routeToBenefit("쿠폰함", "coupon");
       else routeToSearchResult(value);
     }
   });
@@ -618,10 +686,10 @@ function bindInteractions() {
   document.querySelector("#benefitGrid").addEventListener("click", (event) => {
     const item = event.target.closest(".benefit-item");
     if (!item) return;
+    event.stopPropagation();
     document.querySelectorAll(".benefit-item").forEach((node) => node.classList.remove("selected"));
     item.classList.add("selected");
-    if (item.dataset.slug === "coupon") openModal("coupon-sheet");
-    else routeToBenefit(item.dataset.label);
+    routeToBenefit(item.dataset.label, item.dataset.slug);
   });
 
   document.querySelector("#eventTrack").addEventListener("click", (event) => {

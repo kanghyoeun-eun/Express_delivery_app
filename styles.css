@@ -379,6 +379,7 @@ img {
 }
 
 .benefit-art {
+  position: relative;
   display: grid;
   place-items: center;
   width: 56px;
@@ -390,9 +391,14 @@ img {
 }
 
 .benefit-art img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: var(--benefit-size, 60px);
   height: var(--benefit-size, 60px);
   object-fit: contain;
+  object-position: center;
+  transform: translate(-50%, -50%);
 }
 
 .benefit-coupon {
@@ -4590,8 +4596,14 @@ img {
 }
 
 .benefit-art img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: var(--benefit-size, 60px);
   height: var(--benefit-size, 60px);
+  object-fit: contain;
+  object-position: center;
+  transform: translate(-50%, -50%);
 }
 
 .benefit-item em {
@@ -4777,6 +4789,36 @@ img {
   height: calc(100% - 206px);
   padding: 16px 20px 34px;
   background: #fff;
+}
+
+.benefit-result-scroll {
+  height: calc(100% - 212px);
+  padding: 16px 20px 34px;
+  background: #fff;
+}
+
+.benefit-page-note {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: #fff8d9;
+  color: #2a2924;
+}
+
+.benefit-page-note strong {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.benefit-page-note span {
+  color: #62615d;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
 }
 
 .portfolio-store-list {
