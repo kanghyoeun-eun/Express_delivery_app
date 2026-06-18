@@ -127,6 +127,7 @@ const saladResults = [
     time: "35분 소요",
     discount: "최대 3000원 할인",
     image: "banners/payment-benefit-banner.png",
+    ribbon: "배달특급 10% 즉시 할인 매장",
   },
   {
     name: "샐러리아 호매실점",
@@ -141,6 +142,7 @@ const saladResults = [
     time: "35분 소요",
     discount: "최대 3000원 할인",
     image: "banners/salady-menu-banner.png",
+    ribbon: "배달특급 10% 즉시 할인 매장",
   },
 ];
 
@@ -167,7 +169,7 @@ const categoryPages = {
     title: "피자",
     tabs: ["프리미엄", "1인피자", "파스타"],
     stores: [
-      { name: "존앤진피자펍 행궁본점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "stores/john-and-jin-pizza-pub-haenggung/thumb.png" },
+      { name: "존앤진피자펍 행궁본점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "stores/john-and-jin-pizza-pub-haenggung/thumb.png", ribbon: "배달특급 10% 즉시 할인 매장" },
       { name: "노모어피자 호매실점", rating: "4.9(210)", time: "38분 소요", discount: "최대 2000원 할인", image: "stores/no-more-pizza-homaesil/thumb.png" },
       { name: "피자헛 수원역점", rating: "4.8(177)", time: "42분 소요", discount: "2000원 할인", image: "menus/menu-side-02.png" },
     ],
@@ -269,9 +271,9 @@ const benefitPages = {
     tabs: ["온누리", "상품권", "선착순"],
     note: "온누리 상품권 혜택을 쓸 수 있는 가게예요.",
     stores: [
-      { name: "평지담", rating: "5.0(342)", time: "35분 소요", discount: "온누리 상품권 가능", image: "stores/pyeongjidam/thumb.png", badges: ["선착순"], onnuriCoupon: true },
-      { name: "시라유키 행궁점", rating: "5.0(342)", time: "34분 소요", discount: "온누리 결제 가능", image: "stores/shirayuki-haenggung/thumb.png", onnuriCoupon: true },
-      { name: "꼬모온 행궁점", rating: "4.9(188)", time: "24분 소요", discount: "상품권 혜택", image: "stores/ccomon-haenggung/thumb.png", onnuriCoupon: true },
+      { name: "평지담", rating: "5.0(342)", time: "35분 소요", discount: "온누리 상품권 가능", image: "stores/pyeongjidam/thumb.png", badges: ["선착순"], labels: ["온누리"] },
+      { name: "시라유키 행궁점", rating: "5.0(342)", time: "34분 소요", discount: "온누리 결제 가능", image: "stores/shirayuki-haenggung/thumb.png" },
+      { name: "꼬모온 행궁점", rating: "4.9(188)", time: "24분 소요", discount: "상품권 혜택", image: "stores/ccomon-haenggung/thumb.png" },
     ],
   },
   gdream: {
@@ -293,6 +295,7 @@ const searchRecommendations = [
     time: "35분 소요",
     discount: "최대 3000원 할인",
     image: "stores/john-and-jin-pizza-pub-haenggung/thumb.png",
+    ribbon: "배달특급 10% 즉시 할인 매장",
   },
   {
     name: "룰루앙 파스타 더현대",
@@ -520,19 +523,12 @@ function renderStoreBadges(store) {
   return badges ? `<div class="store-status-badges">${badges}</div>` : "";
 }
 
-function getStoreImageBadge(store) {
-  if (store.onnuriCoupon) return { text: "온누리 쿠폰", tone: "onnuri" };
-  const text = store.discount || "";
-  const isDiscountBadge = (text.includes("할인") || text.includes("쿠폰")) && !text.includes("가능") && !text.includes("혜택");
-  return isDiscountBadge ? { text, tone: "discount" } : null;
-}
-
 function largeStoreCard(store) {
-  const imageBadge = getStoreImageBadge(store);
+  const ribbonText = store.ribbon && store.ribbon.includes("배달특급") && store.ribbon.includes("할인") ? store.ribbon : "";
   return `
     <button class="large-store-card" type="button" data-target="store">
       <span class="large-store-media">
-        <span class="${imageBadge ? `ribbon ${imageBadge.tone}` : "ribbon hidden"}">${imageBadge?.text || ""}</span>
+        <span class="${ribbonText ? "ribbon" : "ribbon hidden"}">${ribbonText}</span>
         <img src="${imageRoot}${store.image}" alt="" />
       </span>
       <div class="large-store-copy">
@@ -542,7 +538,7 @@ function largeStoreCard(store) {
           <span class="store-rating"><img src="./icons/14/star.svg" alt="" />${store.rating}</span>
           <span class="store-time"><img src="./icons/14/clock.svg" alt="" />${store.time}</span>
         </div>
-        <div class="tags"><span class="pay">수원페이</span>${renderStoreLabels(store)}</div>
+        <div class="tags"><span class="pay">수원페이</span><span class="coupon">1000원 쿠폰</span>${renderStoreLabels(store)}<span class="discount"><img src="./icons/14/wavy-check.svg" alt="" />${store.discount}</span></div>
       </div>
     </button>
   `;
