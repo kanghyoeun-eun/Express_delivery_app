@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v4-badge-rules";
+const CACHE_NAME = "baedal-prototype-v5-coupon-badges";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260618-badge-rules",
-  "/script.js?v=20260618-badge-rules",
-  "/asset-map.js?v=20260618-badge-rules",
+  "/styles.css?v=20260618-coupon-badges",
+  "/script.js?v=20260618-coupon-badges",
+  "/asset-map.js?v=20260618-coupon-badges",
   "/manifest.json"
 ];
 

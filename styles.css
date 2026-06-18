@@ -1410,13 +1410,18 @@ img {
   padding: 0 8px;
   overflow: hidden;
   border-radius: 8px 0 6px 0;
-  background: #ff6a00;
-  color: #fff;
+  background: #ffd24a;
+  color: #2c2416;
   font-size: 13px;
   line-height: 28px;
   font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.ribbon.onnuri {
+  background: #ff6a00;
+  color: #fff;
 }
 
 .ribbon.hidden {
@@ -4886,8 +4891,8 @@ img {
   padding: 0 8px;
   overflow: hidden;
   border-radius: 8px 0 6px 0;
-  background: #ff6a00;
-  color: #fff;
+  background: #ffd24a;
+  color: #2c2416;
   font-size: 14px;
   line-height: 28px;
   font-weight: 700;
