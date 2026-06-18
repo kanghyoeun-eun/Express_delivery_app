@@ -227,13 +227,13 @@
       <section class="app-screen" data-screen="store" aria-label="매장 상세">
         <section class="scroll-area detail-scroll">
           <header class="store-hero">
-            <img src="./assets/images/banners/payment-benefit-banner.png" alt="" />
+            <img id="storeHeroImg" src="./assets/images/banners/payment-benefit-banner.png" alt="" />
             <div class="status-bar overlay"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/white.svg" alt="" /><img src="./icons/status/wifi/white.svg" alt="" /><img src="./icons/status/battery/white.svg" alt="" /></div></div>
             <div class="store-hero-actions"><button class="icon-button ghost" type="button" data-back><img src="./icons/24/chevron-left.svg" alt="" /></button><div><button class="icon-button ghost" type="button" aria-label="찜하기"><img src="./icons/24/like/white.svg" alt="" /></button><button class="icon-button ghost" type="button" data-target="cart"><img src="./icons/24/shopping-cart-02.svg" alt="" /></button></div></div>
           </header>
           <section class="store-summary">
             <div class="store-title-row">
-              <h1>샐러디 성대점</h1>
+              <h1 id="storeName">샐러디 성대점</h1>
               <button type="button" data-modal="store-info">가게정보/원산지</button>
             </div>
             <p class="store-rating"><img src="./icons/14/star.svg" alt="" /> <strong>5.0</strong> (후기 432개) <img src="./icons/16/chevron-right.svg" alt="" /></p>
@@ -275,16 +275,16 @@
       <section class="app-screen" data-screen="menu" aria-label="메뉴 상세">
         <section class="scroll-area menu-detail-scroll">
           <div class="menu-detail-hero">
-            <img class="menu-detail-main-img" src="./assets/images/menus/menu-detail-main-thumb.png" alt="" />
+            <img id="menuDetailImg" class="menu-detail-main-img" src="./assets/images/menus/menu-detail-main-thumb.png" alt="" />
           </div>
           <div class="menu-top-overlay">
             <div class="status-bar overlay"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/white.svg" alt="" /><img src="./icons/status/wifi/white.svg" alt="" /><img src="./icons/status/battery/white.svg" alt="" /></div></div>
             <header class="menu-overlay-header"><button type="button" data-back aria-label="뒤로"><img src="./icons/24/chevron-left.svg" alt="" /></button><div><button type="button" aria-label="찜"><img src="./icons/24/like/white.svg" alt="" /></button><button type="button" data-target="cart" aria-label="장바구니"><img src="./icons/24/shopping-cart-02.svg" alt="" /></button></div></header>
           </div>
           <section class="menu-product-card">
-            <span class="menu-rank-badge">인기 1위</span>
-            <h1>탄단지 샐러디</h1>
-            <strong>9,900원</strong>
+            <span id="menuBadge" class="menu-rank-badge">인기 1위</span>
+            <h1 id="menuName">탄단지 샐러디</h1>
+            <strong id="menuPrice">9,900원</strong>
             <p>부드러운 닭가슴살, 고구마 무스, 견과류, 크랜베리가 들어간 탄단지가 골고루 들어있는 샐러디 스테디 메뉴 (추천 드레싱 : 오리엔탈) / 닭가슴살, 스윗포테이토, 견과류, 크랜베리, 채소</p>
             <button class="menu-more" type="button">더보기 <img src="./icons/24/chevron-down-small.svg" alt="" /></button>
             <button class="nutrition-chip" type="button">알레르기 및 영양성분 정보</button>
@@ -323,7 +323,7 @@
             <div class="menu-quantity-control"><button type="button" aria-label="수량 감소"><img src="./icons/24/minus-disabled.svg" alt="" /></button><span>개수</span><button type="button" aria-label="수량 증가"><img src="./icons/24/plus.svg" alt="" /></button></div>
           </section>
         </section>
-        <div class="menu-sticky-cta"><p><strong>3000원</strong> 더 담으면<br />주문 가능!</p><button type="button" data-target="cart"><s>12,000원</s><span>9,900원 담기</span></button></div>
+        <div class="menu-sticky-cta"><p id="menuCtaText"><strong>3,000원</strong> 더 담으면<br />주문 가능!</p><button type="button" data-target="cart"><s id="menuOriginalPrice">12,000원</s><span id="menuCtaPrice">9,900원 담기</span></button></div>
       </section>
 
       <section class="app-screen" data-screen="cart" aria-label="장바구니">

@@ -379,6 +379,157 @@ const famous = [
 const toast = document.querySelector(".prototype-toast");
 let toastTimer;
 const historyStack = ["home"];
+let currentStore = null;
+let currentMenu = null;
+
+function getStoreSlug(store) {
+  const m = store.image && store.image.match(/^stores\/([^/]+)\//);
+  return m ? m[1] : store.name.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9가-힣-]/g, "");
+}
+
+function findStoreBySlug(slug) {
+  let all = [];
+  Object.values(categoryPages).forEach((p) => { if (p.stores) all = all.concat(p.stores); });
+  Object.values(benefitPages).forEach((p) => { if (p.stores) all = all.concat(p.stores); });
+  all = all.concat(stores, saladResults, searchRecommendations, hotMenus);
+  return all.find((s) => getStoreSlug(s) === slug) || null;
+}
+
+function defaultMenusForStore(store) {
+  const img = store.image || "stores/store-food-card-01/thumb.png";
+  return [
+    { name: store.name + " 대표", price: "9,900원", image: img, badge: "인기 1위" },
+    { name: store.name + " 세트", price: "12,500원", image: img, badge: "인기 2위" },
+    { name: store.name + " 스페셜", price: "15,000원", image: img },
+  ];
+}
+
+const storeMenus = {
+  "jeongsotbap-suwon-haenggung": [
+    { name: "정솥 정식", price: "9,500원", image: "stores/jeongsotbap-suwon-haenggung/thumb.png", badge: "인기 1위" },
+    { name: "제육덮밥", price: "8,500원", image: "stores/pyeongjidam/thumb.png", badge: "인기 2위" },
+    { name: "김치찌개", price: "7,500원", image: "stores/jeongsotbap-suwon-haenggung/thumb.png" },
+  ],
+  pyeongjidam: [
+    { name: "평지담 정식", price: "10,000원", image: "stores/pyeongjidam/thumb.png", badge: "인기 1위" },
+    { name: "불고기 백반", price: "8,500원", image: "stores/pyeongjidam/thumb.png", badge: "인기 2위" },
+    { name: "된장찌개", price: "7,000원", image: "stores/pyeongjidam/thumb.png" },
+  ],
+  "no-more-pizza-homaesil": [
+    { name: "페퍼로니 피자", price: "15,900원", image: "menus/pizza.jpg", badge: "인기 1위" },
+    { name: "하프앤하프", price: "17,900원", image: "menus/pizza.jpg", badge: "인기 2위" },
+    { name: "마르게리따", price: "14,900원", image: "menus/pizza.jpg" },
+  ],
+  "john-and-jin-pizza-pub-haenggung": [
+    { name: "존앤진 스페셜", price: "18,900원", image: "menus/pizza.jpg", badge: "인기 1위" },
+    { name: "고르곤졸라", price: "16,900원", image: "menus/pizza.jpg", badge: "인기 2위" },
+    { name: "마르게리따", price: "14,900원", image: "menus/pizza.jpg" },
+  ],
+  "chai797-starfield-suwon": [
+    { name: "짜장면", price: "7,500원", image: "menus/jjajangmyeon.jpg", badge: "인기 1위" },
+    { name: "짬뽕", price: "8,500원", image: "menus/ramen.jpg", badge: "인기 2위" },
+    { name: "탕수육", price: "14,000원", image: "menus/jjajangmyeon.jpg" },
+  ],
+  "ccomon-haenggung": [
+    { name: "꼬마김밥", price: "3,500원", image: "menus/kimbap.jpg", badge: "인기 1위" },
+    { name: "떡볶이", price: "4,500원", image: "menus/tteokbokki.jpg", badge: "인기 2위" },
+    { name: "튀김 세트", price: "5,500원", image: "menus/kimbap.jpg" },
+  ],
+  "shirayuki-haenggung": [
+    { name: "돈카츠", price: "10,500원", image: "menus/ramen.jpg", badge: "인기 1위" },
+    { name: "초밥 세트", price: "13,500원", image: "menus/buckwheat-noodle-bowl.png", badge: "인기 2위" },
+    { name: "라멘", price: "9,000원", image: "menus/ramen.jpg" },
+  ],
+  "teddy-plate-haenggung": [
+    { name: "테디버거", price: "8,500원", image: "menus/burger.jpg", badge: "인기 1위" },
+    { name: "치즈버거", price: "9,500원", image: "menus/burger.jpg", badge: "인기 2위" },
+    { name: "베이컨버거", price: "10,500원", image: "menus/burger.jpg" },
+  ],
+  "cafe-maiden2": [
+    { name: "아메리카노", price: "4,500원", image: "stores/cafe-maiden2/thumb.png", badge: "인기 1위" },
+    { name: "크로플", price: "6,500원", image: "stores/cafe-maiden2/thumb.png", badge: "인기 2위" },
+    { name: "카페라떼", price: "5,000원", image: "stores/cafe-maiden2/thumb.png" },
+  ],
+  "dessert-party": [
+    { name: "티라미수", price: "7,500원", image: "stores/dessert-party/thumb.png", badge: "인기 1위" },
+    { name: "레드벨벳 케이크", price: "8,500원", image: "menus/cake-sandwich.png", badge: "인기 2위" },
+    { name: "마카롱 세트", price: "6,000원", image: "stores/dessert-party/thumb.png" },
+  ],
+  "amigo-taco": [
+    { name: "해쉬브라운 부리또", price: "8,500원", image: "stores/amigo-taco/thumb.png", badge: "인기 1위" },
+    { name: "나쵸 세트", price: "7,500원", image: "stores/amigo-taco/thumb.png", badge: "인기 2위" },
+    { name: "타코", price: "6,500원", image: "stores/amigo-taco/thumb.png" },
+  ],
+  "store-food-card-01": [
+    { name: "트라타 스페셜", price: "11,500원", image: "stores/store-food-card-01/thumb.png", badge: "인기 1위" },
+    { name: "까르보네", price: "10,500원", image: "stores/store-food-card-01/thumb.png", badge: "인기 2위" },
+    { name: "더블업 트라부 부리또", price: "12,500원", image: "stores/store-food-card-01/thumb.png" },
+  ],
+  "store-food-card-02": [
+    { name: "카츠오모이 정식", price: "10,000원", image: "stores/store-food-card-02/thumb.png", badge: "인기 1위" },
+    { name: "돈까스", price: "9,000원", image: "stores/store-food-card-02/thumb.png", badge: "인기 2위" },
+    { name: "치킨까스", price: "9,500원", image: "stores/store-food-card-02/thumb.png" },
+  ],
+  salady: [
+    { name: "탄단지 샐러디", price: "8,600원", image: "stores/salady/thumb-square.png", badge: "인기 1위" },
+    { name: "로스트 치킨 샐러드", price: "9,500원", image: "stores/salady/thumb-square.png", badge: "인기 2위" },
+    { name: "맥시칸 랩", price: "7,500원", image: "stores/salady/thumb-square.png" },
+  ],
+  "salad-store": [
+    { name: "그린 샐러드", price: "7,500원", image: "stores/salad-store/thumb-square.png", badge: "인기 1위" },
+    { name: "콥 샐러드", price: "9,500원", image: "stores/salad-store/thumb-square.png", badge: "인기 2위" },
+    { name: "시저 샐러드", price: "8,500원", image: "stores/salad-store/thumb-square.png" },
+  ],
+  "cafe-maven-haenggung": [
+    { name: "시그니처 커피", price: "5,500원", image: "stores/cafe-maven-haenggung/thumb.png", badge: "인기 1위" },
+    { name: "바닐라라떼", price: "6,000원", image: "stores/cafe-maven-haenggung/thumb.png", badge: "인기 2위" },
+    { name: "케이크", price: "7,000원", image: "stores/cafe-maven-haenggung/thumb.png" },
+  ],
+};
+
+function renderMenuList(slug) {
+  const list = document.querySelector("#storeMenuList");
+  if (!list) return;
+  const store = findStoreBySlug(slug);
+  const menus = storeMenus[slug] || (store ? defaultMenusForStore(store) : null);
+  if (!menus) { list.innerHTML = '<p class="empty-state">메뉴 준비 중입니다.</p>'; return; }
+  list.innerHTML = menus.map((item, i) => `
+    <button class="menu-card" type="button" data-target="menu" data-menu-index="${i}" data-store-slug="${slug}">
+      <div>
+        <span class="menu-rank">${item.badge || "메뉴"}</span>
+        <h3>${item.name}</h3>
+        <strong>${item.price}</strong>
+        <p>${item.desc || ""}</p>
+        <small><img src="./icons/14/chat-circle-dots.svg" alt="" /> 리뷰 89</small>
+      </div>
+      <img src="${imageRoot}${item.image}" alt="" />
+    </button>
+  `).join("");
+}
+
+function renderStoreDetail(store) {
+  if (!store) return;
+  const hero = document.querySelector("#storeHeroImg");
+  const title = document.querySelector("#storeName");
+  if (hero) hero.src = imageRoot + store.image;
+  if (title) title.textContent = store.name;
+  const slug = getStoreSlug(store);
+  renderMenuList(slug);
+}
+
+function renderMenuDetail(menu) {
+  if (!menu) return;
+  const img = document.querySelector("#menuDetailImg");
+  const badge = document.querySelector("#menuBadge");
+  const nameEl = document.querySelector("#menuName");
+  const priceEl = document.querySelector("#menuPrice");
+  const ctaPrice = document.querySelector("#menuCtaPrice");
+  if (img) img.src = imageRoot + menu.image;
+  if (badge) badge.textContent = menu.badge || "메뉴";
+  if (nameEl) nameEl.textContent = menu.name;
+  if (priceEl) priceEl.textContent = menu.price;
+  if (ctaPrice) ctaPrice.textContent = menu.price + " 담기";
+}
 
 function showToast(message) {
   toast.textContent = message;
@@ -587,8 +738,9 @@ function renderEvents() {
 }
 
 function smallStoreCard(store) {
+  const slug = getStoreSlug(store);
   return `
-    <button class="store-card" type="button" data-target="store" data-label="${store.name}">
+    <button class="store-card" type="button" data-target="store" data-store-slug="${slug}">
       <img src="${imageRoot}${store.image}" alt="" />
       <div>
         <h3>${store.name} <span><img src="./icons/14/star.svg" alt="" /> ${store.rating}</span></h3>
@@ -617,8 +769,9 @@ function renderStoreBadges(store) {
 
 function largeStoreCard(store) {
   const ribbonText = store.ribbon && store.ribbon.includes("배달특급") && store.ribbon.includes("할인") ? store.ribbon : "";
+  const slug = getStoreSlug(store);
   return `
-    <button class="large-store-card" type="button" data-target="store">
+    <button class="large-store-card" type="button" data-target="store" data-store-slug="${slug}">
       <span class="large-store-media">
         <span class="${ribbonText ? "ribbon" : "ribbon hidden"}">${ribbonText}</span>
         <img src="${imageRoot}${store.image}" alt="" />
@@ -646,14 +799,17 @@ function trendMarkup(item) {
 function renderHotMenus() {
   document.querySelector("#hotList").innerHTML = hotMenus
     .map(
-      (item) => `
-        <button class="hot-card" type="button" data-target="store" data-label="${item.name}">
-          <img src="${imageRoot}${item.image}" alt="" />
-          <h3>${item.name} <span><img src="./icons/14/star.svg" alt="" /> ${item.rating}</span></h3>
-          <p><img src="./icons/14/clock.svg" alt="" /> ${item.detail}</p>
-          <div class="tags"><span class="pay">수원페이</span><span class="coupon">1000원 쿠폰</span></div>
-        </button>
-      `
+      (item) => {
+        const slug = getStoreSlug(item);
+        return `
+          <button class="hot-card" type="button" data-target="store" data-store-slug="${slug}">
+            <img src="${imageRoot}${item.image}" alt="" />
+            <h3>${item.name} <span><img src="./icons/14/star.svg" alt="" /> ${item.rating}</span></h3>
+            <p><img src="./icons/14/clock.svg" alt="" /> ${item.detail}</p>
+            <div class="tags"><span class="pay">수원페이</span><span class="coupon">1000원 쿠폰</span></div>
+          </button>
+        `;
+      }
     )
     .join("");
 }
@@ -692,19 +848,6 @@ function renderSearchScreens() {
   document.querySelector("#resultStoreList").innerHTML = saladResults.map(largeStoreCard).join("");
   const favoriteList = document.querySelector("#favoriteList");
   if (favoriteList) favoriteList.innerHTML = saladResults.slice(0, 2).map(largeStoreCard).join("");
-}
-
-function renderStoreDetail() {
-  document.querySelector("#storeMenuList").innerHTML = menuItems
-    .map(
-      (item) => `
-        <button class="menu-card" type="button" data-target="menu">
-          <div><span class="menu-rank">${item.badge}</span><h3>${item.name}</h3><strong>${item.price}</strong><p>${item.desc}</p><small><img src="./icons/14/chat-circle-dots.svg" alt="" /> 리뷰 89</small></div>
-          <img src="${imageRoot}${item.image}" alt="" />
-        </button>
-      `
-    )
-    .join("");
 }
 
 function bindInteractions() {
@@ -762,6 +905,21 @@ function bindInteractions() {
         showScreen("portfolio-search");
       } else if (targetButton.dataset.target === "benefit-list") {
         routeToBenefit(targetButton.dataset.label || "쿠폰함", targetButton.dataset.slug);
+      } else if (targetButton.dataset.target === "store") {
+        const slug = targetButton.dataset.storeSlug;
+        if (slug) {
+          const store = findStoreBySlug(slug);
+          if (store) { currentStore = store; renderStoreDetail(store); }
+        }
+        showScreen("store");
+      } else if (targetButton.dataset.target === "menu") {
+        const slug = targetButton.dataset.storeSlug;
+        const idx = targetButton.dataset.menuIndex;
+        if (slug && idx !== undefined) {
+          const menus = storeMenus[slug];
+          if (menus && menus[idx]) { currentMenu = menus[idx]; renderMenuDetail(menus[idx]); }
+        }
+        showScreen("menu");
       } else {
         showScreen(targetButton.dataset.target);
       }
@@ -836,7 +994,9 @@ renderChips();
 renderStores();
 renderFamous();
 renderSearchScreens();
-renderStoreDetail();
+const defaultStore = saladResults[0] || { name: "샐러디 성대점", image: "stores/salad-store/thumb-square.png", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인" };
+currentStore = defaultStore;
+renderStoreDetail(defaultStore);
 bindInteractions();
 showScreen("home", false);
 
