@@ -1370,6 +1370,12 @@ img {
   font-weight: 600;
 }
 
+.filter-strip button.active {
+  border-color: #ffc20d;
+  background: #fff8d8;
+  color: #2a2924;
+}
+
 .filter-strip img {
   width: 20px;
   height: 20px;
@@ -1378,6 +1384,30 @@ img {
 .result-scroll {
   padding: 20px 20px 28px;
   background: #fff;
+}
+
+.empty-filter-state {
+  display: flex;
+  min-height: 180px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  color: var(--gray-600);
+  text-align: center;
+}
+
+.empty-filter-state strong {
+  color: var(--gray-800);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.empty-filter-state span {
+  font-size: 13px;
+  line-height: 20px;
 }
 
 .large-store-list {

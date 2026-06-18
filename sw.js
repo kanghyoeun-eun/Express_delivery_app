@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v5-figma-badges";
+const CACHE_NAME = "baedal-prototype-v6-active-filters";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260618-figma-badges",
-  "/script.js?v=20260618-figma-badges",
-  "/asset-map.js?v=20260618-figma-badges",
+  "/styles.css?v=20260618-active-filters",
+  "/script.js?v=20260618-active-filters",
+  "/asset-map.js?v=20260618-active-filters",
   "/manifest.json"
 ];
 
