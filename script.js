@@ -6,6 +6,41 @@ function mappedAsset(figmaNodeId, fallback) {
   return figmaAssets[figmaNodeId] || assetsByAlias[figmaNodeId] || fallback;
 }
 
+const utmParams = new URLSearchParams(window.location.search);
+const utmPayload = {
+  utm_source: utmParams.get("utm_source") || "",
+  utm_medium: utmParams.get("utm_medium") || "",
+  utm_campaign: utmParams.get("utm_campaign") || "",
+  utm_content: utmParams.get("utm_content") || "",
+};
+const utmDebugMode = utmParams.get("debug_mode") === "1" || utmParams.get("debug_mode") === "true";
+
+function currentScreenName() {
+  return document.querySelector(".app-screen.active")?.dataset.screen || "unknown";
+}
+
+function cleanText(value = "") {
+  return value.replace(/\s+/g, " ").trim();
+}
+
+function buttonLabel(button) {
+  return cleanText(button?.innerText || button?.textContent || button?.getAttribute("aria-label") || "");
+}
+
+function trackUtEvent(eventName, params = {}) {
+  if (typeof window.gtag !== "function") return;
+  const payload = {
+    tester_id: utmPayload.utm_content || "unknown",
+    screen_name: currentScreenName(),
+    ...utmPayload,
+    ...params,
+  };
+  Object.keys(payload).forEach((key) => {
+    if (payload[key] === "" || payload[key] === undefined || payload[key] === null) delete payload[key];
+  });
+  window.gtag("event", eventName, utmDebugMode ? { ...payload, debug_mode: true } : payload);
+}
+
 const categories = [
   ["한식", "1002:8774", "categories/korean.png", "korean"],
   ["치킨", "1002:8779", "categories/chicken.png", "chicken"],
@@ -879,7 +914,21 @@ function bindInteractions() {
     const optionButton = event.target.closest(".option-row");
     if (optionButton) {
       if (!optionButton.classList.contains("radio")) optionButton.classList.toggle("selected");
+      trackUtEvent("option_select", {
+        option_name: buttonLabel(optionButton),
+        menu_name: currentMenu?.name || document.querySelector("#menuName")?.textContent || "",
+        restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
+      });
       return;
+    }
+
+    const paymentButton = event.target.closest(".payment-grid button");
+    if (paymentButton) {
+      trackUtEvent("order_click", {
+        button_label: buttonLabel(paymentButton),
+        restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
+        menu_name: currentMenu?.name || document.querySelector("#menuName")?.textContent || "",
+      });
     }
 
     const tabButton = event.target.closest(".tab-list button, .delivery-tabs button, .store-menu-tabs button, .address-chips button, .favorite-filter-strip button, .order-filter-strip button, .portfolio-filter-strip button");
@@ -905,6 +954,14 @@ function bindInteractions() {
 
     const targetButton = event.target.closest("[data-target]");
     if (targetButton) {
+      if (["cart", "checkout", "preparing"].includes(targetButton.dataset.target)) {
+        trackUtEvent("order_click", {
+          button_label: buttonLabel(targetButton),
+          restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
+          menu_name: currentMenu?.name || document.querySelector("#menuName")?.textContent || "",
+        });
+      }
+
       if (targetButton.dataset.target === "search-result") {
         routeToSearchResult(targetButton.dataset.label || "샐러드", targetButton.dataset.slug);
       } else if (targetButton.dataset.target === "portfolio-search") {
@@ -914,10 +971,15 @@ function bindInteractions() {
         routeToBenefit(targetButton.dataset.label || "쿠폰함", targetButton.dataset.slug);
       } else if (targetButton.dataset.target === "store") {
         const slug = targetButton.dataset.storeSlug;
+        let store = null;
         if (slug) {
-          const store = findStoreBySlug(slug);
+          store = findStoreBySlug(slug);
           if (store) { currentStore = store; renderStoreDetail(store); }
         }
+        trackUtEvent("restaurant_click", {
+          restaurant_name: store?.name || cleanText(targetButton.querySelector("h2, h3")?.textContent || buttonLabel(targetButton)),
+          category_name: listViewState.result.label || listViewState.benefit.label || "",
+        });
         showScreen("store");
       } else if (targetButton.dataset.target === "menu") {
         const slug = targetButton.dataset.storeSlug;
@@ -926,6 +988,10 @@ function bindInteractions() {
           const menus = storeMenus[slug];
           if (menus && menus[idx]) { currentMenu = menus[idx]; renderMenuDetail(menus[idx]); }
         }
+        trackUtEvent("menu_click", {
+          menu_name: currentMenu?.name || cleanText(targetButton.querySelector("h3")?.textContent || buttonLabel(targetButton)),
+          restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
+        });
         showScreen("menu");
       } else {
         showScreen(targetButton.dataset.target);
@@ -940,17 +1006,25 @@ function bindInteractions() {
   document.querySelector(".more-button").addEventListener("click", () => showToast("전체 카테고리 보기"));
   document.querySelector(".stamp-card button").addEventListener("click", () => showToast("스탬프 북 열기"));
 
+  document.querySelector("#homeSearchInput").addEventListener("click", (event) => {
+    trackUtEvent("search_click", { button_label: "홈 검색창", search_keyword: event.currentTarget.value.trim() });
+  });
   document.querySelector("#homeSearchInput").addEventListener("focus", () => showScreen("search"));
   document.querySelector("#homeSearchInput").addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       const value = event.currentTarget.value.trim() || "샐러드";
+      trackUtEvent("search_click", { button_label: "홈 검색 실행", search_keyword: value });
       if (value.includes("쿠폰")) routeToBenefit("쿠폰함", "coupon");
       else routeToSearchResult(value);
     }
   });
+  document.querySelector("#searchInput").addEventListener("click", (event) => {
+    trackUtEvent("search_click", { button_label: "검색 화면 검색창", search_keyword: event.currentTarget.value.trim() });
+  });
   document.querySelector("#searchInput").addEventListener("keydown", (event) => {
     if (event.key === "Enter" && event.currentTarget.value.trim()) {
       const value = event.currentTarget.value.trim();
+      trackUtEvent("search_click", { button_label: "검색 실행", search_keyword: value });
       if (value.includes("쿠폰")) routeToBenefit("쿠폰함", "coupon");
       else routeToSearchResult(value);
     }
@@ -962,6 +1036,7 @@ function bindInteractions() {
     event.stopPropagation();
     document.querySelectorAll(".category-item").forEach((node) => node.classList.remove("selected"));
     item.classList.add("selected");
+    trackUtEvent("category_click", { category_name: item.dataset.label, category_type: "food" });
     routeToSearchResult(item.dataset.label, item.dataset.slug);
   });
 
@@ -971,12 +1046,16 @@ function bindInteractions() {
     event.stopPropagation();
     document.querySelectorAll(".benefit-item").forEach((node) => node.classList.remove("selected"));
     item.classList.add("selected");
+    trackUtEvent("category_click", { category_name: item.dataset.label, category_type: "benefit" });
     routeToBenefit(item.dataset.label, item.dataset.slug);
   });
 
   document.querySelector("#eventTrack").addEventListener("click", (event) => {
     const card = event.target.closest(".event-card");
-    if (card) openModal("coupon-sheet");
+    if (card) {
+      trackUtEvent("category_click", { category_name: card.dataset.label || buttonLabel(card), category_type: "promotion" });
+      openModal("coupon-sheet");
+    }
   });
 
   document.querySelector("#chipList").addEventListener("click", (event) => {
@@ -984,6 +1063,7 @@ function bindInteractions() {
     if (!chip) return;
     document.querySelectorAll(".chip-list button").forEach((node) => node.classList.remove("active"));
     chip.classList.add("active");
+    trackUtEvent("category_click", { category_name: buttonLabel(chip), category_type: "home_chip" });
   });
 
   document.querySelectorAll(".modal-layer").forEach((layer) => {
