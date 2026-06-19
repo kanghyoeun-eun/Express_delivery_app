@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v8-gtm";
+const CACHE_NAME = "baedal-prototype-v9-active-tabs";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260619-gtm",
-  "/script.js?v=20260619-gtm",
-  "/asset-map.js?v=20260619-gtm",
+  "/styles.css?v=20260619-active-tabs",
+  "/script.js?v=20260619-active-tabs",
+  "/asset-map.js?v=20260619-active-tabs",
   "/manifest.json"
 ];
 

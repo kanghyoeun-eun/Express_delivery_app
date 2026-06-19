@@ -882,6 +882,13 @@ function bindInteractions() {
       return;
     }
 
+    const tabButton = event.target.closest(".tab-list button, .delivery-tabs button, .store-menu-tabs button, .address-chips button, .favorite-filter-strip button, .order-filter-strip button, .portfolio-filter-strip button");
+    if (tabButton) {
+      const tabGroup = tabButton.parentElement;
+      tabGroup?.querySelectorAll("button").forEach((button) => button.classList.remove("active"));
+      tabButton.classList.add("active");
+    }
+
     const filterButton = event.target.closest(".filter-strip button");
     if (filterButton) {
       const activeScreen = filterButton.closest(".app-screen");
