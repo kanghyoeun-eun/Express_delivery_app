@@ -314,9 +314,9 @@ const benefitPages = {
     ],
   },
   onnuri: {
-    title: "온누리",
+    title: "온누리 상품권 사용처",
     tabs: ["온누리", "상품권", "선착순"],
-    note: "온누리 상품권 혜택을 쓸 수 있는 가게예요.",
+    note: "선착순 무료 지급 온누리 상품권을 사용할 수 있는 가게예요.",
     stores: [
       { name: "평지담", rating: "5.0(342)", time: "35분 소요", discount: "온누리 상품권 가능", image: "stores/pyeongjidam/thumb.png", badges: ["선착순"], labels: ["온누리"] },
       { name: "시라유키 행궁점", rating: "5.0(342)", time: "34분 소요", discount: "온누리 결제 가능", image: "stores/shirayuki-haenggung/thumb.png" },
@@ -681,6 +681,25 @@ function openModal(name) {
   document.querySelector(`[data-overlay="${name}"]`)?.classList.add("show");
 }
 
+function applyCouponState(couponName = "온누리 상품권 3,000원 할인") {
+  document.querySelectorAll(".coupon-download").forEach((button) => {
+    const isSelected = button.dataset.couponName === couponName;
+    button.classList.toggle("downloaded", isSelected);
+    const icon = button.querySelector("img");
+    if (icon) icon.src = isSelected ? "./icons/24/check/default-line.svg" : "./icons/26/download.svg";
+    const label = button.querySelector("i");
+    if (label) label.setAttribute("aria-label", isSelected ? "다운로드 완료" : "쿠폰 다운로드");
+  });
+  const checkoutCouponButton = document.querySelector("#checkoutCouponButton");
+  if (checkoutCouponButton) checkoutCouponButton.innerHTML = `${couponName} 적용됨 <img src="./icons/20/chevron-down.svg" alt="" />`;
+  const autoBenefitLine = document.querySelector("#autoBenefitLine");
+  if (autoBenefitLine) {
+    autoBenefitLine.classList.add("checked");
+    const input = autoBenefitLine.querySelector("input");
+    if (input) input.checked = true;
+  }
+}
+
 function getCategoryPage(label = "샐러드", slug = "salad") {
   const matchedSlug = slug || categories.find(([categoryLabel]) => categoryLabel === label)?.[3] || "salad";
   return categoryPages[matchedSlug] || {
@@ -899,6 +918,19 @@ function bindInteractions() {
       return;
     }
 
+    const couponButton = event.target.closest(".coupon-download");
+    if (couponButton) {
+      const couponName = couponButton.dataset.couponName || "온누리 상품권 3,000원 할인";
+      applyCouponState(couponName);
+      trackUtEvent("coupon_apply_click", {
+        coupon_name: couponName,
+        button_label: buttonLabel(couponButton),
+        restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
+      });
+      showToast("쿠폰이 다운로드되고 적용됐어요");
+      return;
+    }
+
     const closeButton = event.target.closest("[data-close-modal]");
     if (closeButton) {
       closeButton.closest(".modal-layer")?.classList.remove("show");
@@ -1002,7 +1034,10 @@ function bindInteractions() {
   document.querySelector(".location").addEventListener("click", () => showToast("동네 선택 화면으로 이동"));
   document.querySelector(".nav-icons button[aria-label='알림']").addEventListener("click", () => showToast("알림 목록 열기"));
   document.querySelector(".nav-icons button[aria-label='장바구니']").addEventListener("click", () => showScreen("cart"));
-  document.querySelector(".hero-detail-button").addEventListener("click", () => openModal("coupon-sheet"));
+  document.querySelector(".hero-detail-button").addEventListener("click", () => {
+    trackUtEvent("category_click", { category_name: "온누리", category_type: "hero_benefit" });
+    routeToBenefit("온누리", "onnuri");
+  });
   document.querySelector(".more-button").addEventListener("click", () => showToast("전체 카테고리 보기"));
   document.querySelector(".stamp-card button").addEventListener("click", () => showToast("스탬프 북 열기"));
 

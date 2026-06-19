@@ -10,7 +10,7 @@
     <title>배달특급 하이파이 프로토타입</title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260619-ut-events" />
+    <link rel="stylesheet" href="./styles.css?v=20260619-benefit-coupon-flow" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -84,7 +84,7 @@
           </nav>
 
           <section class="hero-promo">
-            <h1>온누리 상품권<br />40% 할인 혜택!</h1>
+            <h1>선착순 무료 지급<br />온누리 상품권 사용처</h1>
             <button class="hero-detail-button" type="button">자세히 보기 <img src="./icons/16/chevron-right.svg" alt="" /></button>
             <img class="hero-ticket" src="./assets/images/decor/onnuri-coupon-banner.png" alt="" />
           </section>
@@ -404,7 +404,7 @@
           <section class="checkout-block"><h2>주문 메뉴</h2><div class="select-row"><span><img src="./icons/24/checkbox/active.svg" alt="" />전체선택(1/1)</span><button type="button">선택삭제</button></div><article class="checkout-menu-card"><img class="check-icon" src="./icons/24/checkbox/active.svg" alt="" /><div class="checkout-menu-content"><div class="checkout-menu-head"><img src="./assets/images/stores/dessert-party/thumb.png" alt="" /><div><h3>탄단지 샐러드</h3><p>16,700원 ㅣ 1개</p></div></div><div class="checkout-option-panel"><p>탄단지 샐러드</p><div><div class="qty-stepper small"><button type="button" aria-label="감소"><img src="./icons/24/minus.svg" alt="" /></button><span>1</span><button type="button" aria-label="증가"><img src="./icons/24/plus.svg" alt="" /></button></div><button class="line-button" type="button">옵션변경</button><strong>15,700원</strong></div></div></div></article></section>
           <section class="checkout-block"><h2>배달 요청사항</h2><div class="checkout-select-box">요청사항 없음 <img src="./icons/20/chevron-down.svg" alt="" /></div><label class="check-line"><input type="checkbox" /> 수저 포크 안 받기</label><button class="checkout-link-card" type="button">결제 시 요청 사항 <span>품절 메뉴만 부분 취소</span><img src="./icons/20/chevron-right.svg" alt="" /></button></section>
           <section class="checkout-block"><h2>결제 수단</h2><div class="payment-grid"><button type="button">신용/체크카드</button><button class="badge-pay" type="button"><em>혜택</em><img src="./assets/images/logos/kakao-pay.png" alt="kakao pay" /></button><button class="badge-pay" type="button"><em>혜택</em><img src="./assets/images/logos/naver-pay.png" alt="naver pay" /></button><button type="button">PAYCO</button><button type="button">지역화폐</button><button type="button">온누리 상품권</button><button type="button">토스페이</button><button type="button">계좌이체</button><button type="button">기타 결제수단</button></div><div class="cash-receipt-row"><span>현금영수증</span><strong>신청 안함 <img src="./icons/16/chevron-right.svg" alt="" /></strong></div></section>
-          <section class="checkout-block"><h2>할인</h2><div class="discount-field"><h3>할인쿠폰</h3><button type="button" data-modal="coupon-sheet">3000원 할인이 적용됐어요 <img src="./icons/20/chevron-down.svg" alt="" /></button></div><div class="discount-field"><h3>키타할인</h3><button type="button">적용할 수 있는 할인이 없어요 <img src="./icons/20/chevron-down.svg" alt="" /></button></div><label class="check-line checked"><input type="checkbox" checked /> 혜택 자동 적용</label></section>
+          <section class="checkout-block"><h2>할인</h2><div class="discount-field"><h3>할인쿠폰</h3><button id="checkoutCouponButton" type="button" data-modal="coupon-sheet">온누리 상품권 쿠폰 적용 가능 <img src="./icons/20/chevron-down.svg" alt="" /></button></div><div class="discount-field"><h3>기타할인</h3><button type="button">적용할 수 있는 할인이 없어요 <img src="./icons/20/chevron-down.svg" alt="" /></button></div><label id="autoBenefitLine" class="check-line"><input type="checkbox" /> 혜택 자동 적용</label></section>
           <section class="checkout-block"><h2>결제 금액 확인</h2><div class="checkout-price-card"><div class="price-detail"><p><span>메뉴 금액</span><strong>15,700원</strong></p><p><span>배달팁</span><strong>3,700원</strong></p></div><div class="price-discount"><p><span>배달특급 특별 할인</span><strong>- 1,000원</strong></p><p><span>총 쿠폰 할인</span><strong>- 3,000원</strong></p><p class="benefit-total"><span>총 할인 금액</span><strong>- 4,000원</strong></p></div><p class="checkout-total"><span>결제 예정 금액</span><strong>16,400원</strong></p></div></section>
         </section>
         <div class="figma-order-bar"><div><strong>16,400원 주문 가능!</strong><span>사장님 쿠폰 +등급 스탬프 적립</span></div><button type="button" data-target="preparing">배달 주문하기</button></div>
@@ -547,17 +547,17 @@
       <div class="modal-layer" data-overlay="coupon-sheet">
         <section class="bottom-sheet coupon-sheet">
           <header class="sheet-title-bar"><span></span><h2>적용 가능 쿠폰함</h2><button type="button" data-close-modal aria-label="닫기"><img src="./icons/32/delete.svg" alt="" /></button></header>
-          <div class="coupon-summary"><h3>중복 가능한 할인</h3><p>결제 창에서 적용 가능한 쿠폰이에요</p></div>
+          <div class="coupon-summary"><h3>온누리 상품권 혜택</h3><p>다운로드 후 결제 창에서 바로 적용할 수 있어요</p></div>
           <div class="coupon-list">
-            <button class="coupon-download" type="button"><span><strong>3,000원 할인</strong><em>G드림쿠폰</em><b>샐러디 성대점 할인 쿠폰</b><small>30,000원 이상 주문 시</small><small>2026/11/20까지 사용 가능</small></span><i><img src="./icons/26/download.svg" alt="" /></i></button>
-            <button class="coupon-download" type="button"><span><strong>3,000원 할인</strong><em>G드림쿠폰</em><b>샐러디 성대점 할인 쿠폰</b><small>30,000원 이상 주문 시</small><small>2026/11/20까지 사용 가능</small></span><i><img src="./icons/26/download.svg" alt="" /></i></button>
+            <button class="coupon-download" type="button" data-coupon-name="온누리 상품권 3,000원 할인"><span><strong>3,000원 할인</strong><em>온누리쿠폰</em><b>샐러디 성대점 온누리 쿠폰</b><small>20,000원 이상 주문 시</small><small>2026/11/20까지 사용 가능</small></span><i><img src="./icons/26/download.svg" alt="" /></i></button>
+            <button class="coupon-download" type="button" data-coupon-name="온누리 상품권 2,000원 할인"><span><strong>2,000원 할인</strong><em>온누리쿠폰</em><b>온누리 상품권 사용처 쿠폰</b><small>15,000원 이상 주문 시</small><small>2026/11/20까지 사용 가능</small></span><i><img src="./icons/26/download.svg" alt="" /></i></button>
           </div>
         </section>
       </div>
 
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
-    <script src="./asset-map.js?v=20260619-ut-events"></script>
-    <script src="./script.js?v=20260619-ut-events"></script>
+    <script src="./asset-map.js?v=20260619-benefit-coupon-flow"></script>
+    <script src="./script.js?v=20260619-benefit-coupon-flow"></script>
   </body>
 </html>

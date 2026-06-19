@@ -4447,6 +4447,7 @@ img {
 }
 
 .coupon-download i {
+  position: relative;
   display: grid;
   place-items: center;
   border-left: 1px dashed #fff;
@@ -4455,8 +4456,7 @@ img {
 }
 
 .coupon-download i::before {
-  display: grid;
-  place-items: center;
+  display: block;
   width: 48px;
   height: 48px;
   border-radius: 999px;
@@ -4465,10 +4465,22 @@ img {
 }
 
 .coupon-download img {
-  position: relative;
+  position: absolute;
   z-index: 1;
+  top: 50%;
+  left: 50%;
   width: 26px;
   height: 26px;
+  transform: translate(-50%, -50%);
+}
+
+.coupon-download.downloaded {
+  background: #fff1a0;
+  outline: 2px solid var(--primary);
+}
+
+.coupon-download.downloaded i::before {
+  background: var(--primary);
 }
 
 .recommend-sheet {
