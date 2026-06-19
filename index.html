@@ -10,13 +10,24 @@
     <title>배달특급 하이파이 프로토타입</title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260618-active-filters" />
+    <link rel="stylesheet" href="./styles.css?v=20260619-utm-events" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZR2K930ZE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag("js", new Date());
-      gtag("config", "G-ZZR2K930ZE");
+      const gaParams = new URLSearchParams(window.location.search);
+      const gaDebugMode = gaParams.get("debug_mode") === "1" || gaParams.get("debug_mode") === "true";
+      gtag("config", "G-ZZR2K930ZE", gaDebugMode ? { debug_mode: true } : {});
+      const utPayload = {
+        utm_source: gaParams.get("utm_source") || "",
+        utm_medium: gaParams.get("utm_medium") || "",
+        utm_campaign: gaParams.get("utm_campaign") || "",
+        utm_content: gaParams.get("utm_content") || "",
+      };
+      if (utPayload.utm_source || utPayload.utm_medium || utPayload.utm_campaign || utPayload.utm_content) {
+        gtag("event", "ut_link_open", gaDebugMode ? { ...utPayload, debug_mode: true } : utPayload);
+      }
     </script>
     <script>
       const CLARITY_ID = "x7o9xawcb2";
@@ -534,7 +545,7 @@
 
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
-    <script src="./asset-map.js?v=20260618-active-filters"></script>
-    <script src="./script.js?v=20260618-active-filters"></script>
+    <script src="./asset-map.js?v=20260619-utm-events"></script>
+    <script src="./script.js?v=20260619-utm-events"></script>
   </body>
 </html>

@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v6-active-filters";
+const CACHE_NAME = "baedal-prototype-v7-utm-events";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260618-active-filters",
-  "/script.js?v=20260618-active-filters",
-  "/asset-map.js?v=20260618-active-filters",
+  "/styles.css?v=20260619-utm-events",
+  "/script.js?v=20260619-utm-events",
+  "/asset-map.js?v=20260619-utm-events",
   "/manifest.json"
 ];
 
