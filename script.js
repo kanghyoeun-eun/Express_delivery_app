@@ -679,6 +679,9 @@ function syncBottomNav(activeScreen) {
 
 function openModal(name) {
   document.querySelector(`[data-overlay="${name}"]`)?.classList.add("show");
+  if (name === "coupon-sheet") {
+    trackUtEvent("coupon_check_click", { modal_name: "coupon-sheet" });
+  }
 }
 
 function applyCouponState(couponName = "온누리 상품권 3,000원 할인") {
@@ -980,6 +983,7 @@ function bindInteractions() {
       } else if (activeScreen?.dataset.screen === "benefit-list") {
         listViewState.benefit.filter = filterKey;
         updateBenefitStores();
+        trackUtEvent("benefit_filter_click", { filter_name: filterButton.textContent.trim(), screen_name: "benefit-list" });
       }
       return;
     }
