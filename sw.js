@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v7-utm-events";
+const CACHE_NAME = "baedal-prototype-v8-gtm";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260619-utm-events",
-  "/script.js?v=20260619-utm-events",
-  "/asset-map.js?v=20260619-utm-events",
+  "/styles.css?v=20260619-gtm",
+  "/script.js?v=20260619-gtm",
+  "/asset-map.js?v=20260619-gtm",
   "/manifest.json"
 ];
 
