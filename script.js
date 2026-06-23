@@ -29,8 +29,9 @@ function buttonLabel(button) {
 
 function trackUtEvent(eventName, params = {}) {
   if (typeof window.gtag !== "function") return;
+  const testerId = utmPayload.utm_content || utmPayload.utm_source || "unknown";
   const payload = {
-    tester_id: utmPayload.utm_content || "unknown",
+    tester_id: testerId,
     screen_name: currentScreenName(),
     ...utmPayload,
     ...params,
@@ -38,7 +39,9 @@ function trackUtEvent(eventName, params = {}) {
   Object.keys(payload).forEach((key) => {
     if (payload[key] === "" || payload[key] === undefined || payload[key] === null) delete payload[key];
   });
-  window.gtag("event", eventName, utmDebugMode ? { ...payload, debug_mode: true } : payload);
+  const finalPayload = utmDebugMode ? { ...payload, debug_mode: true } : payload;
+  console.log(`[GA4] ${eventName}`, finalPayload);
+  window.gtag("event", eventName, finalPayload);
 }
 
 const categories = [
@@ -581,6 +584,32 @@ function showScreen(screenName, push = true) {
   target.querySelector(".scroll-area")?.scrollTo({ top: 0, left: 0, behavior: "auto" });
   if (push && historyStack[historyStack.length - 1] !== screenName) historyStack.push(screenName);
   syncBottomNav(screenName);
+
+  if (push) {
+    switch (screenName) {
+      case "home":
+        trackUtEvent("view_home");
+        break;
+      case "benefit-list":
+        trackUtEvent("view_benefit_list");
+        break;
+      case "store":
+        trackUtEvent("view_store_detail", {
+          restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
+        });
+        break;
+      case "cart":
+        trackUtEvent("view_cart", {
+          restaurant_name: currentStore?.name || "",
+        });
+        break;
+      case "checkout":
+        trackUtEvent("begin_checkout", {
+          restaurant_name: currentStore?.name || "",
+        });
+        break;
+    }
+  }
 }
 
 function resetActiveScroll() {
@@ -911,6 +940,10 @@ function bindInteractions() {
   document.addEventListener("click", (event) => {
     const backButton = event.target.closest("[data-back]");
     if (backButton) {
+      trackUtEvent("back_click", {
+        button_label: buttonLabel(backButton) || "뒤로",
+        target_screen: historyStack[historyStack.length - 2] || "home",
+      });
       goBack();
       return;
     }
@@ -925,11 +958,13 @@ function bindInteractions() {
     if (couponButton) {
       const couponName = couponButton.dataset.couponName || "온누리 상품권 3,000원 할인";
       applyCouponState(couponName);
-      trackUtEvent("coupon_apply_click", {
+      const couponPayload = {
         coupon_name: couponName,
         button_label: buttonLabel(couponButton),
         restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
-      });
+      };
+      trackUtEvent("coupon_apply_click", couponPayload);
+      trackUtEvent("click_coupon", couponPayload);
       showToast("쿠폰이 다운로드되고 적용됐어요");
       return;
     }
@@ -957,33 +992,35 @@ function bindInteractions() {
       return;
     }
 
-    const paymentButton = event.target.closest(".payment-grid button");
-    if (paymentButton) {
-      trackUtEvent("order_click", {
-        button_label: buttonLabel(paymentButton),
-        restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
-        menu_name: currentMenu?.name || document.querySelector("#menuName")?.textContent || "",
-      });
-    }
-
     const tabButton = event.target.closest(".tab-list button, .delivery-tabs button, .store-menu-tabs button, .address-chips button, .favorite-filter-strip button, .order-filter-strip button, .portfolio-filter-strip button");
     if (tabButton) {
       const tabGroup = tabButton.parentElement;
       tabGroup?.querySelectorAll("button").forEach((button) => button.classList.remove("active"));
       tabButton.classList.add("active");
+      trackUtEvent("tab_click", {
+        button_label: buttonLabel(tabButton),
+        tab_name: buttonLabel(tabButton),
+      });
     }
 
     const filterButton = event.target.closest(".filter-strip button");
     if (filterButton) {
       const activeScreen = filterButton.closest(".app-screen");
       const filterKey = filterButton.dataset.filter || getFilterKey(filterButton.textContent.trim());
+      const filterName = cleanText(filterButton.textContent);
+      trackUtEvent(filterKey === "sort" ? "sort_click" : "filter_click", {
+        filter_name: filterName,
+        button_label: filterName,
+        category_name: activeScreen?.dataset.screen === "benefit-list" ? listViewState.benefit.label : listViewState.result.label,
+      });
       if (activeScreen?.dataset.screen === "search-result") {
         listViewState.result.filter = filterKey;
         updateResultStores();
       } else if (activeScreen?.dataset.screen === "benefit-list") {
         listViewState.benefit.filter = filterKey;
         updateBenefitStores();
-        trackUtEvent("benefit_filter_click", { filter_name: filterButton.textContent.trim(), screen_name: "benefit-list" });
+        trackUtEvent("benefit_filter_click", { filter_name: filterName, screen_name: "benefit-list" });
+        trackUtEvent("click_benefit_filter", { filter_name: filterName, screen_name: "benefit-list" });
       }
       return;
     }
@@ -991,7 +1028,20 @@ function bindInteractions() {
     const targetButton = event.target.closest("[data-target]");
     if (targetButton) {
       if (["cart", "checkout", "preparing"].includes(targetButton.dataset.target)) {
-        trackUtEvent("order_click", {
+        const ctaPayload = {
+          button_label: buttonLabel(targetButton),
+          target_screen: targetButton.dataset.target,
+          restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
+          menu_name: currentMenu?.name || document.querySelector("#menuName")?.textContent || "",
+        };
+        trackUtEvent("cta_click", ctaPayload);
+        if (["checkout", "preparing"].includes(targetButton.dataset.target)) {
+          trackUtEvent("order_click", ctaPayload);
+        }
+      }
+
+      if (targetButton.dataset.target === "cart") {
+        trackUtEvent("add_to_cart", {
           button_label: buttonLabel(targetButton),
           restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
           menu_name: currentMenu?.name || document.querySelector("#menuName")?.textContent || "",
@@ -1012,10 +1062,12 @@ function bindInteractions() {
           store = findStoreBySlug(slug);
           if (store) { currentStore = store; renderStoreDetail(store); }
         }
-        trackUtEvent("restaurant_click", {
+        const storePayload = {
           restaurant_name: store?.name || cleanText(targetButton.querySelector("h2, h3")?.textContent || buttonLabel(targetButton)),
           category_name: listViewState.result.label || listViewState.benefit.label || "",
-        });
+        };
+        trackUtEvent("restaurant_click", storePayload);
+        trackUtEvent("click_store_card", storePayload);
         showScreen("store");
       } else if (targetButton.dataset.target === "menu") {
         const slug = targetButton.dataset.storeSlug;
@@ -1024,10 +1076,12 @@ function bindInteractions() {
           const menus = storeMenus[slug];
           if (menus && menus[idx]) { currentMenu = menus[idx]; renderMenuDetail(menus[idx]); }
         }
-        trackUtEvent("menu_click", {
+        const menuPayload = {
           menu_name: currentMenu?.name || cleanText(targetButton.querySelector("h3")?.textContent || buttonLabel(targetButton)),
           restaurant_name: currentStore?.name || document.querySelector("#storeName")?.textContent || "",
-        });
+        };
+        trackUtEvent("menu_click", menuPayload);
+        trackUtEvent("select_menu", menuPayload);
         showScreen("menu");
       } else {
         showScreen(targetButton.dataset.target);
@@ -1038,7 +1092,12 @@ function bindInteractions() {
   document.querySelector(".location").addEventListener("click", () => showToast("동네 선택 화면으로 이동"));
   document.querySelector(".nav-icons button[aria-label='알림']").addEventListener("click", () => showToast("알림 목록 열기"));
   document.querySelector(".nav-icons button[aria-label='장바구니']").addEventListener("click", () => showScreen("cart"));
-  document.querySelector(".hero-detail-button").addEventListener("click", () => {
+  document.querySelector(".hero-detail-button").addEventListener("click", (event) => {
+    trackUtEvent("cta_click", {
+      button_label: buttonLabel(event.currentTarget),
+      category_name: "온누리",
+      target_screen: "benefit-list",
+    });
     trackUtEvent("category_click", { category_name: "온누리", category_type: "hero_benefit" });
     routeToBenefit("온누리", "onnuri");
   });
@@ -1085,7 +1144,14 @@ function bindInteractions() {
     event.stopPropagation();
     document.querySelectorAll(".benefit-item").forEach((node) => node.classList.remove("selected"));
     item.classList.add("selected");
-    trackUtEvent("category_click", { category_name: item.dataset.label, category_type: "benefit" });
+    const benefitCategoryPayload = {
+      screen_name: "home",
+      button_label: item.dataset.label,
+      category_name: item.dataset.label,
+      category_type: "benefit",
+    };
+    trackUtEvent("category_click", benefitCategoryPayload);
+    trackUtEvent("click_benefit_category", benefitCategoryPayload);
     routeToBenefit(item.dataset.label, item.dataset.slug);
   });
 
@@ -1125,6 +1191,7 @@ currentStore = defaultStore;
 renderStoreDetail(defaultStore);
 bindInteractions();
 showScreen("home", false);
+trackUtEvent("view_home");
 
 window.addEventListener("load", () => {
   showScreen("home", false);

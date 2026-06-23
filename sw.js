@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v11-benefit-coupon-flow";
+const CACHE_NAME = "baedal-prototype-v12-ga4-required-events";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260619-benefit-coupon-flow",
-  "/script.js?v=20260619-benefit-coupon-flow",
-  "/asset-map.js?v=20260619-benefit-coupon-flow",
+  "/styles.css?v=20260623-ga4-required-events",
+  "/script.js?v=20260623-ga4-required-events",
+  "/asset-map.js?v=20260623-ga4-required-events",
   "/manifest.json"
 ];
 
