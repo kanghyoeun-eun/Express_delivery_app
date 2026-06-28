@@ -309,11 +309,21 @@ const benefitPages = {
   local: {
     title: "지역화폐",
     tabs: ["지역화폐", "10% 할인", "수원페이"],
+    filters: ["추천순", "쿠폰 할인", "온누리상품권", "가격 설정", "바로 할인"],
     note: "지역화폐 결제와 추가 할인을 받을 수 있는 가게예요.",
+    filteredNote: "선택한 혜택 조건에 맞는 가게를 먼저 보여드렸어요.",
     stores: [
-      { name: "차이797 스타필드 수원", rating: "5.0(342)", time: "36분 소요", discount: "지역화폐 10% 할인", image: "stores/chai797-starfield-suwon/thumb.png", labels: ["지역화폐"] },
-      { name: "정솥밥 수원 행궁동점", rating: "5.0(342)", time: "32분 소요", discount: "수원페이 가능", image: "stores/jeongsotbap-suwon-haenggung/thumb.png" },
-      { name: "아미고타코", rating: "5.0(342)", time: "32분 소요", discount: "지역화폐 결제 가능", image: "stores/amigo-taco/thumb.png" },
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/payment-benefit-banner.png", ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"] },
+      { name: "Poke all day 포케&샐러드 호매실점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/salady-menu-banner.png", ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이"] },
+      { name: "샐러리아 호매실점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/salady-promotion-banner.png", labels: ["수원페이"] },
+    ],
+    filteredStores: [
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/payment-benefit-banner.png", ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"] },
+    ],
+    recommendations: [
+      { name: "트라타", rating: "5.0(342)", time: "45분 소요", discount: "최대 3000원 할인", image: "stores/store-food-card-01/thumb.png", recent: "과카몰레, 더블업 트라타 부리또", labels: ["수원페이"] },
+      { name: "샐러디", rating: "5.0(342)", time: "40분 소요", discount: "최대 3000원 할인", image: "menus/salad-bowl.png", recent: "탄단지 샐러디, 콜라 3335ml", labels: ["수원페이"] },
+      { name: "아미고타코", rating: "5.0(342)", time: "32분 소요", discount: "최대 3000원 할인", image: "stores/amigo-taco/thumb.png", recent: "해쉬브라운 부리또", labels: ["수원페이"] },
     ],
   },
   onnuri: {
@@ -693,7 +703,39 @@ function updateBenefitStores() {
   const { page, slug, filter } = listViewState.benefit;
   if (!page) return;
   const benefitScreen = document.querySelector('[data-screen="benefit-list"]');
+  const recommendationSection = benefitScreen.querySelector("#benefitRecommendationSection");
+  const recommendationList = benefitScreen.querySelector("#benefitRecommendationList");
+  const note = benefitScreen.querySelector(".benefit-page-note");
+  const isFilteredRecommendation = slug === "local" && ["onnuri", "discount", "price", "fast"].includes(filter);
   setFilterStripState(benefitScreen, filter);
+  if (isFilteredRecommendation && page.filteredStores?.length) {
+    const selectedFilters = ["지역화폐", "쿠폰 할인", "온누리상품권"];
+    renderStoreList(benefitScreen.querySelector("#benefitStoreList"), page.filteredStores.map((store, index) => normalizeStore(store, index, slug)));
+    if (note) {
+      note.classList.add("narrow-result-note");
+      note.querySelector("strong").textContent = "조건에 맞는 가게가 1곳 있어요";
+      note.querySelector("span").innerHTML = `${page.filteredNote}<br><em>${selectedFilters.join(" · ")}</em>`;
+    }
+    if (recommendationSection && recommendationList) {
+      recommendationSection.hidden = false;
+      recommendationList.innerHTML = (page.recommendations || []).map((store, index) => smallStoreCard(normalizeStore(store, index, slug))).join("");
+    }
+    trackUtEvent("benefit_filtered_recommendation_view", {
+      screen_name: "benefit-filtered-recommendation",
+      filter_name: filter,
+      benefit_type: page.title,
+    });
+    return;
+  }
+  if (note) {
+    note.classList.remove("narrow-result-note");
+    note.querySelector("strong").textContent = `${page.title} 혜택 가게`;
+    note.querySelector("span").textContent = page.note;
+  }
+  if (recommendationSection && recommendationList) {
+    recommendationSection.hidden = true;
+    recommendationList.innerHTML = "";
+  }
   renderStoreList(benefitScreen.querySelector("#benefitStoreList"), applyStoreFilter(page.stores, filter, slug));
 }
 
@@ -761,6 +803,8 @@ function setBenefitContext(label = "쿠폰함", slug = "coupon") {
   listViewState.benefit = { page, label, slug, filter: "sort" };
   benefitScreen.querySelector(".title-header h1").textContent = page.title;
   benefitScreen.querySelector(".tab-list").innerHTML = page.tabs.map((tab, index) => `<button class="${index === 0 ? "active" : ""}" type="button">${tab}</button>`).join("");
+  const filters = page.filters || ["추천순", "지역화폐", "온누리상품권", "가격 설정", "바로 할인"];
+  benefitScreen.querySelector(".filter-strip").innerHTML = filters.map((filterLabel, index) => `<button type="button">${filterLabel}${index === 0 ? ' <img src="./icons/20/chevron-down.svg" alt="" />' : ""}</button>`).join("");
   const note = benefitScreen.querySelector(".benefit-page-note");
   note.querySelector("strong").textContent = `${page.title} 혜택 가게`;
   note.querySelector("span").textContent = page.note;
@@ -853,6 +897,16 @@ function renderStoreBadges(store) {
   return badges ? `<div class="store-status-badges">${badges}</div>` : "";
 }
 
+function renderBenefitTags(store) {
+  const labels = store.labels || [];
+  const hasPaymentLabel = labels.some((label) =>
+    label.includes("수원페이") || label.includes("지역화폐") || label.includes("온누리") || label.includes("G드림")
+  );
+  const paymentTag = hasPaymentLabel ? "" : `<span class="pay">수원페이</span>`;
+  const couponTag = store.couponLabel === false ? "" : `<span class="coupon">${store.couponLabel || "1000원 쿠폰"}</span>`;
+  return `${paymentTag}${renderStoreLabels(store)}${couponTag}`;
+}
+
 function largeStoreCard(store) {
   const ribbonText = store.ribbon && store.ribbon.includes("배달특급") && store.ribbon.includes("할인") ? store.ribbon : "";
   const slug = getStoreSlug(store);
@@ -869,7 +923,7 @@ function largeStoreCard(store) {
           <span class="store-rating"><img src="./icons/14/star.svg" alt="" />${store.rating}</span>
           <span class="store-time"><img src="./icons/14/clock.svg" alt="" />${store.time}</span>
         </div>
-        <div class="tags"><span class="pay">수원페이</span><span class="coupon">1000원 쿠폰</span>${renderStoreLabels(store)}<span class="discount"><img src="./icons/14/wavy-check.svg" alt="" />${store.discount}</span></div>
+        <div class="tags">${renderBenefitTags(store)}<span class="discount"><img src="./icons/14/wavy-check.svg" alt="" />${store.discount}</span></div>
       </div>
     </button>
   `;
@@ -1019,8 +1073,8 @@ function bindInteractions() {
       } else if (activeScreen?.dataset.screen === "benefit-list") {
         listViewState.benefit.filter = filterKey;
         updateBenefitStores();
-        trackUtEvent("benefit_filter_click", { filter_name: filterName, screen_name: "benefit-list" });
-        trackUtEvent("click_benefit_filter", { filter_name: filterName, screen_name: "benefit-list" });
+        trackUtEvent("benefit_filter_click", { filter_name: filterName, screen_name: "benefit-list", benefit_type: listViewState.benefit.page?.title || listViewState.benefit.label });
+        trackUtEvent("click_benefit_filter", { filter_name: filterName, screen_name: "benefit-list", benefit_type: listViewState.benefit.page?.title || listViewState.benefit.label });
       }
       return;
     }

@@ -5248,3 +5248,80 @@ img {
 .history-actions button {
   height: 36px;
 }
+
+/* 20260628 UT2 benefit flow refinement */
+.benefit-page-note.narrow-result-note {
+  gap: 8px;
+  margin-bottom: 18px;
+  background: #fff;
+  border: 1px solid #eee9d6;
+  box-shadow: 0 8px 20px rgba(24, 24, 20, 0.04);
+}
+
+.benefit-page-note.narrow-result-note strong {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.benefit-page-note.narrow-result-note span {
+  font-weight: 400;
+}
+
+.benefit-page-note.narrow-result-note em {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #fff2b8;
+  color: #8f6500;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.benefit-recommendation-section {
+  margin: 26px -20px -34px;
+  padding: 20px 20px 34px;
+  background: #fff;
+  border-top: 10px solid #f5f5f5;
+}
+
+.benefit-recommendation-section[hidden] {
+  display: none;
+}
+
+.benefit-recommendation-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.benefit-recommendation-title h2 {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #181814;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+.benefit-recommendation-title h2::after {
+  content: "›";
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.benefit-recommendation-title span {
+  color: #77766e;
+  font-size: 13px;
+  line-height: 19px;
+  font-weight: 400;
+}
+
+.compact-store-list {
+  display: grid;
+  gap: 24px;
+}

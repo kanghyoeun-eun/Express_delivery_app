@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v12-ga4-required-events";
+const CACHE_NAME = "baedal-prototype-v13-benefit-ut2-flow";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260623-ga4-required-events",
-  "/script.js?v=20260623-ga4-required-events",
-  "/asset-map.js?v=20260623-ga4-required-events",
+  "/styles.css?v=20260628-benefit-ut2-flow",
+  "/script.js?v=20260628-benefit-ut2-flow",
+  "/asset-map.js?v=20260628-benefit-ut2-flow",
   "/manifest.json"
 ];
 
