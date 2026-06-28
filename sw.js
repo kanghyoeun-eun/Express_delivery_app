@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v13-benefit-ut2-flow";
+const CACHE_NAME = "baedal-prototype-v14-figma-screen-fix";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260628-benefit-ut2-flow",
-  "/script.js?v=20260628-benefit-ut2-flow",
-  "/asset-map.js?v=20260628-benefit-ut2-flow",
+  "/styles.css?v=20260628-figma-screen-fix",
+  "/script.js?v=20260628-figma-screen-fix",
+  "/asset-map.js?v=20260628-figma-screen-fix",
   "/manifest.json"
 ];
 

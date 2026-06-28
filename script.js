@@ -644,11 +644,12 @@ function getFilterKey(label) {
   return "sort";
 }
 
-function setFilterStripState(screen, activeKey = "sort") {
+function setFilterStripState(screen, activeKey = "sort", activeKeys = null) {
+  const activeSet = new Set(activeKeys || [activeKey]);
   screen.querySelectorAll(".filter-strip button").forEach((button) => {
     const key = getFilterKey(button.textContent.trim());
     button.dataset.filter = key;
-    button.classList.toggle("active", key === activeKey);
+    button.classList.toggle("active", activeSet.has(key));
   });
 }
 
@@ -707,7 +708,7 @@ function updateBenefitStores() {
   const recommendationList = benefitScreen.querySelector("#benefitRecommendationList");
   const note = benefitScreen.querySelector(".benefit-page-note");
   const isFilteredRecommendation = slug === "local" && ["onnuri", "discount", "price", "fast"].includes(filter);
-  setFilterStripState(benefitScreen, filter);
+  setFilterStripState(benefitScreen, filter, isFilteredRecommendation ? ["sort", "discount", "onnuri"] : null);
   if (isFilteredRecommendation && page.filteredStores?.length) {
     const selectedFilters = ["지역화폐", "쿠폰 할인", "온누리상품권"];
     renderStoreList(benefitScreen.querySelector("#benefitStoreList"), page.filteredStores.map((store, index) => normalizeStore(store, index, slug)));
