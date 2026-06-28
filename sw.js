@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v18-filter-coupon-rating";
+const CACHE_NAME = "baedal-prototype-v19-no-empty-benefit-filter";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260628-filter-coupon-rating",
-  "/script.js?v=20260628-filter-coupon-rating",
-  "/asset-map.js?v=20260628-filter-coupon-rating",
+  "/styles.css?v=20260628-no-empty-benefit-filter",
+  "/script.js?v=20260628-no-empty-benefit-filter",
+  "/asset-map.js?v=20260628-no-empty-benefit-filter",
   "/manifest.json"
 ];
 
