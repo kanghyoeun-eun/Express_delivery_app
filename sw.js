@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v16-ga4-issue14";
+const CACHE_NAME = "baedal-prototype-v17-benefit-filter-accumulate";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260628-ga4-issue14",
-  "/script.js?v=20260628-ga4-issue14",
-  "/asset-map.js?v=20260628-ga4-issue14",
+  "/styles.css?v=20260628-benefit-filter-accumulate",
+  "/script.js?v=20260628-benefit-filter-accumulate",
+  "/asset-map.js?v=20260628-benefit-filter-accumulate",
   "/manifest.json"
 ];
 

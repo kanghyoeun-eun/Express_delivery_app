@@ -54,11 +54,15 @@ function currentResultCount(screenName = currentScreenName()) {
   return document.querySelectorAll(selector).length;
 }
 
+function activeBenefitFilters() {
+  return listViewState.benefit.activeFilters || [listViewState.benefit.filter || "sort"];
+}
+
 function benefitEventPayload(extra = {}) {
   return {
     benefit_type: currentBenefitType(),
     benefit_source: listViewState.benefit.label || "",
-    selected_filter: listViewState.benefit.filter || "sort",
+    selected_filter: activeBenefitFilters().join("|"),
     result_count: currentResultCount("benefit-list"),
     ...extra,
   };
@@ -302,7 +306,7 @@ const storeFilterLabels = {
 
 const listViewState = {
   result: { page: null, label: "샐러드", slug: "salad", filter: "sort" },
-  benefit: { page: null, label: "쿠폰함", slug: "coupon", filter: "sort" },
+  benefit: { page: null, label: "쿠폰함", slug: "coupon", filter: "sort", activeFilters: ["sort"] },
 };
 
 const benefitPages = {
@@ -718,6 +722,19 @@ function applyStoreFilter(stores, filterKey, contextSlug = "default") {
   return normalized.filter((store) => storeMatchesFilter(store, filterKey));
 }
 
+function applyStoreFilters(stores, filterKeys = ["sort"], contextSlug = "default") {
+  let results = stores.map((store, index) => normalizeStore(store, index, contextSlug));
+  const active = filterKeys.filter((key) => key && key !== "sort");
+  active.forEach((key) => {
+    if (key === "price") {
+      results = [...results].sort((a, b) => minuteValue(a) - minuteValue(b));
+    } else {
+      results = results.filter((store) => storeMatchesFilter(store, key));
+    }
+  });
+  return results;
+}
+
 function renderStoreList(target, stores) {
   target.innerHTML = stores.length
     ? stores.map(largeStoreCard).join("")
@@ -746,10 +763,11 @@ function updateBenefitStores() {
   const recommendationSection = benefitScreen.querySelector("#benefitRecommendationSection");
   const recommendationList = benefitScreen.querySelector("#benefitRecommendationList");
   const note = benefitScreen.querySelector(".benefit-page-note");
-  const isFilteredRecommendation = slug === "local" && ["onnuri", "discount", "price", "fast"].includes(filter);
-  setFilterStripState(benefitScreen, filter, isFilteredRecommendation ? ["sort", "discount", "onnuri"] : null);
-  if (isFilteredRecommendation && page.filteredStores?.length) {
-    const selectedFilters = ["지역화폐", "쿠폰 할인", "온누리상품권"];
+  const filters = activeBenefitFilters();
+  const shouldShowRecommendation = slug === "local" && filters.includes("discount") && filters.includes("onnuri");
+  setFilterStripState(benefitScreen, filter, filters);
+  if (shouldShowRecommendation && page.filteredStores?.length) {
+    const selectedFilters = filters.map((key) => ({ sort: "추천순", discount: "쿠폰 할인", onnuri: "온누리상품권", price: "가격 설정", fast: "바로 할인", local: "지역화폐" }[key] || key));
     renderStoreList(benefitScreen.querySelector("#benefitStoreList"), page.filteredStores.map((store, index) => normalizeStore(store, index, slug)));
     if (note) {
       note.classList.add("narrow-result-note");
@@ -782,7 +800,7 @@ function updateBenefitStores() {
     recommendationSection.hidden = true;
     recommendationList.innerHTML = "";
   }
-  renderStoreList(benefitScreen.querySelector("#benefitStoreList"), applyStoreFilter(page.stores, filter, slug));
+  renderStoreList(benefitScreen.querySelector("#benefitStoreList"), applyStoreFilters(page.stores, filters, slug));
 }
 
 function syncBottomNav(activeScreen) {
@@ -846,7 +864,7 @@ function setPortfolioContext(label = "쿠폰 할인") {
 function setBenefitContext(label = "쿠폰함", slug = "coupon") {
   const page = benefitPages[slug] || benefitPages.coupon;
   const benefitScreen = document.querySelector('[data-screen="benefit-list"]');
-  listViewState.benefit = { page, label, slug, filter: "sort" };
+  listViewState.benefit = { page, label, slug, filter: "sort", activeFilters: ["sort"] };
   benefitScreen.querySelector(".title-header h1").textContent = page.title;
   benefitScreen.querySelector(".tab-list").innerHTML = page.tabs.map((tab, index) => `<button class="${index === 0 ? "active" : ""}" type="button">${tab}</button>`).join("");
   const filters = page.filters || ["추천순", "지역화폐", "온누리상품권", "가격 설정", "바로 할인"];
@@ -1129,13 +1147,23 @@ function bindInteractions() {
         listViewState.result.filter = filterKey;
         updateResultStores();
       } else if (activeScreen?.dataset.screen === "benefit-list") {
+        const currentFilters = new Set(activeBenefitFilters());
+        if (filterKey === "sort") {
+          listViewState.benefit.activeFilters = ["sort"];
+        } else {
+          if (currentFilters.has(filterKey)) currentFilters.delete(filterKey);
+          else currentFilters.add(filterKey);
+          if (!currentFilters.size) currentFilters.add("sort");
+          if (listViewState.benefit.slug === "local") currentFilters.add("sort");
+          listViewState.benefit.activeFilters = Array.from(currentFilters);
+        }
         listViewState.benefit.filter = filterKey;
         updateBenefitStores();
         const benefitFilterPayload = benefitEventPayload({
           filter_name: filterName,
-          selected_filter: filterName,
+          selected_filter: activeBenefitFilters().join("|"),
           filter_type: filterKey,
-          selected_condition: filterName,
+          selected_condition: activeBenefitFilters().join("|"),
         });
         trackUtEvent("benefit_filter_click", benefitFilterPayload);
         trackUtEvent("click_benefit_filter", benefitFilterPayload);
