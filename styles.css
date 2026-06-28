@@ -5534,3 +5534,253 @@ img {
   display: grid;
   gap: 24px;
 }
+
+
+/* 20260628 Figma mobile correction pass */
+.app-screen[data-screen="home"] .benefit-wrap {
+  padding-top: 28px;
+  overflow: visible;
+}
+
+.app-screen[data-screen="home"] .benefit-grid,
+.app-screen[data-screen="home"] .benefit-item,
+.app-screen[data-screen="home"] .benefit-art {
+  overflow: visible;
+}
+
+.app-screen[data-screen="home"] .benefit-item em {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  height: 20px;
+  padding: 0 8px;
+  font-size: 11px;
+  line-height: 20px;
+}
+
+.app-screen[data-screen="portfolio-search"] .portfolio-search-header {
+  grid-template-columns: 32px minmax(0, 1fr) 44px;
+  height: 62px;
+  padding: 0 20px;
+}
+
+.app-screen[data-screen="portfolio-search"] .portfolio-search-field {
+  height: 40px;
+  padding: 0 18px;
+  background: #f5f5f5;
+  color: #8b8a87;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.app-screen[data-screen="portfolio-search"] .portfolio-related {
+  height: 48px;
+}
+
+.app-screen[data-screen="portfolio-search"] .portfolio-related-label,
+.app-screen[data-screen="portfolio-search"] .portfolio-keyword-track button {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 700;
+}
+
+.app-screen[data-screen="portfolio-search"] .portfolio-filter-strip button:first-child {
+  border-color: #2a2924;
+  background: #2a2924;
+  color: #fff;
+}
+
+.app-screen[data-screen="benefit-list"] .title-header {
+  height: 86px;
+  padding: 0 18px;
+}
+
+.app-screen[data-screen="benefit-list"] .title-header h1 {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+.app-screen[data-screen="benefit-list"] .title-header .icon-button:last-child {
+  visibility: visible;
+}
+
+.app-screen[data-screen="benefit-list"] .tab-list {
+  display: none;
+}
+
+.app-screen[data-screen="benefit-list"] .filter-strip {
+  gap: 8px;
+  padding: 0 18px 14px;
+  border-bottom: 1px solid #efefef;
+}
+
+.app-screen[data-screen="benefit-list"] .filter-strip button {
+  height: 36px;
+  padding: 0 14px;
+  border-color: #e7e5e3;
+  background: #fff;
+  color: #2a2924;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.app-screen[data-screen="benefit-list"] .filter-strip button.active,
+.app-screen[data-screen="benefit-list"] .filter-strip button:first-child.active {
+  border-color: #2a2924;
+  background: #2a2924;
+  color: #fff;
+}
+
+.app-screen[data-screen="benefit-list"] .filter-strip button.active img {
+  filter: invert(1);
+}
+
+.app-screen[data-screen="benefit-list"] .benefit-result-scroll {
+  height: calc(100% - 136px);
+  padding: 14px 18px 34px;
+  background: #fff;
+}
+
+.app-screen[data-screen="benefit-list"] .benefit-page-note {
+  display: none;
+}
+
+.app-screen[data-screen="benefit-list"] .large-store-list {
+  gap: 28px;
+}
+
+.app-screen[data-screen="benefit-list"] .large-store-media {
+  height: 172px;
+  border-radius: 6px;
+}
+
+.app-screen[data-screen="benefit-list"] .large-store-media > img {
+  height: 172px;
+}
+
+.app-screen[data-screen="benefit-list"] .ribbon {
+  height: 27px;
+  padding: 0 9px;
+  border-radius: 6px 0 5px 0;
+  font-size: 13px;
+  line-height: 27px;
+  font-weight: 700;
+}
+
+.app-screen[data-screen="benefit-list"] .large-store-copy {
+  padding-top: 9px;
+}
+
+.app-screen[data-screen="benefit-list"] .large-store-title-row {
+  display: grid;
+  grid-template-columns: minmax(0, auto) auto 1fr auto;
+  column-gap: 3px;
+  align-items: center;
+}
+
+.app-screen[data-screen="benefit-list"] .large-store-title-row h3 {
+  max-width: 190px;
+  font-size: 17px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.app-screen[data-screen="benefit-list"] .store-rating,
+.app-screen[data-screen="benefit-list"] .store-time {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.app-screen[data-screen="benefit-list"] .store-time {
+  grid-column: 4;
+  color: #42413d;
+}
+
+.app-screen[data-screen="benefit-list"] .store-rating img,
+.app-screen[data-screen="benefit-list"] .store-time img {
+  width: 14px;
+  height: 14px;
+}
+
+.app-screen[data-screen="benefit-list"] .large-store-copy .tags {
+  margin-top: 5px;
+  gap: 4px;
+}
+
+.app-screen[data-screen="benefit-list"] .large-store-copy .tags span {
+  height: 21px;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 21px;
+  font-weight: 600;
+}
+
+.app-screen[data-screen="benefit-list"] .large-store-copy .tags .discount {
+  height: 21px;
+  padding: 0;
+  background: transparent;
+  color: #42413d;
+}
+
+.app-screen[data-screen="benefit-list"] .benefit-recommendation-section {
+  margin: 18px -18px -34px;
+  padding: 20px 18px 34px;
+  border-top: 8px solid #f5f5f5;
+}
+
+.app-screen[data-screen="benefit-list"] .benefit-recommendation-title {
+  margin-bottom: 16px;
+}
+
+.app-screen[data-screen="benefit-list"] .benefit-recommendation-title h2 {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+.app-screen[data-screen="benefit-list"] .benefit-recommendation-title span {
+  display: none;
+}
+
+.app-screen[data-screen="benefit-list"] .compact-store-list {
+  gap: 14px;
+}
+
+.app-screen[data-screen="benefit-list"] .compact-store-list .store-card {
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 10px;
+  min-height: 76px;
+  height: auto;
+  padding-bottom: 0;
+}
+
+.app-screen[data-screen="benefit-list"] .compact-store-list .store-card > img {
+  width: 76px;
+  height: 76px;
+  border-radius: 6px;
+}
+
+.app-screen[data-screen="benefit-list"] .compact-store-list .store-card h3 {
+  margin: 0 0 2px;
+  font-size: 15px;
+  line-height: 21px;
+  font-weight: 600;
+}
+
+.app-screen[data-screen="benefit-list"] .compact-store-list .store-card p,
+.app-screen[data-screen="benefit-list"] .compact-store-list .store-card small {
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.app-screen[data-screen="benefit-list"] .compact-store-list .tags span {
+  height: 18px;
+  font-size: 10px;
+  line-height: 18px;
+}
+
