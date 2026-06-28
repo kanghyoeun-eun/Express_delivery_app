@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v15-mobile-figma-fix";
+const CACHE_NAME = "baedal-prototype-v16-ga4-issue14";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260628-mobile-figma-fix",
-  "/script.js?v=20260628-mobile-figma-fix",
-  "/asset-map.js?v=20260628-mobile-figma-fix",
+  "/styles.css?v=20260628-ga4-issue14",
+  "/script.js?v=20260628-ga4-issue14",
+  "/asset-map.js?v=20260628-ga4-issue14",
   "/manifest.json"
 ];
 
