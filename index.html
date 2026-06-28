@@ -10,7 +10,7 @@
     <title>배달특급 하이파이 프로토타입</title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260628-benefit-filter-accumulate" />
+    <link rel="stylesheet" href="./styles.css?v=20260628-filter-coupon-rating" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -192,7 +192,7 @@
           <button class="icon-button" type="button" data-target="cart"><img src="./icons/24/shopping-cart-02.svg" alt="" /></button>
         </header>
         <div class="tab-list"><button class="active" type="button">샐러드</button><button type="button">샌드위치</button><button type="button">포케</button></div>
-        <div class="filter-strip"><button>추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button>지역화폐</button><button>온누리상품권</button><button>가격 설정</button><button>바로 할인</button></div>
+        <div class="filter-strip"><button>추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button>지역화폐</button><button>온누리상품권</button><button>가격 설정</button><button>별점 <img src="./icons/20/chevron-down.svg" alt="" /></button></div>
         <section class="scroll-area result-scroll">
           <div class="large-store-list" id="resultStoreList"></div>
         </section>
@@ -213,7 +213,7 @@
             </div>
           </div>
         </section>
-        <div class="portfolio-filter-strip"><button type="button">추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">가격 설정</button><button type="button">바로 할인</button></div>
+        <div class="portfolio-filter-strip"><button type="button">추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">가격 설정</button><button type="button">별점 <img src="./icons/20/chevron-down.svg" alt="" /></button></div>
         <section class="scroll-area portfolio-result-scroll">
           <div class="portfolio-store-list">
             <button class="portfolio-store-card" type="button" data-target="store">
@@ -240,7 +240,7 @@
           <button class="icon-button" type="button" data-target="cart"><img src="./icons/24/shopping-cart-02.svg" alt="" /></button>
         </header>
         <div class="tab-list benefit-tab-list"><button class="active" type="button">쿠폰함</button><button type="button">3000원 할인</button><button type="button">중복쿠폰</button></div>
-        <div class="filter-strip"><button type="button">혜택 큰 순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">빠른 배달</button><button type="button">바로 할인</button></div>
+        <div class="filter-strip"><button type="button">혜택 큰 순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">빠른 배달</button><button type="button">별점 <img src="./icons/20/chevron-down.svg" alt="" /></button></div>
         <section class="scroll-area result-scroll benefit-result-scroll">
           <div class="benefit-page-note"><strong>받을 수 있는 혜택이 있는 가게</strong><span>마음에 드는 메뉴를 고르고 주문 직전 화면까지 이동해보세요.</span></div>
           <div class="large-store-list" id="benefitStoreList"></div>
@@ -440,7 +440,7 @@
       <section class="app-screen" data-screen="favorites" aria-label="찜 화면">
         <div class="status-bar plain"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/black.svg" alt="" /><img src="./icons/status/wifi/black.svg" alt="" /><img src="./icons/status/battery/black.svg" alt="" /></div></div>
         <header class="title-header"><span class="header-spacer"></span><h1>찜</h1><span class="header-spacer"></span></header>
-        <div class="favorite-filter-strip"><button class="active" type="button">추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">가격 설정</button><button type="button">바로 할인</button></div>
+        <div class="favorite-filter-strip"><button class="active" type="button">추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">가격 설정</button><button type="button">별점 <img src="./icons/20/chevron-down.svg" alt="" /></button></div>
         <section class="scroll-area favorite-scroll">
           <p class="favorite-count">총 12개</p>
           <div class="favorite-card-list">
@@ -459,7 +459,7 @@
         <div class="status-bar plain"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/black.svg" alt="" /><img src="./icons/status/wifi/black.svg" alt="" /><img src="./icons/status/battery/black.svg" alt="" /></div></div>
         <header class="title-header"><span class="header-spacer"></span><h1>주문내역</h1><span class="header-spacer"></span></header>
         <div class="order-tabs"><button class="active" type="button">과거 주문 내역</button><button type="button" data-target="preparing">준비중</button></div>
-        <div class="order-filter-strip"><button class="active" type="button">추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">바로 할인</button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">가격 설정</button></div>
+        <div class="order-filter-strip"><button class="active" type="button">추천순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">별점 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">가격 설정</button></div>
         <section class="scroll-area order-history-scroll">
           <article class="history-card"><div class="history-head"><img src="./assets/images/stores/jeongsotbap-suwon-haenggung/thumb.png" alt="" /><div><p><span>2023.11.24</span> <span>(금)</span><button type="button">영수증 보기</button></p><h2>동탄 할머니 보쌈</h2><small>한방 삼계탕 · 외 1개</small></div></div><div class="history-price-panel"><p class="history-price-line"><span>결제금액</span><strong>18,000원</strong></p><p class="history-discount-line"><span>재주문 시 10% 할인</span><strong>16,200원</strong></p></div><div class="history-actions"><button type="button" data-target="store">재주문 하기</button><button type="button">리뷰 쓰기</button></div></article>
           <article class="history-card"><div class="history-head"><img src="./assets/images/stores/pyeongjidam/thumb.png" alt="" /><div><p><span>2023.11.24</span> <span>(금)</span><button type="button">영수증 보기</button></p><h2>동탄 할머니 보쌈</h2><small>한방 삼계탕 · 외 1개</small></div></div><div class="history-price-panel"><p class="history-price-line"><span>결제금액</span><strong>20,000원</strong></p><p class="history-discount-line"><span>재주문 시 10% 할인</span><strong>18,000원</strong></p></div><div class="history-actions"><button type="button" data-target="store">재주문 하기</button><button type="button">리뷰 쓰기</button></div></article>
@@ -564,7 +564,7 @@
 
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
-    <script src="./asset-map.js?v=20260628-benefit-filter-accumulate"></script>
-    <script src="./script.js?v=20260628-benefit-filter-accumulate"></script>
+    <script src="./asset-map.js?v=20260628-filter-coupon-rating"></script>
+    <script src="./script.js?v=20260628-filter-coupon-rating"></script>
   </body>
 </html>

@@ -333,7 +333,7 @@ const benefitPages = {
   local: {
     title: "지역화폐",
     tabs: ["지역화폐", "10% 할인", "수원페이"],
-    filters: ["추천순", "쿠폰 할인", "온누리상품권", "가격 설정", "바로 할인"],
+    filters: ["추천순", "쿠폰 할인", "온누리상품권", "가격 설정", "별점"],
     note: "지역화폐 결제와 추가 할인을 받을 수 있는 가게예요.",
     filteredNote: "선택한 혜택 조건에 맞는 가게를 먼저 보여드렸어요.",
     stores: [
@@ -674,9 +674,10 @@ function goBack() {
 function getFilterKey(label) {
   if (label.includes("지역화폐")) return "local";
   if (label.includes("온누리")) return "onnuri";
+  if (label.includes("쿠폰")) return "coupon";
   if (label.includes("가격")) return "price";
+  if (label.includes("별점")) return "rating";
   if (label.includes("빠른")) return "fast";
-  if (label.includes("바로") || label.includes("할인")) return "discount";
   return "sort";
 }
 
@@ -710,7 +711,7 @@ function storeMatchesFilter(store, filterKey) {
   const haystack = [store.name, store.discount, store.ribbon, ...(store.badges || []), ...labels].join(" ");
   if (filterKey === "local") return haystack.includes("지역화폐") || haystack.includes("수원페이");
   if (filterKey === "onnuri") return haystack.includes("온누리");
-  if (filterKey === "discount") return haystack.includes("배달특급") || haystack.includes("할인") || haystack.includes("쿠폰");
+  if (filterKey === "coupon") return haystack.includes("쿠폰");
   if (filterKey === "fast") return minuteValue(store) <= 35;
   return true;
 }
@@ -719,6 +720,7 @@ function applyStoreFilter(stores, filterKey, contextSlug = "default") {
   const normalized = stores.map((store, index) => normalizeStore(store, index, contextSlug));
   if (filterKey === "sort") return normalized;
   if (filterKey === "price") return [...normalized].sort((a, b) => minuteValue(a) - minuteValue(b));
+  if (filterKey === "rating") return [...normalized].sort((a, b) => String(b.rating || "").localeCompare(String(a.rating || "")));
   return normalized.filter((store) => storeMatchesFilter(store, filterKey));
 }
 
@@ -728,6 +730,8 @@ function applyStoreFilters(stores, filterKeys = ["sort"], contextSlug = "default
   active.forEach((key) => {
     if (key === "price") {
       results = [...results].sort((a, b) => minuteValue(a) - minuteValue(b));
+    } else if (key === "rating") {
+      results = [...results].sort((a, b) => String(b.rating || "").localeCompare(String(a.rating || "")));
     } else {
       results = results.filter((store) => storeMatchesFilter(store, key));
     }
@@ -764,10 +768,10 @@ function updateBenefitStores() {
   const recommendationList = benefitScreen.querySelector("#benefitRecommendationList");
   const note = benefitScreen.querySelector(".benefit-page-note");
   const filters = activeBenefitFilters();
-  const shouldShowRecommendation = slug === "local" && filters.includes("discount") && filters.includes("onnuri");
+  const shouldShowRecommendation = slug === "local" && filters.includes("coupon") && filters.includes("onnuri");
   setFilterStripState(benefitScreen, filter, filters);
   if (shouldShowRecommendation && page.filteredStores?.length) {
-    const selectedFilters = filters.map((key) => ({ sort: "추천순", discount: "쿠폰 할인", onnuri: "온누리상품권", price: "가격 설정", fast: "바로 할인", local: "지역화폐" }[key] || key));
+    const selectedFilters = filters.map((key) => ({ sort: "추천순", coupon: "쿠폰 할인", onnuri: "온누리상품권", price: "가격 설정", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
     renderStoreList(benefitScreen.querySelector("#benefitStoreList"), page.filteredStores.map((store, index) => normalizeStore(store, index, slug)));
     if (note) {
       note.classList.add("narrow-result-note");
@@ -867,8 +871,8 @@ function setBenefitContext(label = "쿠폰함", slug = "coupon") {
   listViewState.benefit = { page, label, slug, filter: "sort", activeFilters: ["sort"] };
   benefitScreen.querySelector(".title-header h1").textContent = page.title;
   benefitScreen.querySelector(".tab-list").innerHTML = page.tabs.map((tab, index) => `<button class="${index === 0 ? "active" : ""}" type="button">${tab}</button>`).join("");
-  const filters = page.filters || ["추천순", "지역화폐", "온누리상품권", "가격 설정", "바로 할인"];
-  benefitScreen.querySelector(".filter-strip").innerHTML = filters.map((filterLabel, index) => `<button type="button">${filterLabel}${index === 0 ? ' <img src="./icons/20/chevron-down.svg" alt="" />' : ""}</button>`).join("");
+  const filters = page.filters || ["추천순", "지역화폐", "온누리상품권", "가격 설정", "별점"];
+  benefitScreen.querySelector(".filter-strip").innerHTML = filters.map((filterLabel, index) => `<button type="button">${filterLabel}${index === 0 || filterLabel === "별점" ? ' <img src="./icons/20/chevron-down.svg" alt="" />' : ""}</button>`).join("");
   const note = benefitScreen.querySelector(".benefit-page-note");
   note.querySelector("strong").textContent = `${page.title} 혜택 가게`;
   note.querySelector("span").textContent = page.note;
