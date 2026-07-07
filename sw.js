@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v19-no-empty-benefit-filter";
+const CACHE_NAME = "baedal-prototype-v20-clarity-utm-tags";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260628-no-empty-benefit-filter",
-  "/script.js?v=20260628-no-empty-benefit-filter",
-  "/asset-map.js?v=20260628-no-empty-benefit-filter",
+  "/styles.css?v=20260707-clarity-utm-tags",
+  "/script.js?v=20260707-clarity-utm-tags",
+  "/asset-map.js?v=20260707-clarity-utm-tags",
   "/manifest.json"
 ];
 
