@@ -14,6 +14,7 @@ const utmPayload = {
   utm_content: utmParams.get("utm_content") || "",
 };
 const utmDebugMode = utmParams.get("debug_mode") === "1" || utmParams.get("debug_mode") === "true" || utmParams.get("utm_source") === "ut2";
+const gaMeasurementId = "G-ZZR2K930ZE";
 
 function currentScreenName() {
   return document.querySelector(".app-screen.active")?.dataset.screen || "unknown";
@@ -40,7 +41,11 @@ function trackUtEvent(eventName, params = {}) {
   Object.keys(payload).forEach((key) => {
     if (payload[key] === "" || payload[key] === undefined || payload[key] === null) delete payload[key];
   });
-  const finalPayload = utmDebugMode ? { ...payload, debug_mode: true } : payload;
+  const finalPayload = {
+    ...payload,
+    send_to: gaMeasurementId,
+    ...(utmDebugMode ? { debug_mode: true } : {}),
+  };
   console.log(`[GA4] ${eventName}`, finalPayload);
   window.gtag("event", eventName, finalPayload);
 }

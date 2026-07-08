@@ -10,7 +10,7 @@
     <title>배달특급 하이파이 프로토타입</title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260708-ut2-auto-debug" />
+    <link rel="stylesheet" href="./styles.css?v=20260708-ga4-send-to" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -27,7 +27,8 @@
       gtag("js", new Date());
       const gaParams = new URLSearchParams(window.location.search);
       const gaDebugMode = gaParams.get("debug_mode") === "1" || gaParams.get("debug_mode") === "true" || gaParams.get("utm_source") === "ut2";
-      gtag("config", "G-ZZR2K930ZE", gaDebugMode ? { debug_mode: true } : {});
+      const GA_MEASUREMENT_ID = "G-ZZR2K930ZE";
+      gtag("config", GA_MEASUREMENT_ID, gaDebugMode ? { debug_mode: true } : {});
       const utPayload = {
         utm_source: gaParams.get("utm_source") || "",
         utm_medium: gaParams.get("utm_medium") || "",
@@ -35,7 +36,7 @@
         utm_content: gaParams.get("utm_content") || "",
       };
       if (utPayload.utm_source || utPayload.utm_medium || utPayload.utm_campaign || utPayload.utm_content) {
-        gtag("event", "ut_link_open", gaDebugMode ? { ...utPayload, debug_mode: true } : utPayload);
+        gtag("event", "ut_link_open", { ...utPayload, send_to: GA_MEASUREMENT_ID, ...(gaDebugMode ? { debug_mode: true } : {}) });
       }
     </script>
     <script>
@@ -584,7 +585,7 @@
 
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
-    <script src="./asset-map.js?v=20260708-ut2-auto-debug"></script>
-    <script src="./script.js?v=20260708-ut2-auto-debug"></script>
+    <script src="./asset-map.js?v=20260708-ga4-send-to"></script>
+    <script src="./script.js?v=20260708-ga4-send-to"></script>
   </body>
 </html>
