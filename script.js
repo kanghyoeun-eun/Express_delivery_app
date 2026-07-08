@@ -13,7 +13,7 @@ const utmPayload = {
   utm_campaign: utmParams.get("utm_campaign") || "",
   utm_content: utmParams.get("utm_content") || "",
 };
-const utmDebugMode = utmParams.get("debug_mode") === "1" || utmParams.get("debug_mode") === "true";
+const utmDebugMode = utmParams.get("debug_mode") === "1" || utmParams.get("debug_mode") === "true" || utmParams.get("utm_source") === "ut2";
 
 function currentScreenName() {
   return document.querySelector(".app-screen.active")?.dataset.screen || "unknown";

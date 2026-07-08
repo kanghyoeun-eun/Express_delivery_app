@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v20-clarity-utm-tags";
+const CACHE_NAME = "baedal-prototype-v21-ut2-auto-debug";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260707-clarity-utm-tags",
-  "/script.js?v=20260707-clarity-utm-tags",
-  "/asset-map.js?v=20260707-clarity-utm-tags",
+  "/styles.css?v=20260708-ut2-auto-debug",
+  "/script.js?v=20260708-ut2-auto-debug",
+  "/asset-map.js?v=20260708-ut2-auto-debug",
   "/manifest.json"
 ];
 
