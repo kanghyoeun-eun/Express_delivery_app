@@ -279,6 +279,59 @@ function buildCategoryStores(categorySlug, categoryTitle, featured = []) {
   return Array.from(byName.values());
 }
 
+const chickenResults = [
+  { slug: "chicken-store-01", name: "교촌치킨 역삼1호점", rating: "5.0(72)", time: "18분 소요", discount: "최대 1000원 할인", image: "menus/chicken-platter-large.png", recent: "최근주문 : 후라이드치킨", orderCount: 95, likeCount: 12, labels: ["수원페이"], couponLabel: "1000원 쿠폰", badges: ["인기", "이벤트"] },
+  { slug: "chicken-store-02", name: "BHC 역삼스타점", rating: "4.7(113)", time: "25분 소요", discount: "최대 2000원 할인", image: "menus/roast-chicken-leg.png", recent: "최근주문 : 양념치킨", orderCount: 162, likeCount: 41, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-03", name: "BBQ 역삼중앙점", rating: "4.4(154)", time: "32분 소요", discount: "G드림카드 쿠폰", image: "menus/fried-chicken.jpg", recent: "최근주문 : 간장치킨", orderCount: 229, likeCount: 70, labels: ["G드림카드"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-04", name: "굽네치킨 역삼점", rating: "4.8(195)", time: "39분 소요", discount: "최대 3000원 할인", image: "banners/party-food-banner.png", recent: "최근주문 : 순살치킨", orderCount: 296, likeCount: 99, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "온누리 쿠폰"], couponLabel: "3000원 쿠폰" },
+  { slug: "chicken-store-05", name: "네네치킨 역삼점", rating: "4.5(236)", time: "46분 소요", discount: "최대 2000원 할인", image: "menus/menu-side-01.png", recent: "최근주문 : 반반치킨", orderCount: 363, likeCount: 128, labels: ["수원페이", "G드림카드"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-06", name: "처갓집양념치킨 역삼점", rating: "4.9(277)", time: "53분 소요", discount: "혜택 없음", image: "menus/chicken-platter-large.png", recent: "최근주문 : 마늘치킨", orderCount: 430, likeCount: 157, labels: [], couponLabel: false },
+  { slug: "chicken-store-07", name: "푸라닭 강남역삼점", rating: "4.6(318)", time: "23분 소요", discount: "최대 3000원 할인", image: "menus/roast-chicken-leg.png", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 497, likeCount: 186, labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-08", name: "60계치킨 역삼점", rating: "5.0(359)", time: "30분 소요", discount: "배달비 혜택 없음", image: "menus/fried-chicken.jpg", recent: "최근주문 : 닭강정", orderCount: 564, likeCount: 215, labels: [], couponLabel: false },
+  { slug: "chicken-store-09", name: "자담치킨 역삼점", rating: "4.7(400)", time: "37분 소요", discount: "최대 1000원 할인", image: "banners/party-food-banner.png", recent: "최근주문 : 후라이드치킨", orderCount: 631, likeCount: 244, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-10", name: "멕시카나 역삼점", rating: "4.4(441)", time: "44분 소요", discount: "최대 2000원 할인", image: "menus/menu-side-01.png", recent: "최근주문 : 양념치킨", orderCount: 698, likeCount: 273, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰", badges: ["인기"] },
+  { slug: "chicken-store-11", name: "페리카나 역삼점", rating: "4.8(482)", time: "51분 소요", discount: "G드림카드 쿠폰", image: "menus/chicken-platter-large.png", recent: "최근주문 : 간장치킨", orderCount: 765, likeCount: 302, labels: ["G드림카드"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-12", name: "호식이두마리치킨 역삼점", rating: "4.5(523)", time: "21분 소요", discount: "최대 3000원 할인", image: "menus/roast-chicken-leg.png", recent: "최근주문 : 순살치킨", orderCount: 832, likeCount: 331, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "온누리 쿠폰"], couponLabel: "3000원 쿠폰" },
+  { slug: "chicken-store-13", name: "깐부치킨 선릉역점", rating: "4.9(564)", time: "28분 소요", discount: "최대 2000원 할인", image: "menus/fried-chicken.jpg", recent: "최근주문 : 반반치킨", orderCount: 899, likeCount: 360, labels: ["수원페이", "G드림카드"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-14", name: "노랑통닭 역삼점", rating: "4.6(605)", time: "35분 소요", discount: "혜택 없음", image: "banners/party-food-banner.png", recent: "최근주문 : 마늘치킨", orderCount: 966, likeCount: 389, labels: [], couponLabel: false, badges: ["이벤트"] },
+  { slug: "chicken-store-15", name: "또래오래 강남역점", rating: "5.0(646)", time: "42분 소요", discount: "최대 3000원 할인", image: "menus/menu-side-01.png", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 1033, likeCount: 28, labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-16", name: "치킨플러스 역삼점", rating: "4.7(687)", time: "49분 소요", discount: "배달비 혜택 없음", image: "menus/chicken-platter-large.png", recent: "최근주문 : 닭강정", orderCount: 1100, likeCount: 57, labels: [], couponLabel: false },
+  { slug: "chicken-store-17", name: "누구나홀딱반한닭 강남점", rating: "4.4(728)", time: "19분 소요", discount: "최대 1000원 할인", image: "menus/roast-chicken-leg.png", recent: "최근주문 : 후라이드치킨", orderCount: 1167, likeCount: 86, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-18", name: "치킨마루 역삼점", rating: "4.8(89)", time: "26분 소요", discount: "최대 2000원 할인", image: "menus/fried-chicken.jpg", recent: "최근주문 : 양념치킨", orderCount: 1234, likeCount: 115, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-19", name: "둘둘치킨 역삼역점", rating: "4.5(130)", time: "33분 소요", discount: "G드림카드 쿠폰", image: "banners/party-food-banner.png", recent: "최근주문 : 간장치킨", orderCount: 1301, likeCount: 144, labels: ["G드림카드"], couponLabel: "1000원 쿠폰", badges: ["인기"] },
+  { slug: "chicken-store-20", name: "오븐마루치킨 역삼점", rating: "4.9(171)", time: "40분 소요", discount: "최대 3000원 할인", image: "menus/menu-side-01.png", recent: "최근주문 : 순살치킨", orderCount: 118, likeCount: 173, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "온누리 쿠폰"], couponLabel: "3000원 쿠폰" },
+  { slug: "chicken-store-21", name: "바른치킨 선릉점", rating: "4.6(212)", time: "47분 소요", discount: "최대 2000원 할인", image: "menus/chicken-platter-large.png", recent: "최근주문 : 반반치킨", orderCount: 185, likeCount: 202, labels: ["수원페이", "G드림카드"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-22", name: "치킨매니아 강남점", rating: "5.0(253)", time: "54분 소요", discount: "혜택 없음", image: "menus/roast-chicken-leg.png", recent: "최근주문 : 마늘치킨", orderCount: 252, likeCount: 231, labels: [], couponLabel: false },
+  { slug: "chicken-store-23", name: "보드람치킨 역삼점", rating: "4.7(294)", time: "24분 소요", discount: "최대 3000원 할인", image: "menus/fried-chicken.jpg", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 319, likeCount: 260, labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-24", name: "가마로강정 역삼점", rating: "4.4(335)", time: "31분 소요", discount: "배달비 혜택 없음", image: "banners/party-food-banner.png", recent: "최근주문 : 닭강정", orderCount: 386, likeCount: 289, labels: [], couponLabel: false },
+  { slug: "chicken-store-25", name: "훌랄라참숯치킨 역삼점", rating: "4.8(376)", time: "38분 소요", discount: "최대 1000원 할인", image: "menus/menu-side-01.png", recent: "최근주문 : 후라이드치킨", orderCount: 453, likeCount: 318, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-26", name: "티바두마리치킨 강남점", rating: "4.5(417)", time: "45분 소요", discount: "최대 2000원 할인", image: "menus/chicken-platter-large.png", recent: "최근주문 : 양념치킨", orderCount: 520, likeCount: 347, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-27", name: "후라이드참잘하는집 역삼점", rating: "4.9(458)", time: "52분 소요", discount: "G드림카드 쿠폰", image: "menus/roast-chicken-leg.png", recent: "최근주문 : 간장치킨", orderCount: 587, likeCount: 376, labels: ["G드림카드"], couponLabel: "1000원 쿠폰", badges: ["이벤트"] },
+  { slug: "chicken-store-28", name: "돈치킨 역삼점", rating: "4.6(499)", time: "22분 소요", discount: "최대 3000원 할인", image: "menus/fried-chicken.jpg", recent: "최근주문 : 순살치킨", orderCount: 654, likeCount: 15, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "온누리 쿠폰"], couponLabel: "3000원 쿠폰", badges: ["인기"] },
+  { slug: "chicken-store-29", name: "땅땅치킨 강남역점", rating: "5.0(540)", time: "29분 소요", discount: "최대 2000원 할인", image: "banners/party-food-banner.png", recent: "최근주문 : 반반치킨", orderCount: 721, likeCount: 44, labels: ["수원페이", "G드림카드"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-30", name: "아웃닭 강남역점", rating: "4.7(581)", time: "36분 소요", discount: "혜택 없음", image: "menus/menu-side-01.png", recent: "최근주문 : 마늘치킨", orderCount: 788, likeCount: 73, labels: [], couponLabel: false },
+  { slug: "chicken-store-31", name: "오늘통닭 역삼점", rating: "4.4(622)", time: "43분 소요", discount: "최대 3000원 할인", image: "menus/chicken-platter-large.png", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 855, likeCount: 102, labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-32", name: "치킨더홈 역삼점", rating: "4.8(663)", time: "50분 소요", discount: "배달비 혜택 없음", image: "menus/roast-chicken-leg.png", recent: "최근주문 : 닭강정", orderCount: 922, likeCount: 131, labels: [], couponLabel: false },
+  { slug: "chicken-store-33", name: "마라통닭 역삼점", rating: "4.5(704)", time: "20분 소요", discount: "최대 1000원 할인", image: "menus/fried-chicken.jpg", recent: "최근주문 : 후라이드치킨", orderCount: 989, likeCount: 160, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-34", name: "순살만공격 강남점", rating: "4.9(745)", time: "27분 소요", discount: "최대 2000원 할인", image: "banners/party-food-banner.png", recent: "최근주문 : 양념치킨", orderCount: 1056, likeCount: 189, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-35", name: "인생닭강정 역삼점", rating: "4.6(106)", time: "34분 소요", discount: "G드림카드 쿠폰", image: "menus/menu-side-01.png", recent: "최근주문 : 간장치킨", orderCount: 1123, likeCount: 218, labels: ["G드림카드"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-36", name: "장모님치킨 역삼점", rating: "5.0(147)", time: "41분 소요", discount: "최대 3000원 할인", image: "menus/chicken-platter-large.png", recent: "최근주문 : 순살치킨", orderCount: 1190, likeCount: 247, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "온누리 쿠폰"], couponLabel: "3000원 쿠폰" },
+  { slug: "chicken-store-37", name: "치킨인류 선릉점", rating: "4.7(188)", time: "48분 소요", discount: "최대 2000원 할인", image: "menus/roast-chicken-leg.png", recent: "최근주문 : 반반치킨", orderCount: 1257, likeCount: 276, labels: ["수원페이", "G드림카드"], couponLabel: "1000원 쿠폰", badges: ["인기"] },
+  { slug: "chicken-store-38", name: "플러스82치킨 역삼점", rating: "4.4(229)", time: "18분 소요", discount: "혜택 없음", image: "menus/fried-chicken.jpg", recent: "최근주문 : 마늘치킨", orderCount: 1324, likeCount: 305, labels: [], couponLabel: false },
+  { slug: "chicken-store-39", name: "바삭한닭 역삼본점", rating: "4.8(270)", time: "25분 소요", discount: "최대 3000원 할인", image: "banners/party-food-banner.png", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 141, likeCount: 334, labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-40", name: "치킨파티 테헤란로점", rating: "4.5(311)", time: "32분 소요", discount: "배달비 혜택 없음", image: "menus/menu-side-01.png", recent: "최근주문 : 닭강정", orderCount: 208, likeCount: 363, labels: [], couponLabel: false, badges: ["이벤트"] },
+  { slug: "chicken-store-41", name: "닭장수후라이드 역삼점", rating: "4.9(352)", time: "39분 소요", discount: "최대 1000원 할인", image: "menus/chicken-platter-large.png", recent: "최근주문 : 후라이드치킨", orderCount: 275, likeCount: 392, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-42", name: "삼덕통닭 강남점", rating: "4.6(393)", time: "46분 소요", discount: "최대 2000원 할인", image: "menus/roast-chicken-leg.png", recent: "최근주문 : 양념치킨", orderCount: 342, likeCount: 31, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-43", name: "봉추찜닭 역삼점", rating: "5.0(434)", time: "53분 소요", discount: "G드림카드 쿠폰", image: "menus/fried-chicken.jpg", recent: "최근주문 : 간장치킨", orderCount: 409, likeCount: 60, labels: ["G드림카드"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-44", name: "홍대개미치킨 강남점", rating: "4.7(475)", time: "23분 소요", discount: "최대 3000원 할인", image: "banners/party-food-banner.png", recent: "최근주문 : 순살치킨", orderCount: 476, likeCount: 89, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "온누리 쿠폰"], couponLabel: "3000원 쿠폰" },
+  { slug: "chicken-store-45", name: "오태식해바라기치킨 역삼점", rating: "4.4(516)", time: "30분 소요", discount: "최대 2000원 할인", image: "menus/menu-side-01.png", recent: "최근주문 : 반반치킨", orderCount: 543, likeCount: 118, labels: ["수원페이", "G드림카드"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-46", name: "오빠닭 강남역점", rating: "4.8(557)", time: "37분 소요", discount: "혜택 없음", image: "menus/chicken-platter-large.png", recent: "최근주문 : 마늘치킨", orderCount: 610, likeCount: 147, labels: [], couponLabel: false, badges: ["인기"] },
+  { slug: "chicken-store-47", name: "아라치 역삼점", rating: "4.5(598)", time: "44분 소요", discount: "최대 3000원 할인", image: "menus/roast-chicken-leg.png", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 677, likeCount: 176, labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-store-48", name: "계동치킨 선릉점", rating: "4.9(639)", time: "51분 소요", discount: "배달비 혜택 없음", image: "menus/fried-chicken.jpg", recent: "최근주문 : 닭강정", orderCount: 744, likeCount: 205, labels: [], couponLabel: false },
+  { slug: "chicken-store-49", name: "롸버트치킨 역삼점", rating: "4.6(680)", time: "21분 소요", discount: "최대 1000원 할인", image: "banners/party-food-banner.png", recent: "최근주문 : 후라이드치킨", orderCount: 811, likeCount: 234, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-store-50", name: "치킨선생 강남역점", rating: "5.0(721)", time: "28분 소요", discount: "최대 2000원 할인", image: "menus/menu-side-01.png", recent: "최근주문 : 양념치킨", orderCount: 878, likeCount: 263, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
+];
+
 const categoryPages = {
   korean: {
     title: "한식",
@@ -292,11 +345,8 @@ const categoryPages = {
   chicken: {
     title: "치킨",
     tabs: ["후라이드", "양념", "순살"],
-    stores: [
-      { name: "BHC 광교중앙점", rating: "5.0(342)", time: "35분 소요", discount: "최대 2000원 할인", image: "menus/chicken-platter-large.png", badges: ["이벤트"] },
-      { name: "치킨파티 수원점", rating: "4.9(188)", time: "31분 소요", discount: "최대 3000원 할인", image: "menus/roast-chicken-leg.png" },
-      { name: "바삭한닭 행궁점", rating: "4.8(156)", time: "40분 소요", discount: "1000원 쿠폰", image: "menus/menu-side-01.png" },
-    ],
+    stores: chickenResults,
+    fixedStores: true,
   },
   pizza: {
     title: "피자",
@@ -370,6 +420,7 @@ const categoryPages = {
 
 Object.entries(categoryPages).forEach(([slug, page]) => {
   page.filters = page.filters || commonFilterLabels;
+  if (page.fixedStores) return;
   page.stores = buildCategoryStores(slug, page.title, page.stores || []);
 });
 
@@ -1162,14 +1213,24 @@ function renderStoreBadges(store) {
   return badges ? `<div class="store-status-badges">${badges}</div>` : "";
 }
 
+function hasVisibleBenefit(store) {
+  return (store.labels || []).length > 0 || store.couponLabel !== false || (store.ribbon || "").includes("배달특급");
+}
+
 function renderBenefitTags(store) {
   const labels = store.labels || [];
+  if (!hasVisibleBenefit(store) && String(store.discount || "").includes("혜택 없음")) return "";
   const hasPaymentLabel = labels.some((label) =>
     label.includes("수원페이") || label.includes("지역화폐") || label.includes("온누리") || label.includes("G드림")
   );
-  const paymentTag = hasPaymentLabel ? "" : `<span class="pay">수원페이</span>`;
+  const paymentTag = hasPaymentLabel || store.couponLabel === false ? "" : `<span class="pay">수원페이</span>`;
   const couponTag = store.couponLabel === false ? "" : `<span class="coupon">${store.couponLabel || "1000원 쿠폰"}</span>`;
   return `${paymentTag}${renderStoreLabels(store)}${couponTag}`;
+}
+
+function renderDiscountTag(store) {
+  if (!hasVisibleBenefit(store) || String(store.discount || "").includes("혜택 없음")) return "";
+  return `<span class="discount"><img src="./icons/14/wavy-check.svg" alt="" />${store.discount}</span>`;
 }
 
 function largeStoreCard(store) {
@@ -1188,7 +1249,7 @@ function largeStoreCard(store) {
           <span class="store-rating"><img src="./icons/14/star.svg" alt="" />${store.rating}</span>
           <span class="store-time"><img src="./icons/14/clock.svg" alt="" />${store.time}</span>
         </div>
-        <div class="tags">${renderBenefitTags(store)}<span class="discount"><img src="./icons/14/wavy-check.svg" alt="" />${store.discount}</span></div>
+        <div class="tags">${renderBenefitTags(store)}${renderDiscountTag(store)}</div>
       </div>
     </button>
   `;

@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v25-sort-sheet";
+const CACHE_NAME = "baedal-prototype-v26-chicken-data";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260901-sort-sheet",
-  "/script.js?v=20260901-sort-sheet",
-  "/asset-map.js?v=20260901-sort-sheet",
+  "/styles.css?v=20260901-chicken-data",
+  "/script.js?v=20260901-chicken-data",
+  "/asset-map.js?v=20260901-chicken-data",
   "/manifest.json"
 ];
 
