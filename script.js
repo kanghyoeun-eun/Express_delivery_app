@@ -159,6 +159,7 @@ const keywords = [
   { rank: 10, label: "아폴로 피자", trend: "up", delta: "1" },
 ];
 const recommendKeywords = ["저녁", "매운 음식", "쿠폰 할인", "엽기떡볶이", "건강식", "두바이 쫀득 쿠키", "베트남 음식"];
+const commonFilterLabels = ["추천순", "지역화폐", "온누리상품권", "가격 설정", "별점"];
 
 const stores = [
   {
@@ -212,6 +213,62 @@ const saladResults = [
     ribbon: "배달특급 10% 즉시 할인 매장",
   },
 ];
+
+const categoryStoreNames = {
+  korean: ["정솥밥", "평지담", "봄동비빔밥", "한솥도시락", "담솥", "소반식당"],
+  chicken: ["BHC", "치킨파티", "바삭한닭", "굽네치킨", "교촌치킨", "처갓집"],
+  pizza: ["존앤진피자펍", "노모어피자", "피자헛", "반올림피자", "피자스쿨", "잭슨피자"],
+  chinese: ["차이797", "마라공방", "홍콩반점", "라화쿵부", "짬뽕지존", "중화가정"],
+  snack: ["엽기떡볶이", "꼬마김밥 연구소", "튀김상회", "죠스떡볶이", "김밥천국", "스쿨푸드"],
+  japanese: ["시라유키", "멘야하나비", "카츠오모이", "스시로", "온기정", "미소야"],
+  burger: ["테디플레이트", "버거앤프라이즈", "맘스터치", "프랭크버거", "버거스올마이티", "다운타우너"],
+  dessert: ["투썸플레이스", "니드스윗", "디저트파티", "카페마이든", "요거트월드", "설빙"],
+  "late-night": ["심야보쌈", "아미고타코", "심야분식", "야식연구소", "닭발공작소", "밤도시락"],
+  salad: ["샐러디", "샐러리아", "Poke all day", "그린볼", "슬로우캘리", "포케올데이"],
+};
+
+const categoryStoreImages = [
+  "banners/payment-benefit-banner.png",
+  "banners/salady-menu-banner.png",
+  "banners/salady-promotion-banner.png",
+  "stores/store-food-card-01/thumb.png",
+  "stores/store-food-card-02/thumb.png",
+  "menus/salad-bowl.png",
+  "menus/chicken-platter-large.png",
+  "banners/party-food-banner.png",
+  "banners/dessert-drinks-banner.png",
+  "stores/john-and-jin-pizza-pub-haenggung/thumb.png",
+];
+
+function createDummyStore(categorySlug, categoryTitle, index) {
+  const names = categoryStoreNames[categorySlug] || categoryStoreNames.salad;
+  const baseName = names[index % names.length];
+  const districts = ["성대점", "행궁점", "광교점", "영통점", "수원역점", "호매실점", "망포점", "인계점"];
+  const ratingValue = Math.min(5, 4.6 + ((index * 7) % 5) / 10).toFixed(1);
+  const reviewCount = 86 + ((index * 37) % 420);
+  const minutes = 22 + ((index * 5) % 28);
+  const couponValues = ["1000원 쿠폰", "2000원 쿠폰", "3000원 쿠폰", "최대 3000원 할인"];
+  const labelCombos = [["수원페이"], ["온누리 쿠폰"], ["수원페이", "온누리 쿠폰"], ["G드림카드"], ["수원페이", "G드림카드"]];
+  const labels = labelCombos[index % labelCombos.length];
+  return {
+    slug: `${categorySlug}-${index}-${baseName}`.replace(/\s+/g, "-"),
+    name: `${baseName} ${districts[index % districts.length]}`,
+    rating: `${ratingValue}(${reviewCount})`,
+    time: `${minutes}분 소요`,
+    discount: couponValues[index % couponValues.length],
+    recent: `최근주문 : ${categoryTitle} 인기 메뉴`,
+    image: categoryStoreImages[index % categoryStoreImages.length],
+    ribbon: index % 3 === 0 ? "배달특급 10% 즉시 할인 매장" : "",
+    labels,
+    couponLabel: couponValues[index % couponValues.length].includes("쿠폰") ? couponValues[index % couponValues.length] : "1000원 쿠폰",
+  };
+}
+
+function buildCategoryStores(categorySlug, categoryTitle, featured = []) {
+  const generated = Array.from({ length: 6 }, (_, index) => createDummyStore(categorySlug, categoryTitle, index + featured.length));
+  const byName = new Map([...featured, ...generated].map((store) => [store.name, store]));
+  return Array.from(byName.values());
+}
 
 const categoryPages = {
   korean: {
@@ -302,6 +359,13 @@ const categoryPages = {
   },
 };
 
+Object.entries(categoryPages).forEach(([slug, page]) => {
+  page.filters = page.filters || commonFilterLabels;
+  page.stores = buildCategoryStores(slug, page.title, page.stores || []);
+});
+
+const allGeneratedCategoryStores = Object.values(categoryPages).flatMap((page) => page.stores || []);
+
 const storeFilterLabels = {
   default: [["지역화폐"], ["온누리"], ["G드림카드"]],
   local: [["지역화폐"], ["지역화폐"], ["지역화폐"]],
@@ -310,7 +374,8 @@ const storeFilterLabels = {
 };
 
 const listViewState = {
-  result: { page: null, label: "샐러드", slug: "salad", filter: "sort" },
+  result: { page: null, label: "샐러드", slug: "salad", filter: "sort", activeFilters: ["sort"] },
+  portfolio: { page: null, label: "쿠폰 할인", slug: "coupon-search", filter: "sort", activeFilters: ["sort"] },
   benefit: { page: null, label: "쿠폰함", slug: "coupon", filter: "sort", activeFilters: ["sort"] },
 };
 
@@ -460,6 +525,7 @@ let currentStore = null;
 let currentMenu = null;
 
 function getStoreSlug(store) {
+  if (store.slug) return store.slug;
   const m = store.image && store.image.match(/^stores\/([^/]+)\//);
   return m ? m[1] : store.name.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9가-힣-]/g, "");
 }
@@ -469,6 +535,7 @@ function findStoreBySlug(slug) {
   Object.values(categoryPages).forEach((p) => { if (p.stores) all = all.concat(p.stores); });
   Object.values(benefitPages).forEach((p) => { if (p.stores) all = all.concat(p.stores); });
   all = all.concat(stores, saladResults, searchRecommendations, hotMenus);
+  all = all.concat(allGeneratedCategoryStores);
   return all.find((s) => getStoreSlug(s) === slug) || null;
 }
 
@@ -711,6 +778,11 @@ function minuteValue(store) {
   return match ? Number(match[1]) : 99;
 }
 
+function ratingValue(store) {
+  const match = String(store.rating || "").match(/\d+(?:\.\d+)?/);
+  return match ? Number(match[0]) : 0;
+}
+
 function storeMatchesFilter(store, filterKey) {
   const labels = store.labels || [];
   const haystack = [store.name, store.discount, store.ribbon, ...(store.badges || []), ...labels].join(" ");
@@ -725,7 +797,7 @@ function applyStoreFilter(stores, filterKey, contextSlug = "default") {
   const normalized = stores.map((store, index) => normalizeStore(store, index, contextSlug));
   if (filterKey === "sort") return normalized;
   if (filterKey === "price") return [...normalized].sort((a, b) => minuteValue(a) - minuteValue(b));
-  if (filterKey === "rating") return [...normalized].sort((a, b) => String(b.rating || "").localeCompare(String(a.rating || "")));
+  if (filterKey === "rating") return [...normalized].sort((a, b) => ratingValue(b) - ratingValue(a));
   return normalized.filter((store) => storeMatchesFilter(store, filterKey));
 }
 
@@ -736,7 +808,7 @@ function applyStoreFilters(stores, filterKeys = ["sort"], contextSlug = "default
     if (key === "price") {
       results = [...results].sort((a, b) => minuteValue(a) - minuteValue(b));
     } else if (key === "rating") {
-      results = [...results].sort((a, b) => String(b.rating || "").localeCompare(String(a.rating || "")));
+      results = [...results].sort((a, b) => ratingValue(b) - ratingValue(a));
     } else {
       results = results.filter((store) => storeMatchesFilter(store, key));
     }
@@ -758,11 +830,19 @@ function renderStoreList(target, stores) {
 }
 
 function updateResultStores() {
-  const { page, slug, filter } = listViewState.result;
+  const { page, slug, filter, activeFilters = ["sort"] } = listViewState.result;
   if (!page) return;
   const resultScreen = document.querySelector('[data-screen="search-result"]');
-  setFilterStripState(resultScreen, filter);
-  renderStoreList(resultScreen.querySelector(".large-store-list"), applyStoreFilter(page.stores, filter, slug));
+  setFilterStripState(resultScreen, filter, activeFilters);
+  renderStoreList(resultScreen.querySelector(".large-store-list"), applyStoreFilters(page.stores, activeFilters, slug));
+}
+
+function updatePortfolioStores() {
+  const { page, slug, filter, activeFilters = ["sort"] } = listViewState.portfolio;
+  if (!page) return;
+  const portfolioScreen = document.querySelector('[data-screen="portfolio-search"]');
+  setFilterStripState(portfolioScreen, filter, activeFilters);
+  renderStoreList(portfolioScreen.querySelector("#portfolioStoreList"), applyStoreFilters(page.stores, activeFilters, slug));
 }
 
 function updateBenefitStores() {
@@ -862,22 +942,31 @@ function getCategoryPage(label = "샐러드", slug = "salad") {
   return categoryPages[matchedSlug] || {
     title: label,
     tabs: [label, "인기", "추천"],
-    stores: searchRecommendations,
+    filters: commonFilterLabels,
+    stores: allGeneratedCategoryStores.slice(0, 24),
   };
 }
 
 function setResultContext(label = "샐러드", slug = "salad") {
   const page = getCategoryPage(label, slug);
   const resultScreen = document.querySelector('[data-screen="search-result"]');
-  const tabs = [page.title, ...page.tabs.filter((tab) => tab !== page.title)].slice(0, 3);
-  listViewState.result = { page, label, slug, filter: "sort" };
+  listViewState.result = { page, label, slug, filter: "sort", activeFilters: ["sort"] };
   resultScreen.querySelector(".title-header h1").textContent = page.title;
-  resultScreen.querySelector(".tab-list").innerHTML = tabs.map((tab, index) => `<button class="${index === 0 ? "active" : ""}" type="button">${tab}</button>`).join("");
+  const filters = page.filters || commonFilterLabels;
+  resultScreen.querySelector(".filter-strip").innerHTML = renderFilterButtons(filters);
+  resultScreen.setAttribute("aria-label", `${page.title} 메뉴 리스트`);
   updateResultStores();
 }
 
 function setPortfolioContext(label = "쿠폰 할인") {
+  const storesForSearch = allGeneratedCategoryStores.filter((store) => {
+    const haystack = [store.name, store.discount, store.ribbon, ...(store.labels || [])].join(" ");
+    return label.includes("쿠폰") ? haystack.includes("쿠폰") || haystack.includes("할인") : haystack.includes(label) || store.name.includes(label);
+  });
+  const page = { title: label, stores: storesForSearch.length ? storesForSearch : allGeneratedCategoryStores.slice(0, 24), filters: commonFilterLabels };
+  listViewState.portfolio = { page, label, slug: "search", filter: "sort", activeFilters: ["sort"] };
   document.querySelector(".portfolio-search-field span").textContent = label;
+  updatePortfolioStores();
 }
 
 function setBenefitContext(label = "쿠폰함", slug = "coupon") {
@@ -886,8 +975,8 @@ function setBenefitContext(label = "쿠폰함", slug = "coupon") {
   listViewState.benefit = { page, label, slug, filter: "sort", activeFilters: ["sort"] };
   benefitScreen.querySelector(".title-header h1").textContent = page.title;
   benefitScreen.querySelector(".tab-list").innerHTML = page.tabs.map((tab, index) => `<button class="${index === 0 ? "active" : ""}" type="button">${tab}</button>`).join("");
-  const filters = page.filters || ["추천순", "지역화폐", "온누리상품권", "가격 설정", "별점"];
-  benefitScreen.querySelector(".filter-strip").innerHTML = filters.map((filterLabel, index) => `<button type="button">${filterLabel}${index === 0 || filterLabel === "별점" ? ' <img src="./icons/20/chevron-down.svg" alt="" />' : ""}</button>`).join("");
+  const filters = page.filters || commonFilterLabels;
+  benefitScreen.querySelector(".filter-strip").innerHTML = renderFilterButtons(filters);
   const note = benefitScreen.querySelector(".benefit-page-note");
   note.querySelector("strong").textContent = `${page.title} 혜택 가게`;
   note.querySelector("span").textContent = page.note;
@@ -898,6 +987,23 @@ function setBenefitContext(label = "쿠폰함", slug = "coupon") {
 function routeToSearchResult(label, slug) {
   setResultContext(label, slug);
   showScreen("search-result");
+}
+
+function renderFilterButtons(filters = commonFilterLabels) {
+  return filters.map((filterLabel, index) => `<button type="button">${filterLabel}${index === 0 || filterLabel === "별점" ? ' <img src="./icons/20/chevron-down.svg" alt="" />' : ""}</button>`).join("");
+}
+
+function toggleListFilter(state, filterKey) {
+  const currentFilters = new Set(state.activeFilters || ["sort"]);
+  if (filterKey === "sort") {
+    state.activeFilters = ["sort"];
+  } else {
+    if (currentFilters.has(filterKey)) currentFilters.delete(filterKey);
+    else currentFilters.add(filterKey);
+    currentFilters.add("sort");
+    state.activeFilters = Array.from(currentFilters);
+  }
+  state.filter = filterKey;
 }
 
 function routeToBenefit(label, slug = "coupon") {
@@ -1067,8 +1173,9 @@ function renderFamous() {
 function renderSearchScreens() {
   document.querySelector("#keywordGrid").innerHTML = keywords.map((item) => `<li><button type="button" data-target="search-result" data-label="${item.label}"><span><strong class="${item.tone || ""}">${item.rank}</strong><em>${item.label}</em></span>${trendMarkup(item)}</button></li>`).join("");
   document.querySelector("#recommendChips").innerHTML = recommendKeywords.map((word) => `<button type="button" data-target="${word.includes("쿠폰") ? "portfolio-search" : "search-result"}" data-label="${word}">${word}</button>`).join("");
-  document.querySelector("#searchRecommendList").innerHTML = searchRecommendations.map(largeStoreCard).join("");
-  document.querySelector("#resultStoreList").innerHTML = saladResults.map(largeStoreCard).join("");
+  document.querySelector("#searchRecommendList").innerHTML = allGeneratedCategoryStores.slice(0, 8).map(largeStoreCard).join("");
+  setResultContext("샐러드", "salad");
+  setPortfolioContext("쿠폰 할인");
   const favoriteList = document.querySelector("#favoriteList");
   if (favoriteList) favoriteList.innerHTML = saladResults.slice(0, 2).map(largeStoreCard).join("");
 }
@@ -1137,7 +1244,7 @@ function bindInteractions() {
       return;
     }
 
-    const tabButton = event.target.closest(".tab-list button, .delivery-tabs button, .store-menu-tabs button, .address-chips button, .favorite-filter-strip button, .order-filter-strip button, .portfolio-filter-strip button");
+    const tabButton = event.target.closest(".tab-list button, .delivery-tabs button, .store-menu-tabs button, .address-chips button, .favorite-filter-strip button, .order-filter-strip button");
     if (tabButton) {
       const tabGroup = tabButton.parentElement;
       tabGroup?.querySelectorAll("button").forEach((button) => button.classList.remove("active"));
@@ -1160,23 +1267,16 @@ function bindInteractions() {
       trackUtEvent(filterKey === "sort" ? "sort_click" : "filter_click", {
         filter_name: filterName,
         button_label: filterName,
-        category_name: activeScreen?.dataset.screen === "benefit-list" ? listViewState.benefit.label : listViewState.result.label,
+        category_name: activeScreen?.dataset.screen === "benefit-list" ? listViewState.benefit.label : activeScreen?.dataset.screen === "portfolio-search" ? listViewState.portfolio.label : listViewState.result.label,
       });
       if (activeScreen?.dataset.screen === "search-result") {
-        listViewState.result.filter = filterKey;
+        toggleListFilter(listViewState.result, filterKey);
         updateResultStores();
+      } else if (activeScreen?.dataset.screen === "portfolio-search") {
+        toggleListFilter(listViewState.portfolio, filterKey);
+        updatePortfolioStores();
       } else if (activeScreen?.dataset.screen === "benefit-list") {
-        const currentFilters = new Set(activeBenefitFilters());
-        if (filterKey === "sort") {
-          listViewState.benefit.activeFilters = ["sort"];
-        } else {
-          if (currentFilters.has(filterKey)) currentFilters.delete(filterKey);
-          else currentFilters.add(filterKey);
-          if (!currentFilters.size) currentFilters.add("sort");
-          if (listViewState.benefit.slug === "local") currentFilters.add("sort");
-          listViewState.benefit.activeFilters = Array.from(currentFilters);
-        }
-        listViewState.benefit.filter = filterKey;
+        toggleListFilter(listViewState.benefit, filterKey);
         updateBenefitStores();
         const benefitFilterPayload = benefitEventPayload({
           filter_name: filterName,
@@ -1307,7 +1407,7 @@ function bindInteractions() {
     if (event.key === "Enter") {
       const value = event.currentTarget.value.trim() || "샐러드";
       trackUtEvent("search_click", { button_label: "홈 검색 실행", search_keyword: value });
-      if (value.includes("쿠폰")) routeToBenefit("쿠폰함", "coupon");
+      if (value.includes("쿠폰")) { setPortfolioContext(value); showScreen("portfolio-search"); }
       else routeToSearchResult(value);
     }
   });
@@ -1318,7 +1418,7 @@ function bindInteractions() {
     if (event.key === "Enter" && event.currentTarget.value.trim()) {
       const value = event.currentTarget.value.trim();
       trackUtEvent("search_click", { button_label: "검색 실행", search_keyword: value });
-      if (value.includes("쿠폰")) routeToBenefit("쿠폰함", "coupon");
+      if (value.includes("쿠폰")) { setPortfolioContext(value); showScreen("portfolio-search"); }
       else routeToSearchResult(value);
     }
   });

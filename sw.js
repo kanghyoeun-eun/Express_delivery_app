@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v22-ga4-send-to";
+const CACHE_NAME = "baedal-prototype-v23-result-filter-data";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260708-ga4-send-to",
-  "/script.js?v=20260708-ga4-send-to",
-  "/asset-map.js?v=20260708-ga4-send-to",
+  "/styles.css?v=20260901-result-filter-data",
+  "/script.js?v=20260901-result-filter-data",
+  "/asset-map.js?v=20260901-result-filter-data",
   "/manifest.json"
 ];
 

@@ -5784,3 +5784,31 @@ img {
   line-height: 18px;
 }
 
+
+
+/* 20260901-result-filter-feedback */
+.app-screen[data-screen="search-result"] .filter-strip {
+  height: 56px;
+  padding: 10px 20px;
+}
+
+.app-screen[data-screen="search-result"] .result-scroll {
+  height: calc(100% - 156px);
+  padding-top: 16px;
+}
+
+.filter-strip button.active,
+.portfolio-filter-strip button.active {
+  border-color: #252b37;
+  background: #252b37;
+  color: #fff;
+}
+
+.filter-strip button.active img,
+.portfolio-filter-strip button.active img {
+  filter: invert(1);
+}
+
+.portfolio-store-list .large-store-card {
+  display: block;
+}
