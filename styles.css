@@ -1536,6 +1536,17 @@ img {
   height: 14px;
 }
 
+.large-store-meta {
+  margin: 2px 0 0;
+  overflow: hidden;
+  color: var(--gray-600);
+  font-size: 13px;
+  line-height: 19px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .store-hero {
   position: relative;
   height: 286px;
