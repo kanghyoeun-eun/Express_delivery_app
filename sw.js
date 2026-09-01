@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v24-search-category-flow";
+const CACHE_NAME = "baedal-prototype-v25-sort-sheet";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260901-search-category-flow",
-  "/script.js?v=20260901-search-category-flow",
-  "/asset-map.js?v=20260901-search-category-flow",
+  "/styles.css?v=20260901-sort-sheet",
+  "/script.js?v=20260901-sort-sheet",
+  "/asset-map.js?v=20260901-sort-sheet",
   "/manifest.json"
 ];
 

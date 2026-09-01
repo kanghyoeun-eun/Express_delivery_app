@@ -5812,3 +5812,42 @@ img {
 .portfolio-store-list .large-store-card {
   display: block;
 }
+
+
+/* 20260901-sort-sheet */
+.sort-sheet {
+  max-height: 420px;
+  padding: 20px 20px 28px;
+}
+
+.sort-option-list {
+  display: grid;
+  gap: 4px;
+}
+
+.sort-option-list button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 4px;
+  border-bottom: 1px solid #f0efec;
+  color: #2a2924;
+  font-size: 17px;
+  line-height: 24px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.sort-option-list button.selected {
+  color: #181814;
+  font-weight: 700;
+}
+
+.sort-option-list button.selected::after {
+  width: 24px;
+  height: 24px;
+  background: url("./icons/24/check/default-line.svg") center / 24px 24px no-repeat;
+  content: "";
+}

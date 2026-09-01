@@ -159,7 +159,14 @@ const keywords = [
   { rank: 10, label: "아폴로 피자", trend: "up", delta: "1" },
 ];
 const recommendKeywords = ["저녁", "매운 음식", "쿠폰 할인", "엽기떡볶이", "건강식", "두바이 쫀득 쿠키", "베트남 음식"];
-const commonFilterLabels = ["추천순", "지역화폐", "온누리상품권", "가격 설정", "별점"];
+const commonFilterLabels = ["기본순", "지역화폐", "온누리상품권", "가격 설정", "별점"];
+const sortOptions = [
+  { key: "default", label: "기본순" },
+  { key: "order", label: "주문 많은 순" },
+  { key: "rating", label: "별점 높은 순" },
+  { key: "near", label: "가까운 순" },
+  { key: "like", label: "찜 많은 순" },
+];
 
 const stores = [
   {
@@ -256,6 +263,8 @@ function createDummyStore(categorySlug, categoryTitle, index) {
     rating: `${ratingValue}(${reviewCount})`,
     time: `${minutes}분 소요`,
     discount: couponValues[index % couponValues.length],
+    orderCount: 140 + ((index * 53) % 860),
+    likeCount: 24 + ((index * 29) % 240),
     recent: `최근주문 : ${categoryTitle} 인기 메뉴`,
     image: categoryStoreImages[index % categoryStoreImages.length],
     ribbon: index % 3 === 0 ? "배달특급 10% 즉시 할인 매장" : "",
@@ -374,9 +383,9 @@ const storeFilterLabels = {
 };
 
 const listViewState = {
-  result: { page: null, label: "샐러드", slug: "salad", filter: "sort", activeFilters: ["sort"] },
-  portfolio: { page: null, label: "쿠폰 할인", slug: "coupon-search", filter: "sort", activeFilters: ["sort"] },
-  benefit: { page: null, label: "쿠폰함", slug: "coupon", filter: "sort", activeFilters: ["sort"] },
+  result: { page: null, label: "샐러드", slug: "salad", filter: "sort", activeFilters: [], sortKey: "default" },
+  portfolio: { page: null, label: "쿠폰 할인", slug: "coupon-search", filter: "sort", activeFilters: [], sortKey: "default" },
+  benefit: { page: null, label: "쿠폰함", slug: "coupon", filter: "sort", activeFilters: [], sortKey: "default" },
 };
 
 const benefitPages = {
@@ -403,7 +412,7 @@ const benefitPages = {
   local: {
     title: "지역화폐",
     tabs: ["지역화폐", "10% 할인", "수원페이"],
-    filters: ["추천순", "쿠폰 할인", "온누리상품권", "가격 설정", "별점"],
+    filters: ["기본순", "쿠폰 할인", "온누리상품권", "가격 설정", "별점"],
     note: "지역화폐 결제와 추가 할인을 받을 수 있는 가게예요.",
     filteredNote: "선택한 혜택 조건에 맞는 가게를 먼저 보여드렸어요.",
     stores: [
@@ -750,15 +759,29 @@ function getFilterKey(label) {
   if (label.includes("가격")) return "price";
   if (label.includes("별점")) return "rating";
   if (label.includes("빠른")) return "fast";
+  if (label.includes("기본") || label.includes("주문 많은") || label.includes("가까운") || label.includes("찜 많은") || label.includes("추천")) return "sort";
   return "sort";
 }
 
-function setFilterStripState(screen, activeKey = "sort", activeKeys = null) {
-  const activeSet = new Set(activeKeys || [activeKey]);
-  screen.querySelectorAll(".filter-strip button").forEach((button) => {
-    const key = getFilterKey(button.textContent.trim());
+function sortLabelFor(key = "default") {
+  return sortOptions.find((option) => option.key === key)?.label || "기본순";
+}
+
+function sortButtonMarkup(label = "기본순") {
+  return `${label} <img src="./icons/20/chevron-down.svg" alt="" />`;
+}
+
+function setFilterStripState(screen, activeKey = "sort", activeKeys = null, sortKey = "default") {
+  const activeSet = new Set(activeKeys || []);
+  screen.querySelectorAll(".filter-strip button").forEach((button, index) => {
+    const key = index === 0 ? "sort" : getFilterKey(button.textContent.trim());
     button.dataset.filter = key;
-    button.classList.toggle("active", activeSet.has(key));
+    if (key === "sort") {
+      button.innerHTML = sortButtonMarkup(sortLabelFor(sortKey));
+      button.classList.remove("active");
+    } else {
+      button.classList.toggle("active", activeSet.has(key));
+    }
   });
 }
 
@@ -770,7 +793,12 @@ function labelsForStore(store, index, contextSlug = "default") {
 }
 
 function normalizeStore(store, index, contextSlug = "default") {
-  return { ...store, labels: labelsForStore(store, index, contextSlug) };
+  return {
+    ...store,
+    labels: labelsForStore(store, index, contextSlug),
+    orderCount: store.orderCount ?? 120 + ((index * 47) % 760),
+    likeCount: store.likeCount ?? 18 + ((index * 31) % 220),
+  };
 }
 
 function minuteValue(store) {
@@ -781,6 +809,19 @@ function minuteValue(store) {
 function ratingValue(store) {
   const match = String(store.rating || "").match(/\d+(?:\.\d+)?/);
   return match ? Number(match[0]) : 0;
+}
+
+function reviewCountValue(store) {
+  const match = String(store.rating || "").match(/\((\d+)\)/);
+  return match ? Number(match[1]) : 0;
+}
+
+function applySort(stores, sortKey = "default") {
+  if (sortKey === "order") return [...stores].sort((a, b) => (b.orderCount || 0) - (a.orderCount || 0));
+  if (sortKey === "rating") return [...stores].sort((a, b) => ratingValue(b) - ratingValue(a) || reviewCountValue(b) - reviewCountValue(a));
+  if (sortKey === "near") return [...stores].sort((a, b) => minuteValue(a) - minuteValue(b));
+  if (sortKey === "like") return [...stores].sort((a, b) => (b.likeCount || 0) - (a.likeCount || 0));
+  return stores;
 }
 
 function storeMatchesFilter(store, filterKey) {
@@ -801,19 +842,19 @@ function applyStoreFilter(stores, filterKey, contextSlug = "default") {
   return normalized.filter((store) => storeMatchesFilter(store, filterKey));
 }
 
-function applyStoreFilters(stores, filterKeys = ["sort"], contextSlug = "default") {
+function applyStoreFilters(stores, filterKeys = [], contextSlug = "default", sortKey = "default") {
   let results = stores.map((store, index) => normalizeStore(store, index, contextSlug));
   const active = filterKeys.filter((key) => key && key !== "sort");
   active.forEach((key) => {
     if (key === "price") {
-      results = [...results].sort((a, b) => minuteValue(a) - minuteValue(b));
+      results = results.filter((store) => minuteValue(store) <= 40);
     } else if (key === "rating") {
-      results = [...results].sort((a, b) => ratingValue(b) - ratingValue(a));
+      results = results.filter((store) => ratingValue(store) >= 4.8);
     } else {
       results = results.filter((store) => storeMatchesFilter(store, key));
     }
   });
-  return results;
+  return applySort(results, sortKey);
 }
 
 function renderStoreList(target, stores) {
@@ -830,23 +871,23 @@ function renderStoreList(target, stores) {
 }
 
 function updateResultStores() {
-  const { page, slug, filter, activeFilters = ["sort"] } = listViewState.result;
+  const { page, slug, filter, activeFilters = [], sortKey = "default" } = listViewState.result;
   if (!page) return;
   const resultScreen = document.querySelector('[data-screen="search-result"]');
-  setFilterStripState(resultScreen, filter, activeFilters);
-  renderStoreList(resultScreen.querySelector(".large-store-list"), applyStoreFilters(page.stores, activeFilters, slug));
+  setFilterStripState(resultScreen, filter, activeFilters, sortKey);
+  renderStoreList(resultScreen.querySelector(".large-store-list"), applyStoreFilters(page.stores, activeFilters, slug, sortKey));
 }
 
 function updatePortfolioStores() {
-  const { page, slug, filter, activeFilters = ["sort"] } = listViewState.portfolio;
+  const { page, slug, filter, activeFilters = [], sortKey = "default" } = listViewState.portfolio;
   if (!page) return;
   const portfolioScreen = document.querySelector('[data-screen="portfolio-search"]');
-  setFilterStripState(portfolioScreen, filter, activeFilters);
-  renderStoreList(portfolioScreen.querySelector("#portfolioStoreList"), applyStoreFilters(page.stores, activeFilters, slug));
+  setFilterStripState(portfolioScreen, filter, activeFilters, sortKey);
+  renderStoreList(portfolioScreen.querySelector("#portfolioStoreList"), applyStoreFilters(page.stores, activeFilters, slug, sortKey));
 }
 
 function updateBenefitStores() {
-  const { page, slug, filter } = listViewState.benefit;
+  const { page, slug, filter, sortKey = "default" } = listViewState.benefit;
   if (!page) return;
   const benefitScreen = document.querySelector('[data-screen="benefit-list"]');
   const recommendationSection = benefitScreen.querySelector("#benefitRecommendationSection");
@@ -854,9 +895,9 @@ function updateBenefitStores() {
   const note = benefitScreen.querySelector(".benefit-page-note");
   const filters = activeBenefitFilters();
   const shouldShowRecommendation = slug === "local" && filters.includes("coupon") && filters.includes("onnuri");
-  setFilterStripState(benefitScreen, filter, filters);
+  setFilterStripState(benefitScreen, filter, filters, sortKey);
   if (shouldShowRecommendation && page.filteredStores?.length) {
-    const selectedFilters = filters.map((key) => ({ sort: "추천순", coupon: "쿠폰 할인", onnuri: "온누리상품권", price: "가격 설정", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
+    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "쿠폰 할인", onnuri: "온누리상품권", price: "가격 설정", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
     renderStoreList(benefitScreen.querySelector("#benefitStoreList"), page.filteredStores.map((store, index) => normalizeStore(store, index, slug)));
     if (note) {
       note.classList.add("narrow-result-note");
@@ -885,7 +926,7 @@ function updateBenefitStores() {
     note.querySelector("strong").textContent = `${page.title} 혜택 가게`;
     note.querySelector("span").textContent = page.note;
   }
-  const filteredStores = applyStoreFilters(page.stores, filters, slug);
+  const filteredStores = applyStoreFilters(page.stores, filters, slug, sortKey);
   const hasNarrowLocalResult = slug === "local" && filteredStores.length <= 1 && filters.some((key) => key !== "sort");
   if (recommendationSection && recommendationList) {
     recommendationSection.hidden = !hasNarrowLocalResult;
@@ -894,7 +935,7 @@ function updateBenefitStores() {
       : "";
   }
   if (hasNarrowLocalResult && note) {
-    const selectedFilters = filters.map((key) => ({ sort: "추천순", coupon: "쿠폰 할인", onnuri: "온누리상품권", price: "가격 설정", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
+    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "쿠폰 할인", onnuri: "온누리상품권", price: "가격 설정", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
     note.classList.add("narrow-result-note");
     note.querySelector("strong").textContent = `조건에 맞는 가게가 ${filteredStores.length}곳 있어요`;
     note.querySelector("span").innerHTML = `${page.filteredNote || page.note}<br><em>${selectedFilters.join(" · ")}</em>`;
@@ -950,7 +991,7 @@ function getCategoryPage(label = "샐러드", slug = "salad") {
 function setResultContext(label = "샐러드", slug = "salad") {
   const page = getCategoryPage(label, slug);
   const resultScreen = document.querySelector('[data-screen="search-result"]');
-  listViewState.result = { page, label, slug, filter: "sort", activeFilters: [] };
+  listViewState.result = { page, label, slug, filter: "sort", activeFilters: [], sortKey: "default" };
   resultScreen.querySelector(".title-header h1").textContent = page.title;
   const filters = page.filters || commonFilterLabels;
   resultScreen.querySelector(".filter-strip").innerHTML = renderFilterButtons(filters);
@@ -964,7 +1005,7 @@ function setPortfolioContext(label = "쿠폰 할인") {
     return label.includes("쿠폰") ? haystack.includes("쿠폰") || haystack.includes("할인") : haystack.includes(label) || store.name.includes(label);
   });
   const page = { title: label, stores: storesForSearch.length ? storesForSearch : allGeneratedCategoryStores.slice(0, 24), filters: commonFilterLabels };
-  listViewState.portfolio = { page, label, slug: "search", filter: "sort", activeFilters: [] };
+  listViewState.portfolio = { page, label, slug: "search", filter: "sort", activeFilters: [], sortKey: "default" };
   document.querySelector(".portfolio-search-field span").textContent = label;
   updatePortfolioStores();
 }
@@ -972,7 +1013,7 @@ function setPortfolioContext(label = "쿠폰 할인") {
 function setBenefitContext(label = "쿠폰함", slug = "coupon") {
   const page = benefitPages[slug] || benefitPages.coupon;
   const benefitScreen = document.querySelector('[data-screen="benefit-list"]');
-  listViewState.benefit = { page, label, slug, filter: "sort", activeFilters: ["sort"] };
+  listViewState.benefit = { page, label, slug, filter: "sort", activeFilters: [], sortKey: "default" };
   benefitScreen.querySelector(".title-header h1").textContent = page.title;
   benefitScreen.querySelector(".tab-list").innerHTML = page.tabs.map((tab, index) => `<button class="${index === 0 ? "active" : ""}" type="button">${tab}</button>`).join("");
   const filters = page.filters || commonFilterLabels;
@@ -1003,6 +1044,42 @@ function toggleListFilter(state, filterKey) {
     state.activeFilters = Array.from(currentFilters);
   }
   state.filter = filterKey;
+}
+
+function sortContextForScreen(screen) {
+  if (screen?.dataset.screen === "portfolio-search") return { key: "portfolio", state: listViewState.portfolio, update: updatePortfolioStores };
+  if (screen?.dataset.screen === "benefit-list") return { key: "benefit", state: listViewState.benefit, update: updateBenefitStores };
+  return { key: "result", state: listViewState.result, update: updateResultStores };
+}
+
+function openSortSheet(screen) {
+  const context = sortContextForScreen(screen);
+  const sheet = document.querySelector('[data-overlay="sort-select"]');
+  if (!sheet) return;
+  sheet.dataset.sortContext = context.key;
+  sheet.querySelectorAll("[data-sort-option]").forEach((button) => {
+    button.classList.toggle("selected", button.dataset.sortOption === (context.state.sortKey || "default"));
+  });
+  openModal("sort-select");
+}
+
+function applySortSelection(sortKey) {
+  const overlay = document.querySelector('[data-overlay="sort-select"]');
+  const contextKey = overlay?.dataset.sortContext || "result";
+  const context = {
+    result: { state: listViewState.result, update: updateResultStores },
+    portfolio: { state: listViewState.portfolio, update: updatePortfolioStores },
+    benefit: { state: listViewState.benefit, update: updateBenefitStores },
+  }[contextKey];
+  if (!context) return;
+  context.state.sortKey = sortKey;
+  context.state.filter = "sort";
+  context.update();
+  trackUtEvent("sort_click", {
+    sort_name: sortLabelFor(sortKey),
+    button_label: sortLabelFor(sortKey),
+  });
+  overlay?.classList.remove("show");
 }
 
 function routeToBenefit(label, slug = "coupon") {
@@ -1220,6 +1297,12 @@ function bindInteractions() {
       return;
     }
 
+    const sortOption = event.target.closest("[data-sort-option]");
+    if (sortOption) {
+      applySortSelection(sortOption.dataset.sortOption || "default");
+      return;
+    }
+
     const closeButton = event.target.closest("[data-close-modal]");
     if (closeButton) {
       closeButton.closest(".modal-layer")?.classList.remove("show");
@@ -1263,7 +1346,11 @@ function bindInteractions() {
       const activeScreen = filterButton.closest(".app-screen");
       const filterKey = filterButton.dataset.filter || getFilterKey(filterButton.textContent.trim());
       const filterName = cleanText(filterButton.textContent);
-      trackUtEvent(filterKey === "sort" ? "sort_click" : "filter_click", {
+      if (filterKey === "sort") {
+        openSortSheet(activeScreen);
+        return;
+      }
+      trackUtEvent("filter_click", {
         filter_name: filterName,
         button_label: filterName,
         category_name: activeScreen?.dataset.screen === "benefit-list" ? listViewState.benefit.label : activeScreen?.dataset.screen === "portfolio-search" ? listViewState.portfolio.label : listViewState.result.label,
