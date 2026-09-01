@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v28-chip-filter-refine";
+const CACHE_NAME = "baedal-prototype-v29-chicken-image-crops";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260901-chip-filter-refine",
-  "/script.js?v=20260901-chip-filter-refine",
-  "/asset-map.js?v=20260901-chip-filter-refine",
+  "/styles.css?v=20260901-chicken-image-crops",
+  "/script.js?v=20260901-chicken-image-crops",
+  "/asset-map.js?v=20260901-chicken-image-crops",
   "/manifest.json"
 ];
 
