@@ -159,7 +159,7 @@ const keywords = [
   { rank: 10, label: "아폴로 피자", trend: "up", delta: "1" },
 ];
 const recommendKeywords = ["저녁", "매운 음식", "쿠폰 할인", "엽기떡볶이", "건강식", "두바이 쫀득 쿠키", "베트남 음식"];
-const commonFilterLabels = ["기본순", "지역화폐", "온누리상품권", "가격 설정", "별점"];
+const commonFilterLabels = ["기본순", "지역화폐", "온누리상품권", "G드림카드", "할인쿠폰", "최소주문금액"];
 const sortOptions = [
   { key: "default", label: "기본순" },
   { key: "order", label: "주문 많은 순" },
@@ -463,7 +463,7 @@ const benefitPages = {
   local: {
     title: "지역화폐",
     tabs: ["지역화폐", "10% 할인", "수원페이"],
-    filters: ["기본순", "쿠폰 할인", "온누리상품권", "가격 설정", "별점"],
+    filters: commonFilterLabels,
     note: "지역화폐 결제와 추가 할인을 받을 수 있는 가게예요.",
     filteredNote: "선택한 혜택 조건에 맞는 가게를 먼저 보여드렸어요.",
     stores: [
@@ -806,7 +806,9 @@ function goBack() {
 function getFilterKey(label) {
   if (label.includes("지역화폐")) return "local";
   if (label.includes("온누리")) return "onnuri";
-  if (label.includes("쿠폰")) return "coupon";
+  if (label.includes("G드림")) return "gdream";
+  if (label.includes("할인쿠폰") || label.includes("쿠폰")) return "coupon";
+  if (label.includes("최소주문")) return "minOrder";
   if (label.includes("가격")) return "price";
   if (label.includes("별점")) return "rating";
   if (label.includes("빠른")) return "fast";
@@ -867,6 +869,15 @@ function reviewCountValue(store) {
   return match ? Number(match[1]) : 0;
 }
 
+function priceValue(value) {
+  const match = String(value || "").replace(/,/g, "").match(/\d+/);
+  return match ? Number(match[0]) : Number.POSITIVE_INFINITY;
+}
+
+function minOrderValue(store) {
+  return priceValue(store.minOrder);
+}
+
 function applySort(stores, sortKey = "default") {
   if (sortKey === "order") return [...stores].sort((a, b) => (b.orderCount || 0) - (a.orderCount || 0));
   if (sortKey === "rating") return [...stores].sort((a, b) => ratingValue(b) - ratingValue(a) || reviewCountValue(b) - reviewCountValue(a));
@@ -880,7 +891,9 @@ function storeMatchesFilter(store, filterKey) {
   const haystack = [store.name, store.discount, store.ribbon, ...(store.badges || []), ...labels].join(" ");
   if (filterKey === "local") return haystack.includes("지역화폐") || haystack.includes("수원페이");
   if (filterKey === "onnuri") return haystack.includes("온누리");
+  if (filterKey === "gdream") return haystack.includes("G드림");
   if (filterKey === "coupon") return store.couponLabel !== false || haystack.includes("쿠폰");
+  if (filterKey === "minOrder" || filterKey === "price") return minOrderValue(store) <= 15000 || haystack.includes("최소주문금액 낮음");
   if (filterKey === "fast") return minuteValue(store) <= 35;
   return true;
 }
@@ -888,7 +901,7 @@ function storeMatchesFilter(store, filterKey) {
 function applyStoreFilter(stores, filterKey, contextSlug = "default") {
   const normalized = stores.map((store, index) => normalizeStore(store, index, contextSlug));
   if (filterKey === "sort") return normalized;
-  if (filterKey === "price") return [...normalized].sort((a, b) => minuteValue(a) - minuteValue(b));
+  if (filterKey === "price" || filterKey === "minOrder") return [...normalized].sort((a, b) => minOrderValue(a) - minOrderValue(b));
   if (filterKey === "rating") return [...normalized].sort((a, b) => ratingValue(b) - ratingValue(a));
   return normalized.filter((store) => storeMatchesFilter(store, filterKey));
 }
@@ -897,8 +910,8 @@ function applyStoreFilters(stores, filterKeys = [], contextSlug = "default", sor
   let results = stores.map((store, index) => normalizeStore(store, index, contextSlug));
   const active = filterKeys.filter((key) => key && key !== "sort");
   active.forEach((key) => {
-    if (key === "price") {
-      results = results.filter((store) => minuteValue(store) <= 40);
+    if (key === "price" || key === "minOrder") {
+      results = results.filter((store) => storeMatchesFilter(store, "minOrder"));
     } else if (key === "rating") {
       results = results.filter((store) => ratingValue(store) >= 4.8);
     } else {
@@ -948,7 +961,7 @@ function updateBenefitStores() {
   const shouldShowRecommendation = slug === "local" && filters.includes("coupon") && filters.includes("onnuri");
   setFilterStripState(benefitScreen, filter, filters, sortKey);
   if (shouldShowRecommendation && page.filteredStores?.length) {
-    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "쿠폰 할인", onnuri: "온누리상품권", price: "가격 설정", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
+    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "할인쿠폰", onnuri: "온누리상품권", gdream: "G드림카드", minOrder: "최소주문금액", price: "최소주문금액", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
     renderStoreList(benefitScreen.querySelector("#benefitStoreList"), page.filteredStores.map((store, index) => normalizeStore(store, index, slug)));
     if (note) {
       note.classList.add("narrow-result-note");
@@ -986,7 +999,7 @@ function updateBenefitStores() {
       : "";
   }
   if (hasNarrowLocalResult && note) {
-    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "쿠폰 할인", onnuri: "온누리상품권", price: "가격 설정", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
+    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "할인쿠폰", onnuri: "온누리상품권", gdream: "G드림카드", minOrder: "최소주문금액", price: "최소주문금액", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
     note.classList.add("narrow-result-note");
     note.querySelector("strong").textContent = `조건에 맞는 가게가 ${filteredStores.length}곳 있어요`;
     note.querySelector("span").innerHTML = `${page.filteredNote || page.note}<br><em>${selectedFilters.join(" · ")}</em>`;
@@ -1082,7 +1095,12 @@ function routeToSearchResult(label, slug) {
 }
 
 function renderFilterButtons(filters = commonFilterLabels) {
-  return filters.map((filterLabel, index) => `<button type="button">${filterLabel}${index === 0 || filterLabel === "별점" ? ' <img src="./icons/20/chevron-down.svg" alt="" />' : ""}</button>`).join("");
+  return filters
+    .map((filterLabel, index) => {
+      const hasChevron = index === 0 || filterLabel === "최소주문금액" || filterLabel === "별점";
+      return `<button type="button">${filterLabel}${hasChevron ? ' <img src="./icons/20/chevron-down.svg" alt="" />' : ""}</button>`;
+    })
+    .join("");
 }
 
 function toggleListFilter(state, filterKey) {

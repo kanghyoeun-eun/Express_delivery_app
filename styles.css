@@ -5862,3 +5862,78 @@ img {
   background: url("./icons/24/check/default-line.svg") center / 24px 24px no-repeat;
   content: "";
 }
+
+
+/* 20260901 Figma chip refinement */
+.filter-strip,
+.favorite-filter-strip,
+.order-filter-strip {
+  gap: 8px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #e7e6e3;
+  background: #fff;
+}
+
+.filter-strip button,
+.favorite-filter-strip button,
+.order-filter-strip button {
+  height: 36px;
+  padding: 0 12px;
+  border-color: #e7e6e3;
+  background: #fff;
+  color: #2a2924;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.filter-strip button:first-child,
+.filter-strip button:has(img),
+.favorite-filter-strip button:has(img),
+.order-filter-strip button:has(img) {
+  padding-right: 10px;
+}
+
+.filter-strip img,
+.favorite-filter-strip img,
+.order-filter-strip img {
+  width: 20px;
+  height: 20px;
+  filter: none;
+}
+
+.filter-strip button.active,
+.portfolio-filter-strip button.active,
+.favorite-filter-strip .active,
+.order-filter-strip .active,
+.app-screen[data-screen="benefit-list"] .filter-strip button.active,
+.app-screen[data-screen="benefit-list"] .filter-strip button:first-child.active {
+  border-color: #2a2924;
+  background: #2a2924;
+  color: #fff;
+  font-weight: 500;
+}
+
+.filter-strip button.active img,
+.portfolio-filter-strip button.active img,
+.favorite-filter-strip .active img,
+.order-filter-strip .active img,
+.app-screen[data-screen="benefit-list"] .filter-strip button.active img {
+  filter: invert(1);
+}
+
+.app-screen[data-screen="benefit-list"] .filter-strip {
+  gap: 8px;
+  padding: 10px 20px;
+}
+
+.app-screen[data-screen="benefit-list"] .filter-strip button {
+  height: 36px;
+  padding: 0 12px;
+  border-color: #e7e6e3;
+  background: #fff;
+  color: #2a2924;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
