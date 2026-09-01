@@ -950,7 +950,7 @@ function getCategoryPage(label = "샐러드", slug = "salad") {
 function setResultContext(label = "샐러드", slug = "salad") {
   const page = getCategoryPage(label, slug);
   const resultScreen = document.querySelector('[data-screen="search-result"]');
-  listViewState.result = { page, label, slug, filter: "sort", activeFilters: ["sort"] };
+  listViewState.result = { page, label, slug, filter: "sort", activeFilters: [] };
   resultScreen.querySelector(".title-header h1").textContent = page.title;
   const filters = page.filters || commonFilterLabels;
   resultScreen.querySelector(".filter-strip").innerHTML = renderFilterButtons(filters);
@@ -964,7 +964,7 @@ function setPortfolioContext(label = "쿠폰 할인") {
     return label.includes("쿠폰") ? haystack.includes("쿠폰") || haystack.includes("할인") : haystack.includes(label) || store.name.includes(label);
   });
   const page = { title: label, stores: storesForSearch.length ? storesForSearch : allGeneratedCategoryStores.slice(0, 24), filters: commonFilterLabels };
-  listViewState.portfolio = { page, label, slug: "search", filter: "sort", activeFilters: ["sort"] };
+  listViewState.portfolio = { page, label, slug: "search", filter: "sort", activeFilters: [] };
   document.querySelector(".portfolio-search-field span").textContent = label;
   updatePortfolioStores();
 }
@@ -994,13 +994,12 @@ function renderFilterButtons(filters = commonFilterLabels) {
 }
 
 function toggleListFilter(state, filterKey) {
-  const currentFilters = new Set(state.activeFilters || ["sort"]);
+  const currentFilters = new Set(state.activeFilters || []);
   if (filterKey === "sort") {
-    state.activeFilters = ["sort"];
+    state.activeFilters = [];
   } else {
     if (currentFilters.has(filterKey)) currentFilters.delete(filterKey);
     else currentFilters.add(filterKey);
-    currentFilters.add("sort");
     state.activeFilters = Array.from(currentFilters);
   }
   state.filter = filterKey;
@@ -1407,8 +1406,8 @@ function bindInteractions() {
     if (event.key === "Enter") {
       const value = event.currentTarget.value.trim() || "샐러드";
       trackUtEvent("search_click", { button_label: "홈 검색 실행", search_keyword: value });
-      if (value.includes("쿠폰")) { setPortfolioContext(value); showScreen("portfolio-search"); }
-      else routeToSearchResult(value);
+      setPortfolioContext(value);
+      showScreen("portfolio-search");
     }
   });
   document.querySelector("#searchInput").addEventListener("click", (event) => {
@@ -1418,8 +1417,8 @@ function bindInteractions() {
     if (event.key === "Enter" && event.currentTarget.value.trim()) {
       const value = event.currentTarget.value.trim();
       trackUtEvent("search_click", { button_label: "검색 실행", search_keyword: value });
-      if (value.includes("쿠폰")) { setPortfolioContext(value); showScreen("portfolio-search"); }
-      else routeToSearchResult(value);
+      setPortfolioContext(value);
+      showScreen("portfolio-search");
     }
   });
 
