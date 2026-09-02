@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v32-figma-chicken-images";
+const CACHE_NAME = "baedal-prototype-v33-min-order-sheet";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260902-figma-chicken-images",
-  "/script.js?v=20260902-figma-chicken-images",
-  "/asset-map.js?v=20260902-figma-chicken-images",
+  "/styles.css?v=20260902-min-order-sheet",
+  "/script.js?v=20260902-min-order-sheet",
+  "/asset-map.js?v=20260902-min-order-sheet",
   "/manifest.json"
 ];
 

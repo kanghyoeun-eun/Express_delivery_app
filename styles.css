@@ -5937,3 +5937,70 @@ img {
   line-height: 20px;
   font-weight: 500;
 }
+
+
+/* 20260902 minimum order bottom sheet */
+.min-order-sheet {
+  max-height: 78vh;
+  padding: 18px 0 0;
+  border-radius: 28px 28px 0 0;
+}
+
+.min-order-title {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+}
+
+.min-order-title h2 {
+  color: #181814;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.min-order-option-list {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0 8px;
+}
+
+.min-order-option-list button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 66px;
+  padding: 0 28px;
+  color: #181814;
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.min-order-option-list button.selected {
+  font-weight: 700;
+}
+
+.min-order-option-list button.selected::after {
+  width: 26px;
+  height: 26px;
+  background: url("./icons/24/check/default-line.svg") center / 24px 24px no-repeat;
+  content: "";
+  flex: 0 0 26px;
+}
+
+.sheet-close-action {
+  width: 100%;
+  min-height: 72px;
+  border-top: 1px solid #e7e6e3;
+  color: #181814;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  text-align: center;
+}

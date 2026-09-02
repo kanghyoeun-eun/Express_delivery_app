@@ -10,7 +10,7 @@
     <title>배달특급 하이파이 프로토타입</title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260902-figma-chicken-images" />
+    <link rel="stylesheet" href="./styles.css?v=20260902-min-order-sheet" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -582,9 +582,24 @@
         </section>
       </div>
 
+      <div class="modal-layer" data-overlay="min-order-select">
+        <section class="bottom-sheet min-order-sheet">
+          <header class="sheet-title-bar min-order-title"><span></span><h2>최소주문금액</h2><span></span></header>
+          <div class="min-order-option-list">
+            <button type="button" data-min-order-option="all">전체</button>
+            <button type="button" data-min-order-option="5000">5,000원 이하</button>
+            <button type="button" data-min-order-option="10000">10,000원 이하</button>
+            <button type="button" data-min-order-option="12000">12,000원 이하</button>
+            <button type="button" data-min-order-option="15000">15,000원 이하</button>
+            <button type="button" data-min-order-option="20000">20,000원 이하</button>
+          </div>
+          <button class="sheet-close-action" type="button" data-close-modal>닫기</button>
+        </section>
+      </div>
+
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
-    <script src="./asset-map.js?v=20260902-figma-chicken-images"></script>
-    <script src="./script.js?v=20260902-figma-chicken-images"></script>
+    <script src="./asset-map.js?v=20260902-min-order-sheet"></script>
+    <script src="./script.js?v=20260902-min-order-sheet"></script>
   </body>
 </html>
