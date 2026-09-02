@@ -10,7 +10,7 @@
     <title>배달특급 하이파이 프로토타입</title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260902-min-order-sheet" />
+    <link rel="stylesheet" href="./styles.css?v=20260902-min-order-detail" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -279,7 +279,7 @@
             <div class="delivery-card">
               <div class="delivery-tabs"><button class="active" type="button">배달 25~30분</button><button type="button">포장 20분</button></div>
               <dl>
-                <div><dt>최소주문</dt><dd>15,000원</dd></div>
+                <div><dt>최소주문</dt><dd id="storeMinOrder">15,000원</dd></div>
                 <div><dt>현주소 배달비</dt><dd>3000원 <button type="button">자세히</button></dd></div>
               </dl>
             </div>
@@ -587,7 +587,6 @@
           <header class="sheet-title-bar min-order-title"><span></span><h2>최소주문금액</h2><span></span></header>
           <div class="min-order-option-list">
             <button type="button" data-min-order-option="all">전체</button>
-            <button type="button" data-min-order-option="5000">5,000원 이하</button>
             <button type="button" data-min-order-option="10000">10,000원 이하</button>
             <button type="button" data-min-order-option="12000">12,000원 이하</button>
             <button type="button" data-min-order-option="15000">15,000원 이하</button>
@@ -599,7 +598,7 @@
 
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
-    <script src="./asset-map.js?v=20260902-min-order-sheet"></script>
-    <script src="./script.js?v=20260902-min-order-sheet"></script>
+    <script src="./asset-map.js?v=20260902-min-order-detail"></script>
+    <script src="./script.js?v=20260902-min-order-detail"></script>
   </body>
 </html>

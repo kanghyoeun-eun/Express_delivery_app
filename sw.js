@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v33-min-order-sheet";
+const CACHE_NAME = "baedal-prototype-v34-min-order-detail";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260902-min-order-sheet",
-  "/script.js?v=20260902-min-order-sheet",
-  "/asset-map.js?v=20260902-min-order-sheet",
+  "/styles.css?v=20260902-min-order-detail",
+  "/script.js?v=20260902-min-order-detail",
+  "/asset-map.js?v=20260902-min-order-detail",
   "/manifest.json"
 ];
 
