@@ -1,10 +1,10 @@
-const CACHE_NAME = "baedal-prototype-v30-clean-chicken-images";
+const CACHE_NAME = "baedal-prototype-v31-generated-chicken-images";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260901-clean-chicken-images",
-  "/script.js?v=20260901-clean-chicken-images",
-  "/asset-map.js?v=20260901-clean-chicken-images",
+  "/styles.css?v=20260902-generated-chicken-images",
+  "/script.js?v=20260902-generated-chicken-images",
+  "/asset-map.js?v=20260902-generated-chicken-images",
   "/manifest.json"
 ];
 
