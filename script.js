@@ -589,6 +589,7 @@ const famous = [
 const toast = document.querySelector(".prototype-toast");
 let toastTimer;
 const historyStack = ["home"];
+let suppressBrowserHistoryPush = false;
 let currentStore = null;
 let currentMenu = null;
 
@@ -714,7 +715,7 @@ function renderMenuList(slug) {
         <p>${item.desc || ""}</p>
         <small><img src="./icons/14/chat-circle-dots.svg" alt="" /> 리뷰 89</small>
       </div>
-      <img src="${imageRoot}${item.image}" alt="" />
+      <img src="${imageRoot}${item.image}" alt="" loading="lazy" decoding="async" />
     </button>
   `).join("");
 }
@@ -759,7 +760,11 @@ function showScreen(screenName, push = true) {
   document.querySelectorAll(".app-screen").forEach((screen) => screen.classList.toggle("active", screen === target));
   document.querySelectorAll(".modal-layer").forEach((modal) => modal.classList.remove("show"));
   target.querySelector(".scroll-area")?.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  if (push && historyStack[historyStack.length - 1] !== screenName) historyStack.push(screenName);
+  const shouldPushInternalHistory = push && historyStack[historyStack.length - 1] !== screenName;
+  if (shouldPushInternalHistory) historyStack.push(screenName);
+  if (shouldPushInternalHistory && !suppressBrowserHistoryPush && window.history?.pushState) {
+    window.history.pushState({ screen: screenName }, "", window.location.href);
+  }
   syncBottomNav(screenName);
 
   if (push) {
@@ -808,10 +813,27 @@ function resetActiveScroll() {
 function goBack() {
   if (historyStack.length <= 1) {
     showScreen("home", false);
+    if (window.history?.replaceState) window.history.replaceState({ screen: "home" }, "", window.location.href);
+    return;
+  }
+  if (window.history?.back) {
+    window.history.back();
     return;
   }
   historyStack.pop();
   showScreen(historyStack[historyStack.length - 1], false);
+}
+
+function handleBrowserBackGesture() {
+  if (historyStack.length > 1) {
+    historyStack.pop();
+    suppressBrowserHistoryPush = true;
+    showScreen(historyStack[historyStack.length - 1], false);
+    suppressBrowserHistoryPush = false;
+    return;
+  }
+  showScreen("home", false);
+  if (window.history?.pushState) window.history.pushState({ screen: "home" }, "", window.location.href);
 }
 
 function getFilterKey(label) {
@@ -1094,6 +1116,47 @@ function setResultContext(label = "샐러드", slug = "salad") {
   updateResultStores();
 }
 
+function searchTargetForKeyword(value = "") {
+  const keyword = value.trim();
+  const exactCategory = categories.find(([label, , , slug]) => keyword === label || keyword.includes(label));
+  if (exactCategory) return { type: "category", label: exactCategory[0], slug: exactCategory[3] };
+  if (keyword.includes("쿠폰") || keyword.includes("할인") || keyword.includes("특가") || keyword.includes("저렴")) {
+    return { type: "portfolio", label: keyword || "쿠폰 할인" };
+  }
+  return { type: "category", label: "치킨", slug: "chicken" };
+}
+
+function routeFromSearchKeyword(value) {
+  const target = searchTargetForKeyword(value);
+  if (target.type === "category") {
+    routeToSearchResult(target.label, target.slug);
+  } else {
+    setPortfolioContext(target.label);
+    showScreen("portfolio-search");
+  }
+}
+
+function applyRelatedSearch(keyword, filterKey = "coupon", minOrder = null) {
+  setPortfolioContext(keyword || "쿠폰 할인");
+  const nextFilters = new Set(listViewState.portfolio.activeFilters || []);
+  if (filterKey === "minOrder") {
+    nextFilters.add("minOrder");
+    listViewState.portfolio.minOrderLimit = Number(minOrder) || 12000;
+  } else if (filterKey) {
+    nextFilters.add(filterKey);
+  }
+  listViewState.portfolio.activeFilters = Array.from(nextFilters);
+  listViewState.portfolio.filter = filterKey || "sort";
+  updatePortfolioStores();
+  trackUtEvent("search_related_click", {
+    search_keyword: keyword,
+    filter_name: keyword,
+    filter_type: filterKey,
+    target_screen: "portfolio-search",
+  });
+  showScreen("portfolio-search");
+}
+
 function setPortfolioContext(label = "쿠폰 할인") {
   const storesForSearch = allGeneratedCategoryStores.filter((store) => {
     const haystack = [store.name, store.discount, store.ribbon, ...(store.labels || [])].join(" ");
@@ -1290,7 +1353,7 @@ function smallStoreCard(store) {
   const slug = getStoreSlug(store);
   return `
     <button class="store-card" type="button" data-target="store" data-store-slug="${slug}">
-      <img src="${imageRoot}${store.image}" alt="" />
+      <img src="${imageRoot}${store.image}" alt="" loading="lazy" decoding="async" />
       <div>
         <h3>${store.name} <span><img src="./icons/14/star.svg" alt="" /> ${store.rating}</span></h3>
         <p><img src="./icons/14/clock.svg" alt="" /> ${store.time} · ${store.discount}</p>
@@ -1344,7 +1407,7 @@ function largeStoreCard(store) {
     <button class="large-store-card" type="button" data-target="store" data-store-slug="${slug}">
       <span class="large-store-media">
         <span class="${ribbonText ? "ribbon" : "ribbon hidden"}">${ribbonText}</span>
-        <img src="${imageRoot}${store.image}" alt="" />
+        <img src="${imageRoot}${store.image}" alt="" loading="lazy" decoding="async" />
       </span>
       <div class="large-store-copy">
         ${renderStoreBadges(store)}
@@ -1374,7 +1437,7 @@ function renderHotMenus() {
         const slug = getStoreSlug(item);
         return `
           <button class="hot-card" type="button" data-target="store" data-store-slug="${slug}">
-            <img src="${imageRoot}${item.image}" alt="" />
+            <img src="${imageRoot}${item.image}" alt="" loading="lazy" decoding="async" />
             <h3>${item.name} <span><img src="./icons/14/star.svg" alt="" /> ${item.rating}</span></h3>
             <p><img src="./icons/14/clock.svg" alt="" /> ${item.detail}</p>
             <div class="tags"><span class="pay">수원페이</span><span class="coupon">1000원 쿠폰</span></div>
@@ -1402,7 +1465,7 @@ function renderFamous() {
         <button class="famous-card" type="button" data-target="search-result" data-label="${item.name}">
           <div class="rank-pill"><img src="./${item.badge}" alt="" />${item.rank}</div>
           <div class="famous-art" style="background:${item.bg}">
-            <img src="${imageRoot}${item.image}" alt="" />
+            <img src="${imageRoot}${item.image}" alt="" loading="lazy" decoding="async" />
           </div>
           <h3>${item.name}</h3>
           <p>${item.desc}</p>
@@ -1669,8 +1732,7 @@ function bindInteractions() {
     if (event.key === "Enter") {
       const value = event.currentTarget.value.trim() || "샐러드";
       trackUtEvent("search_click", { button_label: "홈 검색 실행", search_keyword: value });
-      setPortfolioContext(value);
-      showScreen("portfolio-search");
+      routeFromSearchKeyword(value);
     }
   });
   document.querySelector("#searchInput").addEventListener("click", (event) => {
@@ -1680,8 +1742,7 @@ function bindInteractions() {
     if (event.key === "Enter" && event.currentTarget.value.trim()) {
       const value = event.currentTarget.value.trim();
       trackUtEvent("search_click", { button_label: "검색 실행", search_keyword: value });
-      setPortfolioContext(value);
-      showScreen("portfolio-search");
+      routeFromSearchKeyword(value);
     }
   });
 
@@ -1721,6 +1782,16 @@ function bindInteractions() {
     trackUtEvent("category_click", benefitCategoryPayload);
     trackUtEvent("click_benefit_category", benefitCategoryPayload);
     routeToBenefit(item.dataset.label, item.dataset.slug);
+  });
+
+  document.querySelector(".portfolio-keyword-track")?.addEventListener("click", (event) => {
+    const keywordButton = event.target.closest("button");
+    if (!keywordButton) return;
+    applyRelatedSearch(
+      keywordButton.dataset.relatedKeyword || buttonLabel(keywordButton),
+      keywordButton.dataset.relatedFilter || "coupon",
+      keywordButton.dataset.minOrder || null
+    );
   });
 
   document.querySelector("#eventTrack").addEventListener("click", (event) => {
@@ -1772,6 +1843,8 @@ const defaultStore = saladResults[0] || { name: "샐러디 성대점", image: "s
 currentStore = defaultStore;
 renderStoreDetail(defaultStore);
 bindInteractions();
+if (window.history?.replaceState) window.history.replaceState({ screen: "home" }, "", window.location.href);
+window.addEventListener("popstate", handleBrowserBackGesture);
 showScreen("home", false);
 trackUtEvent("view_home");
 

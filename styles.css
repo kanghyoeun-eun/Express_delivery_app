@@ -6004,3 +6004,32 @@ img {
   font-weight: 700;
   text-align: center;
 }
+
+
+/* 20260902 UT feedback fixes */
+.sort-option-list button,
+.min-order-option-list button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.sort-option-list button:focus-visible,
+.min-order-option-list button:focus-visible {
+  outline: 2px solid #ffc20d;
+  outline-offset: -2px;
+}
+
+.sort-option-list button.selected,
+.min-order-option-list button.selected {
+  background: transparent;
+}
+
+.portfolio-keyword-track button {
+  cursor: pointer;
+}
+
+.large-store-card img {
+  content-visibility: auto;
+}

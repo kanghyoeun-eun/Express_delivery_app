@@ -8,9 +8,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="배달특급" />
     <title>배달특급 하이파이 프로토타입</title>
-    <link rel="manifest" href="./manifest.json" />
+    <link rel="manifest" href="./manifest.json?v=20260902-ut-feedback-fixes" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260902-min-order-detail" />
+    <link rel="stylesheet" href="./styles.css?v=20260902-ut-feedback-fixes" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -229,7 +229,7 @@
           <span class="portfolio-related-label">관련 검색어</span>
           <div class="portfolio-keyword-viewport">
             <div class="portfolio-keyword-track">
-              <button type="button">쿠폰 최대 할인</button><button type="button">오늘 특가</button><button type="button">저렴한 저녁</button><button type="button">정부 지원금</button>
+              <button type="button" data-related-keyword="쿠폰 최대 할인" data-related-filter="coupon">쿠폰 최대 할인</button><button type="button" data-related-keyword="오늘 특가" data-related-filter="coupon">오늘 특가</button><button type="button" data-related-keyword="저렴한 저녁" data-related-filter="minOrder" data-min-order="12000">저렴한 저녁</button><button type="button" data-related-keyword="정부 지원금" data-related-filter="gdream">정부 지원금</button>
             </div>
           </div>
         </section>
@@ -598,7 +598,7 @@
 
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
-    <script src="./asset-map.js?v=20260902-min-order-detail"></script>
-    <script src="./script.js?v=20260902-min-order-detail"></script>
+    <script src="./asset-map.js?v=20260902-ut-feedback-fixes"></script>
+    <script src="./script.js?v=20260902-ut-feedback-fixes"></script>
   </body>
 </html>

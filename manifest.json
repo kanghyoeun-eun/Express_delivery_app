@@ -2,9 +2,11 @@
   "name": "배달특급",
   "short_name": "배달특급",
   "description": "배달특급 모바일 하이파이 프로토타입",
-  "start_url": "/",
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "background_color": "#ffffff",
   "theme_color": "#ffc20d",
   "icons": [

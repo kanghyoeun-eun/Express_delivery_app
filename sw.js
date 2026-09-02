@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v34-min-order-detail";
+const CACHE_NAME = "baedal-prototype-v35-ut-feedback-fixes";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260902-min-order-detail",
-  "/script.js?v=20260902-min-order-detail",
-  "/asset-map.js?v=20260902-min-order-detail",
-  "/manifest.json"
+  "/styles.css?v=20260902-ut-feedback-fixes",
+  "/script.js?v=20260902-ut-feedback-fixes",
+  "/asset-map.js?v=20260902-ut-feedback-fixes",
+  "/manifest.json?v=20260902-ut-feedback-fixes"
 ];
 
 function shouldUseNetworkFirst(request) {
