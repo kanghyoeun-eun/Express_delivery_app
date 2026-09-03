@@ -6033,3 +6033,22 @@ img {
 .large-store-card img {
   content-visibility: auto;
 }
+
+/* 20260903 visible applied filter state */
+.filter-strip button.active,
+.portfolio-filter-strip button.active,
+.app-screen[data-screen="benefit-list"] .filter-strip button.active,
+.app-screen[data-screen="search-result"] .filter-strip button.active,
+.app-screen[data-screen="portfolio-search"] .filter-strip button.active {
+  border-color: #2a2924;
+  background: #2a2924;
+  color: #fff;
+}
+
+.filter-strip button.active img,
+.portfolio-filter-strip button.active img,
+.app-screen[data-screen="benefit-list"] .filter-strip button.active img,
+.app-screen[data-screen="search-result"] .filter-strip button.active img,
+.app-screen[data-screen="portfolio-search"] .filter-strip button.active img {
+  filter: invert(1);
+}

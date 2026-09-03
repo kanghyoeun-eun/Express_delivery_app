@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v35-ut-feedback-fixes";
+const CACHE_NAME = "baedal-prototype-v36-filter-active-state";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260902-ut-feedback-fixes",
-  "/script.js?v=20260902-ut-feedback-fixes",
-  "/asset-map.js?v=20260902-ut-feedback-fixes",
-  "/manifest.json?v=20260902-ut-feedback-fixes"
+  "/styles.css?v=20260903-filter-active-state",
+  "/script.js?v=20260903-filter-active-state",
+  "/asset-map.js?v=20260903-filter-active-state",
+  "/manifest.json?v=20260903-filter-active-state"
 ];
 
 function shouldUseNetworkFirst(request) {
