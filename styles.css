@@ -5857,10 +5857,13 @@ img {
 }
 
 .sort-option-list button.selected::after {
-  width: 24px;
-  height: 24px;
-  background: url("./icons/24/check/default-line.svg") center / 24px 24px no-repeat;
-  content: "";
+  width: 28px;
+  color: #181814;
+  font-size: 28px;
+  line-height: 28px;
+  font-weight: 700;
+  text-align: center;
+  content: "✓";
 }
 
 
@@ -5987,11 +5990,14 @@ img {
 }
 
 .min-order-option-list button.selected::after {
-  width: 26px;
-  height: 26px;
-  background: url("./icons/24/check/default-line.svg") center / 24px 24px no-repeat;
-  content: "";
-  flex: 0 0 26px;
+  width: 28px;
+  color: #181814;
+  font-size: 28px;
+  line-height: 28px;
+  font-weight: 700;
+  text-align: center;
+  content: "✓";
+  flex: 0 0 28px;
 }
 
 .sheet-close-action {

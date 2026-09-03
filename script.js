@@ -1224,7 +1224,9 @@ function openSortSheet(screen) {
   if (!sheet) return;
   sheet.dataset.sortContext = context.key;
   sheet.querySelectorAll("[data-sort-option]").forEach((button) => {
-    button.classList.toggle("selected", button.dataset.sortOption === (context.state.sortKey || "default"));
+    const isSelected = button.dataset.sortOption === (context.state.sortKey || "default");
+    button.classList.toggle("selected", isSelected);
+    button.setAttribute("aria-checked", isSelected ? "true" : "false");
   });
   openModal("sort-select");
 }
@@ -1256,7 +1258,9 @@ function openMinOrderSheet(screen) {
   const selectedValue = context.state.minOrderLimit ?? null;
   sheet.querySelectorAll("[data-min-order-option]").forEach((button) => {
     const option = minOrderOptions.find((item) => item.key === button.dataset.minOrderOption) || minOrderOptions[0];
-    button.classList.toggle("selected", option.value === selectedValue);
+    const isSelected = option.value === selectedValue;
+    button.classList.toggle("selected", isSelected);
+    button.setAttribute("aria-checked", isSelected ? "true" : "false");
   });
   openModal("min-order-select");
 }
