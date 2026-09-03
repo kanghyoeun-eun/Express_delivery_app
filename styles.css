@@ -1659,11 +1659,26 @@ img {
 }
 
 .store-badges .onnuri {
-  background: #fff2b8;
-  color: #8f6500;
+  background: #ffdcbb;
+  color: #d85700;
 }
 
 .store-badges .gdream {
+  background: #baf1e0;
+  color: #008b60;
+}
+
+.store-badges .benefit-label {
+  background: #dfefff;
+  color: #355371;
+}
+
+.store-badges .onnuri-coupon {
+  background: #ffdcbb;
+  color: #d85700;
+}
+
+.store-badges .gdream-label {
   background: #baf1e0;
   color: #008b60;
 }
@@ -2430,6 +2445,12 @@ img {
 
 .option-row.radio::before {
   background-image: url("./icons/24/radio/default.svg");
+}
+
+.option-row.radio.selected::before {
+  background: radial-gradient(circle at center, var(--primary) 0 6px, transparent 7px), #fff;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
 }
 
 .option-row span,

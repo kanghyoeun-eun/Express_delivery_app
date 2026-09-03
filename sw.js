@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v40-dynamic-chicken-order";
+const CACHE_NAME = "baedal-prototype-v41-detail-label-option-fix";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260903-dynamic-chicken-order",
-  "/script.js?v=20260903-dynamic-chicken-order",
-  "/asset-map.js?v=20260903-dynamic-chicken-order",
-  "/manifest.json?v=20260903-dynamic-chicken-order"
+  "/styles.css?v=20260903-detail-label-option-fix",
+  "/script.js?v=20260903-detail-label-option-fix",
+  "/asset-map.js?v=20260903-detail-label-option-fix",
+  "/manifest.json?v=20260903-detail-label-option-fix"
 ];
 
 function shouldUseNetworkFirst(request) {

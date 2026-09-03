@@ -866,7 +866,7 @@ function renderStoreDetail(store) {
   if (minOrder) minOrder.textContent = detailStore.minOrder;
   if (deliveryFee) deliveryFee.innerHTML = `${detailStore.deliveryFee || "배달비 0원"} <button type="button">자세히</button>`;
   if (rating) rating.innerHTML = `<img src="./icons/14/star.svg" alt="" /> <strong>${ratingValue(detailStore)}</strong> (후기 ${reviewCountValue(detailStore)}개) <img src="./icons/16/chevron-right.svg" alt="" />`;
-  if (badgeBox) badgeBox.innerHTML = renderStoreLabels(detailStore) || '<span class="pay">수원페이</span>';
+  if (badgeBox) badgeBox.innerHTML = renderStoreDetailLabels(detailStore) || '<span class="pay">수원페이</span>';
   if (discount) discount.innerHTML = `<img src="./icons/24/thunder.svg" alt="" /> ${detailStore.ribbon || detailStore.discount || "배달특급 혜택을 확인할 수 있어요"}`;
   if (menuTabs) {
     menuTabs.innerHTML = isChickenStore(detailStore, getStoreSlug(store))
@@ -1592,6 +1592,17 @@ function renderStoreLabels(store) {
       if (label.includes("온누리")) return `<span class="onnuri-coupon">온누리 쿠폰</span>`;
       if (label.includes("G드림")) return `<span class="gdream-label">${label}</span>`;
       return `<span class="benefit-label">${label}</span>`;
+    })
+    .join("");
+}
+
+function renderStoreDetailLabels(store) {
+  return (store.labels || [])
+    .map((label) => {
+      if (label.includes("온누리")) return `<span class="onnuri">온누리 상품권</span>`;
+      if (label.includes("G드림")) return `<span class="gdream">G드림카드</span>`;
+      if (label.includes("수원페이") || label.includes("지역화폐")) return `<span class="pay">수원페이</span>`;
+      return `<span class="pay">${label}</span>`;
     })
     .join("");
 }
