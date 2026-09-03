@@ -611,10 +611,81 @@ function findStoreBySlug(slug) {
 function defaultMenusForStore(store) {
   const img = store.image || "stores/store-food-card-01/thumb.png";
   return [
-    { name: store.name + " 대표", price: "9,900원", image: img, badge: "인기 1위" },
-    { name: store.name + " 세트", price: "12,500원", image: img, badge: "인기 2위" },
-    { name: store.name + " 스페셜", price: "15,000원", image: img },
+    { name: store.name + " 대표", price: "9,900원", image: img, badge: "인기 1위", desc: `${store.name}에서 가장 많이 주문되는 대표 메뉴예요.` },
+    { name: store.name + " 세트", price: "12,500원", image: img, badge: "인기 2위", desc: "메인 메뉴와 사이드를 함께 담은 든든한 세트예요." },
+    { name: store.name + " 스페셜", price: "15,000원", image: img, desc: "오늘 저녁 메뉴로 고르기 좋은 스페셜 메뉴예요." },
   ];
+}
+
+const chickenStoreNamePattern = /치킨|통닭|닭|BHC|KFC|BBQ|푸라닭|지코바|멕시카나|60계|파파이스|또래오래|굽네|교촌|강정|후라이드/i;
+const chickenMenuPools = [
+  [
+    { name: "후라이드 치킨", price: "18,000원", badge: "인기 1위", desc: "바삭하게 튀긴 기본 후라이드에 소금과 치킨무를 함께 드려요.", flavor: "후라이드", side: "치킨무" },
+    { name: "양념 반 후라이드 반", price: "19,000원", badge: "인기 2위", desc: "매콤달콤 양념과 고소한 후라이드를 한 번에 먹는 반반 메뉴예요.", flavor: "반반", side: "치킨무" },
+    { name: "순살 치킨 세트", price: "20,000원", desc: "먹기 편한 순살 치킨에 감자튀김과 콜라를 더한 세트예요.", flavor: "순살", side: "감자튀김" },
+  ],
+  [
+    { name: "숯불양념치킨", price: "19,500원", badge: "인기 1위", desc: "불향이 살아있는 매콤한 양념 치킨으로 밥이랑도 잘 어울려요.", flavor: "숯불양념", side: "치킨무" },
+    { name: "간장마늘치킨", price: "18,500원", badge: "인기 2위", desc: "짭조름한 간장 소스와 마늘 향을 입힌 단짠 치킨이에요.", flavor: "간장마늘", side: "치킨무" },
+    { name: "닭강정 박스", price: "17,000원", desc: "한입 크기 닭강정에 달콤한 소스를 넉넉히 버무렸어요.", flavor: "달콤강정", side: "떡사리" },
+  ],
+  [
+    { name: "크리스피 윙봉", price: "18,900원", badge: "인기 1위", desc: "윙과 봉만 골라 담아 바삭한 식감을 더 잘 느낄 수 있어요.", flavor: "크리스피", side: "치킨무" },
+    { name: "매운양념 순살", price: "19,900원", badge: "매콤 인기", desc: "매운맛을 좋아하는 사용자를 위한 순살 양념 치킨이에요.", flavor: "매운양념", side: "치즈볼" },
+    { name: "치즈시즈닝 치킨", price: "18,500원", desc: "고소한 치즈 시즈닝을 듬뿍 뿌린 인기 메뉴예요.", flavor: "치즈시즈닝", side: "치킨무" },
+  ],
+  [
+    { name: "로스트 오븐치킨", price: "17,900원", badge: "담백 인기", desc: "기름기는 줄이고 담백한 맛을 살린 오븐구이 치킨이에요.", flavor: "오븐구이", side: "샐러드" },
+    { name: "블랙알리오 치킨", price: "20,900원", badge: "인기 1위", desc: "진한 마늘 간장 소스가 올라간 프리미엄 치킨이에요.", flavor: "블랙알리오", side: "치킨무" },
+    { name: "고추마요 순살", price: "19,900원", desc: "부드러운 마요 소스에 알싸한 고추 향을 더한 순살 메뉴예요.", flavor: "고추마요", side: "콜라" },
+  ],
+];
+
+function slugNumber(slug = "") {
+  const match = String(slug).match(/(\d+)$/);
+  return match ? Number(match[1]) : 1;
+}
+
+function isChickenStore(store, slug = "") {
+  return String(slug).startsWith("chicken-suwon") || chickenStoreNamePattern.test(store?.name || "");
+}
+
+function menuOptionGroups(menu) {
+  const flavor = menu.flavor || "후라이드";
+  const side = menu.side || "치킨무";
+  return [
+    { title: "조리 선택", note: "1개 선택", options: [["뼈", "0원", true], ["순살 변경", "+1,000원", false], ["윙봉 변경", "+2,000원", false]], radio: true },
+    { title: "맛 선택", note: "1개 선택", options: [[flavor, "0원", true], ["양념 소스 추가", "+1,000원", false], ["매운맛 변경", "0원", false]], radio: true },
+    { title: "사이드 추가", note: "여러 개 선택 가능", options: [[side, "0원", true], ["치즈볼 5개", "+4,000원", false], ["콜라 500ml", "+2,000원", false]], radio: false },
+  ];
+}
+
+function cartOptionLines(menu) {
+  const groups = menu.optionGroups || menuOptionGroups(menu);
+  return [
+    `가격 : ${menu.price}`,
+    ...groups.map((group) => {
+      const selected = group.options.find((option) => option[2]) || group.options[0];
+      return `${group.title} : ${selected[0]}${selected[1] && selected[1] !== "0원" ? ` (${selected[1]})` : ""}`;
+    }),
+  ];
+}
+
+function buildChickenMenus(store, slug) {
+  const img = store.image || "stores/chicken-suwon/01-bhc.png";
+  const pool = chickenMenuPools[(slugNumber(slug) - 1) % chickenMenuPools.length];
+  return pool.map((item) => ({
+    ...item,
+    image: img,
+    optionGroups: menuOptionGroups(item),
+  }));
+}
+
+function menusForStoreSlug(slug) {
+  const store = findStoreBySlug(slug);
+  if (storeMenus[slug]) return storeMenus[slug];
+  if (store && isChickenStore(store, slug)) return buildChickenMenus(store, slug);
+  return store ? defaultMenusForStore(store) : null;
 }
 
 const storeMenus = {
@@ -703,8 +774,7 @@ const storeMenus = {
 function renderMenuList(slug) {
   const list = document.querySelector("#storeMenuList");
   if (!list) return;
-  const store = findStoreBySlug(slug);
-  const menus = storeMenus[slug] || (store ? defaultMenusForStore(store) : null);
+  const menus = menusForStoreSlug(slug);
   if (!menus) { list.innerHTML = '<p class="empty-state">메뉴 준비 중입니다.</p>'; return; }
   list.innerHTML = menus.map((item, i) => `
     <button class="menu-card" type="button" data-target="menu" data-menu-index="${i}" data-store-slug="${slug}">
@@ -720,31 +790,199 @@ function renderMenuList(slug) {
   `).join("");
 }
 
+function wonValue(value, fallback = 0) {
+  const match = String(value || "").replace(/,/g, "").match(/\d+/);
+  return match ? Number(match[0]) : fallback;
+}
+
+function formatWon(value) {
+  return `${Number(value || 0).toLocaleString("ko-KR")}원`;
+}
+
+function ratingValue(store) {
+  return String(store?.rating || "5.0(342)").match(/^([0-9.]+)/)?.[1] || "5.0";
+}
+
+function reviewCountValue(store) {
+  return String(store?.rating || "5.0(342)").match(/\(([^)]+)\)/)?.[1] || "342";
+}
+
+function selectedOrderState() {
+  const baseStore = currentStore || chickenResults[0] || saladResults[0] || stores[0];
+  const slug = getStoreSlug(baseStore);
+  const menus = menusForStoreSlug(slug) || defaultMenusForStore(baseStore);
+  const menu = currentMenu || menus[0];
+  if (!currentMenu) currentMenu = menu;
+  const menuPrice = wonValue(menu.price, 18000);
+  const deliveryFee = String(baseStore.deliveryFee || "").includes("0원") ? 0 : wonValue(baseStore.deliveryFee, 3000);
+  const couponDiscount = baseStore.couponLabel === false ? 0 : Math.min(wonValue(baseStore.couponLabel || "1000원", 1000), menuPrice);
+  const total = Math.max(menuPrice + deliveryFee - couponDiscount, 0);
+  return { store: baseStore, menu, menuPrice, deliveryFee, couponDiscount, total };
+}
+
+function renderMenuOptionSections(menu) {
+  const groups = menu.optionGroups || menuOptionGroups(menu);
+  menu.optionGroups = groups;
+  document.querySelectorAll('[data-screen="menu"] .menu-option-section').forEach((section, index) => {
+    const group = groups[index];
+    if (!group) return;
+    section.innerHTML = `
+      <header><h2>${group.title} <span>필수</span></h2>${group.note ? `<p>${group.note}</p>` : ""}</header>
+      ${group.options.map((option) => `
+        <button class="option-row${option[2] ? " selected" : ""}${group.radio ? " radio" : ""}" type="button">
+          <span>${option[0]}</span><strong>${option[1]}</strong>
+        </button>
+      `).join("")}
+    `;
+  });
+}
+
+function syncCurrentMenuOptionsFromDom() {
+  if (!currentMenu?.optionGroups) return;
+  document.querySelectorAll('[data-screen="menu"] .menu-option-section').forEach((section, groupIndex) => {
+    const group = currentMenu.optionGroups[groupIndex];
+    if (!group) return;
+    const selectedLabels = Array.from(section.querySelectorAll('.option-row.selected span')).map((span) => cleanText(span.textContent));
+    group.options.forEach((option) => {
+      option[2] = selectedLabels.includes(option[0]);
+    });
+  });
+}
+
 function renderStoreDetail(store) {
   if (!store) return;
   const detailStore = normalizeStore(store, 0, getStoreSlug(store));
   const hero = document.querySelector("#storeHeroImg");
   const title = document.querySelector("#storeName");
   const minOrder = document.querySelector("#storeMinOrder");
+  const deliveryFee = document.querySelectorAll('[data-screen="store"] .delivery-card dd')[1];
+  const rating = document.querySelector('[data-screen="store"] .store-rating');
+  const badgeBox = document.querySelector('[data-screen="store"] .store-badges');
+  const discount = document.querySelector('[data-screen="store"] .instant-discount');
+  const menuTabs = document.querySelector('[data-screen="store"] .store-menu-tabs');
+  const couponCardCopy = document.querySelector('[data-screen="store"] .store-coupon-card .store-card-main span');
   if (hero) hero.src = imageRoot + detailStore.image;
   if (title) title.textContent = detailStore.name;
   if (minOrder) minOrder.textContent = detailStore.minOrder;
+  if (deliveryFee) deliveryFee.innerHTML = `${detailStore.deliveryFee || "배달비 0원"} <button type="button">자세히</button>`;
+  if (rating) rating.innerHTML = `<img src="./icons/14/star.svg" alt="" /> <strong>${ratingValue(detailStore)}</strong> (후기 ${reviewCountValue(detailStore)}개) <img src="./icons/16/chevron-right.svg" alt="" />`;
+  if (badgeBox) badgeBox.innerHTML = renderStoreLabels(detailStore) || '<span class="pay">수원페이</span>';
+  if (discount) discount.innerHTML = `<img src="./icons/24/thunder.svg" alt="" /> ${detailStore.ribbon || detailStore.discount || "배달특급 혜택을 확인할 수 있어요"}`;
+  if (menuTabs) {
+    menuTabs.innerHTML = isChickenStore(detailStore, getStoreSlug(store))
+      ? '<button class="active" type="button">인기메뉴</button><button type="button">후라이드</button><button type="button">양념/간장</button><button type="button">순살/세트</button>'
+      : '<button class="active" type="button">인기메뉴</button><button type="button">이벤트 메뉴</button><button type="button">대표 메뉴</button><button type="button">사이드</button>';
+  }
+  if (couponCardCopy) {
+    couponCardCopy.textContent = detailStore.couponLabel === false ? "적용 가능한 쿠폰은 없지만 바로 주문할 수 있어요" : `${detailStore.couponLabel || "1000원 쿠폰"}이 있어요!`;
+  }
   const slug = getStoreSlug(store);
+  const menus = menusForStoreSlug(slug) || [];
+  currentStore = store;
+  currentMenu = menus[0] || currentMenu;
   renderMenuList(slug);
+  if (currentMenu) renderMenuDetail(currentMenu);
+  renderOrderSurfaces();
 }
 
 function renderMenuDetail(menu) {
   if (!menu) return;
+  currentMenu = menu;
   const img = document.querySelector("#menuDetailImg");
   const badge = document.querySelector("#menuBadge");
   const nameEl = document.querySelector("#menuName");
   const priceEl = document.querySelector("#menuPrice");
+  const descEl = document.querySelector('[data-screen="menu"] .menu-product-card p');
+  const ratingLine = document.querySelector('[data-screen="menu"] .menu-rating-line');
   const ctaPrice = document.querySelector("#menuCtaPrice");
+  const ctaText = document.querySelector("#menuCtaText");
+  const originalPrice = document.querySelector("#menuOriginalPrice");
+  const menuPrice = wonValue(menu.price, 18000);
+  const minOrder = wonValue(currentStore?.minOrder, 10000);
+  const shortfall = Math.max(minOrder - menuPrice, 0);
   if (img) img.src = imageRoot + menu.image;
   if (badge) badge.textContent = menu.badge || "메뉴";
   if (nameEl) nameEl.textContent = menu.name;
   if (priceEl) priceEl.textContent = menu.price;
-  if (ctaPrice) ctaPrice.textContent = menu.price + " 담기";
+  if (descEl) descEl.textContent = menu.desc || `${currentStore?.name || "가게"}에서 바로 주문할 수 있는 인기 메뉴예요.`;
+  if (ratingLine && currentStore) ratingLine.innerHTML = `<img src="./icons/20/star.svg" alt="" /><b>${ratingValue(currentStore)}</b><span>(후기 ${reviewCountValue(currentStore)}개)</span><img src="./icons/16/chevron-right.svg" alt="" />`;
+  if (ctaPrice) ctaPrice.textContent = `${menu.price} 담기`;
+  if (ctaText) ctaText.innerHTML = shortfall ? `<strong>${formatWon(shortfall)}</strong> 더 담으면<br />주문 가능!` : `<strong>주문 가능!</strong><br />쿠폰 적용 후 결제해보세요`;
+  if (originalPrice) originalPrice.textContent = formatWon(menuPrice + 1000);
+  renderMenuOptionSections(menu);
+  renderOrderSurfaces();
+}
+
+function renderOrderSurfaces() {
+  const { store, menu, menuPrice, deliveryFee, couponDiscount, total } = selectedOrderState();
+  const imageSrc = imageRoot + (menu.image || store.image);
+  const optionHtml = cartOptionLines(menu).map((line) => `<p>${line}</p>`).join("");
+  const couponLabel = store.couponLabel === false ? "적용 가능한 쿠폰이 없어요" : `${store.couponLabel || "1000원 쿠폰"} 적용 가능`;
+  const discountText = couponDiscount ? `- ${formatWon(couponDiscount)}` : "0원";
+
+  const cartScreen = document.querySelector('[data-screen="cart"]');
+  if (cartScreen) {
+    const storeTitle = cartScreen.querySelector(".cart-store-section h2");
+    const productImage = cartScreen.querySelector(".cart-product-head img");
+    const productName = cartScreen.querySelector(".cart-product-head h3");
+    const optionBox = cartScreen.querySelector(".cart-option-box");
+    const productPrice = cartScreen.querySelector(".cart-product-actions strong");
+    const methodText = cartScreen.querySelector(".receive-method.selected p");
+    const summary = cartScreen.querySelector(".summary-list");
+    const bar = cartScreen.querySelector(".figma-order-bar");
+    if (storeTitle) storeTitle.innerHTML = `${store.name} <img src="./icons/20/chevron-right.svg" alt="" />`;
+    if (productImage) productImage.src = imageSrc;
+    if (productName) productName.textContent = menu.name;
+    if (optionBox) optionBox.innerHTML = optionHtml;
+    if (productPrice) productPrice.textContent = formatWon(menuPrice);
+    if (methodText) methodText.textContent = `${formatWon(deliveryFee)} · ${store.time || "30분 소요"} 후 도착`;
+    if (summary) summary.innerHTML = `<p><span>메뉴 금액</span><strong>${formatWon(menuPrice)}</strong></p><p><span>배달팁</span><strong>${formatWon(deliveryFee)}</strong></p><p><span>할인 가능 금액</span><strong class="green">${discountText}</strong></p><p class="total"><span>결제 예정 금액</span><strong>${formatWon(total)}</strong></p>`;
+    if (bar) {
+      bar.querySelector("strong").textContent = `${formatWon(total)} 주문 가능!`;
+      bar.querySelector("span").textContent = store.couponLabel === false ? "선택한 메뉴로 주문 직전까지 이동" : `${store.couponLabel || "1000원 쿠폰"} + 배달특급 혜택`;
+    }
+  }
+
+  const checkoutScreen = document.querySelector('[data-screen="checkout"]');
+  if (checkoutScreen) {
+    const menuImage = checkoutScreen.querySelector(".checkout-menu-head img");
+    const menuName = checkoutScreen.querySelector(".checkout-menu-head h3");
+    const menuMeta = checkoutScreen.querySelector(".checkout-menu-head p");
+    const optionPanelName = checkoutScreen.querySelector(".checkout-option-panel p");
+    const optionPanelPrice = checkoutScreen.querySelector(".checkout-option-panel strong");
+    const couponButton = checkoutScreen.querySelector("#checkoutCouponButton");
+    const priceCard = checkoutScreen.querySelector(".checkout-price-card");
+    const bar = checkoutScreen.querySelector(".figma-order-bar");
+    if (menuImage) menuImage.src = imageSrc;
+    if (menuName) menuName.textContent = menu.name;
+    if (menuMeta) menuMeta.textContent = `${formatWon(menuPrice)} ㅣ 1개`;
+    if (optionPanelName) optionPanelName.textContent = menu.name;
+    if (optionPanelPrice) optionPanelPrice.textContent = formatWon(menuPrice);
+    if (couponButton) couponButton.innerHTML = `${couponLabel} <img src="./icons/20/chevron-down.svg" alt="" />`;
+    if (priceCard) priceCard.innerHTML = `<div class="price-detail"><p><span>메뉴 금액</span><strong>${formatWon(menuPrice)}</strong></p><p><span>배달팁</span><strong>${formatWon(deliveryFee)}</strong></p></div><div class="price-discount"><p><span>배달특급 특별 할인</span><strong>0원</strong></p><p><span>총 쿠폰 할인</span><strong>${discountText}</strong></p><p class="benefit-total"><span>총 할인 금액</span><strong>${discountText}</strong></p></div><p class="checkout-total"><span>결제 예정 금액</span><strong>${formatWon(total)}</strong></p>`;
+    if (bar) {
+      bar.querySelector("strong").textContent = `${formatWon(total)} 주문 가능!`;
+      bar.querySelector("span").textContent = `${store.name} · ${menu.name}`;
+    }
+  }
+
+  document.querySelectorAll('.coupon-ticket b').forEach((couponTitle) => {
+    couponTitle.textContent = `${store.name} 할인 쿠폰`;
+  });
+  document.querySelectorAll('.coupon-ticket small').forEach((couponDesc) => {
+    couponDesc.textContent = `${store.minOrder || "10,000원"} 이상 주문 시`;
+  });
+  document.querySelectorAll('.coupon-download').forEach((button) => {
+    if (store.couponLabel !== false) button.dataset.couponName = `${store.name} ${store.couponLabel || "1000원 쿠폰"}`;
+  });
+
+  const preparingScreen = document.querySelector('[data-screen="preparing"]');
+  if (preparingScreen) {
+    const preparingCopy = preparingScreen.querySelector('.delivery-time-copy p');
+    const preparingTime = preparingScreen.querySelector('.delivery-time-copy strong');
+    if (preparingCopy) preparingCopy.textContent = `${store.name} 배달 시작!`;
+    if (preparingTime) preparingTime.textContent = store.time?.replace(" 소요", "") || "30분";
+  }
 }
 
 function showToast(message) {
@@ -766,6 +1004,7 @@ function showScreen(screenName, push = true) {
     window.history.pushState({ screen: screenName }, "", window.location.href);
   }
   syncBottomNav(screenName);
+  if (["cart", "checkout", "preparing"].includes(screenName)) renderOrderSurfaces();
 
   if (push) {
     switch (screenName) {
@@ -1571,7 +1810,14 @@ function bindInteractions() {
 
     const optionButton = event.target.closest(".option-row");
     if (optionButton) {
-      if (!optionButton.classList.contains("radio")) optionButton.classList.toggle("selected");
+      if (optionButton.classList.contains("radio")) {
+        optionButton.closest(".menu-option-section")?.querySelectorAll(".option-row").forEach((button) => button.classList.remove("selected"));
+        optionButton.classList.add("selected");
+      } else {
+        optionButton.classList.toggle("selected");
+      }
+      syncCurrentMenuOptionsFromDom();
+      renderOrderSurfaces();
       trackUtEvent("option_select", {
         option_name: buttonLabel(optionButton),
         menu_name: currentMenu?.name || document.querySelector("#menuName")?.textContent || "",
@@ -1706,7 +1952,9 @@ function bindInteractions() {
         const slug = targetButton.dataset.storeSlug;
         const idx = targetButton.dataset.menuIndex;
         if (slug && idx !== undefined) {
-          const menus = storeMenus[slug];
+          const store = findStoreBySlug(slug);
+          const menus = menusForStoreSlug(slug);
+          if (store) currentStore = store;
           if (menus && menus[idx]) { currentMenu = menus[idx]; renderMenuDetail(menus[idx]); }
         }
         const menuPayload = {
@@ -1849,9 +2097,10 @@ renderChips();
 renderStores();
 renderFamous();
 renderSearchScreens();
-const defaultStore = saladResults[0] || { name: "샐러디 성대점", image: "stores/salad-store/thumb-square.png", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인" };
+const defaultStore = chickenResults[0] || saladResults[0] || { name: "BHC 성대푸르지오점", image: "stores/chicken-suwon/01-bhc.png", rating: "4.7(3,307)", time: "30분 소요", discount: "최대 3000원 할인", minOrder: "10,000원", deliveryFee: "배달비 0원" };
 currentStore = defaultStore;
 renderStoreDetail(defaultStore);
+renderOrderSurfaces();
 bindInteractions();
 bindHorizontalChipScrollLock();
 if (window.history?.replaceState) window.history.replaceState({ screen: "home" }, "", window.location.href);

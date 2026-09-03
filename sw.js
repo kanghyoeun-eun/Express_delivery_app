@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v39-horizontal-chip-scroll";
+const CACHE_NAME = "baedal-prototype-v40-dynamic-chicken-order";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260903-horizontal-chip-scroll",
-  "/script.js?v=20260903-horizontal-chip-scroll",
-  "/asset-map.js?v=20260903-horizontal-chip-scroll",
-  "/manifest.json?v=20260903-horizontal-chip-scroll"
+  "/styles.css?v=20260903-dynamic-chicken-order",
+  "/script.js?v=20260903-dynamic-chicken-order",
+  "/asset-map.js?v=20260903-dynamic-chicken-order",
+  "/manifest.json?v=20260903-dynamic-chicken-order"
 ];
 
 function shouldUseNetworkFirst(request) {
