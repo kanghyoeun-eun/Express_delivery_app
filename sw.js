@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v37-filter-check-state";
+const CACHE_NAME = "baedal-prototype-v38-sort-default-inactive";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260903-filter-check-state",
-  "/script.js?v=20260903-filter-check-state",
-  "/asset-map.js?v=20260903-filter-check-state",
-  "/manifest.json?v=20260903-filter-check-state"
+  "/styles.css?v=20260903-sort-default-inactive",
+  "/script.js?v=20260903-sort-default-inactive",
+  "/asset-map.js?v=20260903-sort-default-inactive",
+  "/manifest.json?v=20260903-sort-default-inactive"
 ];
 
 function shouldUseNetworkFirst(request) {

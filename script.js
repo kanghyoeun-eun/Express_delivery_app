@@ -873,7 +873,7 @@ function setFilterStripState(screen, activeKey = "sort", activeKeys = null, sort
     button.dataset.filter = key;
     if (key === "sort") {
       button.innerHTML = sortButtonMarkup(sortLabelFor(sortKey));
-      button.classList.add("active");
+      button.classList.toggle("active", sortKey !== "default");
     } else if (key === "minOrder" || key === "price") {
       button.dataset.filter = "minOrder";
       button.innerHTML = minOrderButtonMarkup(minOrderLimit);
