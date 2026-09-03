@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v38-sort-default-inactive";
+const CACHE_NAME = "baedal-prototype-v39-horizontal-chip-scroll";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260903-sort-default-inactive",
-  "/script.js?v=20260903-sort-default-inactive",
-  "/asset-map.js?v=20260903-sort-default-inactive",
-  "/manifest.json?v=20260903-sort-default-inactive"
+  "/styles.css?v=20260903-horizontal-chip-scroll",
+  "/script.js?v=20260903-horizontal-chip-scroll",
+  "/asset-map.js?v=20260903-horizontal-chip-scroll",
+  "/manifest.json?v=20260903-horizontal-chip-scroll"
 ];
 
 function shouldUseNetworkFirst(request) {

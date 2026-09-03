@@ -1136,27 +1136,6 @@ function routeFromSearchKeyword(value) {
   }
 }
 
-function applyRelatedSearch(keyword, filterKey = "coupon", minOrder = null) {
-  setPortfolioContext(keyword || "쿠폰 할인");
-  const nextFilters = new Set(listViewState.portfolio.activeFilters || []);
-  if (filterKey === "minOrder") {
-    nextFilters.add("minOrder");
-    listViewState.portfolio.minOrderLimit = Number(minOrder) || 12000;
-  } else if (filterKey) {
-    nextFilters.add(filterKey);
-  }
-  listViewState.portfolio.activeFilters = Array.from(nextFilters);
-  listViewState.portfolio.filter = filterKey || "sort";
-  updatePortfolioStores();
-  trackUtEvent("search_related_click", {
-    search_keyword: keyword,
-    filter_name: keyword,
-    filter_type: filterKey,
-    target_screen: "portfolio-search",
-  });
-  showScreen("portfolio-search");
-}
-
 function setPortfolioContext(label = "쿠폰 할인") {
   const storesForSearch = allGeneratedCategoryStores.filter((store) => {
     const haystack = [store.name, store.discount, store.ribbon, ...(store.labels || [])].join(" ");
@@ -1489,6 +1468,42 @@ function renderSearchScreens() {
   if (favoriteList) favoriteList.innerHTML = saladResults.slice(0, 2).map(largeStoreCard).join("");
 }
 
+function bindHorizontalChipScrollLock() {
+  const stripSelector = [
+    ".filter-strip",
+    ".portfolio-filter-strip",
+    ".favorite-filter-strip",
+    ".order-filter-strip",
+    ".tab-list",
+    ".delivery-tabs",
+    ".store-menu-tabs",
+    ".address-chips",
+  ].join(", ");
+
+  document.querySelectorAll(stripSelector).forEach((strip) => {
+    if (strip.dataset.horizontalLockBound === "true") return;
+    strip.dataset.horizontalLockBound = "true";
+
+    let startX = 0;
+    let startY = 0;
+
+    strip.addEventListener("touchstart", (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      startX = touch.clientX;
+      startY = touch.clientY;
+    }, { passive: true });
+
+    strip.addEventListener("touchmove", (event) => {
+      if (event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      const dx = Math.abs(touch.clientX - startX);
+      const dy = Math.abs(touch.clientY - startY);
+      if (dy > dx) event.preventDefault();
+    }, { passive: false });
+  });
+}
+
 function bindInteractions() {
   document.addEventListener("click", (event) => {
     const backButton = event.target.closest("[data-back]");
@@ -1788,15 +1803,6 @@ function bindInteractions() {
     routeToBenefit(item.dataset.label, item.dataset.slug);
   });
 
-  document.querySelector(".portfolio-keyword-track")?.addEventListener("click", (event) => {
-    const keywordButton = event.target.closest("button");
-    if (!keywordButton) return;
-    applyRelatedSearch(
-      keywordButton.dataset.relatedKeyword || buttonLabel(keywordButton),
-      keywordButton.dataset.relatedFilter || "coupon",
-      keywordButton.dataset.minOrder || null
-    );
-  });
 
   document.querySelector("#eventTrack").addEventListener("click", (event) => {
     const card = event.target.closest(".event-card");
@@ -1847,6 +1853,7 @@ const defaultStore = saladResults[0] || { name: "샐러디 성대점", image: "s
 currentStore = defaultStore;
 renderStoreDetail(defaultStore);
 bindInteractions();
+bindHorizontalChipScrollLock();
 if (window.history?.replaceState) window.history.replaceState({ screen: "home" }, "", window.location.href);
 window.addEventListener("popstate", handleBrowserBackGesture);
 showScreen("home", false);

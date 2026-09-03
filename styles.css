@@ -4785,58 +4785,6 @@ img {
   font-weight: 400;
 }
 
-.portfolio-related {
-  display: flex;
-  align-items: center;
-  height: 44px;
-  padding-left: 20px;
-  overflow: hidden;
-  background: #fff;
-}
-
-.portfolio-related-label {
-  position: relative;
-  z-index: 2;
-  flex: 0 0 auto;
-  width: 80px;
-  background: #fff;
-  color: #2a2924;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.portfolio-keyword-viewport {
-  min-width: 0;
-  flex: 1;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
-}
-
-.portfolio-keyword-viewport::-webkit-scrollbar {
-  display: none;
-}
-
-.portfolio-keyword-track {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: max-content;
-  padding-right: 20px;
-}
-
-.portfolio-keyword-track button {
-  flex: 0 0 auto;
-  padding: 0;
-  color: #008f62;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
 
 .portfolio-filter-strip {
   display: flex;
@@ -5585,23 +5533,6 @@ img {
   font-weight: 600;
 }
 
-.app-screen[data-screen="portfolio-search"] .portfolio-related {
-  height: 48px;
-}
-
-.app-screen[data-screen="portfolio-search"] .portfolio-related-label,
-.app-screen[data-screen="portfolio-search"] .portfolio-keyword-track button {
-  font-size: 15px;
-  line-height: 22px;
-  font-weight: 700;
-}
-
-.app-screen[data-screen="portfolio-search"] .portfolio-filter-strip button:first-child {
-  border-color: #2a2924;
-  background: #2a2924;
-  color: #fff;
-}
-
 .app-screen[data-screen="benefit-list"] .title-header {
   height: 86px;
   padding: 0 18px;
@@ -6032,10 +5963,6 @@ img {
   background: transparent;
 }
 
-.portfolio-keyword-track button {
-  cursor: pointer;
-}
-
 .large-store-card img {
   content-visibility: auto;
 }
@@ -6057,4 +5984,32 @@ img {
 .app-screen[data-screen="search-result"] .filter-strip button.active img,
 .app-screen[data-screen="portfolio-search"] .filter-strip button.active img {
   filter: invert(1);
+}
+
+/* 20260903 horizontal-only chip scrolling */
+.filter-strip,
+.portfolio-filter-strip,
+.favorite-filter-strip,
+.order-filter-strip,
+.tab-list,
+.delivery-tabs,
+.store-menu-tabs,
+.address-chips {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: none;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-strip button,
+.portfolio-filter-strip button,
+.favorite-filter-strip button,
+.order-filter-strip button,
+.tab-list button,
+.delivery-tabs button,
+.store-menu-tabs button,
+.address-chips button {
+  touch-action: pan-x;
 }
