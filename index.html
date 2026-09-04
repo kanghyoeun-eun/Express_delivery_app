@@ -8,9 +8,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="배달특급" />
     <title>배달특급 하이파이 프로토타입</title>
-    <link rel="manifest" href="./manifest.json?v=20260904-benefit-chip-cleanup" />
+    <link rel="manifest" href="./manifest.json?v=20260904-clarity-ut2-recording" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260904-benefit-chip-cleanup" />
+    <link rel="stylesheet" href="./styles.css?v=20260904-clarity-ut2-recording" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -59,6 +59,7 @@
           ...clarityPayload,
           tester_id: clarityTesterId,
           mission_round: clarityPayload.utm_source,
+          debug_mode: clarityPayload.utm_source === "ut2" ? "true" : "",
         };
         Object.entries(clarityTags).forEach(([key, value]) => {
           if (value) window.clarity("set", key, value);
@@ -66,6 +67,9 @@
         if (clarityTesterId) window.clarity("identify", clarityTesterId);
         if (clarityPayload.utm_source || clarityPayload.utm_campaign || clarityPayload.utm_content) {
           window.clarity("event", "ut_link_open");
+        }
+        if (clarityPayload.utm_source === "ut2") {
+          window.clarity("upgrade", "ut2_recording");
         }
       }
     </script>
@@ -592,7 +596,7 @@
 
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
-    <script src="./asset-map.js?v=20260904-benefit-chip-cleanup"></script>
-    <script src="./script.js?v=20260904-benefit-chip-cleanup"></script>
+    <script src="./asset-map.js?v=20260904-clarity-ut2-recording"></script>
+    <script src="./script.js?v=20260904-clarity-ut2-recording"></script>
   </body>
 </html>

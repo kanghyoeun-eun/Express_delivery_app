@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v44-benefit-chip-cleanup";
+const CACHE_NAME = "baedal-prototype-v45-clarity-ut2-recording";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260904-benefit-chip-cleanup",
-  "/script.js?v=20260904-benefit-chip-cleanup",
-  "/asset-map.js?v=20260904-benefit-chip-cleanup",
-  "/manifest.json?v=20260904-benefit-chip-cleanup"
+  "/styles.css?v=20260904-clarity-ut2-recording",
+  "/script.js?v=20260904-clarity-ut2-recording",
+  "/asset-map.js?v=20260904-clarity-ut2-recording",
+  "/manifest.json?v=20260904-clarity-ut2-recording"
 ];
 
 function shouldUseNetworkFirst(request) {

@@ -7,13 +7,32 @@ function mappedAsset(figmaNodeId, fallback) {
 }
 
 const utmParams = new URLSearchParams(window.location.search);
-const utmPayload = {
+const storedUtmPayload = (() => {
+  try {
+    return JSON.parse(sessionStorage.getItem("baedal_utm_payload") || "{}");
+  } catch {
+    return {};
+  }
+})();
+const urlUtmPayload = {
   utm_source: utmParams.get("utm_source") || "",
   utm_medium: utmParams.get("utm_medium") || "",
   utm_campaign: utmParams.get("utm_campaign") || "",
   utm_content: utmParams.get("utm_content") || "",
 };
-const utmDebugMode = utmParams.get("debug_mode") === "1" || utmParams.get("debug_mode") === "true" || utmParams.get("utm_source") === "ut2";
+const utmPayload = {
+  utm_source: urlUtmPayload.utm_source || storedUtmPayload.utm_source || "",
+  utm_medium: urlUtmPayload.utm_medium || storedUtmPayload.utm_medium || "",
+  utm_campaign: urlUtmPayload.utm_campaign || storedUtmPayload.utm_campaign || "",
+  utm_content: urlUtmPayload.utm_content || storedUtmPayload.utm_content || "",
+};
+const hasUrlUtm = Object.values(urlUtmPayload).some(Boolean);
+if (hasUrlUtm) {
+  try {
+    sessionStorage.setItem("baedal_utm_payload", JSON.stringify(utmPayload));
+  } catch {}
+}
+const utmDebugMode = utmParams.get("debug_mode") === "1" || utmParams.get("debug_mode") === "true" || utmPayload.utm_source === "ut2";
 const gaMeasurementId = "G-ZZR2K930ZE";
 
 function currentScreenName() {
@@ -28,8 +47,19 @@ function buttonLabel(button) {
   return cleanText(button?.innerText || button?.textContent || button?.getAttribute("aria-label") || "");
 }
 
+function trackClarityEvent(eventName, payload = {}) {
+  if (typeof window.clarity !== "function") return;
+  const clarityPayload = { ...utmPayload, ...payload };
+  try {
+    Object.entries(clarityPayload).forEach(([key, value]) => {
+      if (value !== "" && value !== undefined && value !== null) window.clarity("set", key, String(value).slice(0, 120));
+    });
+    window.clarity("event", eventName);
+    if (utmDebugMode) window.clarity("upgrade", "ut2_interaction");
+  } catch {}
+}
+
 function trackUtEvent(eventName, params = {}) {
-  if (typeof window.gtag !== "function") return;
   const testerId = utmPayload.utm_content || utmPayload.utm_campaign || utmPayload.utm_source || "unknown";
   const payload = {
     tester_id: testerId,
@@ -46,8 +76,11 @@ function trackUtEvent(eventName, params = {}) {
     send_to: gaMeasurementId,
     ...(utmDebugMode ? { debug_mode: true } : {}),
   };
-  console.log(`[GA4] ${eventName}`, finalPayload);
-  window.gtag("event", eventName, finalPayload);
+  if (typeof window.gtag === "function") {
+    console.log(`[GA4] ${eventName}`, finalPayload);
+    window.gtag("event", eventName, finalPayload);
+  }
+  trackClarityEvent(eventName, payload);
 }
 
 function currentBenefitType() {
