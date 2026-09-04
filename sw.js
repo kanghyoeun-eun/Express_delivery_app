@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v42-issue-filter-pwa";
+const CACHE_NAME = "baedal-prototype-v43-pwa-status-cleanup";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260903-detail-label-option-fix",
-  "/script.js?v=20260903-detail-label-option-fix",
-  "/asset-map.js?v=20260903-detail-label-option-fix",
-  "/manifest.json?v=20260903-detail-label-option-fix"
+  "/styles.css?v=20260904-pwa-status-cleanup",
+  "/script.js?v=20260904-pwa-status-cleanup",
+  "/asset-map.js?v=20260904-pwa-status-cleanup",
+  "/manifest.json?v=20260904-pwa-status-cleanup"
 ];
 
 function shouldUseNetworkFirst(request) {

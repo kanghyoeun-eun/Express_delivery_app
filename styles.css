@@ -2196,20 +2196,16 @@ img {
 }
 
 @media all and (display-mode: standalone) {
-  .status-bar {
-    display: flex;
+  .app-screen.active {
+    padding-top: env(safe-area-inset-top);
   }
 
-  .plain {
-    height: var(--status-bar-height);
+  .app-screen[data-screen="home"].active {
+    background: var(--primary);
   }
 
   .store-hero-actions {
-    top: calc(var(--status-bar-height) + 16px);
-  }
-
-  .menu-overlay-header {
-    padding-top: env(safe-area-inset-top);
+    top: calc(env(safe-area-inset-top) + 16px);
   }
 }
 
