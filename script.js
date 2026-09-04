@@ -47,6 +47,23 @@ function buttonLabel(button) {
   return cleanText(button?.innerText || button?.textContent || button?.getAttribute("aria-label") || "");
 }
 
+function currentFilterAnalyticsState() {
+  const screenName = currentScreenName();
+  const state = {
+    "search-result": listViewState.result,
+    "portfolio-search": listViewState.portfolio,
+    "benefit-list": listViewState.benefit,
+  }[screenName];
+  if (!state) return {};
+  const filters = new Set(state.activeFilters || []);
+  if (state.minOrderLimit) filters.add("minOrder");
+  return {
+    sort_name: sortLabelFor(state.sortKey || "default"),
+    min_order_limit: state.minOrderLimit || "all",
+    selected_filter: Array.from(filters).join("|") || "none",
+  };
+}
+
 function trackClarityEvent(eventName, payload = {}) {
   if (typeof window.clarity !== "function") return;
   const clarityPayload = { ...utmPayload, ...payload };
@@ -66,6 +83,7 @@ function trackUtEvent(eventName, params = {}) {
     screen_name: currentScreenName(),
     mission_round: utmPayload.utm_source,
     ...utmPayload,
+    ...currentFilterAnalyticsState(),
     ...params,
   };
   Object.keys(payload).forEach((key) => {
