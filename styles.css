@@ -93,7 +93,7 @@ img {
 .status-bar {
   position: relative;
   z-index: 1;
-  display: flex;
+  display: none;
   align-items: flex-end;
   justify-content: space-between;
   height: var(--status-bar-height);
@@ -1018,7 +1018,7 @@ img {
 }
 
 .plain {
-  height: var(--status-bar-height);
+  height: 0;
   background: #fff;
 }
 
@@ -2197,19 +2197,15 @@ img {
 
 @media all and (display-mode: standalone) {
   .status-bar {
-    display: none;
-  }
-
-  .hero {
-    height: clamp(214px, 27dvh, 244px);
+    display: flex;
   }
 
   .plain {
-    height: 0;
+    height: var(--status-bar-height);
   }
 
   .store-hero-actions {
-    top: calc(16px + env(safe-area-inset-top));
+    top: calc(var(--status-bar-height) + 16px);
   }
 
   .menu-overlay-header {

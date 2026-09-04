@@ -1,4 +1,4 @@
-const CACHE_NAME = "baedal-prototype-v41-detail-label-option-fix";
+const CACHE_NAME = "baedal-prototype-v42-issue-filter-pwa";
 const APP_SHELL = [
   "/",
   "/index.html",

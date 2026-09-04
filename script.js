@@ -159,13 +159,15 @@ const keywords = [
   { rank: 10, label: "아폴로 피자", trend: "up", delta: "1" },
 ];
 const recommendKeywords = ["저녁", "매운 음식", "쿠폰 할인", "엽기떡볶이", "건강식", "두바이 쫀득 쿠키", "베트남 음식"];
-const commonFilterLabels = ["기본순", "지역화폐", "온누리상품권", "G드림카드", "할인쿠폰", "최소주문금액"];
+const commonFilterLabels = ["기본순", "혜택 전체", "지역화폐", "온누리상품권", "G드림카드", "할인쿠폰", "배달비 무료", "최소주문금액"];
 const sortOptions = [
   { key: "default", label: "기본순" },
   { key: "order", label: "주문 많은 순" },
   { key: "rating", label: "별점 높은 순" },
+  { key: "review", label: "리뷰 많은 순" },
   { key: "near", label: "가까운 순" },
-  { key: "like", label: "찜 많은 순" },
+  { key: "fast", label: "배달 빠른 순" },
+  { key: "deliveryFee", label: "배달비 낮은 순" },
 ];
 const minOrderOptions = [
   { key: "all", label: "전체", value: null },
@@ -291,53 +293,53 @@ const chickenResults = [
   { slug: "chicken-suwon-01", name: "BHC 성대푸르지오점", rating: "4.7(3,307)", time: "30분 소요", distance: "0.4km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "최대 3000원 할인", image: "stores/chicken-suwon/01-bhc.png", recent: "최근주문 : 후라이드치킨", orderCount: 153, likeCount: 43, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이"], couponLabel: "1000원 쿠폰", badges: ["리뷰이벤트"] },
   { slug: "chicken-suwon-02", name: "갓튀긴후라이드 장안점", rating: "4.8(10,553)", time: "34분 소요", distance: "0.5km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/02-gcova.png", recent: "최근주문 : 양념치킨", orderCount: 226, likeCount: 74, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰", badges: ["리뷰이벤트"] },
   { slug: "chicken-suwon-03", name: "그 옛날통닭 구운점", rating: "4.6(348)", time: "38분 소요", distance: "0.6km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "G드림카드 쿠폰", image: "stores/chicken-suwon/03-old-ssangpal.png", recent: "최근주문 : 간장치킨", orderCount: 299, likeCount: 105, ribbon: "배달특급 1000원 즉시 할인 매장", labels: ["G드림카드"], couponLabel: "3000원 쿠폰" },
-  { slug: "chicken-suwon-04", name: "쌍팔통닭 수원화서점", rating: "5.0(26)", time: "32분 소요", distance: "0.7km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "최대 2000원 할인", image: "stores/chicken-suwon/04-kfc-mexicana.png", recent: "최근주문 : 숯불양념치킨", orderCount: 372, likeCount: 136, labels: ["수원페이", "온누리 쿠폰"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-suwon-04", name: "쌍팔통닭 수원화서점", rating: "5.0(26)", time: "32분 소요", distance: "0.7km", minOrder: "20,000원", deliveryFee: "배달비 1,000원", discount: "최대 2000원 할인", image: "stores/chicken-suwon/04-kfc-mexicana.png", recent: "최근주문 : 숯불양념치킨", orderCount: 372, likeCount: 136, labels: ["수원페이", "온누리 쿠폰"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-05", name: "BHC 구운일월점", rating: "4.9(1,797)", time: "30분 소요", distance: "1.5km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "최대 4000원 할인", image: "stores/chicken-suwon/05-mexicana-basak.png", recent: "최근주문 : 닭강정", orderCount: 445, likeCount: 167, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "G드림카드"], couponLabel: "4000원 쿠폰", badges: ["리뷰이벤트"] },
   { slug: "chicken-suwon-06", name: "지코바 숯불양념치킨 구운점", rating: "4.7(5,111)", time: "29분 소요", distance: "1.7km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "온누리 쿠폰 사용 가능", image: "stores/chicken-suwon/06-good-60.png", recent: "최근주문 : 순살치킨", orderCount: 518, likeCount: 198, ribbon: "배달특급 1000원 즉시 할인 매장", labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "3000원 쿠폰", badges: ["최소주문금액 낮음"] },
   { slug: "chicken-suwon-07", name: "KFC 수원성균관대점", rating: "4.8(694)", time: "29분 소요", distance: "1.8km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "혜택 없음", image: "stores/chicken-suwon/07-dakgangjeong.png", recent: "최근주문 : 반반치킨", orderCount: 591, likeCount: 229, labels: [], couponLabel: false },
-  { slug: "chicken-suwon-08", name: "멕시카나 성대율전점", rating: "4.6(207)", time: "37분 소요", distance: "1.9km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/08-gcova-popeyes.png", recent: "최근주문 : 마늘치킨", orderCount: 664, likeCount: 260, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-suwon-08", name: "멕시카나 성대율전점", rating: "4.6(207)", time: "37분 소요", distance: "1.9km", minOrder: "20,000원", deliveryFee: "배달비 1,500원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/08-gcova-popeyes.png", recent: "최근주문 : 마늘치킨", orderCount: 664, likeCount: 260, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-09", name: "멕시카나치킨 화서점", rating: "5.0(1,000)", time: "37분 소요", distance: "2.0km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "최대 3000원 할인", image: "stores/chicken-suwon/09-holddak-baeksa.png", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 737, likeCount: 291, ribbon: "배달특급 1000원 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "3000원 쿠폰" },
-  { slug: "chicken-suwon-10", name: "바삭통통닭강정", rating: "4.9(2,623)", time: "33분 소요", distance: "2.2km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/10-mexicana-puradak.png", recent: "최근주문 : 깐풍치킨", orderCount: 810, likeCount: 322, labels: [], couponLabel: false, badges: ["리뷰이벤트"] },
+  { slug: "chicken-suwon-10", name: "바삭통통닭강정", rating: "4.9(2,623)", time: "33분 소요", distance: "2.2km", minOrder: "12,000원", deliveryFee: "배달비 2,000원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/10-mexicana-puradak.png", recent: "최근주문 : 깐풍치킨", orderCount: 810, likeCount: 322, labels: [], couponLabel: false, badges: ["리뷰이벤트"] },
   { slug: "chicken-suwon-11", name: "잘만든치킨 굿킨 화서점", rating: "4.7(657)", time: "31분 소요", distance: "2.3km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "최대 3000원 할인", image: "stores/chicken-suwon/11-bbq-old.png", recent: "최근주문 : 후라이드치킨", orderCount: 883, likeCount: 353, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
-  { slug: "chicken-suwon-12", name: "60계치킨 수원화서점", rating: "4.8(2,429)", time: "48분 소요", distance: "2.5km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/12-ttorae-hajin.png", recent: "최근주문 : 양념치킨", orderCount: 956, likeCount: 384, labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-suwon-12", name: "60계치킨 수원화서점", rating: "4.8(2,429)", time: "48분 소요", distance: "2.5km", minOrder: "20,000원", deliveryFee: "배달비 1,000원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/12-ttorae-hajin.png", recent: "최근주문 : 양념치킨", orderCount: 956, likeCount: 384, labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
   { slug: "chicken-suwon-13", name: "닭강정혁명 성균관대점", rating: "4.6(6,202)", time: "29분 소요", distance: "2.8km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "G드림카드 쿠폰", image: "stores/chicken-suwon/13-puradak.png", recent: "최근주문 : 간장치킨", orderCount: 1029, likeCount: 415, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["G드림카드"], couponLabel: "3000원 쿠폰", badges: ["최소주문금액 낮음"] },
   { slug: "chicken-suwon-14", name: "지코바 숯불양념치킨 율전점", rating: "5.0(1,204)", time: "47분 소요", distance: "0.4km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "최대 2000원 할인", image: "stores/chicken-suwon/01-bhc.png", recent: "최근주문 : 숯불양념치킨", orderCount: 1102, likeCount: 26, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "온누리 쿠폰"], couponLabel: "1000원 쿠폰", badges: ["리뷰이벤트"] },
   { slug: "chicken-suwon-15", name: "파파이스 수원정자점", rating: "4.9(1,521)", time: "25분 소요", distance: "0.5km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "최대 4000원 할인", image: "stores/chicken-suwon/02-gcova.png", recent: "최근주문 : 닭강정", orderCount: 1175, likeCount: 57, ribbon: "배달특급 1000원 즉시 할인 매장", labels: ["수원페이", "G드림카드"], couponLabel: "4000원 쿠폰" },
-  { slug: "chicken-suwon-16", name: "누구나홀딱반한닭 수원화서점", rating: "4.7(579)", time: "34분 소요", distance: "0.6km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "온누리 쿠폰 사용 가능", image: "stores/chicken-suwon/03-old-ssangpal.png", recent: "최근주문 : 순살치킨", orderCount: 1248, likeCount: 88, labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "3000원 쿠폰" },
+  { slug: "chicken-suwon-16", name: "누구나홀딱반한닭 수원화서점", rating: "4.7(579)", time: "34분 소요", distance: "0.6km", minOrder: "20,000원", deliveryFee: "배달비 1,500원", discount: "온누리 쿠폰 사용 가능", image: "stores/chicken-suwon/03-old-ssangpal.png", recent: "최근주문 : 순살치킨", orderCount: 1248, likeCount: 88, labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "3000원 쿠폰" },
   { slug: "chicken-suwon-17", name: "백사104 깐풍닭튀김", rating: "4.8(2,258)", time: "27분 소요", distance: "0.7km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "혜택 없음", image: "stores/chicken-suwon/04-kfc-mexicana.png", recent: "최근주문 : 반반치킨", orderCount: 1321, likeCount: 119, labels: [], couponLabel: false, badges: ["최소주문금액 낮음"] },
   { slug: "chicken-suwon-18", name: "푸라닭 수원정자3동점", rating: "4.6(1,932)", time: "41분 소요", distance: "1.5km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/05-mexicana-basak.png", recent: "최근주문 : 마늘치킨", orderCount: 1394, likeCount: 150, ribbon: "배달특급 1000원 즉시 할인 매장", labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-19", name: "BBQ 수원꽃뫼마을점", rating: "5.0(233)", time: "31분 소요", distance: "1.7km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "최대 3000원 할인", image: "stores/chicken-suwon/06-good-60.png", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 1467, likeCount: 181, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "3000원 쿠폰", badges: ["리뷰이벤트"] },
-  { slug: "chicken-suwon-20", name: "하진옛날통닭 천천점", rating: "4.9(518)", time: "28분 소요", distance: "1.8km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/07-dakgangjeong.png", recent: "최근주문 : 깐풍치킨", orderCount: 140, likeCount: 212, labels: [], couponLabel: false },
+  { slug: "chicken-suwon-20", name: "하진옛날통닭 천천점", rating: "4.9(518)", time: "28분 소요", distance: "1.8km", minOrder: "20,000원", deliveryFee: "배달비 2,000원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/07-dakgangjeong.png", recent: "최근주문 : 깐풍치킨", orderCount: 140, likeCount: 212, labels: [], couponLabel: false },
   { slug: "chicken-suwon-21", name: "또래오래 구운동점", rating: "4.7(3,307)", time: "30분 소요", distance: "1.9km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "최대 3000원 할인", image: "stores/chicken-suwon/08-gcova-popeyes.png", recent: "최근주문 : 후라이드치킨", orderCount: 213, likeCount: 243, ribbon: "배달특급 1000원 즉시 할인 매장", labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-22", name: "푸라닭 수원서둔점", rating: "4.8(10,553)", time: "34분 소요", distance: "2.0km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/09-holddak-baeksa.png", recent: "최근주문 : 양념치킨", orderCount: 286, likeCount: 274, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
   { slug: "chicken-suwon-23", name: "푸라닭 수원성균관대점", rating: "4.6(348)", time: "38분 소요", distance: "2.2km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "G드림카드 쿠폰", image: "stores/chicken-suwon/10-mexicana-puradak.png", recent: "최근주문 : 간장치킨", orderCount: 359, likeCount: 305, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["G드림카드"], couponLabel: "3000원 쿠폰" },
-  { slug: "chicken-suwon-24", name: "교촌치킨 화서문점", rating: "5.0(26)", time: "32분 소요", distance: "2.3km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "최대 2000원 할인", image: "stores/chicken-suwon/11-bbq-old.png", recent: "최근주문 : 숯불양념치킨", orderCount: 432, likeCount: 336, labels: ["수원페이", "온누리 쿠폰"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-suwon-24", name: "교촌치킨 화서문점", rating: "5.0(26)", time: "32분 소요", distance: "2.3km", minOrder: "20,000원", deliveryFee: "배달비 1,000원", discount: "최대 2000원 할인", image: "stores/chicken-suwon/11-bbq-old.png", recent: "최근주문 : 숯불양념치킨", orderCount: 432, likeCount: 336, labels: ["수원페이", "온누리 쿠폰"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-25", name: "처갓집양념치킨 화서점", rating: "4.9(1,797)", time: "30분 소요", distance: "2.5km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "최대 4000원 할인", image: "stores/chicken-suwon/12-ttorae-hajin.png", recent: "최근주문 : 닭강정", orderCount: 505, likeCount: 367, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "G드림카드"], couponLabel: "4000원 쿠폰" },
   { slug: "chicken-suwon-26", name: "노랑통닭 정자시장점", rating: "4.7(5,111)", time: "29분 소요", distance: "2.8km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "온누리 쿠폰 사용 가능", image: "stores/chicken-suwon/13-puradak.png", recent: "최근주문 : 순살치킨", orderCount: 578, likeCount: 398, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "3000원 쿠폰" },
   { slug: "chicken-suwon-27", name: "자담치킨 수원화서점", rating: "4.8(694)", time: "29분 소요", distance: "0.4km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "혜택 없음", image: "stores/chicken-suwon/01-bhc.png", recent: "최근주문 : 반반치킨", orderCount: 651, likeCount: 429, labels: [], couponLabel: false, badges: ["최소주문금액 낮음"] },
-  { slug: "chicken-suwon-28", name: "굽네치킨 정자동점", rating: "4.6(207)", time: "37분 소요", distance: "0.5km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/02-gcova.png", recent: "최근주문 : 마늘치킨", orderCount: 724, likeCount: 40, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-suwon-28", name: "굽네치킨 정자동점", rating: "4.6(207)", time: "37분 소요", distance: "0.5km", minOrder: "20,000원", deliveryFee: "배달비 1,500원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/02-gcova.png", recent: "최근주문 : 마늘치킨", orderCount: 724, likeCount: 40, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-29", name: "네네치킨 화서역점", rating: "5.0(1,000)", time: "37분 소요", distance: "0.6km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "최대 3000원 할인", image: "stores/chicken-suwon/03-old-ssangpal.png", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 797, likeCount: 71, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "3000원 쿠폰" },
-  { slug: "chicken-suwon-30", name: "호식이두마리치킨 정자점", rating: "4.9(2,623)", time: "33분 소요", distance: "0.7km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/04-kfc-mexicana.png", recent: "최근주문 : 깐풍치킨", orderCount: 870, likeCount: 102, labels: [], couponLabel: false },
+  { slug: "chicken-suwon-30", name: "호식이두마리치킨 정자점", rating: "4.9(2,623)", time: "33분 소요", distance: "0.7km", minOrder: "12,000원", deliveryFee: "배달비 2,000원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/04-kfc-mexicana.png", recent: "최근주문 : 깐풍치킨", orderCount: 870, likeCount: 102, labels: [], couponLabel: false },
   { slug: "chicken-suwon-31", name: "페리카나 화서오거리점", rating: "4.7(657)", time: "31분 소요", distance: "1.5km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "최대 3000원 할인", image: "stores/chicken-suwon/05-mexicana-basak.png", recent: "최근주문 : 후라이드치킨", orderCount: 943, likeCount: 133, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
-  { slug: "chicken-suwon-32", name: "치킨플러스 팔달정자점", rating: "4.8(2,429)", time: "48분 소요", distance: "1.7km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/06-good-60.png", recent: "최근주문 : 양념치킨", orderCount: 1016, likeCount: 164, labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
+  { slug: "chicken-suwon-32", name: "치킨플러스 팔달정자점", rating: "4.8(2,429)", time: "48분 소요", distance: "1.7km", minOrder: "20,000원", deliveryFee: "배달비 1,000원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/06-good-60.png", recent: "최근주문 : 양념치킨", orderCount: 1016, likeCount: 164, labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
   { slug: "chicken-suwon-33", name: "바른치킨 수원천천점", rating: "4.6(6,202)", time: "29분 소요", distance: "1.8km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "G드림카드 쿠폰", image: "stores/chicken-suwon/07-dakgangjeong.png", recent: "최근주문 : 간장치킨", orderCount: 1089, likeCount: 195, ribbon: "배달특급 1000원 즉시 할인 매장", labels: ["G드림카드"], couponLabel: "3000원 쿠폰" },
   { slug: "chicken-suwon-34", name: "깐부치킨 성균관대역점", rating: "5.0(1,204)", time: "47분 소요", distance: "1.9km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "최대 2000원 할인", image: "stores/chicken-suwon/08-gcova-popeyes.png", recent: "최근주문 : 숯불양념치킨", orderCount: 1162, likeCount: 226, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "온누리 쿠폰"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-35", name: "치킨마루 화서블루밍점", rating: "4.9(1,521)", time: "25분 소요", distance: "2.0km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "최대 4000원 할인", image: "stores/chicken-suwon/09-holddak-baeksa.png", recent: "최근주문 : 닭강정", orderCount: 1235, likeCount: 257, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이", "G드림카드"], couponLabel: "4000원 쿠폰" },
-  { slug: "chicken-suwon-36", name: "보드람치킨 구운동점", rating: "4.7(579)", time: "34분 소요", distance: "2.2km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "온누리 쿠폰 사용 가능", image: "stores/chicken-suwon/10-mexicana-puradak.png", recent: "최근주문 : 순살치킨", orderCount: 1308, likeCount: 288, labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "3000원 쿠폰", badges: ["최소주문금액 낮음"] },
+  { slug: "chicken-suwon-36", name: "보드람치킨 구운동점", rating: "4.7(579)", time: "34분 소요", distance: "2.2km", minOrder: "20,000원", deliveryFee: "배달비 1,500원", discount: "온누리 쿠폰 사용 가능", image: "stores/chicken-suwon/10-mexicana-puradak.png", recent: "최근주문 : 순살치킨", orderCount: 1308, likeCount: 288, labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "3000원 쿠폰", badges: ["최소주문금액 낮음"] },
   { slug: "chicken-suwon-37", name: "가마로강정 화서시장점", rating: "4.8(2,258)", time: "27분 소요", distance: "2.3km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "혜택 없음", image: "stores/chicken-suwon/11-bbq-old.png", recent: "최근주문 : 반반치킨", orderCount: 1381, likeCount: 319, labels: [], couponLabel: false },
   { slug: "chicken-suwon-38", name: "훌랄라참숯치킨 천천점", rating: "4.6(1,932)", time: "41분 소요", distance: "2.5km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/12-ttorae-hajin.png", recent: "최근주문 : 마늘치킨", orderCount: 1454, likeCount: 350, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-39", name: "티바두마리치킨 화서점", rating: "5.0(233)", time: "31분 소요", distance: "2.8km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "최대 3000원 할인", image: "stores/chicken-suwon/13-puradak.png", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 127, likeCount: 381, ribbon: "배달특급 1000원 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "3000원 쿠폰" },
-  { slug: "chicken-suwon-40", name: "후라이드참잘하는집 정자동점", rating: "4.9(518)", time: "28분 소요", distance: "0.4km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/01-bhc.png", recent: "최근주문 : 깐풍치킨", orderCount: 200, likeCount: 412, labels: [], couponLabel: false },
+  { slug: "chicken-suwon-40", name: "후라이드참잘하는집 정자동점", rating: "4.9(518)", time: "28분 소요", distance: "0.4km", minOrder: "20,000원", deliveryFee: "배달비 2,000원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/01-bhc.png", recent: "최근주문 : 깐풍치킨", orderCount: 200, likeCount: 412, labels: [], couponLabel: false },
   { slug: "chicken-suwon-41", name: "돈치킨 서호공원점", rating: "4.7(3,307)", time: "30분 소요", distance: "0.5km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "최대 3000원 할인", image: "stores/chicken-suwon/02-gcova.png", recent: "최근주문 : 후라이드치킨", orderCount: 273, likeCount: 23, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-42", name: "땅땅치킨 화서역점", rating: "4.8(10,553)", time: "34분 소요", distance: "0.6km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/03-old-ssangpal.png", recent: "최근주문 : 양념치킨", orderCount: 346, likeCount: 54, ribbon: "배달특급 1000원 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "2000원 쿠폰" },
   { slug: "chicken-suwon-43", name: "아웃닭 성균관대점", rating: "4.6(348)", time: "38분 소요", distance: "0.7km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "G드림카드 쿠폰", image: "stores/chicken-suwon/04-kfc-mexicana.png", recent: "최근주문 : 간장치킨", orderCount: 419, likeCount: 85, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["G드림카드"], couponLabel: "3000원 쿠폰" },
-  { slug: "chicken-suwon-44", name: "오늘통닭 수원정자점", rating: "5.0(26)", time: "32분 소요", distance: "1.5km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "최대 2000원 할인", image: "stores/chicken-suwon/05-mexicana-basak.png", recent: "최근주문 : 숯불양념치킨", orderCount: 492, likeCount: 116, labels: ["수원페이", "온누리 쿠폰"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-suwon-44", name: "오늘통닭 수원정자점", rating: "5.0(26)", time: "32분 소요", distance: "1.5km", minOrder: "20,000원", deliveryFee: "배달비 1,000원", discount: "최대 2000원 할인", image: "stores/chicken-suwon/05-mexicana-basak.png", recent: "최근주문 : 숯불양념치킨", orderCount: 492, likeCount: 116, labels: ["수원페이", "온누리 쿠폰"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-45", name: "치킨더홈 팔달화서점", rating: "4.9(1,797)", time: "30분 소요", distance: "1.7km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "최대 4000원 할인", image: "stores/chicken-suwon/06-good-60.png", recent: "최근주문 : 닭강정", orderCount: 565, likeCount: 147, ribbon: "배달특급 1000원 즉시 할인 매장", labels: ["수원페이", "G드림카드"], couponLabel: "4000원 쿠폰" },
   { slug: "chicken-suwon-46", name: "순살만공격 수원화서점", rating: "4.7(5,111)", time: "29분 소요", distance: "1.8km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "온누리 쿠폰 사용 가능", image: "stores/chicken-suwon/07-dakgangjeong.png", recent: "최근주문 : 순살치킨", orderCount: 638, likeCount: 178, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰", "G드림카드"], couponLabel: "3000원 쿠폰" },
   { slug: "chicken-suwon-47", name: "인생닭강정 정자천점", rating: "4.8(694)", time: "29분 소요", distance: "1.9km", minOrder: "15,000원", deliveryFee: "배달비 0원", discount: "혜택 없음", image: "stores/chicken-suwon/08-gcova-popeyes.png", recent: "최근주문 : 반반치킨", orderCount: 711, likeCount: 209, labels: [], couponLabel: false },
-  { slug: "chicken-suwon-48", name: "오태식해바라기치킨 구운점", rating: "4.6(207)", time: "37분 소요", distance: "2.0km", minOrder: "20,000원", deliveryFee: "배달비 0원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/09-holddak-baeksa.png", recent: "최근주문 : 마늘치킨", orderCount: 784, likeCount: 240, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
+  { slug: "chicken-suwon-48", name: "오태식해바라기치킨 구운점", rating: "4.6(207)", time: "37분 소요", distance: "2.0km", minOrder: "20,000원", deliveryFee: "배달비 1,500원", discount: "최대 1000원 할인", image: "stores/chicken-suwon/09-holddak-baeksa.png", recent: "최근주문 : 마늘치킨", orderCount: 784, likeCount: 240, labels: ["수원페이"], couponLabel: "1000원 쿠폰" },
   { slug: "chicken-suwon-49", name: "아라치 수원정자점", rating: "5.0(1,000)", time: "37분 소요", distance: "2.2km", minOrder: "10,000원", deliveryFee: "배달비 0원", discount: "최대 3000원 할인", image: "stores/chicken-suwon/10-mexicana-puradak.png", recent: "최근주문 : 치즈시즈닝치킨", orderCount: 857, likeCount: 271, ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"], couponLabel: "3000원 쿠폰" },
-  { slug: "chicken-suwon-50", name: "계동치킨 화서역점", rating: "4.9(2,623)", time: "33분 소요", distance: "2.3km", minOrder: "12,000원", deliveryFee: "배달비 0원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/11-bbq-old.png", recent: "최근주문 : 깐풍치킨", orderCount: 930, likeCount: 302, labels: [], couponLabel: false },
+  { slug: "chicken-suwon-50", name: "계동치킨 화서역점", rating: "4.9(2,623)", time: "33분 소요", distance: "2.3km", minOrder: "12,000원", deliveryFee: "배달비 2,000원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/11-bbq-old.png", recent: "최근주문 : 깐풍치킨", orderCount: 930, likeCount: 302, labels: [], couponLabel: false },
 ];
 
 const categoryPages = {
@@ -1076,15 +1078,17 @@ function handleBrowserBackGesture() {
 }
 
 function getFilterKey(label) {
+  if (label.includes("혜택 전체")) return "benefitAll";
   if (label.includes("지역화폐")) return "local";
   if (label.includes("온누리")) return "onnuri";
   if (label.includes("G드림")) return "gdream";
   if (label.includes("할인쿠폰") || label.includes("쿠폰")) return "coupon";
+  if (label.includes("배달비 무료") || label.includes("무료배달")) return "freeDelivery";
   if (label.includes("최소주문")) return "minOrder";
   if (label.includes("가격")) return "price";
   if (label.includes("별점")) return "rating";
   if (label.includes("빠른")) return "fast";
-  if (label.includes("기본") || label.includes("주문 많은") || label.includes("가까운") || label.includes("찜 많은") || label.includes("추천")) return "sort";
+  if (label.includes("기본") || label.includes("주문 많은") || label.includes("가까운") || label.includes("리뷰 많은") || label.includes("배달비 낮은") || label.includes("추천")) return "sort";
   return "sort";
 }
 
@@ -1170,21 +1174,36 @@ function minOrderValue(store) {
   return priceValue(store.minOrder);
 }
 
+function distanceValue(store) {
+  const match = String(store.distance || "").match(/\d+(?:\.\d+)?/);
+  return match ? Number(match[0]) : 99;
+}
+
+function deliveryFeeValue(store) {
+  const value = String(store.deliveryFee || "");
+  if (value.includes("무료") || value.includes("0원")) return 0;
+  return priceValue(value);
+}
+
 function applySort(stores, sortKey = "default") {
   if (sortKey === "order") return [...stores].sort((a, b) => (b.orderCount || 0) - (a.orderCount || 0));
   if (sortKey === "rating") return [...stores].sort((a, b) => ratingValue(b) - ratingValue(a) || reviewCountValue(b) - reviewCountValue(a));
-  if (sortKey === "near") return [...stores].sort((a, b) => minuteValue(a) - minuteValue(b));
-  if (sortKey === "like") return [...stores].sort((a, b) => (b.likeCount || 0) - (a.likeCount || 0));
+  if (sortKey === "review") return [...stores].sort((a, b) => reviewCountValue(b) - reviewCountValue(a) || ratingValue(b) - ratingValue(a));
+  if (sortKey === "near") return [...stores].sort((a, b) => distanceValue(a) - distanceValue(b) || minuteValue(a) - minuteValue(b));
+  if (sortKey === "fast") return [...stores].sort((a, b) => minuteValue(a) - minuteValue(b) || distanceValue(a) - distanceValue(b));
+  if (sortKey === "deliveryFee") return [...stores].sort((a, b) => deliveryFeeValue(a) - deliveryFeeValue(b) || minOrderValue(a) - minOrderValue(b));
   return stores;
 }
 
 function storeMatchesFilter(store, filterKey) {
   const labels = store.labels || [];
   const haystack = [store.name, store.discount, store.ribbon, ...(store.badges || []), ...labels].join(" ");
+  if (filterKey === "benefitAll") return hasVisibleBenefit(store);
   if (filterKey === "local") return haystack.includes("지역화폐") || haystack.includes("수원페이");
   if (filterKey === "onnuri") return haystack.includes("온누리");
   if (filterKey === "gdream") return haystack.includes("G드림");
   if (filterKey === "coupon") return store.couponLabel !== false || haystack.includes("쿠폰");
+  if (filterKey === "freeDelivery") return deliveryFeeValue(store) === 0;
   if (filterKey === "minOrder" || filterKey === "price") return minOrderValue(store) <= 15000 || haystack.includes("최소주문금액 낮음");
   if (filterKey === "fast") return minuteValue(store) <= 35;
   return true;
@@ -1253,7 +1272,7 @@ function updateBenefitStores() {
   const shouldShowRecommendation = slug === "local" && filters.includes("coupon") && filters.includes("onnuri");
   setFilterStripState(benefitScreen, filter, filters, sortKey, minOrderLimit);
   if (shouldShowRecommendation && page.filteredStores?.length) {
-    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "할인쿠폰", onnuri: "온누리상품권", gdream: "G드림카드", minOrder: "최소주문금액", price: "최소주문금액", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
+    const selectedFilters = filters.map((key) => ({ sort: "기본순", benefitAll: "혜택 전체", coupon: "할인쿠폰", onnuri: "온누리상품권", gdream: "G드림카드", freeDelivery: "배달비 무료", minOrder: "최소주문금액", price: "최소주문금액", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
     renderStoreList(benefitScreen.querySelector("#benefitStoreList"), page.filteredStores.map((store, index) => normalizeStore(store, index, slug)));
     if (note) {
       note.classList.add("narrow-result-note");
@@ -1291,7 +1310,7 @@ function updateBenefitStores() {
       : "";
   }
   if (hasNarrowLocalResult && note) {
-    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "할인쿠폰", onnuri: "온누리상품권", gdream: "G드림카드", minOrder: "최소주문금액", price: "최소주문금액", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
+    const selectedFilters = filters.map((key) => ({ sort: "기본순", benefitAll: "혜택 전체", coupon: "할인쿠폰", onnuri: "온누리상품권", gdream: "G드림카드", freeDelivery: "배달비 무료", minOrder: "최소주문금액", price: "최소주문금액", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
     note.classList.add("narrow-result-note");
     note.querySelector("strong").textContent = `조건에 맞는 가게가 ${filteredStores.length}곳 있어요`;
     note.querySelector("span").innerHTML = `${page.filteredNote || page.note}<br><em>${selectedFilters.join(" · ")}</em>`;
