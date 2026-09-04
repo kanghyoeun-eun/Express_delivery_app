@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v45-clarity-ut2-recording";
+const CACHE_NAME = "baedal-prototype-v46-clarity-ut2-heartbeat";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260904-clarity-ut2-recording",
-  "/script.js?v=20260904-clarity-ut2-recording",
-  "/asset-map.js?v=20260904-clarity-ut2-recording",
-  "/manifest.json?v=20260904-clarity-ut2-recording"
+  "/styles.css?v=20260904-clarity-ut2-heartbeat",
+  "/script.js?v=20260904-clarity-ut2-heartbeat",
+  "/asset-map.js?v=20260904-clarity-ut2-heartbeat",
+  "/manifest.json?v=20260904-clarity-ut2-heartbeat"
 ];
 
 function shouldUseNetworkFirst(request) {

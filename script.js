@@ -83,6 +83,24 @@ function trackUtEvent(eventName, params = {}) {
   trackClarityEvent(eventName, payload);
 }
 
+function startUt2ClarityHeartbeat() {
+  if (!utmDebugMode) return;
+  let heartbeatCount = 0;
+  const sendHeartbeat = () => {
+    heartbeatCount += 1;
+    trackClarityEvent("ut2_heartbeat", {
+      heartbeat_count: heartbeatCount,
+      screen_name: currentScreenName(),
+      session_seconds: Math.round(performance.now() / 1000),
+    });
+  };
+  window.addEventListener("load", () => setTimeout(sendHeartbeat, 1200), { once: true });
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") sendHeartbeat();
+  });
+  setInterval(sendHeartbeat, 10000);
+}
+
 function currentBenefitType() {
   return listViewState.benefit.page?.title || listViewState.benefit.label || "";
 }
@@ -2160,6 +2178,7 @@ if (window.history?.replaceState) window.history.replaceState({ screen: "home" }
 window.addEventListener("popstate", handleBrowserBackGesture);
 showScreen("home", false);
 trackUtEvent("view_home");
+startUt2ClarityHeartbeat();
 
 window.addEventListener("load", () => {
   showScreen("home", false);
