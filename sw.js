@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v47-ga4-filter-state";
+const CACHE_NAME = "baedal-prototype-v48-benefit-chip-copy";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260904-ga4-filter-state",
-  "/script.js?v=20260904-ga4-filter-state",
-  "/asset-map.js?v=20260904-ga4-filter-state",
-  "/manifest.json?v=20260904-ga4-filter-state"
+  "/styles.css?v=20260922-benefit-chip-copy",
+  "/script.js?v=20260922-benefit-chip-copy",
+  "/asset-map.js?v=20260922-benefit-chip-copy",
+  "/manifest.json?v=20260922-benefit-chip-copy"
 ];
 
 function shouldUseNetworkFirst(request) {

@@ -227,7 +227,7 @@ const keywords = [
   { rank: 10, label: "아폴로 피자", trend: "up", delta: "1" },
 ];
 const recommendKeywords = ["저녁", "매운 음식", "쿠폰 할인", "엽기떡볶이", "건강식", "두바이 쫀득 쿠키", "베트남 음식"];
-const commonFilterLabels = ["기본순", "쿠폰", "지역화폐", "온누리상품권", "최소주문금액", "무료배달"];
+const commonFilterLabels = ["기본순", "쿠폰할인", "지역화폐", "온누리상품권", "최소주문금액", "배달비 0원"];
 const sortOptions = [
   { key: "default", label: "기본순" },
   { key: "order", label: "주문 많은 순" },
@@ -1138,7 +1138,7 @@ function getFilterKey(label) {
   if (label.includes("지역화폐")) return "local";
   if (label.includes("온누리")) return "onnuri";
   if (label.includes("할인쿠폰") || label.includes("쿠폰")) return "coupon";
-  if (label.includes("무료 배달") || label.includes("배달비 무료") || label.includes("무료배달")) return "freeDelivery";
+  if (label.includes("무료 배달") || label.includes("배달비 무료") || label.includes("무료배달") || label.includes("배달비 0원")) return "freeDelivery";
   if (label.includes("최소주문")) return "minOrder";
   if (label.includes("가격")) return "price";
   if (label.includes("별점")) return "rating";
@@ -1325,7 +1325,7 @@ function updateBenefitStores() {
   const shouldShowRecommendation = slug === "local" && filters.includes("coupon") && filters.includes("onnuri");
   setFilterStripState(benefitScreen, filter, filters, sortKey, minOrderLimit);
   if (shouldShowRecommendation && page.filteredStores?.length) {
-    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "쿠폰", onnuri: "온누리상품권", freeDelivery: "무료배달", minOrder: "최소주문금액", price: "최소주문금액", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
+    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "쿠폰할인", onnuri: "온누리상품권", freeDelivery: "배달비 0원", minOrder: "최소주문금액", price: "최소주문금액", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
     renderStoreList(benefitScreen.querySelector("#benefitStoreList"), page.filteredStores.map((store, index) => normalizeStore(store, index, slug)));
     if (note) {
       note.classList.add("narrow-result-note");
@@ -1363,7 +1363,7 @@ function updateBenefitStores() {
       : "";
   }
   if (hasNarrowLocalResult && note) {
-    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "쿠폰", onnuri: "온누리상품권", freeDelivery: "무료배달", minOrder: "최소주문금액", price: "최소주문금액", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
+    const selectedFilters = filters.map((key) => ({ sort: "기본순", coupon: "쿠폰할인", onnuri: "온누리상품권", freeDelivery: "배달비 0원", minOrder: "최소주문금액", price: "최소주문금액", rating: "별점", fast: "빠른 배달", local: "지역화폐" }[key] || key));
     note.classList.add("narrow-result-note");
     note.querySelector("strong").textContent = `조건에 맞는 가게가 ${filteredStores.length}곳 있어요`;
     note.querySelector("span").innerHTML = `${page.filteredNote || page.note}<br><em>${selectedFilters.join(" · ")}</em>`;
