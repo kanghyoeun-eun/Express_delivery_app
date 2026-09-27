@@ -260,10 +260,10 @@ img {
 
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(5, 62px);
-  gap: 10px;
-  justify-content: center;
-  padding: 20px 20px;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 16px;
+  justify-items: center;
+  padding: 20px 26px;
 }
 
 .category-item,
@@ -450,16 +450,11 @@ img {
 }
 
 .event-track {
-  display: flex;
-  gap: 12px;
+  display: block;
   height: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   padding: 20px 24px;
-  scroll-padding: 24px;
-  scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
 }
 
 .event-track::-webkit-scrollbar {
@@ -468,13 +463,13 @@ img {
 
 .event-card {
   position: relative;
-  flex: 0 0 344px;
+  display: block;
+  width: 100%;
   height: 120px;
   overflow: hidden;
   border-radius: 20px;
   color: #fff;
   padding: 0;
-  scroll-snap-align: center;
   text-align: left;
   transition: transform 220ms ease, opacity 220ms ease;
 }
@@ -726,12 +721,14 @@ img {
 .tags span {
   display: inline-flex;
   align-items: center;
-  height: 20px;
-  padding: 0 6px;
+  justify-content: center;
+  min-height: 20px;
+  padding: 2px 7px 3px;
   border-radius: 4px;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 1;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .tags .pay {
@@ -1477,14 +1474,16 @@ img {
 .store-status-badges span {
   display: inline-flex;
   align-items: center;
-  height: 22px;
-  padding: 0 8px;
+  justify-content: center;
+  min-height: 22px;
+  padding: 2px 8px 3px;
   border-radius: 4px;
   background: #f2f3f5;
   color: #555c66;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 1;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .large-store-title-row {

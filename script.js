@@ -227,7 +227,7 @@ const keywords = [
   { rank: 10, label: "아폴로 피자", trend: "up", delta: "1" },
 ];
 const recommendKeywords = ["저녁", "매운 음식", "쿠폰 할인", "엽기떡볶이", "건강식", "두바이 쫀득 쿠키", "베트남 음식"];
-const commonFilterLabels = ["기본순", "쿠폰할인", "지역화폐", "온누리상품권", "최소주문금액", "배달비 0원"];
+const commonFilterLabels = ["기본순", "쿠폰할인", "배달비 0원", "지역화폐", "온누리상품권", "최소주문금액"];
 const sortOptions = [
   { key: "default", label: "기본순" },
   { key: "order", label: "주문 많은 순" },
@@ -1644,20 +1644,16 @@ function renderBenefits() {
 
 function renderEvents() {
   const track = document.querySelector("#eventTrack");
-  track.innerHTML = events
-    .map(
-      (event, index) => `
-        <button class="event-card event-card-${event.slug}" type="button" data-index="${index}" data-label="${event.title}" style="background:${event.color}">
+  const event = events[1] || events[0];
+  track.innerHTML = `
+        <button class="event-card event-card-${event.slug}" type="button" data-index="1" data-label="${event.title}" style="background:${event.color}">
           <span>${event.eyebrow}</span>
           <strong>${event.title}</strong>
           <img class="event-bag event-bag-${event.slug}" src="${imageRoot}${event.bag}" alt="" />
           <img class="event-food event-food-${event.slug}" src="${imageRoot}${event.image}" alt="" />
           <em>${event.count}</em>
         </button>
-      `
-    )
-    .join("");
-  requestAnimationFrame(() => track.querySelector('[data-index="1"]')?.scrollIntoView({ behavior: "auto", inline: "center", block: "nearest" }));
+      `;
 }
 
 function smallStoreCard(store) {
