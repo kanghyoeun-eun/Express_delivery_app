@@ -159,7 +159,8 @@ const benefits = [
   ["쿠폰함", "1151:2704", "benefits/images/benefits/coupon-box.png", "coupon"],
   ["이벤트", "1151:2706", "benefits/images/benefits/event-gift.png", "event"],
   ["지역화폐", "1151:2708", "benefits/images/benefits/local-currency.png", "local", "10% 할인"],
-  ["온누리", "1151:2710", "benefits/images/benefits/onnuri.png", "onnuri", "10% 할인"],
+  ["온누리", "1151:2710", "benefits/images/benefits/onnuri.png", "onnuri", "선착순"],
+  ["G드림카드", "benefit-gdream-card", "benefits/images/benefits/gdream-card.png", "gdream"],
 ];
 
 const events = [
@@ -582,6 +583,16 @@ const benefitPages = {
       { name: "평지담", rating: "5.0(342)", time: "35분 소요", discount: "온누리 상품권 가능", image: "stores/pyeongjidam/thumb.png", badges: ["선착순"], labels: ["온누리"] },
       { name: "시라유키 행궁점", rating: "5.0(342)", time: "34분 소요", discount: "온누리 결제 가능", image: "stores/shirayuki-haenggung/thumb.png" },
       { name: "꼬모온 행궁점", rating: "4.9(188)", time: "24분 소요", discount: "상품권 혜택", image: "stores/ccomon-haenggung/thumb.png" },
+    ],
+  },
+  gdream: {
+    title: "G드림카드",
+    tabs: ["G드림카드", "아동급식카드", "사용처"],
+    note: "G드림카드로 결제할 수 있는 가게예요.",
+    stores: [
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "G드림카드 사용 가능", image: "stores/salady/thumb-square.png", labels: ["G드림카드"] },
+      { name: "한상차림 행궁점", rating: "4.9(188)", time: "31분 소요", discount: "G드림카드 결제 가능", image: "stores/category-matches/korean-table.jpeg", labels: ["G드림카드"] },
+      { name: "쿠키브라운", rating: "4.8(119)", time: "28분 소요", discount: "G드림카드 사용 가능", image: "stores/category-matches/dessert-cookies.jpeg", labels: ["G드림카드"] },
     ],
   },
 };

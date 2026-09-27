@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v54-menu-image-cover";
+const CACHE_NAME = "baedal-prototype-v55-benefit-gdream-row";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260927-menu-image-cover",
-  "/script.js?v=20260927-menu-image-cover",
-  "/asset-map.js?v=20260927-menu-image-cover",
-  "/manifest.json?v=20260927-menu-image-cover"
+  "/styles.css?v=20260927-benefit-gdream-row",
+  "/script.js?v=20260927-benefit-gdream-row",
+  "/asset-map.js?v=20260927-benefit-gdream-row",
+  "/manifest.json?v=20260927-benefit-gdream-row"
 ];
 
 function shouldUseNetworkFirst(request) {
