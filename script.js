@@ -279,7 +279,7 @@ const saladResults = [
     rating: "5.0(342)",
     time: "35분 소요",
     discount: "최대 3000원 할인",
-    image: "banners/payment-benefit-banner.png",
+    image: "stores/salady/thumb-square.png",
     ribbon: "배달특급 10% 즉시 할인 매장",
   },
   {
@@ -539,7 +539,7 @@ const benefitPages = {
     tabs: ["쿠폰함", "3000원 할인", "중복쿠폰"],
     note: "다운로드하거나 바로 쓸 수 있는 쿠폰 가게예요.",
     stores: [
-      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "3000원 쿠폰", image: "banners/payment-benefit-banner.png", badges: ["중복쿠폰"] },
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "3000원 쿠폰", image: "stores/salady/thumb-square.png", badges: ["중복쿠폰"] },
       { name: "존앤진피자펍 행궁본점", rating: "5.0(342)", time: "35분 소요", discount: "2000원 쿠폰", image: "stores/john-and-jin-pizza-pub-haenggung/thumb.png", badges: ["오늘만"] },
       { name: "투썸플레이스 영통점", rating: "5.0(342)", time: "35분 소요", discount: "1000원 쿠폰", image: "banners/dessert-drinks-banner.png" },
     ],
@@ -550,7 +550,7 @@ const benefitPages = {
     note: "지금 진행 중인 이벤트 혜택 매장이에요.",
     stores: [
       { name: "BHC 광교중앙점", rating: "5.0(342)", time: "35분 소요", discount: "오늘 저녁 2000원 할인", image: "menus/chicken-platter-large.png", badges: ["이벤트"] },
-      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "4000원 이벤트 할인", image: "banners/salady-promotion-banner.png", badges: ["이벤트"] },
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "4000원 이벤트 할인", image: "stores/salady/thumb-square.png", badges: ["이벤트"] },
       { name: "피자헛 수원역점", rating: "4.8(177)", time: "42분 소요", discount: "2000원 할인", image: "menus/menu-side-02.png" },
     ],
   },
@@ -561,16 +561,16 @@ const benefitPages = {
     note: "지역화폐 결제와 추가 할인을 받을 수 있는 가게예요.",
     filteredNote: "선택한 혜택 조건에 맞는 가게를 먼저 보여드렸어요.",
     stores: [
-      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/payment-benefit-banner.png", ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"] },
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "stores/salady/thumb-square.png", ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"] },
       { name: "Poke all day 포케&샐러드 호매실점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/salady-menu-banner.png", ribbon: "배달특급 10% 즉시 할인 매장", labels: ["수원페이"] },
       { name: "샐러리아 호매실점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/salady-promotion-banner.png", labels: ["수원페이"] },
     ],
     filteredStores: [
-      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/payment-benefit-banner.png", ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"] },
+      { name: "샐러디 성대점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "stores/salady/thumb-square.png", ribbon: "배달특급 10% 즉시 할인 매장", labels: ["온누리 쿠폰"] },
     ],
     recommendations: [
       { name: "트라타", rating: "5.0(342)", time: "45분 소요", discount: "최대 3000원 할인", image: "stores/store-food-card-01/thumb.png", recent: "과카몰레, 더블업 트라타 부리또", labels: ["수원페이"] },
-      { name: "샐러디", rating: "5.0(342)", time: "40분 소요", discount: "최대 3000원 할인", image: "menus/salad-bowl.png", recent: "탄단지 샐러디, 콜라 3335ml", labels: ["수원페이"] },
+      { name: "샐러디", rating: "5.0(342)", time: "40분 소요", discount: "최대 3000원 할인", image: "stores/salady/thumb-square.png", recent: "탄단지 샐러디, 콜라 3335ml", labels: ["수원페이"] },
       { name: "아미고타코", rating: "5.0(342)", time: "32분 소요", discount: "최대 3000원 할인", image: "stores/amigo-taco/thumb.png", recent: "해쉬브라운 부리또", labels: ["수원페이"] },
     ],
   },
@@ -610,7 +610,7 @@ const menuItems = [
     name: "탄단지 샐러디",
     desc: "한 주문 단 한 번만 가능합니다!",
     price: "8,600원",
-    image: "stores/dessert-party/thumb.png",
+    image: "stores/salady/thumb-square.png",
   },
   {
     badge: "인기 2위",
@@ -624,7 +624,7 @@ const menuItems = [
     name: "맥시칸 랩",
     desc: "맛도 건강도 다 잡은 인기 메뉴",
     price: "1,7000원",
-    image: "menus/wrap.png",
+    image: "stores/salady/thumb-square.png",
   },
   {
     badge: "사장님 추천",
@@ -672,7 +672,10 @@ let currentMenu = null;
 function getStoreSlug(store) {
   if (store.slug) return store.slug;
   const m = store.image && store.image.match(/^stores\/([^/]+)\//);
-  return m ? m[1] : store.name.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9가-힣-]/g, "");
+  const imageSlug = m?.[1];
+  const genericImageSlug = imageSlug === "category-matches" || (imageSlug === "salady" && store.name !== "샐러디");
+  if (imageSlug && !genericImageSlug) return imageSlug;
+  return store.name.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9가-힣-]/g, "");
 }
 
 function findStoreBySlug(slug) {
