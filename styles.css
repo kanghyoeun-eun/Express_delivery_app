@@ -6032,3 +6032,91 @@ img {
 .address-chips button {
   touch-action: pan-x;
 }
+
+/* 20260927 Figma home layout restore */
+.app-screen[data-screen="home"] .category-wrap {
+  margin-top: -6px;
+  border-bottom: 0;
+  background: #fff;
+}
+
+.app-screen[data-screen="home"] .category-grid {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  height: 122px;
+  padding: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.app-screen[data-screen="home"] .category-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.app-screen[data-screen="home"] .category-item {
+  flex: 0 0 62px;
+  width: 62px;
+  height: 82px;
+  gap: 4px;
+}
+
+.app-screen[data-screen="home"] .more-button {
+  height: 36px;
+  border-top: 1px solid rgba(231, 230, 227, 0.72);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.app-screen[data-screen="home"] .benefit-wrap {
+  margin-top: 10px;
+  padding: 20px;
+  border-bottom: 0;
+  background: #fff;
+}
+
+.app-screen[data-screen="home"] .benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 62px);
+  gap: 10px;
+  justify-content: center;
+  width: 350px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.app-screen[data-screen="home"] .benefit-item {
+  flex: initial;
+  width: 62px;
+  height: 78px;
+  gap: 0;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0;
+}
+
+.app-screen[data-screen="home"] .benefit-art {
+  width: 56px;
+  height: 56px;
+  border-width: 0.6px;
+  border-radius: 20px;
+}
+
+.app-screen[data-screen="home"] .benefit-item em {
+  top: -9px;
+  left: 3px;
+  width: 56px;
+  height: 18px;
+  padding: 0;
+  border-radius: 999px;
+  transform: none;
+  font-size: 10px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.app-screen[data-screen="home"] .event-wrap {
+  margin-top: 10px;
+}
