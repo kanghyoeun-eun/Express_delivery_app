@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v55-benefit-gdream-row";
+const CACHE_NAME = "baedal-prototype-v56-benefit-gdream-onnuri-10";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260927-benefit-gdream-row",
-  "/script.js?v=20260927-benefit-gdream-row",
-  "/asset-map.js?v=20260927-benefit-gdream-row",
-  "/manifest.json?v=20260927-benefit-gdream-row"
+  "/styles.css?v=20260927-benefit-gdream-onnuri-10",
+  "/script.js?v=20260927-benefit-gdream-onnuri-10",
+  "/asset-map.js?v=20260927-benefit-gdream-onnuri-10",
+  "/manifest.json?v=20260927-benefit-gdream-onnuri-10"
 ];
 
 function shouldUseNetworkFirst(request) {

@@ -159,7 +159,7 @@ const benefits = [
   ["쿠폰함", "1151:2704", "benefits/images/benefits/coupon-box.png", "coupon"],
   ["이벤트", "1151:2706", "benefits/images/benefits/event-gift.png", "event"],
   ["지역화폐", "1151:2708", "benefits/images/benefits/local-currency.png", "local", "10% 할인"],
-  ["온누리", "1151:2710", "benefits/images/benefits/onnuri.png", "onnuri", "선착순"],
+  ["온누리", "1151:2710", "benefits/images/benefits/onnuri.png", "onnuri", "10% 할인"],
   ["G드림카드", "benefit-gdream-card", "benefits/images/benefits/gdream-card.png", "gdream"],
 ];
 
