@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v53-category-food-images-3";
+const CACHE_NAME = "baedal-prototype-v54-menu-image-cover";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260927-category-food-images-3",
-  "/script.js?v=20260927-category-food-images-3",
-  "/asset-map.js?v=20260927-category-food-images-3",
-  "/manifest.json?v=20260927-category-food-images-3"
+  "/styles.css?v=20260927-menu-image-cover",
+  "/script.js?v=20260927-menu-image-cover",
+  "/asset-map.js?v=20260927-menu-image-cover",
+  "/manifest.json?v=20260927-menu-image-cover"
 ];
 
 function shouldUseNetworkFirst(request) {
