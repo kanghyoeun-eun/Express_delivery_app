@@ -352,8 +352,8 @@ function createDummyStore(categorySlug, categoryTitle, index) {
 }
 
 function buildCategoryStores(categorySlug, categoryTitle, featured = []) {
-  const generated = Array.from({ length: 6 }, (_, index) => createDummyStore(categorySlug, categoryTitle, index + featured.length));
-  const byName = new Map([...featured, ...generated].map((store) => [store.name, store]));
+  const curatedStores = (featured || []).filter((store) => store && store.image);
+  const byName = new Map(curatedStores.map((store) => [store.name, store]));
   return Array.from(byName.values());
 }
 
@@ -410,6 +410,23 @@ const chickenResults = [
   { slug: "chicken-suwon-50", name: "계동치킨 화서역점", rating: "4.9(2,623)", time: "33분 소요", distance: "2.3km", minOrder: "12,000원", deliveryFee: "배달비 2,000원", discount: "배달비 혜택 없음", image: "stores/chicken-suwon/11-bbq-old.png", recent: "최근주문 : 깐풍치킨", orderCount: 930, likeCount: 302, labels: [], couponLabel: false },
 ];
 
+const visibleChickenSlugs = new Set([
+  "chicken-suwon-01",
+  "chicken-suwon-02",
+  "chicken-suwon-03",
+  "chicken-suwon-05",
+  "chicken-suwon-06",
+  "chicken-suwon-09",
+  "chicken-suwon-11",
+  "chicken-suwon-13",
+  "chicken-suwon-25",
+  "chicken-suwon-29",
+  "chicken-suwon-33",
+  "chicken-suwon-38",
+  "chicken-suwon-42",
+]);
+const visibleChickenResults = chickenResults.filter((store) => visibleChickenSlugs.has(store.slug));
+
 const categoryPages = {
   korean: {
     title: "한식",
@@ -423,7 +440,7 @@ const categoryPages = {
   chicken: {
     title: "치킨",
     tabs: ["후라이드", "양념", "순살"],
-    stores: chickenResults,
+    stores: visibleChickenResults,
     fixedStores: true,
   },
   pizza: {

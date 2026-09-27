@@ -1,11 +1,11 @@
-const CACHE_NAME = "baedal-prototype-v48-benefit-chip-copy";
+const CACHE_NAME = "baedal-prototype-v49-curated-store-images";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/styles.css?v=20260922-benefit-chip-copy",
-  "/script.js?v=20260922-benefit-chip-copy",
-  "/asset-map.js?v=20260922-benefit-chip-copy",
-  "/manifest.json?v=20260922-benefit-chip-copy"
+  "/styles.css?v=20260927-curated-store-images",
+  "/script.js?v=20260927-curated-store-images",
+  "/asset-map.js?v=20260927-curated-store-images",
+  "/manifest.json?v=20260927-curated-store-images"
 ];
 
 function shouldUseNetworkFirst(request) {
