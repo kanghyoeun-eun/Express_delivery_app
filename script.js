@@ -432,9 +432,9 @@ const categoryPages = {
     title: "한식",
     tabs: ["백반", "국밥", "도시락"],
     stores: [
-      { name: "정솥밥 수원 행궁동점", rating: "5.0(342)", time: "32분 소요", discount: "최대 3000원 할인", image: "stores/category-matches/korean-table.jpeg", badges: ["추천"] },
-      { name: "평지담", rating: "5.0(342)", time: "35분 소요", discount: "최대 2000원 할인", image: "stores/category-matches/korean-table.jpeg" },
-      { name: "봄동비빔밥 상점", rating: "4.9(221)", time: "28분 소요", discount: "최대 1000원 할인", image: "stores/category-matches/korean-table.jpeg" },
+      { name: "정솥밥 수원 행궁동점", rating: "5.0(342)", time: "32분 소요", discount: "최대 3000원 할인", image: "stores/jeongsotbap-suwon-haenggung/thumb.png", badges: ["추천"] },
+      { name: "한상차림 행궁점", rating: "5.0(342)", time: "35분 소요", discount: "최대 2000원 할인", image: "stores/category-matches/korean-table.jpeg" },
+      { name: "봄동비빔밥 상점", rating: "4.9(221)", time: "28분 소요", discount: "최대 1000원 할인", image: "menus/salad-bowl.png" },
     ],
   },
   chicken: {
@@ -466,15 +466,15 @@ const categoryPages = {
     tabs: ["떡볶이", "김밥", "튀김"],
     stores: [
       { name: "엽기떡볶이 영통점", rating: "5.0(342)", time: "30분 소요", discount: "최대 2000원 할인", image: "stores/category-matches/snack-tteokbokki.jpeg", badges: ["인기"] },
-      { name: "꼬마김밥 연구소", rating: "4.9(188)", time: "24분 소요", discount: "1000원 쿠폰", image: "stores/category-matches/snack-tteokbokki.jpeg" },
-      { name: "튀김상회 행궁점", rating: "4.8(121)", time: "27분 소요", discount: "최대 1000원 할인", image: "stores/category-matches/snack-tteokbokki.jpeg" },
+      { name: "꼬마김밥 연구소", rating: "4.9(188)", time: "24분 소요", discount: "1000원 쿠폰", image: "stores/category-matches/snack-ramen.jpeg" },
+      { name: "튀김상회 행궁점", rating: "4.8(121)", time: "27분 소요", discount: "최대 1000원 할인", image: "stores/category-matches/snack-tteokbokki-bowl.jpeg" },
     ],
   },
   japanese: {
     title: "일식",
     tabs: ["초밥", "돈카츠", "라멘"],
     stores: [
-      { name: "시라유키 행궁점", rating: "5.0(342)", time: "34분 소요", discount: "최대 3000원 할인", image: "stores/category-matches/japanese-seafood.jpeg", badges: ["추천"] },
+      { name: "시라유키 행궁점", rating: "5.0(342)", time: "34분 소요", discount: "최대 3000원 할인", image: "stores/shirayuki-haenggung/thumb.png", badges: ["추천"] },
       { name: "멘야하나비 수원점", rating: "4.9(204)", time: "39분 소요", discount: "1000원 쿠폰", image: "stores/category-matches/japanese-breakfast.jpeg" },
       { name: "카츠오모이 광교점", rating: "4.8(166)", time: "31분 소요", discount: "최대 2000원 할인", image: "stores/category-matches/japanese-seafood.jpeg" },
     ],
@@ -483,9 +483,9 @@ const categoryPages = {
     title: "햄버거",
     tabs: ["수제버거", "치킨버거", "세트"],
     stores: [
-      { name: "테디플레이트", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "stores/teddy-plate-haenggung/thumb.png", badges: ["추천"] },
-      { name: "버거앤프라이즈 수원점", rating: "4.9(198)", time: "29분 소요", discount: "1000원 쿠폰", image: "stores/store-food-card-01/thumb.png" },
-      { name: "맘스터치 광교점", rating: "4.8(151)", time: "25분 소요", discount: "최대 2000원 할인", image: "menus/wrap.png" },
+      { name: "테디플레이트", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "stores/category-matches/burger-cartel.jpeg", badges: ["추천"] },
+      { name: "버거앤프라이즈 수원점", rating: "4.9(198)", time: "29분 소요", discount: "1000원 쿠폰", image: "stores/category-matches/burger-brand.jpeg" },
+      { name: "맘스터치 광교점", rating: "4.8(151)", time: "25분 소요", discount: "최대 2000원 할인", image: "stores/category-matches/burger-tray.jpeg" },
     ],
   },
   dessert: {
@@ -493,8 +493,8 @@ const categoryPages = {
     tabs: ["카페", "쿠키", "케이크"],
     stores: [
       { name: "투썸플레이스 영통점", rating: "5.0(342)", time: "35분 소요", discount: "최대 3000원 할인", image: "banners/dessert-drinks-banner.png", badges: ["이벤트"] },
-      { name: "니드스윗", rating: "4.9(220)", time: "26분 소요", discount: "1000원 쿠폰", image: "stores/cafe-maiden2/thumb.png" },
-      { name: "디저트파티", rating: "4.9(188)", time: "28분 소요", discount: "최대 1000원 할인", image: "stores/dessert-party/thumb.png" },
+      { name: "쿠키브라운", rating: "4.9(220)", time: "26분 소요", discount: "1000원 쿠폰", image: "stores/category-matches/dessert-cookies.jpeg" },
+      { name: "치즈케이크 라바", rating: "4.9(188)", time: "28분 소요", discount: "최대 1000원 할인", image: "stores/category-matches/dessert-cheesecake-lava.jpeg" },
     ],
   },
   "late-night": {
