@@ -27,14 +27,25 @@
 .home-v2 .event-card > strong { padding-left: 16px; }
 .home-promotion-art { position: absolute; right: 0; top: 7px; width: 112px; height: 106px; object-fit: contain; }
 .home-v2 .content-section { margin-top: 10px; background: white; }
-.home-v2 .hot-section { background: linear-gradient(#ffe262 0%, white 72%); padding: 20px; }
+.home-v2 .hot-section { position: relative; min-height: 313px; height: 313px; padding: 20px; background: linear-gradient(to bottom,#ffe262 27.6px,#fff 168.9px) 0 0 / 100% 234px no-repeat #fff; overflow: hidden; }
 .home-offer-track { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; align-items: flex-start; }
 .home-offer-track::-webkit-scrollbar, .home-charge-links::-webkit-scrollbar { display: none; }
-.home-chef-intro { width: 132px; flex: 0 0 132px; position: relative; text-align: center; }
-.home-chef-intro > span { display: inline-block; background: #ffe994; font-size: 12px; line-height: 18px; padding: 2px 6px; border-radius: 4px; }
-.home-chef-intro h2 { font-size: 20px; line-height: 28px; margin: 6px 0 0; }
-.home-chef-intro p { font-size: 12px; line-height: 18px; margin: 0; }
-.home-chef-intro > img { width: 147px; height: 180px; object-fit: fill; margin-left: -14px; }
+.home-chef-intro { width: 133px; height: 273px; flex: 0 0 133px; position: relative; text-align: left; display: flex; flex-direction: column; gap: 8px; }
+.home-chef-heading { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.home-chef-heading > span { display: inline-flex; height: 19px; align-items: center; background: #ffa100; font-size: 12px; font-weight: 500; line-height: 18px; padding: 1px 6px 0; border-radius: 2px; white-space: nowrap; }
+.home-chef-intro h2 { font-size: 20px; font-weight: 600; line-height: 28px; margin: 0; white-space: nowrap; }
+.home-chef-intro p { font-size: 16px; font-weight: 400; line-height: 24px; margin: 0; white-space: nowrap; color: #43423c; }
+.home-chef-art { position: relative; width: 133px; height: 184px; overflow: hidden; flex-shrink: 0; }
+.home-chef-art > img { position: absolute; left: -14.073px; top: 0; width: 147.073px; height: 179.979px; }
+.home-chef-art::after { content: ""; position: absolute; left: 12px; bottom: .42px; width: 110.791px; height: 38.758px; background: linear-gradient(transparent,#fff); }
+.home-v2 .hot-section .home-offer-track { width: calc(100% + 20px); height: 273px; padding-right: 20px; }
+.home-v2 .hot-section .home-offer-card { height: 273px; position: relative; display: flex; flex-direction: column; align-items: flex-start; }
+.home-v2 .hot-section .home-offer-media > span { top: 124.5px; bottom: auto; height: 28px; padding: 4px; font-size: 14px; font-weight: 600; line-height: 20px; background: #f90; border-radius: 0 0 8px 8px; }
+.home-v2 .hot-section .home-offer-card p { font-size: 12px; font-weight: 400; line-height: 18px; margin: 0 0 6px; white-space: nowrap; }
+.home-v2 .hot-section .home-offer-card h3 { font-weight: 600; }
+.home-v2 .hot-section .home-offer-card .home-rating { height: 26px; display: flex; align-items: center; gap: 0; margin: 6px 0 0; }
+.home-v2 .hot-section .home-rating strong { font-size: 14px; font-weight: 700; line-height: 20px; }
+.home-v2 .hot-section .home-rating span { font-size: 12px; font-weight: 400; line-height: 18px; color: #5c5b54; }
 .home-offer-card { flex: 0 0 152px; width: 152px; padding: 0; text-align: left; color: #181814; }
 .home-offer-media { display: block; position: relative; width: 152px; height: 152px; }
 .home-offer-media > img { width: 152px; height: 152px; object-fit: cover; border-radius: 8px; }

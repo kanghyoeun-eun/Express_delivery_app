@@ -1,4 +1,4 @@
-const CACHE_NAME = "baedal-prototype-v58-home-oct28";
+const CACHE_NAME = "baedal-prototype-v59-ranking-oct28";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -6,8 +6,8 @@ const APP_SHELL = [
   "/script.js?v=20260927-figma-home-layout",
   "/asset-map.js?v=20260927-figma-home-layout",
   "/manifest.json?v=20260927-figma-home-layout",
-  "/home-update.css?v=20261028-home",
-  "/home-update.js?v=20261028-home"
+  "/home-update.css?v=20261028-ranking",
+  "/home-update.js?v=20261028-ranking"
 ];
 
 function shouldUseNetworkFirst(request) {

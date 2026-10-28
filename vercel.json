@@ -1,0 +1,13 @@
+{
+  "routes": [
+    { "handle": "filesystem" },
+    {
+      "src": "/assets/(.*)",
+      "dest": "https://raw.githubusercontent.com/kanghyoeun-eun/Express_delivery_app/c0ac036e74db5cad0c8f4f73dbb569bbbbb07ac6/assets/$1"
+    },
+    {
+      "src": "/icons/(.*)",
+      "dest": "https://raw.githubusercontent.com/kanghyoeun-eun/Express_delivery_app/c0ac036e74db5cad0c8f4f73dbb569bbbbb07ac6/icons/$1"
+    }
+  ]
+}

@@ -41,7 +41,13 @@
     return `<button class="home-offer-card" type="button" data-target="store" data-home-store="${key}"><span class="home-offer-media"><img src="${asset(file)}" alt="${name}" /><span>사장님 쿠폰 ${coupon}원</span></span><h3>${name}</h3>${free ? '<p>말차 라떼</p><p class="home-free-price"><b>100%</b> <strong>0원</strong> <del>12,000원</del></p>' : `<p>${time}분 소요 · 최대 ${discount}원 할인</p>`}<div class="home-offer-tags">${tags}</div>${free ? '' : `<p class="home-rating"><img src="${asset('6fad9.svg')}" alt="별점" />${rating}</p>`}</button>`;
   };
   const hot = home.querySelector('.hot-section');
-  hot.innerHTML = `<div class="home-offer-track"><div class="home-chef-intro"><span>사장님 쿠폰 랭킹</span><h2>사장님이 쏜다!</h2><p>오직 배달특급에서만!</p><img src="${asset('6d8eb.png')}" alt="" /></div>${card('샐러디 성대점','83cc0.png',3000,35,7000,'5.0(432)')}${card('투썸플레이스 영통점','abcac.png',2000,25,3000,'5.0(200)')}</div>`;
+  hot.innerHTML = `<div class="home-offer-track"><div class="home-chef-intro"><div class="home-chef-heading"><span>사장님 쿠폰 랭킹</span><div><h2>사장님이 쏜다!</h2><p>오직 배달특급에서만!</p></div></div><div class="home-chef-art"><img src="${asset('6d8eb.png')}" alt="" /></div></div>${card('샐러디 성대점','83cc0.png',3000,35,7000,'5.0(432)')}${card('투썸플레이스','abcac.png',2000,25,3000,'5.0(200)')}${card('동탄 할머니 보쌈','abcac.png',2000,35,3000,'5.0(342)')}</div>`;
+  hot.querySelectorAll('.home-offer-card').forEach((button, index) => {
+    if (index > 0) button.querySelector('.home-tag.orange').textContent = '온누리 쿠폰';
+    const rating = button.querySelector('.home-rating');
+    const parts = rating.textContent.match(/([\d.]+)(\(\d+\))/);
+    if (parts) rating.innerHTML = `<img src="${asset('6fad9.svg')}" alt="별점" /><strong>${parts[1]}</strong><span>${parts[2]}</span>`;
+  });
 
   const stamp = home.querySelector('.stamp-section');
   stamp.querySelector('h2').innerHTML = `4월 프리퀀시 현황 ${arrow}`;
