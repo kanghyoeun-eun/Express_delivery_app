@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./styles.css?v=20260927-figma-home-layout" />
     <link rel="stylesheet" href="./home-update.css?v=20261028-ranking" />
     <link rel="stylesheet" href="./category-update.css?v=20261028-category" />
+    <link rel="stylesheet" href="./store-update.css?v=20261028-store" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -261,34 +262,36 @@
         </section>
       </section>
 
-      <section class="app-screen" data-screen="store" aria-label="매장 상세">
+      <section class="app-screen store-v2" data-screen="store" aria-label="매장 상세">
         <section class="scroll-area detail-scroll">
+          <div class="store-top-nav"><div class="status-bar"><strong>9:41</strong><div class="status-icons"><img src="./assets/images/store-20261028/39433.svg" alt="" /><img src="./assets/images/store-20261028/60ad9.svg" alt="" /><img src="./assets/images/store-20261028/f8aa3.svg" alt="" /></div></div><div class="store-hero-actions"><button class="icon-button" type="button" data-back aria-label="뒤로"><img src="./assets/images/store-20261028/9cb8c.svg" alt="" /></button><div><button class="icon-button" type="button" data-store-favorite aria-label="찜하기" aria-pressed="false"><img src="./assets/images/store-20261028/f700d.svg" alt="" /></button><button class="icon-button" type="button" data-target="cart" aria-label="장바구니"><img src="./assets/images/store-20261028/c5b1a.svg" alt="" /></button></div></div></div>
           <header class="store-hero">
             <img id="storeHeroImg" src="./assets/images/banners/payment-benefit-banner.png" alt="" />
-            <div class="status-bar overlay"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/white.svg" alt="" /><img src="./icons/status/wifi/white.svg" alt="" /><img src="./icons/status/battery/white.svg" alt="" /></div></div>
-            <div class="store-hero-actions"><button class="icon-button ghost" type="button" data-back><img src="./icons/24/chevron-left.svg" alt="" /></button><div><button class="icon-button ghost" type="button" aria-label="찜하기"><img src="./icons/24/like/white.svg" alt="" /></button><button class="icon-button ghost" type="button" data-target="cart"><img src="./icons/24/shopping-cart-02.svg" alt="" /></button></div></div>
           </header>
           <section class="store-summary">
+            <div class="store-identity">
             <div class="store-title-row">
               <h1 id="storeName">BHC 성대푸르지오점</h1>
-              <button type="button" data-modal="store-info">가게정보/원산지</button>
+              <button type="button" data-modal="store-details-info">가게정보/원산지</button>
             </div>
-            <p class="store-rating"><img src="./icons/14/star.svg" alt="" /> <strong>5.0</strong> (후기 432개) <img src="./icons/16/chevron-right.svg" alt="" /></p>
+            <button class="store-rating" type="button" data-modal="store-reviews"><img src="./assets/images/store-20261028/16c13.svg" alt="" /> <strong>5.0</strong> (후기 432개) <img src="./assets/images/store-20261028/da206.svg" alt="" /></button>
             <div class="store-badges"><span class="pay">수원페이</span><span class="onnuri">온누리 상품권</span></div>
-            <p class="instant-discount"><img src="./icons/24/thunder.svg" alt="" /> 배달특급 앱에서만 10% 바로 할인 중이에요!</p>
+            </div>
             <div class="delivery-card">
-              <div class="delivery-tabs"><button class="active" type="button">배달 25~30분</button><button type="button">포장 20분</button></div>
+              <div class="delivery-tabs" role="tablist" aria-label="수령 방법"><button class="active" type="button" data-fulfillment="delivery" role="tab" aria-selected="true">배달 25~30분</button><button type="button" data-fulfillment="pickup" role="tab" aria-selected="false">픽업 20분 <em>6000원 할인</em></button></div>
               <dl>
                 <div><dt>최소주문</dt><dd id="storeMinOrder">15,000원</dd></div>
-                <div><dt>현주소 배달비</dt><dd>3000원 <button type="button">자세히</button></dd></div>
+                <div><dt id="storeFeeLabel">현주소 배달비</dt><dd>3000원 <button type="button" data-store-fee-info>자세히</button></dd></div>
               </dl>
             </div>
-            <button class="store-info-card" type="button"><span class="store-card-main"><img class="store-card-icon" src="./icon_drafts/24/map-pin-alt-silver.svg" alt="" /><span><small>현재 주소</small>경기 수원시 팔달구 정자천로 32번길</span></span><img class="store-card-chevron" src="./icons/20/chevron-right.svg" alt="" /></button>
-            <button class="store-coupon-card" type="button" data-modal="coupon-sheet"><span class="store-card-main"><img class="store-card-icon" src="./icon_drafts/24/ticket-voucher-alt.svg" alt="" /><span>최대 3000원 할인 쿠폰이 있어요!</span></span><img class="store-card-chevron" src="./icons/20/chevron-right.svg" alt="" /></button>
-            <div class="store-review-strip">
-              <article><img src="./assets/images/reviews/review-food-01.png" alt="" /><span>★★★★★</span><p>다이어트 하려고 주문했어요ㅎㅎ</p></article>
-              <article><img src="./assets/images/reviews/review-food-02.png" alt="" /><span>★★★★★</span><p>탄단지 조합이 좋아요</p></article>
+            <div class="store-benefit-stack">
+            <button class="store-info-card" type="button" data-modal="store-address"><span class="store-card-main"><img class="store-card-icon" src="./assets/images/store-20261028/5579c.svg" alt="" /><span><small>현재 주소</small><b id="storeAddressText">경기 수원시 영통구 광교로</b></span></span><img class="store-card-chevron" src="./icons/20/chevron-right.svg" alt="" /></button>
+            <section class="store-owner-coupon"><p>수수료 부담은 줄이고, 소비자 혜택은 늘리고!</p><div class="store-owner-body"><div><small><span class="owner-ticket-icon"><img src="./assets/images/store-20261028/c0bfb.svg" alt="" /></span>배달특급 사용자만을 위한 <b>사장님의 선물!</b></small><strong id="ownerCouponText">3000원 할인 쿠폰</strong></div><button type="button" data-owner-coupon>다운로드</button></div></section>
+            <button class="store-coupon-card" type="button" data-modal="coupon-sheet"><span class="store-card-main"><img class="store-card-icon" src="./assets/images/store-20261028/8bf71.svg" alt="" /><span>최대 4000원 추가 할인 쿠폰!</span></span><img class="store-card-chevron" src="./icons/20/chevron-right.svg" alt="" /></button>
             </div>
+          </section>
+          <div class="store-review-strip"></div>
+          <section class="detail-band store-menu-band">
             <nav class="store-menu-tabs" aria-label="매장 메뉴 카테고리">
               <button type="button">인기메뉴</button>
               <button type="button">이벤트 메뉴</button>
@@ -297,16 +300,16 @@
             </nav>
             <div class="store-filter-row">
               <button type="button" data-modal="store-info">제외 성분 선택</button>
-              <button type="button" data-modal="coupon-select">추천 조합 자동 선택</button>
-              <button type="button">열량 설정</button>
-              <label><input type="checkbox" checked /> 품절 상품 제외</label>
+              <button type="button" data-store-recommend>추천 조합 자동 선택</button>
+              <button type="button" data-store-calories>열량 설정</button>
+              <button type="button" data-menu-preference="lowSugar" aria-pressed="false">저당</button><button type="button" data-menu-preference="vegan" aria-pressed="false">비건</button>
             </div>
-          </section>
-          <section class="detail-band store-menu-band">
+            <label class="store-soldout-control"><input id="storeHideSoldout" type="checkbox" checked /> 품절 상품 제외</label>
             <h2>인기메뉴</h2>
             <div class="menu-grid" id="storeMenuList"></div>
           </section>
         </section>
+        <div class="category-bottom-indicator" aria-hidden="true"><img src="./assets/images/category-20261028/9b0b0.png" alt="" /></div>
       </section>
 
       <section class="app-screen" data-screen="menu" aria-label="메뉴 상세">
@@ -535,6 +538,10 @@
         </section>
       </div>
 
+      <div class="modal-layer" data-overlay="store-details-info" role="dialog" aria-modal="true" aria-labelledby="storeDetailsTitle"><section class="bottom-sheet"><header class="sheet-title-bar"><span></span><h2 id="storeDetailsTitle">가게정보/원산지</h2><button type="button" data-close-modal aria-label="닫기"><img src="./icons/32/delete.svg" alt="" /></button></header><div class="store-dialog-body" id="storeDetailsBody"></div></section></div>
+      <div class="modal-layer" data-overlay="store-address" role="dialog" aria-modal="true" aria-labelledby="storeAddressTitle"><section class="bottom-sheet"><header class="sheet-title-bar"><span></span><h2 id="storeAddressTitle">현재 주소</h2><button type="button" data-close-modal aria-label="닫기"><img src="./icons/32/delete.svg" alt="" /></button></header><form class="store-dialog-body" id="storeAddressForm"><label for="storeAddressInput">주소</label><input id="storeAddressInput" required value="경기 수원시 영통구 광교로" /><button type="submit" class="store-dialog-apply">적용</button></form></section></div>
+      <div class="modal-layer" data-overlay="store-reviews" role="dialog" aria-modal="true" aria-labelledby="storeReviewsTitle"><section class="bottom-sheet"><header class="sheet-title-bar"><span></span><h2 id="storeReviewsTitle">가게 리뷰</h2><button type="button" data-close-modal aria-label="닫기"><img src="./icons/32/delete.svg" alt="" /></button></header><div class="store-dialog-body" id="storeReviewsBody"></div></section></div>
+
       <div class="modal-layer" data-overlay="coupon-select">
         <section class="bottom-sheet recommend-sheet">
           <header class="sheet-title-bar"><span></span><h2>추천 조합 자동 선택</h2><button type="button" data-close-modal aria-label="닫기"><img src="./icons/32/delete.svg" alt="" /></button></header>
@@ -610,7 +617,7 @@
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
     <script src="./asset-map.js?v=20260927-figma-home-layout"></script>
-    <script src="./script.js?v=20261028-category"></script>
+    <script src="./script.js?v=20261028-store"></script>
     <script src="./home-update.js?v=20261028-ranking"></script>
   </body>
 </html>

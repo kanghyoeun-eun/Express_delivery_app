@@ -1,0 +1,97 @@
+.store-v2 .detail-scroll { background:#f5f5f5; }
+.store-v2 .store-top-nav { position:sticky; top:0; height:0; z-index:20; color:#fff; }
+.store-top-nav::before { content:""; position:absolute; inset:0 0 auto; height:100px; background:linear-gradient(rgba(0,0,0,.64),transparent); pointer-events:none; }
+.store-v2 .store-top-nav .status-bar { display:grid; grid-template-columns:minmax(0,1fr) 124px minmax(0,1fr); height:50px; padding:21px 0 0; align-items:start; background:none; }
+.store-v2 .status-bar strong { grid-column:1; width:auto; padding:0 6px 0 16px; }
+.store-v2 .status-icons { grid-column:3; width:auto; justify-content:center; gap:7px; padding:4.5px 16px 0 6px; }
+.store-v2 .status-icons img:nth-child(1) { width:19.2px; height:12.226px; }
+.store-v2 .status-icons img:nth-child(2) { width:17.142px; height:12.328px; }
+.store-v2 .status-icons img:nth-child(3) { width:27.328px; height:13px; }
+.store-v2 .store-hero-actions { position:relative; inset:auto; display:flex; justify-content:space-between; align-items:center; height:50px; padding:0 20px; }
+.store-v2 .store-hero-actions > div { display:flex; gap:8px; }
+.store-v2 .icon-button { width:24px; min-width:24px; height:24px; padding:0; border-radius:0; background:none; }
+.store-v2 .icon-button img { width:24px; height:24px; filter:none; }
+.store-v2 [data-store-favorite][aria-pressed="true"] { background:#ff6a00; border-radius:50%; }
+.store-v2.is-scrolled .store-top-nav::before { background:#fff; border-bottom:1px solid #e7e6e3; }
+.store-v2.is-scrolled .store-top-nav { color:#181814; }
+.store-v2.is-scrolled .store-top-nav img { filter:brightness(0); }
+.store-v2 .store-hero { height:286px; margin-bottom:-10px; background:#d0d0d0; }
+.store-v2 .store-hero > img { width:100%; height:296.189px; object-fit:cover; object-position:center; }
+.store-v2 .store-summary { position:relative; padding:20px; display:flex; flex-direction:column; gap:20px; background:#fff; }
+.store-identity { position:relative; padding-bottom:16px; }
+.store-identity::after { content:""; position:absolute; bottom:0; left:0; right:0; height:.4px; background:#e7e6e3; }
+.store-v2 .store-title-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0; }
+.store-v2 .store-title-row h1 { min-width:0; margin:0; font-size:24px; font-weight:600; line-height:32px; word-break:keep-all; overflow-wrap:anywhere; }
+.store-v2 .store-title-row > button { flex-shrink:0; height:22px; padding:2px 10px; font-size:12px; line-height:18px; font-weight:500; color:#5c5b54; border-radius:999px; background:#f5f5f5; }
+.store-v2 .store-rating { display:flex; align-items:center; gap:0; height:22px; margin:8px 0 12px; padding:0; background:none; color:#43423c; font-size:14px; line-height:20px; font-weight:500; }
+.store-v2 .store-rating strong { font-size:16px; line-height:24px; font-weight:600; margin-right:4px; }
+.store-v2 .store-rating > img:first-child { width:20px; height:20px; }
+.store-v2 .store-rating > img:last-child { width:16px; height:16px; }
+.store-v2 .store-badges { display:flex; gap:4px; margin:0; min-height:20px; flex-wrap:wrap; }
+.store-v2 .store-badges span { display:inline-flex; align-items:center; height:20px; border-radius:4px; padding:0 6px; font-size:12px; font-weight:500; line-height:18px; }
+.store-v2 .store-badges .pay { color:#355371; background:#dfefff; }
+.store-v2 .store-badges .onnuri { color:#d85700; background:#ffdcbb; }
+.store-v2 .delivery-card { padding:0; }
+.store-v2 .delivery-tabs { height:40px; padding:2px; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+.store-v2 .delivery-tabs button { height:36px; min-width:0; padding:0 4px; font-size:14px; line-height:20px; white-space:nowrap; }
+.store-v2 .delivery-tabs em { color:#008b60; font-style:normal; }
+.store-v2 .delivery-card dl { margin:16px 0 0; gap:10px; }
+.store-v2 .delivery-card dl > div { gap:0; display:grid; grid-template-columns:118px minmax(0,1fr); }
+.store-v2 .delivery-card dl > div:first-child { grid-template-columns:111.3px minmax(0,1fr); }
+.store-v2 .delivery-card dt { font-weight:500; }
+.store-v2 .delivery-card dd { text-align:left; display:flex; align-items:center; height:20px; }
+.store-v2 .delivery-card dd button { color:#5c5b54; font-weight:500; }
+.store-benefit-stack { display:flex; flex-direction:column; gap:8px; }
+.store-v2 .store-info-card { height:62px; min-height:62px; padding:11px; }
+.store-v2 .store-info-card small { line-height:18px; font-size:12px; font-weight:400; color:#5c5b54; }
+.store-v2 .store-info-card b { display:block; line-height:20px; font-size:14px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.store-owner-coupon { overflow:hidden; border-radius:8px; }
+.store-owner-coupon > p { margin:0; padding:8px 12px; min-height:34px; background:#baf1e0; color:#007551; font-size:12px; font-weight:500; line-height:18px; }
+.store-owner-body { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px; min-height:70px; background:#e8f8f3; }
+.store-owner-body > div { min-width:0; flex:1; }
+.store-owner-body small { display:flex; align-items:center; flex-wrap:wrap; gap:2px; color:#5c5b54; font-size:12px; font-weight:400; line-height:18px; }
+.store-owner-body small b { color:#2a2924; font-weight:400; }
+.owner-ticket-icon { width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+.owner-ticket-icon img { width:15.114px; height:10.704px; }
+.store-owner-body strong { display:block; font-size:16px; line-height:24px; font-weight:600; margin-top:2px; }
+.store-owner-body > button { height:32px; padding:0 16px; flex-shrink:0; border:.8px solid #e7e6e3; border-radius:4px; background:#fff; font-size:12px; line-height:18px; font-weight:500; }
+.store-owner-body > button:disabled { color:#7b7a73; cursor:default; }
+.store-v2 .store-coupon-card { height:48px; min-height:48px; color:#5c5b54; padding:11.4px; }
+.store-v2 .store-review-strip { width:100%; margin:10px 0; padding:20px; min-height:116px; background:#fff; gap:8px; }
+.store-review-card { display:flex; align-items:center; gap:15px; width:259px; height:76px; flex-shrink:0; padding:8px; border-radius:8px; background:#f5f5f5; text-align:left; }
+.store-review-photo { width:60px; height:60px; flex-shrink:0; position:relative; overflow:hidden; border-radius:6px; }
+.store-v2 .store-review-photo > img, .store-dialog-body .store-review-photo > img { width:60px; height:60px; margin:0; object-fit:cover; }
+.store-v2 .review-crop-0 > img, .store-dialog-body .review-crop-0 > img { height:121.368px; position:absolute; top:0; }
+.store-v2 .review-crop-1 > img, .store-dialog-body .review-crop-1 > img { height:120.462px; position:absolute; top:-60.462px; }
+.store-review-copy { min-width:0; display:flex; flex-direction:column; gap:4px; padding-right:16px; font-size:12px; line-height:18px; }
+.store-review-stars { display:flex; height:14px; }
+.store-v2 .store-review-stars > img, .store-dialog-body .store-review-stars > img { width:14px; height:14px; margin:0; }
+.store-review-copy > span:last-child { height:39px; overflow:hidden; }
+.store-v2 .store-menu-band { background:#fff; padding:0 20px 8px; margin:0; }
+.store-v2 .store-menu-tabs { margin:0 -20px; display:flex; gap:0; width:calc(100% + 40px); height:56px; border:0; box-shadow:inset 0 -1.2px #dfded8; padding:0; overflow-x:auto; }
+.store-v2 .store-menu-tabs button { flex-shrink:0; height:56px; padding:0 20px; font-size:16px; font-weight:600; line-height:24px; white-space:nowrap; border:0; position:relative; color:#626262; }
+.store-v2 .store-menu-tabs button.active { color:#2a2924; }
+.store-v2 .store-menu-tabs button.active::after { content:""; position:absolute; left:0; right:0; bottom:0; height:2.6px; background:#2a2924; }
+.store-v2 .store-filter-row { width:calc(100% + 40px); margin:0 -20px; padding:16px 20px; height:68px; gap:8px; overflow-x:auto; }
+.store-v2 .store-filter-row button { flex-shrink:0; height:36px; padding:0 12px; border:1px solid #e7e6e3; border-radius:999px; font-size:14px; line-height:20px; font-weight:500; }
+.store-v2 .store-filter-row [aria-pressed="true"] { background:#2a2924; color:#fff; }
+.store-soldout-control { display:flex; justify-content:flex-end; align-items:center; gap:4px; height:24px; margin:0; font-size:14px; font-weight:500; color:#43423c; }
+.store-soldout-control input { appearance:none; width:24px; height:24px; margin:0; border:1px solid #dfded8; border-radius:50%; cursor:pointer; }
+.store-soldout-control input:checked { border:0; background:url('./assets/images/store-20261028/7d9e8.svg') center/24px 24px no-repeat; }
+.store-v2 .store-menu-band > h2 { font-size:20px; line-height:28px; font-weight:600; margin:0 0 20px; }
+.store-v2 .menu-grid { gap:32px; grid-template-columns:minmax(0,1fr); }
+.store-v2 .menu-card { padding:0; border:0; gap:16px; height:124px; align-items:center; }
+.store-v2 .menu-card > div { min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:6px; }
+.store-v2 .menu-rank { margin:0; padding:0 6px; height:20px; font-size:12px; line-height:18px; font-weight:500; color:#5c5b54; background:#e7e6e3; align-items:center; }
+.store-v2 .menu-card:first-child .menu-rank { background:#fff2b8; color:#8f6500; }
+.store-v2 .menu-card h3 { margin:0; width:100%; height:22px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:18px; line-height:26px; font-weight:600; }
+.store-v2 .menu-card strong { font-size:16px; line-height:22px; font-weight:600; }
+.store-v2 .menu-card p { margin:0; max-width:100%; font-size:12px; line-height:18px; color:#5c5b54; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.store-v2 .menu-card small { font-size:12px; line-height:18px; }
+.store-v2 .menu-card small img { width:14px; height:14px; border-radius:0; }
+.store-v2 .menu-card > img { width:124px; height:124px; object-fit:cover; border:1px solid #e7e6e3; border-radius:8px; }
+.store-dialog-body { display:flex; flex-direction:column; gap:12px; padding:20px; }
+.store-dialog-body p { margin:0; font-size:14px; line-height:22px; }
+.store-dialog-body input { width:100%; height:44px; padding:0 12px; border:1px solid #dfded8; border-radius:4px; }
+.store-dialog-apply { height:44px; background:#2a2924; color:#fff; border-radius:4px; }
+.store-dialog-body .store-review-card { width:100%; }

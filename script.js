@@ -277,7 +277,15 @@ const stores = [
 const saladResults = [
   {
     name: "샐러디 성대점",
-    rating: "5.0(342)",
+    ownerCoupon: 3000,
+    extraCoupon: 4000,
+    detailLabels: ["수원페이", "온누리 상품권"],
+    minOrder: "15,000원",
+    deliveryFee: "3000원",
+    deliveryTime: "25~30분",
+    pickupTime: "20분",
+    pickupDiscount: 6000,
+    rating: "5.0(432)",
     time: "35분 소요",
     discount: "최대 3000원 할인",
     image: "category-20261028/600c6.png",
@@ -682,6 +690,11 @@ const historyStack = ["home"];
 let suppressBrowserHistoryPush = false;
 let currentStore = null;
 let currentMenu = null;
+let currentFulfillment = "delivery";
+let currentStoreMenuTab = "인기메뉴";
+const downloadedOwnerCoupons = new Set();
+const favoriteStoreSlugs = new Set();
+const storeMenuPreferences = new Set();
 
 function getStoreSlug(store) {
   if (store.slug) return store.slug;
@@ -776,6 +789,7 @@ function buildChickenMenus(store, slug) {
 
 function menusForStoreSlug(slug) {
   const store = findStoreBySlug(slug);
+  if (store?.name === "샐러디 성대점") return storeMenus.salady;
   if (storeMenus[slug]) return storeMenus[slug];
   if (store && isChickenStore(store, slug)) return buildChickenMenus(store, slug);
   return store ? defaultMenusForStore(store) : null;
@@ -848,9 +862,10 @@ const storeMenus = {
     { name: "치킨까스", price: "9,500원", image: "stores/store-food-card-02/thumb.png" },
   ],
   salady: [
-    { name: "탄단지 샐러디", price: "8,600원", image: "stores/salady/thumb-square.png", badge: "인기 1위" },
-    { name: "로스트 치킨 샐러드", price: "9,500원", image: "stores/salady/thumb-square.png", badge: "인기 2위" },
-    { name: "맥시칸 랩", price: "7,500원", image: "stores/salady/thumb-square.png" },
+    { name: "탄단지 샐러디", price: "8,600원", image: "store-20261028/cacd6.png", badge: "인기 1위", desc: "한 주문 단 한 번만 가능합니다!", reviews: 89, section: "올데이 세트" },
+    { name: "로스트닭다리살 샐러드", price: "11,400원", image: "store-20261028/68bdb.png", badge: "인기 2위", desc: "연간 주문량 2위", reviews: 74, section: "올데이 세트" },
+    { name: "맥시칸 랩", price: "17,000원", image: "store-20261028/64435.png", badge: "인기 3위", desc: "맛도 건강도 다 잡은 인기 메뉴", reviews: 62, section: "올데이 세트" },
+    { name: "우삼겹메밀면 누들볼", price: "17,000원", image: "store-20261028/820bf.png", badge: "사장님 추천", desc: "직접 공수한 재료로 만들었습니다.", reviews: 12, section: "올데이 세트" },
   ],
   "salad-store": [
     { name: "그린 샐러드", price: "7,500원", image: "stores/salad-store/thumb-square.png", badge: "인기 1위" },
@@ -869,18 +884,20 @@ function renderMenuList(slug) {
   if (!list) return;
   const menus = menusForStoreSlug(slug);
   if (!menus) { list.innerHTML = '<p class="empty-state">메뉴 준비 중입니다.</p>'; return; }
-  list.innerHTML = menus.map((item, i) => `
+  const hideSoldout = document.querySelector("#storeHideSoldout")?.checked;
+  const visible = menus.map((item, index) => ({ item, index })).filter(({ item }) => (!hideSoldout || !item.soldOut) && [...storeMenuPreferences].every(key => item[key] === true) && (currentStoreMenuTab === "인기메뉴" || !item.section || item.section === currentStoreMenuTab));
+  list.innerHTML = visible.length ? visible.map(({ item, index: i }) => `
     <button class="menu-card" type="button" data-target="menu" data-menu-index="${i}" data-store-slug="${slug}">
       <div>
         <span class="menu-rank">${item.badge || "메뉴"}</span>
         <h3>${item.name}</h3>
         <strong>${item.price}</strong>
         <p>${item.desc || ""}</p>
-        <small><img src="./icons/14/chat-circle-dots.svg" alt="" /> 리뷰 89</small>
+        <small><img src="./assets/images/store-20261028/ba1f8.svg" alt="" /> 리뷰 ${item.reviews ?? 89}</small>
       </div>
-      <img src="${imageRoot}${item.image}" alt="" loading="lazy" decoding="async" />
+      <img src="${imageRoot}${item.image}" alt="${item.name}" decoding="async" />
     </button>
-  `).join("");
+  `).join("") : '<p class="empty-filter-state">조건에 맞는 메뉴가 없어요</p>';
 }
 
 function wonValue(value, fallback = 0) {
@@ -907,8 +924,10 @@ function selectedOrderState() {
   const menu = currentMenu || menus[0];
   if (!currentMenu) currentMenu = menu;
   const menuPrice = wonValue(menu.price, 18000);
-  const deliveryFee = String(baseStore.deliveryFee || "").includes("0원") ? 0 : wonValue(baseStore.deliveryFee, 3000);
-  const couponDiscount = baseStore.couponLabel === false ? 0 : Math.min(wonValue(baseStore.couponLabel || "1000원", 1000), menuPrice);
+  const deliveryFee = currentFulfillment === "pickup" ? 0 : deliveryFeeValue(baseStore) === 0 ? 0 : wonValue(baseStore.deliveryFee, 3000);
+  const ownerCoupon = downloadedOwnerCoupons.has(slug) ? baseStore.ownerCoupon || 0 : 0;
+  const pickupDiscount = currentFulfillment === "pickup" ? baseStore.pickupDiscount || 0 : 0;
+  const couponDiscount = Math.min(Math.max(baseStore.couponLabel === false ? 0 : wonValue(baseStore.couponLabel || "1000원", 1000), ownerCoupon, pickupDiscount), menuPrice);
   const total = Math.max(menuPrice + deliveryFee - couponDiscount, 0);
   return { store: baseStore, menu, menuPrice, deliveryFee, couponDiscount, total };
 }
@@ -944,6 +963,10 @@ function syncCurrentMenuOptionsFromDom() {
 
 function renderStoreDetail(store) {
   if (!store) return;
+  currentFulfillment = "delivery";
+  currentStoreMenuTab = "인기메뉴";
+  storeMenuPreferences.clear();
+  document.querySelectorAll("[data-menu-preference]").forEach(button => button.setAttribute("aria-pressed", "false"));
   const detailStore = normalizeStore(store, 0, getStoreSlug(store));
   const hero = document.querySelector("#storeHeroImg");
   const title = document.querySelector("#storeName");
@@ -954,24 +977,50 @@ function renderStoreDetail(store) {
   const discount = document.querySelector('[data-screen="store"] .instant-discount');
   const menuTabs = document.querySelector('[data-screen="store"] .store-menu-tabs');
   const couponCardCopy = document.querySelector('[data-screen="store"] .store-coupon-card .store-card-main span');
-  if (hero) hero.src = imageRoot + detailStore.image;
+  if (hero) { hero.src = imageRoot + detailStore.image; hero.alt = detailStore.name; }
   if (title) title.textContent = detailStore.name;
   if (minOrder) minOrder.textContent = detailStore.minOrder;
-  if (deliveryFee) deliveryFee.innerHTML = `${detailStore.deliveryFee || "배달비 0원"} <button type="button">자세히</button>`;
-  if (rating) rating.innerHTML = `<img src="./icons/14/star.svg" alt="" /> <strong>${ratingValue(detailStore)}</strong> (후기 ${reviewCountValue(detailStore)}개) <img src="./icons/16/chevron-right.svg" alt="" />`;
-  if (badgeBox) badgeBox.innerHTML = renderStoreDetailLabels(detailStore) || '<span class="pay">수원페이</span>';
+  if (deliveryFee) deliveryFee.innerHTML = `${detailStore.deliveryFee || "배달비 0원"} <button type="button" data-store-fee-info>자세히</button>`;
+  if (rating) rating.innerHTML = `<img src="./assets/images/store-20261028/16c13.svg" alt="별점" /><strong>${Number(ratingValue(detailStore)).toFixed(1)}</strong><span>(후기 ${reviewCountValue(detailStore)}개)</span><img src="./assets/images/store-20261028/da206.svg" alt="" />`;
+  if (badgeBox) badgeBox.innerHTML = renderStoreDetailLabels({ ...detailStore, labels: detailStore.detailLabels || detailStore.labels });
   if (discount) discount.innerHTML = `<img src="./icons/24/thunder.svg" alt="" /> ${detailStore.ribbon || detailStore.discount || "배달특급 혜택을 확인할 수 있어요"}`;
   if (menuTabs) {
-    menuTabs.innerHTML = isChickenStore(detailStore, getStoreSlug(store))
+    menuTabs.innerHTML = detailStore.name === "샐러디 성대점" ? '<button type="button">인기메뉴</button><button type="button">이벤트 메뉴</button><button class="active" type="button">올데이 세트</button><button type="button">샌드위치</button><button type="button">샐러드</button>' : isChickenStore(detailStore, getStoreSlug(store))
       ? '<button class="active" type="button">인기메뉴</button><button type="button">후라이드</button><button type="button">양념/간장</button><button type="button">순살/세트</button>'
       : '<button class="active" type="button">인기메뉴</button><button type="button">이벤트 메뉴</button><button type="button">대표 메뉴</button><button type="button">사이드</button>';
   }
   if (couponCardCopy) {
-    couponCardCopy.textContent = detailStore.couponLabel === false ? "적용 가능한 쿠폰은 없지만 바로 주문할 수 있어요" : `${detailStore.couponLabel || "1000원 쿠폰"}이 있어요!`;
+    couponCardCopy.textContent = detailStore.couponLabel === false ? "적용 가능한 추가 쿠폰이 없어요" : `최대 ${detailStore.extraCoupon || wonValue(detailStore.couponLabel, 1000)}원 추가 할인 쿠폰!`;
   }
   const slug = getStoreSlug(store);
   const menus = menusForStoreSlug(slug) || [];
   currentStore = store;
+  document.querySelector(".store-menu-band h2").textContent = "인기메뉴";
+  const ownerAmount = detailStore.ownerCoupon || (detailStore.couponLabel === false ? 0 : wonValue(detailStore.couponLabel, 1000));
+  document.querySelector("#ownerCouponText").textContent = ownerAmount ? `${ownerAmount}원 할인 쿠폰` : "등록된 사장님 쿠폰이 없어요";
+  const ownerButton = document.querySelector("[data-owner-coupon]");
+  ownerButton.disabled = !ownerAmount;
+  ownerButton.textContent = downloadedOwnerCoupons.has(slug) ? "다운로드 완료" : "다운로드";
+  document.querySelector("[data-store-favorite]").setAttribute("aria-pressed", String(favoriteStoreSlugs.has(slug)));
+  document.querySelector("#storeFeeLabel").textContent = "현주소 배달비";
+  document.querySelectorAll("[data-fulfillment]").forEach(button => {
+    const pickup = button.dataset.fulfillment === "pickup";
+    button.classList.toggle("active", !pickup);
+    button.setAttribute("aria-selected", String(!pickup));
+    button.innerHTML = pickup ? `픽업 ${detailStore.pickupTime || "20분"}${detailStore.pickupDiscount ? ` <em>${detailStore.pickupDiscount}원 할인</em>` : ""}` : `배달 ${detailStore.deliveryTime || detailStore.time?.replace(" 소요", "") || "30분"}`;
+  });
+  const isSalady = detailStore.name === "샐러디 성대점";
+  const snippets = isSalady ? ["다이어트 하려고 주문했어요ㅎㅎ넘 맛있어요~", "~단골입니당! 번창하세요ㅎㅎ"] : ["메뉴가 맛있고 포장도 깔끔해요.", "다음에도 또 주문할게요."];
+  const reviews = snippets.map((text, index) => `<button class="store-review-card" type="button" data-modal="store-reviews"><span class="store-review-photo ${isSalady ? `review-crop-${index}` : ""}"><img src="${isSalady ? imageRoot + "store-20261028/d6ea5.png" : imageRoot + detailStore.image}" alt="리뷰 사진" /></span><span class="store-review-copy"><span class="store-review-stars">${Array.from({ length:5 }, () => '<img src="./icons/14/star.svg" alt="" />').join("")}</span><span>${text}</span></span></button>`).join("");
+  document.querySelector(".store-review-strip").innerHTML = reviews;
+  document.querySelector("#storeReviewsBody").innerHTML = reviews;
+  const info = document.querySelector("#storeDetailsBody");
+  info.replaceChildren();
+  for (const [label, value] of [["가게명", detailStore.name], ["최소주문", detailStore.minOrder], ["원산지", detailStore.origin || "등록된 원산지 정보가 없습니다."]]) {
+    const row = document.createElement("p");
+    row.textContent = `${label}: ${value}`;
+    info.append(row);
+  }
   currentMenu = menus[0] || currentMenu;
   renderMenuList(slug);
   if (currentMenu) renderMenuDetail(currentMenu);
@@ -1028,7 +1077,7 @@ function renderOrderSurfaces() {
     if (productName) productName.textContent = menu.name;
     if (optionBox) optionBox.innerHTML = optionHtml;
     if (productPrice) productPrice.textContent = formatWon(menuPrice);
-    if (methodText) methodText.textContent = `${formatWon(deliveryFee)} · ${store.time || "30분 소요"} 후 도착`;
+    if (methodText) methodText.textContent = currentFulfillment === "pickup" ? `픽업 · ${store.pickupTime || "20분"} 후 준비` : `${formatWon(deliveryFee)} · ${store.time || "30분 소요"} 후 도착`;
     if (summary) summary.innerHTML = `<p><span>메뉴 금액</span><strong>${formatWon(menuPrice)}</strong></p><p><span>배달팁</span><strong>${formatWon(deliveryFee)}</strong></p><p><span>할인 가능 금액</span><strong class="green">${discountText}</strong></p><p class="total"><span>결제 예정 금액</span><strong>${formatWon(total)}</strong></p>`;
     if (bar) {
       bar.querySelector("strong").textContent = `${formatWon(total)} 주문 가능!`;
@@ -1271,7 +1320,7 @@ function distanceValue(store) {
 
 function deliveryFeeValue(store) {
   const value = String(store.deliveryFee || "");
-  if (value.includes("무료") || value.includes("0원")) return 0;
+  if (value.includes("무료")) return 0;
   return priceValue(value);
 }
 
@@ -1887,6 +1936,19 @@ function bindHorizontalChipScrollLock() {
 }
 
 function bindInteractions() {
+  document.querySelector('.store-v2 .detail-scroll').addEventListener('scroll', event => {
+    document.querySelector('.store-v2').classList.toggle('is-scrolled', event.target.scrollTop > 180);
+  }, { passive:true });
+  document.querySelector('#storeHideSoldout').addEventListener('change', () => {
+    if (currentStore) renderMenuList(getStoreSlug(currentStore));
+  });
+  document.querySelector('#storeAddressForm').addEventListener('submit', event => {
+    event.preventDefault();
+    const value = document.querySelector('#storeAddressInput').value.trim();
+    if (!value) return;
+    document.querySelector('#storeAddressText').textContent = value;
+    event.target.closest('.modal-layer').classList.remove('show');
+  });
   document.addEventListener("click", (event) => {
     const backButton = event.target.closest("[data-back]");
     if (backButton) {
@@ -1898,6 +1960,45 @@ function bindInteractions() {
       return;
     }
 
+    const ownerCoupon = event.target.closest("[data-owner-coupon]");
+    if (ownerCoupon && currentStore) {
+      downloadedOwnerCoupons.add(getStoreSlug(currentStore));
+      ownerCoupon.textContent = "다운로드 완료";
+      renderOrderSurfaces();
+      trackUtEvent("coupon_download_click", { coupon_name: document.querySelector('#ownerCouponText').textContent, restaurant_name: currentStore.name, coupon_action: "download" });
+      return;
+    }
+    const storeFavorite = event.target.closest("[data-store-favorite]");
+    if (storeFavorite && currentStore) {
+      const slug = getStoreSlug(currentStore);
+      if (favoriteStoreSlugs.has(slug)) favoriteStoreSlugs.delete(slug);
+      else favoriteStoreSlugs.add(slug);
+      storeFavorite.setAttribute('aria-pressed', String(favoriteStoreSlugs.has(slug)));
+      showToast(favoriteStoreSlugs.has(slug) ? "찜한 가게에 추가했어요" : "찜한 가게에서 삭제했어요");
+      return;
+    }
+    if (event.target.closest('[data-store-fee-info]')) {
+      showToast(currentFulfillment === "pickup" ? "픽업은 배달비가 없어요" : `현재 주소 배달비: ${currentStore?.deliveryFee || "3000원"}`);
+      return;
+    }
+    const preference = event.target.closest('[data-menu-preference]');
+    if (preference && currentStore) {
+      const key = preference.dataset.menuPreference;
+      if (storeMenuPreferences.has(key)) storeMenuPreferences.delete(key);
+      else storeMenuPreferences.add(key);
+      preference.setAttribute('aria-pressed', String(storeMenuPreferences.has(key)));
+      renderMenuList(getStoreSlug(currentStore));
+      return;
+    }
+    if (event.target.closest('[data-store-calories]')) {
+      showToast("열량 정보가 등록된 메뉴가 없어요");
+      return;
+    }
+    if (event.target.closest('[data-store-recommend]') && currentStore) {
+      const menu = menusForStoreSlug(getStoreSlug(currentStore))?.[0];
+      if (menu) { renderMenuDetail(menu); showScreen('menu'); }
+      return;
+    }
     const modalButton = event.target.closest("[data-modal]");
     if (modalButton) {
       if (modalButton.dataset.modal === "coupon-sheet") {
@@ -1974,6 +2075,19 @@ function bindInteractions() {
       const tabGroup = tabButton.parentElement;
       tabGroup?.querySelectorAll("button").forEach((button) => button.classList.remove("active"));
       tabButton.classList.add("active");
+      if (tabButton.dataset.fulfillment && currentStore) {
+        currentFulfillment = tabButton.dataset.fulfillment;
+        tabGroup.querySelectorAll('button').forEach(button => button.setAttribute('aria-selected', String(button === tabButton)));
+        document.querySelector('#storeFeeLabel').textContent = currentFulfillment === 'pickup' ? '픽업 배달비' : '현주소 배달비';
+        const fee = document.querySelectorAll('[data-screen="store"] .delivery-card dd')[1];
+        fee.innerHTML = `${currentFulfillment === 'pickup' ? '0원' : currentStore.deliveryFee || '배달비 0원'} <button type="button" data-store-fee-info>자세히</button>`;
+        renderOrderSurfaces();
+      }
+      if (tabButton.closest('.store-menu-tabs') && currentStore) {
+        currentStoreMenuTab = tabButton.textContent.trim();
+        document.querySelector('.store-menu-band h2').textContent = currentStoreMenuTab;
+        renderMenuList(getStoreSlug(currentStore));
+      }
       const tabPayload = {
         button_label: buttonLabel(tabButton),
         tab_name: buttonLabel(tabButton),
