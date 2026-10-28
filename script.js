@@ -280,7 +280,8 @@ const saladResults = [
     rating: "5.0(342)",
     time: "35분 소요",
     discount: "최대 3000원 할인",
-    image: "stores/salady/thumb-square.png",
+    image: "category-20261028/600c6.png",
+    labels: ["온누리 쿠폰"],
     ribbon: "배달특급 10% 즉시 할인 매장",
   },
   {
@@ -288,14 +289,16 @@ const saladResults = [
     rating: "5.0(342)",
     time: "35분 소요",
     discount: "최대 3000원 할인",
-    image: "banners/salady-promotion-banner.png",
+    image: "category-20261028/068cf.png",
+    labels: ["수원페이"],
   },
   {
     name: "Poke all day 포케&샐러드 호매실점",
     rating: "5.0(342)",
     time: "35분 소요",
     discount: "최대 3000원 할인",
-    image: "banners/salady-menu-banner.png",
+    image: "category-20261028/fe306.png",
+    labels: ["수원페이"],
     ribbon: "배달특급 10% 즉시 할인 매장",
   },
 ];
@@ -510,7 +513,7 @@ const categoryPages = {
   salad: {
     title: "샐러드",
     tabs: ["샐러드", "샌드위치", "포케"],
-    stores: saladResults,
+    stores: [saladResults[0], saladResults[2], saladResults[1]],
   },
 };
 
@@ -1198,6 +1201,7 @@ function minOrderButtonMarkup(value = null) {
 function setFilterStripState(screen, activeKey = "sort", activeKeys = null, sortKey = "default", minOrderLimit = null) {
   const activeSet = new Set(activeKeys || []);
   screen.querySelectorAll(".filter-strip button").forEach((button, index) => {
+    if (button.hasAttribute("data-store-mode-open")) return;
     const key = button.dataset.filter || (index === 0 ? "sort" : getFilterKey(button.textContent.trim()));
     button.dataset.filter = key;
     if (key === "sort") {
@@ -1334,7 +1338,24 @@ function updateResultStores() {
   if (!page) return;
   const resultScreen = document.querySelector('[data-screen="search-result"]');
   setFilterStripState(resultScreen, filter, activeFilters, sortKey, minOrderLimit);
-  renderStoreList(resultScreen.querySelector(".large-store-list"), applyStoreFilters(page.stores, activeFilters, slug, sortKey, minOrderLimit));
+  const mode = listViewState.result.storeMode || "delivery";
+  const modeStores = page.stores.filter((store) => mode === "all" || (mode === "pickup" ? store.pickupAvailable !== false : store.deliveryAvailable !== false));
+  const resultStores = applyStoreFilters(modeStores, activeFilters, slug, sortKey, minOrderLimit);
+  const list = resultScreen.querySelector(".large-store-list");
+  list.innerHTML = resultStores.length ? resultStores.map(categoryStoreCard).join("") : `<div class="empty-filter-state"><strong>조건에 맞는 가게가 없어요</strong><span>다른 필터를 선택해보세요.</span></div>`;
+  const modeButton = resultScreen.querySelector("[data-store-mode-open]");
+  modeButton.innerHTML = `${storeModeLabel(mode)}<img src="./assets/images/category-20261028/7cb3d.svg" alt="" />`;
+  resultScreen.querySelector('[data-filter="local"]').innerHTML = `${activeFilters.includes("local") ? "수원페이" : "지역화폐"}<img src="./assets/images/category-20261028/473de.svg" alt="" />`;
+}
+
+function storeModeLabel(mode) {
+  return { delivery: "배달 가능 가게만", pickup: "픽업 가게만", all: "전체 가게" }[mode] || "배달 가능 가게만";
+}
+
+function categoryStoreCard(store) {
+  const rating = String(store.rating).match(/^([\d.]+)(.*)$/);
+  const ribbon = store.ribbon && store.ribbon.includes("배달특급") ? `<span class="category-ribbon"><span>${store.ribbon}</span><img src="./assets/images/category-20261028/eb3e5.svg" alt="" /></span>` : "";
+  return `<button class="large-store-card" type="button" data-target="store" data-store-slug="${getStoreSlug(store)}"><span class="large-store-media"><img src="${imageRoot}${store.image}" alt="${store.name}" loading="lazy" decoding="async" />${ribbon}</span><span class="category-store-copy"><span class="category-store-heading"><span class="category-store-title"><strong>${store.name}</strong><span class="category-rating"><img src="./icons/14/star.svg" alt="별점" /><b>${rating ? rating[1] : store.rating}</b><small>${rating ? rating[2] : ""}</small></span></span><span class="category-store-time"><img src="./icons/14/clock.svg" alt="" />${store.time}</span></span><span class="tags">${renderBenefitTags(store)}${renderDiscountTag(store)}</span></span></button>`;
 }
 
 function updatePortfolioStores() {
@@ -1450,10 +1471,16 @@ function getCategoryPage(label = "샐러드", slug = "salad") {
 function setResultContext(label = "샐러드", slug = "salad") {
   const page = getCategoryPage(label, slug);
   const resultScreen = document.querySelector('[data-screen="search-result"]');
-  listViewState.result = { page, label, slug, filter: "sort", activeFilters: [], sortKey: "default", minOrderLimit: null };
-  resultScreen.querySelector(".title-header h1").textContent = page.title;
-  const filters = page.filters || commonFilterLabels;
-  resultScreen.querySelector(".filter-strip").innerHTML = renderFilterButtons(filters);
+  listViewState.result = { page, label, slug, filter: "sort", activeFilters: [], sortKey: "default", minOrderLimit: null, storeMode: "delivery" };
+  resultScreen.querySelector(".title-header h1").textContent = "가게";
+  const filters = ["기본순", "지역화폐", "온누리상품권", "쿠폰", "최소주문금액"];
+  resultScreen.querySelector(".filter-strip").innerHTML = `<button type="button" data-store-mode-open aria-haspopup="dialog"></button>${renderFilterButtons(filters)}`;
+  const tabs = resultScreen.querySelector(".category-tabs");
+  tabs.innerHTML = categories.map(([name, , , key]) => `<button type="button" data-category-tab="${key}" aria-selected="${key === slug}" class="${key === slug ? "active" : ""}">${name}</button>`).join("");
+  requestAnimationFrame(() => {
+    const active = tabs.querySelector(".active");
+    if (active) tabs.scrollLeft = active.offsetLeft - (tabs.clientWidth - active.offsetWidth) / 2;
+  });
   resultScreen.setAttribute("aria-label", `${page.title} 메뉴 리스트`);
   updateResultStores();
 }
@@ -1959,9 +1986,18 @@ function bindInteractions() {
 
     const filterButton = event.target.closest(".filter-strip button");
     if (filterButton) {
+      if (filterButton.hasAttribute("data-store-mode-open")) {
+        document.querySelectorAll("[data-store-mode]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.storeMode === listViewState.result.storeMode)));
+        openModal("store-mode-select");
+        return;
+      }
       const activeScreen = filterButton.closest(".app-screen");
       const filterKey = filterButton.dataset.filter || getFilterKey(filterButton.textContent.trim());
       const filterName = cleanText(filterButton.textContent);
+      if (filterKey === "local" && activeScreen?.classList.contains("category-v2")) {
+        openModal("category-local-select");
+        return;
+      }
       if (filterKey === "sort") {
         openSortSheet(activeScreen);
         return;
@@ -1993,6 +2029,37 @@ function bindInteractions() {
         trackUtEvent("benefit_filter_click", benefitFilterPayload);
         trackUtEvent("click_benefit_filter", benefitFilterPayload);
       }
+      return;
+    }
+
+    const categoryTab = event.target.closest("[data-category-tab]");
+    if (categoryTab) {
+      setResultContext(categoryTab.textContent, categoryTab.dataset.categoryTab);
+      document.querySelector('[data-screen="search-result"] .result-scroll').scrollTop = 0;
+      trackUtEvent("food_category_click", { category_name: categoryTab.textContent, target_screen: "search-result" });
+      return;
+    }
+    if (event.target.closest("[data-category-notifications]")) {
+      showToast("새로운 알림이 없어요");
+      return;
+    }
+    const modeOption = event.target.closest("[data-store-mode]");
+    if (modeOption) {
+      listViewState.result.storeMode = modeOption.dataset.storeMode;
+      updateResultStores();
+      modeOption.closest(".modal-layer").classList.remove("show");
+      trackUtEvent("filter_click", { filter_name: storeModeLabel(modeOption.dataset.storeMode), category_name: listViewState.result.label });
+      return;
+    }
+    const localOption = event.target.closest("[data-category-local]");
+    if (localOption) {
+      const active = new Set(listViewState.result.activeFilters || []);
+      if (localOption.dataset.categoryLocal === "local") active.add("local");
+      else active.delete("local");
+      listViewState.result.activeFilters = [...active];
+      updateResultStores();
+      localOption.closest(".modal-layer").classList.remove("show");
+      trackUtEvent("filter_click", { filter_name: localOption.textContent, category_name: listViewState.result.label });
       return;
     }
 
@@ -2226,8 +2293,7 @@ trackUtEvent("view_home");
 startUt2ClarityHeartbeat();
 
 window.addEventListener("load", () => {
-  showScreen("home", false);
-  requestAnimationFrame(resetActiveScroll);
+  if (document.querySelector('.app-screen.active')?.dataset.screen === "home") requestAnimationFrame(resetActiveScroll);
 });
 
 window.addEventListener("pageshow", () => {

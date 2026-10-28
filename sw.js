@@ -1,13 +1,14 @@
-const CACHE_NAME = "baedal-prototype-v59-ranking-oct28";
+const CACHE_NAME = "baedal-prototype-v60-category-oct28";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/styles.css?v=20260927-figma-home-layout",
-  "/script.js?v=20260927-figma-home-layout",
+  "/script.js?v=20261028-category",
   "/asset-map.js?v=20260927-figma-home-layout",
   "/manifest.json?v=20260927-figma-home-layout",
   "/home-update.css?v=20261028-ranking",
-  "/home-update.js?v=20261028-ranking"
+  "/home-update.js?v=20261028-ranking",
+  "/category-update.css?v=20261028-category"
 ];
 
 function shouldUseNetworkFirst(request) {
