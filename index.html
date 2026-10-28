@@ -12,6 +12,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
     <link rel="stylesheet" href="./styles.css?v=20260927-figma-home-layout" />
     <link rel="stylesheet" href="./home-update.css?v=20261028-ranking" />
+    <link rel="stylesheet" href="./category-update.css?v=20261028-category" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -210,17 +211,19 @@
         </nav>
       </section>
 
-      <section class="app-screen" data-screen="search-result" aria-label="샐러드 검색 결과">
-        <div class="status-bar plain"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/black.svg" alt="" /><img src="./icons/status/wifi/black.svg" alt="" /><img src="./icons/status/battery/black.svg" alt="" /></div></div>
+      <section class="app-screen category-v2" data-screen="search-result" aria-label="샐러드 검색 결과">
+        <div class="status-bar plain"><strong>9:41</strong><div class="status-icons"><img src="./assets/images/category-20261028/e07fb.svg" alt="" /><img src="./assets/images/category-20261028/57096.svg" alt="" /><img src="./assets/images/category-20261028/56d0a.svg" alt="" /></div></div>
         <header class="title-header">
-          <button class="icon-button" type="button" data-back><img src="./icons/24/chevron-left.svg" alt="" /></button>
-          <h1>샐러드</h1>
-          <button class="icon-button" type="button" data-target="cart"><img src="./icons/24/shopping-cart-02.svg" alt="" /></button>
+          <button class="icon-button" type="button" data-back aria-label="뒤로"><img src="./assets/images/category-20261028/dc01e.svg" alt="" /></button>
+          <h1>가게</h1>
+          <div class="category-header-actions"><button class="icon-button" type="button" data-category-notifications aria-label="알림"><img src="./assets/images/category-20261028/de084.svg" alt="" /></button><button class="icon-button" type="button" data-target="cart" aria-label="장바구니"><img src="./assets/images/category-20261028/6aebb.svg" alt="" /></button></div>
         </header>
+        <nav class="category-tabs" aria-label="음식 카테고리"></nav>
         <div class="filter-strip"><button type="button">기본순 <img src="./icons/20/chevron-down.svg" alt="" /></button><button type="button">쿠폰할인</button><button type="button">배달비 0원</button><button type="button">지역화폐</button><button type="button">온누리상품권</button><button type="button">최소주문금액 <img src="./icons/20/chevron-down.svg" alt="" /></button></div>
         <section class="scroll-area result-scroll">
           <div class="large-store-list" id="resultStoreList"></div>
         </section>
+        <div class="category-bottom-indicator" aria-hidden="true"><img src="./assets/images/category-20261028/9b0b0.png" alt="" /><i></i></div>
       </section>
 
       <section class="app-screen" data-screen="portfolio-search" aria-label="쿠폰 할인 검색 결과">
@@ -581,6 +584,15 @@
         </section>
       </div>
 
+      <div class="modal-layer" data-overlay="store-mode-select" role="dialog" aria-modal="true" aria-labelledby="storeModeTitle">
+        <section class="bottom-sheet category-mode-sheet">
+          <header class="sheet-title-bar"><span></span><h2 id="storeModeTitle">가게</h2><button type="button" data-close-modal aria-label="닫기"><img src="./icons/32/delete.svg" alt="" /></button></header>
+          <div class="category-mode-options"><button type="button" data-store-mode="delivery">배달 가능 가게만</button><button type="button" data-store-mode="pickup">픽업 가게만</button><button type="button" data-store-mode="all">전체 가게</button></div>
+        </section>
+      </div>
+
+      <div class="modal-layer" data-overlay="category-local-select" role="dialog" aria-modal="true" aria-labelledby="categoryLocalTitle"><section class="bottom-sheet category-mode-sheet"><header class="sheet-title-bar"><span></span><h2 id="categoryLocalTitle">지역화폐</h2><button type="button" data-close-modal aria-label="닫기"><img src="./icons/32/delete.svg" alt="" /></button></header><div class="category-mode-options"><button type="button" data-category-local="all">전체</button><button type="button" data-category-local="local">수원페이</button></div></section></div>
+
       <div class="modal-layer" data-overlay="min-order-select">
         <section class="bottom-sheet min-order-sheet">
           <header class="sheet-title-bar min-order-title"><span></span><h2>최소주문금액</h2><span></span></header>
@@ -598,7 +610,7 @@
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
     <script src="./asset-map.js?v=20260927-figma-home-layout"></script>
-    <script src="./script.js?v=20260927-figma-home-layout"></script>
+    <script src="./script.js?v=20261028-category"></script>
     <script src="./home-update.js?v=20261028-ranking"></script>
   </body>
 </html>
