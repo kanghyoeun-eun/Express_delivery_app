@@ -1171,6 +1171,7 @@ function showScreen(screenName, push = true) {
   syncBottomNav(screenName);
   if (screenName === "pickup-map") requestAnimationFrame(() => window.pickupMapView?.onShow());
   if (screenName === "my") window.myPageView?.onShow();
+  if (screenName === "coupon-book") window.couponBookView?.onShow();
   if (["cart", "checkout", "preparing"].includes(screenName)) renderOrderSurfaces();
 
   if (push) {
