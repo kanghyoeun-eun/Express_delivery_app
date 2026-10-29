@@ -3,11 +3,11 @@
     { "handle": "filesystem" },
     {
       "src": "/assets/(.*)",
-      "dest": "https://raw.githubusercontent.com/kanghyoeun-eun/Express_delivery_app/92b43dd259c1db8a803ff4326b7676f1e521459f/assets/$1"
+      "dest": "https://raw.githubusercontent.com/kanghyoeun-eun/Express_delivery_app/5d81a26a3079586d8c354d4022daf0e7d6bf1721/assets/$1"
     },
     {
       "src": "/icons/(.*)",
-      "dest": "https://raw.githubusercontent.com/kanghyoeun-eun/Express_delivery_app/92b43dd259c1db8a803ff4326b7676f1e521459f/icons/$1"
+      "dest": "https://raw.githubusercontent.com/kanghyoeun-eun/Express_delivery_app/5d81a26a3079586d8c354d4022daf0e7d6bf1721/icons/$1"
     }
   ]
 }
