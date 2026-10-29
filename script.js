@@ -522,6 +522,11 @@ const categoryPages = {
     title: "샐러드",
     tabs: ["샐러드", "샌드위치", "포케"],
     stores: [saladResults[0], saladResults[2], saladResults[1]],
+    pickupStores: [
+      { slug:"pickup-salad-village", name:"샐러드 마을", rating:"5.0(312)", image:"pickup-20261029/9c9ba.png", pickupWalkMinutes:38, pickupDriveMinutes:35, time:"35분 소요", discount:"최대 7000원 할인", pickupDiscount:7000, deliveryAvailable:false, pickupAvailable:true, labels:["수원페이"], detailLabels:["수원페이", "온누리 상품권"], paymentMethods:["local", "onnuri"], couponLabel:"1000원 쿠폰", minOrder:"15,000원" },
+      { slug:"pickup-cafe-maiden-homaesil", name:"카페메이든 호매실점", rating:"5.0(342)", image:"pickup-20261029/22114.png", pickupWalkMinutes:28, pickupDriveMinutes:25, time:"25분 소요", discount:"최대 7000원 할인", pickupDiscount:7000, deliveryAvailable:false, pickupAvailable:true, labels:["수원페이"], detailLabels:["수원페이", "온누리 상품권"], paymentMethods:["local", "onnuri"], couponLabel:"1000원 쿠폰", minOrder:"15,000원" },
+      { slug:"pickup-cafe-maiden-gwanggyo", name:"카페메이든 광교점", rating:"5.0(338)", image:"pickup-20261029/331bf.png", pickupWalkMinutes:28, pickupDriveMinutes:25, time:"25분 소요", discount:"최대 7000원 할인", pickupDiscount:7000, deliveryAvailable:false, pickupAvailable:true, labels:["수원페이"], detailLabels:["수원페이", "온누리 상품권"], paymentMethods:["local", "onnuri"], couponLabel:"1000원 쿠폰", minOrder:"15,000원" },
+    ],
   },
 };
 
@@ -707,7 +712,7 @@ function getStoreSlug(store) {
 
 function findStoreBySlug(slug) {
   let all = [];
-  Object.values(categoryPages).forEach((p) => { if (p.stores) all = all.concat(p.stores); });
+  Object.values(categoryPages).forEach((p) => { all = all.concat(p.stores || [], p.pickupStores || []); });
   Object.values(benefitPages).forEach((p) => { if (p.stores) all = all.concat(p.stores); });
   all = all.concat(stores, saladResults, searchRecommendations, hotMenus);
   all = all.concat(allGeneratedCategoryStores);
@@ -1005,6 +1010,7 @@ function renderStoreDetail(store) {
   document.querySelector("#storeFeeLabel").textContent = "현주소 배달비";
   document.querySelectorAll("[data-fulfillment]").forEach(button => {
     const pickup = button.dataset.fulfillment === "pickup";
+    button.disabled = pickup ? detailStore.pickupAvailable === false : detailStore.deliveryAvailable === false;
     button.classList.toggle("active", !pickup);
     button.setAttribute("aria-selected", String(!pickup));
     button.innerHTML = pickup ? `픽업 ${detailStore.pickupTime || "20분"}${detailStore.pickupDiscount ? ` <em>${detailStore.pickupDiscount}원 할인</em>` : ""}` : `배달 ${detailStore.deliveryTime || detailStore.time?.replace(" 소요", "") || "30분"}`;
@@ -1024,6 +1030,21 @@ function renderStoreDetail(store) {
   currentMenu = menus[0] || currentMenu;
   renderMenuList(slug);
   if (currentMenu) renderMenuDetail(currentMenu);
+  renderOrderSurfaces();
+  if (store.deliveryAvailable === false) selectStoreFulfillment("pickup");
+}
+
+function selectStoreFulfillment(method) {
+  if (!currentStore || (method === "delivery" && currentStore.deliveryAvailable === false)) return;
+  currentFulfillment = method;
+  document.querySelectorAll('[data-fulfillment]').forEach(button => {
+    const selected = button.dataset.fulfillment === method;
+    button.classList.toggle('active', selected);
+    button.setAttribute('aria-selected', String(selected));
+  });
+  document.querySelector('#storeFeeLabel').textContent = method === 'pickup' ? '픽업 배달비' : '현주소 배달비';
+  const fee = document.querySelectorAll('[data-screen="store"] .delivery-card dd')[1];
+  fee.innerHTML = `${method === 'pickup' ? '0원' : currentStore.deliveryFee || '배달비 0원'} <button type="button" data-store-fee-info>자세히</button>`;
   renderOrderSurfaces();
 }
 
@@ -1337,8 +1358,8 @@ function applySort(stores, sortKey = "default") {
 function storeMatchesFilter(store, filterKey) {
   const labels = store.labels || [];
   const haystack = [store.name, store.discount, store.ribbon, ...(store.badges || []), ...labels].join(" ");
-  if (filterKey === "local") return haystack.includes("지역화폐") || haystack.includes("수원페이");
-  if (filterKey === "onnuri") return haystack.includes("온누리");
+  if (filterKey === "local") return store.paymentMethods?.includes("local") || haystack.includes("지역화폐") || haystack.includes("수원페이");
+  if (filterKey === "onnuri") return store.paymentMethods?.includes("onnuri") || haystack.includes("온누리");
   if (filterKey === "coupon") return store.couponLabel !== false || haystack.includes("쿠폰");
   if (filterKey === "freeDelivery") return deliveryFeeValue(store) === 0;
   if (filterKey === "minOrder" || filterKey === "price") return minOrderValue(store) <= 15000 || haystack.includes("최소주문금액 낮음");
@@ -1388,10 +1409,16 @@ function updateResultStores() {
   const resultScreen = document.querySelector('[data-screen="search-result"]');
   setFilterStripState(resultScreen, filter, activeFilters, sortKey, minOrderLimit);
   const mode = listViewState.result.storeMode || "delivery";
-  const modeStores = page.stores.filter((store) => mode === "all" || (mode === "pickup" ? store.pickupAvailable !== false : store.deliveryAvailable !== false));
+  const availableStores = mode === "pickup" ? page.pickupStores || page.stores : mode === "all" ? [...new Map([...page.stores, ...(page.pickupStores || [])].map(store => [getStoreSlug(store), store])).values()] : page.stores;
+  const modeStores = availableStores.filter((store) => mode === "all" || (mode === "pickup" ? store.pickupAvailable !== false : store.deliveryAvailable !== false));
   const resultStores = applyStoreFilters(modeStores, activeFilters, slug, sortKey, minOrderLimit);
   const list = resultScreen.querySelector(".large-store-list");
-  list.innerHTML = resultStores.length ? resultStores.map(categoryStoreCard).join("") : `<div class="empty-filter-state"><strong>조건에 맞는 가게가 없어요</strong><span>다른 필터를 선택해보세요.</span></div>`;
+  list.innerHTML = resultStores.length ? resultStores.map(mode === "pickup" ? pickupStoreCard : categoryStoreCard).join("") : `<div class="empty-filter-state"><strong>조건에 맞는 가게가 없어요</strong><span>다른 필터를 선택해보세요.</span></div>`;
+  resultScreen.classList.toggle("pickup-mode", mode === "pickup");
+  resultScreen.setAttribute("aria-label", `${listViewState.result.label} ${mode === "pickup" ? "픽업 " : ""}가게 목록`);
+  const mapLink = resultScreen.querySelector("#pickupMapLink");
+  mapLink.href = `https://map.kakao.com/?q=${encodeURIComponent(`${listViewState.result.label} 경기 수원시`)}`;
+  mapLink.hidden = mode !== "pickup" || !resultStores.length;
   const modeButton = resultScreen.querySelector("[data-store-mode-open]");
   modeButton.innerHTML = `${storeModeLabel(mode)}<img src="./assets/images/category-20261028/7cb3d.svg" alt="" />`;
   resultScreen.querySelector('[data-filter="local"]').innerHTML = `${activeFilters.includes("local") ? "수원페이" : "지역화폐"}<img src="./assets/images/category-20261028/473de.svg" alt="" />`;
@@ -1405,6 +1432,16 @@ function categoryStoreCard(store) {
   const rating = String(store.rating).match(/^([\d.]+)(.*)$/);
   const ribbon = store.ribbon && store.ribbon.includes("배달특급") ? `<span class="category-ribbon"><span>${store.ribbon}</span><img src="./assets/images/category-20261028/eb3e5.svg" alt="" /></span>` : "";
   return `<button class="large-store-card" type="button" data-target="store" data-store-slug="${getStoreSlug(store)}"><span class="large-store-media"><img src="${imageRoot}${store.image}" alt="${store.name}" loading="lazy" decoding="async" />${ribbon}</span><span class="category-store-copy"><span class="category-store-heading"><span class="category-store-title"><strong>${store.name}</strong><span class="category-rating"><img src="./icons/14/star.svg" alt="별점" /><b>${rating ? rating[1] : store.rating}</b><small>${rating ? rating[2] : ""}</small></span></span><span class="category-store-time"><img src="./icons/14/clock.svg" alt="" />${store.time}</span></span><span class="tags">${renderBenefitTags(store)}${renderDiscountTag(store)}</span></span></button>`;
+}
+
+function pickupStoreCard(store) {
+  const rating = String(store.rating).match(/^([\d.]+)(.*)$/);
+  const badges = (store.paymentMethods || []).filter(method => ["local", "onnuri"].includes(method)).map(method => {
+    const local = method === "local";
+    return `<span class="pickup-payment-badge pickup-badge-${method}" role="img" aria-label="${local ? "수원페이" : "온누리상품권"} 사용 가능"><img class="pickup-badge-shield" src="${imageRoot}pickup-20261029/${local ? "38fde.svg" : "a7d48.svg"}" alt="" /><img class="pickup-badge-currency" src="${imageRoot}home-20261028/${local ? "b9fe0.png" : "af9df.png"}" alt="" /><img class="pickup-badge-label" src="${imageRoot}pickup-20261029/${local ? "50033.svg" : "e472d.svg"}" alt="" /><b>${local ? "수원" : "온누리"}</b></span>`;
+  }).join("");
+  const travel = [Number.isFinite(store.pickupWalkMinutes) ? `<span>도보 <b>${store.pickupWalkMinutes}분 소요</b></span>` : "", Number.isFinite(store.pickupDriveMinutes) ? `<span>자동차 <b>${store.pickupDriveMinutes}분 소요</b></span>` : ""].filter(Boolean).join('<span aria-hidden="true">·</span>');
+  return `<button class="large-store-card pickup-store-card" type="button" data-target="store" data-store-slug="${getStoreSlug(store)}" data-pickup-store="true"><span class="large-store-media"><img src="${imageRoot}${store.image}" alt="${store.name}" loading="lazy" decoding="async" />${store.pickupDiscount ? `<span class="pickup-ribbon">픽업only 최대 ${store.pickupDiscount}원 할인</span>` : ""}<span class="pickup-payment-badges">${badges}</span></span><span class="pickup-store-copy"><span class="pickup-card-heading"><strong>${store.name}</strong><span class="category-rating"><img src="./icons/14/star.svg" alt="별점" /><b>${rating ? rating[1] : store.rating}</b><small>${rating ? rating[2] : ""}</small></span></span><span class="pickup-travel">${travel || "이동시간 정보 없음"}</span><span class="tags">${renderBenefitTags(store)}${renderDiscountTag(store)}</span></span></button>`;
 }
 
 function updatePortfolioStores() {
@@ -1517,10 +1554,10 @@ function getCategoryPage(label = "샐러드", slug = "salad") {
   };
 }
 
-function setResultContext(label = "샐러드", slug = "salad") {
+function setResultContext(label = "샐러드", slug = "salad", storeMode = "delivery") {
   const page = getCategoryPage(label, slug);
   const resultScreen = document.querySelector('[data-screen="search-result"]');
-  listViewState.result = { page, label, slug, filter: "sort", activeFilters: [], sortKey: "default", minOrderLimit: null, storeMode: "delivery" };
+  listViewState.result = { page, label, slug, filter: "sort", activeFilters: [], sortKey: "default", minOrderLimit: null, storeMode };
   resultScreen.querySelector(".title-header h1").textContent = "가게";
   const filters = ["기본순", "지역화폐", "온누리상품권", "쿠폰", "최소주문금액"];
   resultScreen.querySelector(".filter-strip").innerHTML = `<button type="button" data-store-mode-open aria-haspopup="dialog"></button>${renderFilterButtons(filters)}`;
@@ -2076,12 +2113,7 @@ function bindInteractions() {
       tabGroup?.querySelectorAll("button").forEach((button) => button.classList.remove("active"));
       tabButton.classList.add("active");
       if (tabButton.dataset.fulfillment && currentStore) {
-        currentFulfillment = tabButton.dataset.fulfillment;
-        tabGroup.querySelectorAll('button').forEach(button => button.setAttribute('aria-selected', String(button === tabButton)));
-        document.querySelector('#storeFeeLabel').textContent = currentFulfillment === 'pickup' ? '픽업 배달비' : '현주소 배달비';
-        const fee = document.querySelectorAll('[data-screen="store"] .delivery-card dd')[1];
-        fee.innerHTML = `${currentFulfillment === 'pickup' ? '0원' : currentStore.deliveryFee || '배달비 0원'} <button type="button" data-store-fee-info>자세히</button>`;
-        renderOrderSurfaces();
+        selectStoreFulfillment(tabButton.dataset.fulfillment);
       }
       if (tabButton.closest('.store-menu-tabs') && currentStore) {
         currentStoreMenuTab = tabButton.textContent.trim();
@@ -2148,7 +2180,7 @@ function bindInteractions() {
 
     const categoryTab = event.target.closest("[data-category-tab]");
     if (categoryTab) {
-      setResultContext(categoryTab.textContent, categoryTab.dataset.categoryTab);
+      setResultContext(categoryTab.textContent, categoryTab.dataset.categoryTab, listViewState.result.storeMode);
       document.querySelector('[data-screen="search-result"] .result-scroll').scrollTop = 0;
       trackUtEvent("food_category_click", { category_name: categoryTab.textContent, target_screen: "search-result" });
       return;
@@ -2157,10 +2189,15 @@ function bindInteractions() {
       showToast("새로운 알림이 없어요");
       return;
     }
+    if (event.target.closest("#pickupMapLink")) {
+      trackUtEvent("map_open", { category_name:listViewState.result.label, fulfillment_type:"pickup", target_screen:"external_map" });
+      return;
+    }
     const modeOption = event.target.closest("[data-store-mode]");
     if (modeOption) {
       listViewState.result.storeMode = modeOption.dataset.storeMode;
       updateResultStores();
+      document.querySelector('.category-v2 .result-scroll').scrollTop = 0;
       modeOption.closest(".modal-layer").classList.remove("show");
       trackUtEvent("filter_click", { filter_name: storeModeLabel(modeOption.dataset.storeMode), category_name: listViewState.result.label });
       return;
@@ -2220,6 +2257,7 @@ function bindInteractions() {
           store = findStoreBySlug(slug);
           if (store) { currentStore = store; renderStoreDetail(store); }
         }
+        if (store && targetButton.dataset.pickupStore === "true" && currentFulfillment !== "pickup") selectStoreFulfillment("pickup");
         const storePayload = {
           restaurant_name: store?.name || cleanText(targetButton.querySelector("h2, h3")?.textContent || buttonLabel(targetButton)),
           category_name: listViewState.result.label || listViewState.benefit.label || "",
