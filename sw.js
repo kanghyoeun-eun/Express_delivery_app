@@ -1,16 +1,20 @@
-const CACHE_NAME = "baedal-prototype-v62-pickup-oct29";
+const CACHE_NAME = "baedal-prototype-v63-map-oct29";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/styles.css?v=20260927-figma-home-layout",
-  "/script.js?v=20261029-pickup",
+  "/script.js?v=20261029-map",
   "/asset-map.js?v=20260927-figma-home-layout",
   "/manifest.json?v=20260927-figma-home-layout",
   "/home-update.css?v=20261028-ranking",
   "/home-update.js?v=20261028-ranking",
   "/category-update.css?v=20261028-category",
   "/store-update.css?v=20261028-store",
-  "/pickup-update.css?v=20261029-pickup"
+  "/pickup-update.css?v=20261029-pickup",
+  "/map-update.css?v=20261029-map",
+  "/map-update.js?v=20261029-map",
+  "/assets/vendor/leaflet/leaflet.css",
+  "/assets/vendor/leaflet/leaflet.js"
 ];
 
 function shouldUseNetworkFirst(request) {

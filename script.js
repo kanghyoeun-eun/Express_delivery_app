@@ -716,7 +716,7 @@ function findStoreBySlug(slug) {
   Object.values(benefitPages).forEach((p) => { if (p.stores) all = all.concat(p.stores); });
   all = all.concat(stores, saladResults, searchRecommendations, hotMenus);
   all = all.concat(allGeneratedCategoryStores);
-  return all.find((s) => getStoreSlug(s) === slug) || null;
+  return all.find((s) => getStoreSlug(s) === slug) || window.pickupMapView?.findStore(slug) || null;
 }
 
 function defaultMenusForStore(store) {
@@ -1167,6 +1167,7 @@ function showScreen(screenName, push = true) {
     window.history.pushState({ screen: screenName }, "", window.location.href);
   }
   syncBottomNav(screenName);
+  if (screenName === "pickup-map") requestAnimationFrame(() => window.pickupMapView?.onShow());
   if (["cart", "checkout", "preparing"].includes(screenName)) renderOrderSurfaces();
 
   if (push) {
@@ -1403,25 +1404,33 @@ function renderStoreList(target, stores) {
   }
 }
 
+function resultStoresForView() {
+  const { page, slug, activeFilters = [], sortKey = "default", minOrderLimit = null, searchQuery = "" } = listViewState.result;
+  if (!page) return [];
+  const mode = listViewState.result.storeMode || "delivery";
+  const availableStores = mode === "pickup" ? page.pickupStores || page.stores : mode === "all" ? [...new Map([...page.stores, ...(page.pickupStores || [])].map(store => [getStoreSlug(store), store])).values()] : page.stores;
+  const candidates = searchQuery ? [...new Map([...availableStores, ...(window.pickupMapView?.searchStores(searchQuery) || [])].map(store => [getStoreSlug(store), store])).values()] : availableStores;
+  const modeStores = candidates.filter((store) => mode === "all" || (mode === "pickup" ? store.pickupAvailable !== false : store.deliveryAvailable !== false));
+  return applyStoreFilters(modeStores, activeFilters, slug, sortKey, minOrderLimit).filter(store => !searchQuery || store.name.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase()));
+}
+
 function updateResultStores() {
-  const { page, slug, filter, activeFilters = [], sortKey = "default", minOrderLimit = null } = listViewState.result;
+  const { page, filter, activeFilters = [], sortKey = "default", minOrderLimit = null } = listViewState.result;
   if (!page) return;
   const resultScreen = document.querySelector('[data-screen="search-result"]');
   setFilterStripState(resultScreen, filter, activeFilters, sortKey, minOrderLimit);
   const mode = listViewState.result.storeMode || "delivery";
-  const availableStores = mode === "pickup" ? page.pickupStores || page.stores : mode === "all" ? [...new Map([...page.stores, ...(page.pickupStores || [])].map(store => [getStoreSlug(store), store])).values()] : page.stores;
-  const modeStores = availableStores.filter((store) => mode === "all" || (mode === "pickup" ? store.pickupAvailable !== false : store.deliveryAvailable !== false));
-  const resultStores = applyStoreFilters(modeStores, activeFilters, slug, sortKey, minOrderLimit);
+  const resultStores = resultStoresForView();
   const list = resultScreen.querySelector(".large-store-list");
   list.innerHTML = resultStores.length ? resultStores.map(mode === "pickup" ? pickupStoreCard : categoryStoreCard).join("") : `<div class="empty-filter-state"><strong>조건에 맞는 가게가 없어요</strong><span>다른 필터를 선택해보세요.</span></div>`;
   resultScreen.classList.toggle("pickup-mode", mode === "pickup");
   resultScreen.setAttribute("aria-label", `${listViewState.result.label} ${mode === "pickup" ? "픽업 " : ""}가게 목록`);
   const mapLink = resultScreen.querySelector("#pickupMapLink");
-  mapLink.href = `https://map.kakao.com/?q=${encodeURIComponent(`${listViewState.result.label} 경기 수원시`)}`;
   mapLink.hidden = mode !== "pickup" || !resultStores.length;
   const modeButton = resultScreen.querySelector("[data-store-mode-open]");
   modeButton.innerHTML = `${storeModeLabel(mode)}<img src="./assets/images/category-20261028/7cb3d.svg" alt="" />`;
   resultScreen.querySelector('[data-filter="local"]').innerHTML = `${activeFilters.includes("local") ? "수원페이" : "지역화폐"}<img src="./assets/images/category-20261028/473de.svg" alt="" />`;
+  window.pickupMapView?.render();
 }
 
 function storeModeLabel(mode) {
@@ -2157,7 +2166,7 @@ function bindInteractions() {
         button_label: filterName,
         category_name: activeScreen?.dataset.screen === "benefit-list" ? listViewState.benefit.label : activeScreen?.dataset.screen === "portfolio-search" ? listViewState.portfolio.label : listViewState.result.label,
       });
-      if (activeScreen?.dataset.screen === "search-result") {
+      if (["search-result", "pickup-map"].includes(activeScreen?.dataset.screen)) {
         toggleListFilter(listViewState.result, filterKey);
         updateResultStores();
       } else if (activeScreen?.dataset.screen === "portfolio-search") {
@@ -2190,7 +2199,8 @@ function bindInteractions() {
       return;
     }
     if (event.target.closest("#pickupMapLink")) {
-      trackUtEvent("map_open", { category_name:listViewState.result.label, fulfillment_type:"pickup", target_screen:"external_map" });
+      trackUtEvent("map_open", { category_name:listViewState.result.label, fulfillment_type:"pickup", target_screen:"pickup-map" });
+      window.pickupMapView?.open();
       return;
     }
     const modeOption = event.target.closest("[data-store-mode]");
