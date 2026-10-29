@@ -1,5 +1,5 @@
 (() => {
-  const asset = file => `./assets/images/onnuri-20261029/${file}`;
+  const asset = file => `./assets/images/onnuri-20261029/${file}${file==='banner.png'?'?v=4x':''}`;
   const icon = (file,alt='') => `<img src="${asset(file)}" alt="${alt}" />`;
   const storeMap = new Map();
   const menuMap = new Map();
