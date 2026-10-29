@@ -2335,7 +2335,7 @@ function bindInteractions() {
     routeToBenefit("온누리", "onnuri");
   });
   document.querySelector(".more-button").addEventListener("click", () => showToast("전체 카테고리 보기"));
-  document.querySelector(".stamp-card button").addEventListener("click", () => showToast("스탬프 북 열기"));
+  document.querySelector(".stamp-card button").addEventListener("click", () => showScreen("coupon-book"));
 
   document.querySelector("#homeSearchInput").addEventListener("click", (event) => {
     trackUtEvent("search_click", { button_label: "홈 검색창", search_keyword: event.currentTarget.value.trim() });
