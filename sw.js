@@ -1,9 +1,9 @@
-const CACHE_NAME = "baedal-prototype-v67-home-badge-oct29";
+const CACHE_NAME = "baedal-prototype-v68-onnuri-oct29";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/styles.css?v=20260927-figma-home-layout",
-  "/script.js?v=20261029-book",
+  "/script.js?v=20261029-onnuri",
   "/asset-map.js?v=20260927-figma-home-layout",
   "/manifest.json?v=20260927-figma-home-layout",
   "/home-update.css?v=20261029-badge",
@@ -19,6 +19,8 @@ const APP_SHELL = [
   "/couponbook-update.js?v=20261029-book",
   "/currency-guide.css?v=20261029-guide",
   "/currency-guide.js?v=20261029-guide",
+  "/onnuri-update.css?v=20261029-onnuri",
+  "/onnuri-update.js?v=20261029-onnuri",
   "/assets/vendor/leaflet/leaflet.css",
   "/assets/vendor/leaflet/leaflet.js"
 ];

@@ -716,7 +716,7 @@ function findStoreBySlug(slug) {
   Object.values(benefitPages).forEach((p) => { if (p.stores) all = all.concat(p.stores); });
   all = all.concat(stores, saladResults, searchRecommendations, hotMenus);
   all = all.concat(allGeneratedCategoryStores);
-  return all.find((s) => getStoreSlug(s) === slug) || window.pickupMapView?.findStore(slug) || null;
+  return all.find((s) => getStoreSlug(s) === slug) || window.pickupMapView?.findStore(slug) || window.onnuriView?.findStore(slug) || null;
 }
 
 function defaultMenusForStore(store) {
@@ -793,6 +793,8 @@ function buildChickenMenus(store, slug) {
 }
 
 function menusForStoreSlug(slug) {
+  const onnuriMenus = window.onnuriView?.menusForStore(slug);
+  if (onnuriMenus) return onnuriMenus;
   const store = findStoreBySlug(slug);
   if (store?.name === "샐러디 성대점") return storeMenus.salady;
   if (storeMenus[slug]) return storeMenus[slug];
