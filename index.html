@@ -11,10 +11,12 @@
     <link rel="manifest" href="./manifest.json?v=20260927-figma-home-layout" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/pwa/apple-touch-icon.png" />
     <link rel="stylesheet" href="./styles.css?v=20260927-figma-home-layout" />
+    <link rel="stylesheet" href="./assets/vendor/leaflet/leaflet.css" />
     <link rel="stylesheet" href="./home-update.css?v=20261028-ranking" />
     <link rel="stylesheet" href="./category-update.css?v=20261028-category" />
     <link rel="stylesheet" href="./store-update.css?v=20261028-store" />
     <link rel="stylesheet" href="./pickup-update.css?v=20261029-pickup" />
+    <link rel="stylesheet" href="./map-update.css?v=20261029-map" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -225,7 +227,20 @@
         <section class="scroll-area result-scroll">
           <div class="large-store-list" id="resultStoreList"></div>
         </section>
-        <a class="pickup-map-button" id="pickupMapLink" href="https://map.kakao.com/" target="_blank" rel="noopener noreferrer" title="외부 지도에서 열기"><img src="./assets/images/pickup-20261029/6acbb.svg" alt="" />지도로 보기</a>
+        <button class="pickup-map-button" id="pickupMapLink" type="button"><img src="./assets/images/pickup-20261029/6acbb.svg" alt="" />지도로 보기</button>
+        <div class="category-bottom-indicator" aria-hidden="true"><img src="./assets/images/category-20261028/9b0b0.png" alt="" /><i></i></div>
+      </section>
+
+      <section class="app-screen category-v2 map-v2" data-screen="pickup-map" aria-label="주변 픽업 가게 지도">
+        <div id="pickupMapCanvas" class="pickup-map-canvas" aria-label="테스트 지역 지도" tabindex="0"></div>
+        <header class="map-top-controls">
+          <div class="status-bar plain"><strong>9:41</strong><div class="status-icons"><img src="./assets/images/category-20261028/e07fb.svg" alt="" /><img src="./assets/images/category-20261028/57096.svg" alt="" /><img src="./assets/images/category-20261028/56d0a.svg" alt="" /></div></div>
+          <form class="map-search-form" id="mapSearchForm"><label><img src="./assets/images/home-20261028/f7e46.svg" alt="" /><input id="mapSearchInput" type="search" placeholder="검색어를 입력하세요" aria-label="가게 검색" /></label></form>
+          <div class="filter-strip" id="mapFilterStrip"></div>
+        </header>
+        <div class="map-location-controls"><button type="button" id="mapHomeButton" aria-label="홈으로" title="홈으로"><img src="./assets/images/map-20261029/97a40.svg" alt="" /></button><button type="button" id="mapRecenterButton" aria-label="기준 위치로 이동" title="기준 위치로 이동"><img src="./assets/images/map-20261029/713ea.svg" alt="" /></button></div>
+        <section class="map-store-panel" id="mapStorePanel" aria-label="주변 가게 목록"><button class="map-panel-handle" id="mapPanelHandle" type="button" aria-label="가게 목록 펼치기" aria-expanded="false"><span></span></button><div class="map-panel-scroll" id="mapPanelScroll"><nav class="map-food-categories" id="mapFoodCategories" aria-label="음식 카테고리"></nav><section class="map-popular-section"><button type="button" class="map-section-title" id="mapPopularTitle"><h2>인기 동네 맛집</h2><img src="./icons/20/chevron-right.svg" alt="" /></button><div class="map-popular-track" id="mapPopularStores"></div></section><div class="large-store-list" id="mapResultStores"></div></div></section>
+        <button type="button" class="map-list-button" id="mapListButton"><img src="./assets/images/map-20261029/a99ce.svg" alt="" />리스트로 보기</button>
         <div class="category-bottom-indicator" aria-hidden="true"><img src="./assets/images/category-20261028/9b0b0.png" alt="" /><i></i></div>
       </section>
 
@@ -619,7 +634,9 @@
       <div class="prototype-toast" role="status" aria-live="polite"></div>
     </main>
     <script src="./asset-map.js?v=20260927-figma-home-layout"></script>
-    <script src="./script.js?v=20261029-pickup"></script>
+    <script src="./assets/vendor/leaflet/leaflet.js"></script>
+    <script src="./script.js?v=20261029-map"></script>
     <script src="./home-update.js?v=20261028-ranking"></script>
+    <script src="./map-update.js?v=20261029-map"></script>
   </body>
 </html>
