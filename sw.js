@@ -1,4 +1,4 @@
-const CACHE_NAME = "baedal-prototype-v66-currency-guide-oct29";
+const CACHE_NAME = "baedal-prototype-v67-home-badge-oct29";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -6,8 +6,8 @@ const APP_SHELL = [
   "/script.js?v=20261029-book",
   "/asset-map.js?v=20260927-figma-home-layout",
   "/manifest.json?v=20260927-figma-home-layout",
-  "/home-update.css?v=20261028-ranking",
-  "/home-update.js?v=20261028-ranking",
+  "/home-update.css?v=20261029-badge",
+  "/home-update.js?v=20261029-badge",
   "/category-update.css?v=20261028-category",
   "/store-update.css?v=20261028-store",
   "/pickup-update.css?v=20261029-pickup",

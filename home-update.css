@@ -62,11 +62,17 @@
 .home-v2 .stamp-section h2 { font-size: 20px; line-height: 28px; }
 .home-v2 .stamp-section .section-title p { font-size: 16px; line-height: 24px; }
 .home-v2 .stamp-card { margin-top: 20px; padding: 20px 16px 16px; border: 1px solid #e7e6e3; border-radius: 12px; background: #f9f9f9; }
-.home-v2 .stamp-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.home-v2 .stamp-row > img { width: 64px; height: 68px; object-fit: contain; }
-.home-locked-badge { display: block; position: relative; width: 64px; height: 68px; }
-.home-locked-badge > img:first-child { width: 64px; height: 68px; }
-.home-locked-badge > img:last-child { position: absolute; width: 45px; height: 34px; left: 9px; top: 16px; }
+.home-v2 .stamp-row { position:relative; display:flex; align-items:center; justify-content:space-between; gap:0; width:295.273px; max-width:100%; height:61.02px; margin:0 auto; }
+.home-v2 .stamp-row > .home-badge-line { position:absolute; left:13.69px; top:30.11px; width:auto; height:auto; }
+.home-earned-badge,.home-locked-badge { display:block; position:relative; flex-shrink:0; width:54.046px; height:61.02px; }
+.home-earned-badge-0 { width:58.551px; }
+.home-earned-badge-2 { width:56.63px; }
+.home-earned-badge > img,.home-locked-badge > .home-locked-shield { position:absolute; left:-7.4px; top:-5.583px; width:auto; height:auto; max-width:none; }
+.home-earned-badge-0 > img { left:-5.148px; }
+.home-earned-badge-2 > img { left:-4.819px; }
+.home-locked-ticket { position:absolute; left:10.15px; top:20.11px; width:33.757px; height:18.939px; transform:rotate(-20.49deg); }
+.home-locked-ticket img { position:absolute; left:-2.6px; top:-1.6px; width:auto; height:auto; max-width:none; }
+.home-locked-ticket small { position:absolute; inset:0; display:grid; place-items:center; font-size:6px; line-height:18px; font-weight:500; color:#f3f3f3; }
 .home-v2 .stamp-card button { margin-top: 18px; }
 .home-v2 .famous-section { padding: 20px; }
 .home-time-title { margin-bottom: 20px; }
