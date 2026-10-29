@@ -1,0 +1,64 @@
+.onnuri-v2 { background:#f5f5f5; }
+.onnuri-v2 .onnuri-status { position:relative; z-index:2; display:flex; flex:0 0 50px; height:50px; padding:21px 34px 7px 55px; background:#fff; }
+.onnuri-v2 .onnuri-status strong { width:auto; font-size:17px; line-height:22px; }
+.onnuri-v2 .status-icons { gap:7px; }
+.onnuri-v2 .status-icons img { width:auto; height:auto; }
+.onnuri-header { position:relative; display:flex; flex:0 0 50px; align-items:center; justify-content:space-between; padding:0 20px; background:#fff; }
+.onnuri-header h1 { position:absolute; left:50%; transform:translateX(-50%); margin:0; font-size:20px; font-weight:600; line-height:28px; white-space:nowrap; }
+.onnuri-header button { display:grid; place-items:center; width:24px; height:32px; padding:0; border:0; background:transparent; }
+.onnuri-header > div { display:flex; gap:8px; }
+.onnuri-banner { position:relative; flex:none; width:100%; aspect-ratio:393 / 208; }
+.onnuri-banner > img { width:100%; height:100%; object-fit:fill; }
+.onnuri-banner a { position:absolute; bottom:0; left:0; width:100%; height:17.308%; }
+.onnuri-banner a:focus-visible { outline:3px solid #181814; outline-offset:-3px; }
+.onnuri-v2 > .onnuri-scroll { padding:0 0 34px; background:#f5f5f5; }
+.onnuri-free,.onnuri-popular { padding:20px; background:#fff; }
+.onnuri-free { overflow:hidden; }
+.onnuri-free > header { display:flex; flex-direction:column; gap:4px; margin-bottom:20px; }
+.onnuri-timer { display:flex; align-items:center; gap:4px; align-self:flex-start; height:20px; padding:0 6px; border-radius:4px; background:#ff4537; color:#fff; font-size:12px; font-weight:500; line-height:18px; }
+.onnuri-free h2,.onnuri-popular h2 { display:flex; align-items:center; gap:4px; margin:0; font-size:20px; line-height:28px; font-weight:600; color:#181814; }
+.onnuri-free h2 img,.onnuri-popular h2 img { flex:none; }
+.onnuri-menu-track { display:flex; gap:12px; overflow-x:auto; margin:0 -20px; padding:0 20px; scrollbar-width:none; }
+.onnuri-menu-track::-webkit-scrollbar,.onnuri-filter-strip::-webkit-scrollbar { display:none; }
+.onnuri-free-card { display:flex; flex-direction:column; flex:0 0 152px; gap:12px; width:152px; padding:0; border:0; background:transparent; color:#2a2924; text-align:left; }
+.onnuri-free-photo { position:relative; display:block; width:152px; height:152px; overflow:hidden; border-radius:8px; }
+.onnuri-free-photo > img { width:100%; height:100%; object-fit:cover; }
+.onnuri-free-photo > span { position:absolute; bottom:0; left:0; width:100%; height:28px; display:flex; align-items:center; justify-content:center; background:#f90; color:#fff; font-size:14px; line-height:20px; font-weight:600; }
+.onnuri-free-copy { display:flex; flex-direction:column; gap:6px; width:100%; min-height:109px; }
+.onnuri-free-copy > small { font-size:12px; line-height:18px; font-weight:400; }
+.onnuri-free-copy > strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:18px; line-height:26px; font-weight:600; }
+.onnuri-free-price { display:flex; align-items:center; gap:4px; height:26px; white-space:nowrap; }
+.onnuri-free-price b,.onnuri-free-price strong { font-size:18px; line-height:26px; font-weight:600; }
+.onnuri-free-price b { color:#ff7b00; }
+.onnuri-free-price del { font-size:12px; line-height:18px; }
+.onnuri-tags { display:flex; align-items:center; gap:4px; flex-wrap:wrap; }
+.onnuri-tags > span { display:flex; align-items:center; justify-content:center; height:20px; padding:0 6px; border-radius:4px; background:#dfefff; color:#355371; font-size:12px; line-height:18px; font-weight:500; }
+.onnuri-tags > .orange { background:#ffdcbb; color:#d85700; }
+.onnuri-tags > .yellow { background:#fff2b8; color:#8f6500; }
+.onnuri-popular { display:flex; flex-direction:column; gap:20px; margin-top:10px; }
+.onnuri-filter-strip { display:flex; align-items:center; gap:8px; height:36px; margin:0 -20px; padding:0 20px; overflow-x:auto; scrollbar-width:none; }
+.onnuri-select { position:relative; flex:none; height:36px; }
+.onnuri-select:has([data-onnuri-select="mode"]) { width:135px; }
+.onnuri-select:has([data-onnuri-select="sort"]) { width:80px; }
+.onnuri-select:has([data-onnuri-select="local"]) { width:92px; }
+.onnuri-select:has([data-onnuri-select="minimum"]) { width:125px; }
+.onnuri-select select,.onnuri-filter-strip > button { height:36px; border:1px solid #e7e6e3; border-radius:999px; background:#fff; color:#2a2924; font-size:14px; line-height:20px; font-weight:500; white-space:nowrap; }
+.onnuri-select select { width:100%; appearance:none; padding:0 31px 0 12px; background-image:url('./assets/images/onnuri-20261029/473de.svg'); background-repeat:no-repeat; background-position:right 10px center; cursor:pointer; }
+.onnuri-select.dark select { border-color:#2a2924; background-color:#2a2924; background-image:url('./assets/images/onnuri-20261029/7cb3d.svg'); color:#fff; font-weight:600; }
+.onnuri-select option { color:#2a2924; background:#fff; }
+.onnuri-filter-strip > button { flex:none; padding:0 12px; }
+.onnuri-filter-strip > button[aria-pressed="true"] { border-color:#2a2924; background:#2a2924; color:#fff; }
+.onnuri-store-list { display:flex; flex-direction:column; gap:12px; }
+.onnuri-store-card { display:flex; align-items:center; gap:20px; width:100%; padding:0; border:0; background:transparent; color:#2a2924; text-align:left; }
+.onnuri-store-photo { width:100px; height:100px; flex:none; object-fit:cover; border-radius:8px; }
+.onnuri-store-copy { display:flex; flex-direction:column; flex:1; min-width:0; gap:6px; padding-bottom:1px; border-bottom:1px solid rgba(198,198,198,.1); }
+.onnuri-store-title { display:flex; align-items:center; gap:4px; min-width:0; }
+.onnuri-store-title > strong { font-size:18px; line-height:26px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.onnuri-store-title > span { display:flex; align-items:center; flex:none; }
+.onnuri-store-title b { font-size:14px; line-height:20px; }
+.onnuri-store-title small { font-size:12px; line-height:18px; font-weight:400; color:#5c5b54; }
+.onnuri-store-meta { display:flex; align-items:center; gap:4px; flex-wrap:wrap; font-size:12px; line-height:18px; }
+.onnuri-store-meta > span { display:flex; align-items:center; gap:2px; }
+.onnuri-recent { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; line-height:18px; color:#5c5b54; }
+.onnuri-home-indicator { position:absolute; z-index:3; bottom:0; left:0; width:100%; height:34px; object-fit:cover; pointer-events:none; }
+.onnuri-empty { margin:20px 0; font-size:14px; line-height:20px; color:#5c5b54; }
