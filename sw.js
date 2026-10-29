@@ -1,4 +1,4 @@
-const CACHE_NAME = "baedal-prototype-v68-onnuri-oct29";
+const CACHE_NAME = "baedal-prototype-v69-banner4x-oct29";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -20,7 +20,7 @@ const APP_SHELL = [
   "/currency-guide.css?v=20261029-guide",
   "/currency-guide.js?v=20261029-guide",
   "/onnuri-update.css?v=20261029-onnuri",
-  "/onnuri-update.js?v=20261029-onnuri",
+  "/onnuri-update.js?v=20261029-banner4x",
   "/assets/vendor/leaflet/leaflet.css",
   "/assets/vendor/leaflet/leaflet.js"
 ];
