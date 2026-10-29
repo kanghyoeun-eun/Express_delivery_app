@@ -73,5 +73,16 @@
     showScreen('onnuri');trackUtEvent('view_onnuri',{screen_name:'onnuri'});
   },true);
   window.onnuriView={findStore:slug=>storeMap.get(slug),menusForStore:slug=>menuMap.get(slug)};
+  const homeFree = screen.querySelector('.onnuri-free').cloneNode(true);
+  homeFree.classList.add('famous-section','home-onnuri-free');
+  const homeTitle = document.createElement('button');
+  homeTitle.type = 'button';
+  homeTitle.className = 'home-onnuri-title';
+  homeTitle.dataset.target = 'onnuri';
+  homeTitle.innerHTML = `온누리 상품권 받고 무료로 먹자!${icon('a1a1c.svg')}`;
+  homeTitle.addEventListener('click',()=>trackUtEvent('view_onnuri',{screen_name:'onnuri',button_label:'온누리 상품권 받고 무료로 먹자!'}));
+  homeFree.querySelector('h2').replaceChildren(homeTitle);
+  homeFree.querySelectorAll('.onnuri-tags .orange')[2].textContent = '온누리 쿠폰';
+  document.querySelector('.home-v2 .famous-section').replaceWith(homeFree);
   render();
 })();
