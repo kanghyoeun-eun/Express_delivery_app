@@ -13,7 +13,7 @@
 .book-intro h2 { position:relative; z-index:1; width:max-content; margin:0; font-size:22px; line-height:28px; font-weight:700; }
 .book-intro h2::before { content:""; position:absolute; z-index:-1; left:0; top:8.29px; width:116.51px; height:19.707px; background:linear-gradient(104.42deg,#50c466 4.93%,#47c3c4 108.68%); }
 .book-intro p { position:relative; z-index:1; margin:7px 0 0; font-size:16px; line-height:22px; color:#43423c; }
-.book-megaphone { position:absolute; left:56.98%; top:10.18px; width:144.588px; height:139.219px; object-fit:contain; object-position:bottom; transform:rotate(6.18deg) scaleX(-1); filter:drop-shadow(0 7px 21px rgba(147,209,147,.84)); }
+.book-megaphone { position:absolute; left:60.864%; top:10.18px; width:144.588px; height:139.219px; object-fit:contain; object-position:bottom; transform:rotate(-6.18deg) scaleX(-1); filter:drop-shadow(0 7px 21px rgba(147,209,147,.84)); }
 .book-board { position:relative; height:642px; border-radius:32px 32px 0 0; overflow:hidden; background:#fff; }
 .book-path { position:absolute; width:279.052px; height:137.082px; }
 .book-path img { position:absolute; left:0; top:-7px; max-width:none; }
