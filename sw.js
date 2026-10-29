@@ -1,4 +1,4 @@
-const CACHE_NAME = "baedal-prototype-v65-couponbook-oct29";
+const CACHE_NAME = "baedal-prototype-v66-currency-guide-oct29";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -17,6 +17,8 @@ const APP_SHELL = [
   "/my-update.js?v=20261029-book",
   "/couponbook-update.css?v=20261029-book",
   "/couponbook-update.js?v=20261029-book",
+  "/currency-guide.css?v=20261029-guide",
+  "/currency-guide.js?v=20261029-guide",
   "/assets/vendor/leaflet/leaflet.css",
   "/assets/vendor/leaflet/leaflet.js"
 ];
