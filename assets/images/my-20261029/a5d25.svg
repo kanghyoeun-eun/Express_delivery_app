@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="294" height="8.00001" viewBox="0 0 294 8.00001" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="indicator">
+<path id="track" d="M4 4H290" stroke-width="8" stroke-linecap="round" stroke="#D5D7DA"/>
+<path id="bar_indicator" d="M4 4L164.157 4.00001" stroke-width="8" stroke-linecap="round" stroke="#2CD5A5"/>
+</g>
+</svg>

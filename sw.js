@@ -1,9 +1,9 @@
-const CACHE_NAME = "baedal-prototype-v63-map-oct29";
+const CACHE_NAME = "baedal-prototype-v64-my-oct29";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/styles.css?v=20260927-figma-home-layout",
-  "/script.js?v=20261029-map",
+  "/script.js?v=20261029-my",
   "/asset-map.js?v=20260927-figma-home-layout",
   "/manifest.json?v=20260927-figma-home-layout",
   "/home-update.css?v=20261028-ranking",
@@ -13,6 +13,8 @@ const APP_SHELL = [
   "/pickup-update.css?v=20261029-pickup",
   "/map-update.css?v=20261029-map",
   "/map-update.js?v=20261029-map",
+  "/my-update.css?v=20261029-my",
+  "/my-update.js?v=20261029-my",
   "/assets/vendor/leaflet/leaflet.css",
   "/assets/vendor/leaflet/leaflet.js"
 ];

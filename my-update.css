@@ -1,0 +1,67 @@
+.my-v2 > .status-bar { display:grid; grid-template-columns:minmax(0,1fr) 124px minmax(0,1fr); height:50px; min-height:50px; padding:21px 0 0; align-items:start; background:#fff; }
+.my-v2 .status-bar strong { grid-column:1; width:auto; padding:0 6px 0 16px; }
+.my-v2 .status-icons { grid-column:3; width:auto; justify-content:center; padding:4.5px 16px 0 6px; gap:7px; }
+.my-v2 .status-icons img:nth-child(1) { width:19.2px; height:12.226px; }
+.my-v2 .status-icons img:nth-child(2) { width:17.142px; height:12.328px; }
+.my-v2 .status-icons img:nth-child(3) { width:27.328px; height:13px; }
+.my-v2 .my-title-header { position:relative; min-height:50px; height:50px; flex-shrink:0; }
+.my-v2 .my-title-header h1 { position:absolute; left:50%; transform:translateX(-50%); font-size:20px; line-height:28px; font-weight:600; }
+.my-v2 .header-actions { gap:8px; }
+.my-v2 .header-actions button { padding:0; }
+.my-v2 .header-actions img { filter:none; }
+.my-v2 .my-page-scroll { top:100px; bottom:104px; padding:0; height:auto; }
+.my-v2 .my-profile-section { padding:0 20px 18px; gap:8px; }
+.my-v2 .my-profile-row { padding:12px 0; min-height:76px; }
+.my-v2 .my-profile-edit { display:flex; align-items:center; gap:2px; padding:0; text-align:left; }
+.my-v2 .my-profile-row h2 { gap:2px; margin:0 0 4px; font-weight:600; }
+.my-v2 .my-profile-row p { font-weight:500; }
+.my-v2 .my-profile-row > button { width:111px; padding:0; height:32px; flex-shrink:0; font-weight:500; }
+.my-v2 .my-progress-card { height:72px; padding:13px; gap:4px; }
+.my-v2 .my-progress-card p { white-space:normal; font-weight:600; }
+.my-v2 .my-progress-card strong { color:#5c5b54; font-weight:700; }
+.my-v2 .my-progress-card em { color:#008b60; font-style:normal; }
+.my-v2 .my-progress-row { gap:8px; min-height:20px; }
+.my-v2 .my-progress-row > span { min-width:0; background:#d4d7d8; }
+.my-v2 .my-progress-row > span > img { position:absolute; left:0; top:0; max-width:none; }
+.my-v2 .my-progress-row b { flex-shrink:0; min-width:23px; }
+.my-v2 .my-address-card { height:62px; min-height:62px; padding:11px; }
+.my-v2 .my-address-card > span { min-width:0; }
+.my-v2 .my-address-card span span { min-width:0; }
+.my-v2 .my-address-card small { font-weight:400; }
+.my-v2 .my-address-card b { display:block; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:600; }
+.my-v2 .my-quick-grid { grid-template-columns:repeat(4,minmax(0,1fr)); padding:12px 0; min-height:104px; align-items:start; }
+.my-v2 .my-quick-grid button { padding:0; }
+.my-v2 .my-quick-grid span { border:.6px solid #e7e6e3; }
+.my-v2 .my-quick-grid b { width:100%; font-weight:500; white-space:normal; word-break:keep-all; overflow-wrap:anywhere; }
+.my-frequency-card { width:100%; min-width:0; padding:19px 15px 15px; border:1px solid #e7e6e3; border-radius:12px; background:#f9f9f9; display:flex; flex-direction:column; align-items:center; gap:18px; }
+.my-frequency-card > header { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; min-height:26px; }
+.my-frequency-card h2 { margin:0; font-size:18px; font-weight:600; line-height:26px; }
+.my-frequency-card header button { flex-shrink:0; width:102px; height:26px; padding:0 3px; border:1px solid #e7e6e3; border-radius:4px; background:#fff; font-size:12px; line-height:18px; font-weight:500; }
+.my-frequency-badges { position:relative; display:flex; justify-content:space-between; width:295.273px; max-width:100%; height:61.02px; }
+.my-frequency-line { position:absolute; left:13.69px; top:30.11px; max-width:none; }
+.my-frequency-badge { position:relative; height:61.02px; flex-shrink:0; }
+.my-frequency-badge > img { position:absolute; top:-5.583px; max-width:none; }
+.my-frequency-badge-first { width:58.551px; }
+.my-frequency-badge-first > img { left:-5.148px; }
+.my-frequency-badge-second, .my-frequency-badge-locked { width:54.046px; }
+.my-frequency-badge-second > img, .my-frequency-badge-locked > img { left:-7.4px; }
+.my-frequency-badge-third { width:56.63px; }
+.my-frequency-badge-third > img { left:-4.819px; }
+.my-locked-ticket { position:absolute; left:10.147px; top:20.11px; width:33.757px; height:18.939px; transform:rotate(-20.49deg); }
+.my-locked-ticket img { position:absolute; left:-2.6px; top:-1.6px; max-width:none; }
+.my-frequency-badge-locked small { position:absolute; top:20.14px; left:0; width:54.046px; height:18px; text-align:center; font-size:6px; line-height:18px; color:#f3f3f3; transform:rotate(-20.49deg); }
+.my-v2 .my-list-section { margin-top:10px; padding:0 20px; gap:6px; }
+.my-v2 .my-list-section button { height:56px; min-height:56px; flex-shrink:0; }
+.my-v2 .bottom-nav { height:104px; display:flex; justify-content:space-between; padding:10px 20px 44px; gap:0; border:0; background:#fff; }
+.my-v2 .bottom-nav button { flex:0 0 48px; width:48px; height:50px; padding:0; gap:0; font-size:11px; font-weight:500; line-height:18px; }
+.my-v2 .bottom-nav button img { width:28px; height:28px; }
+.my-home-indicator { position:absolute; z-index:11; bottom:8px; left:50%; transform:translateX(-50%); width:144px; height:5px; background:#252b37; border-radius:100px; pointer-events:none; }
+.my-detail-body { padding:20px; display:flex; flex-direction:column; gap:16px; }
+.my-detail-body p { font-size:14px; line-height:22px; margin:0; }
+.my-detail-body form { display:flex; flex-direction:column; gap:12px; }
+.my-detail-body input[type="text"] { height:44px; width:100%; padding:0 12px; border:1px solid #e7e6e3; border-radius:4px; }
+.my-detail-apply { height:44px; background:#2a2924; border-radius:4px; color:#fff; }
+.my-detail-body .my-frequency-badges { align-self:center; margin:8px 0; }
+.my-payment-choice { display:flex; align-items:center; gap:8px; min-height:36px; }
+.my-payment-choice input { accent-color:#2a2924; }
+.my-personal-coupon { display:flex; flex-direction:column; gap:6px; padding:12px; border:1px solid #e7e6e3; border-radius:8px; font-size:14px; line-height:20px; }

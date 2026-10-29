@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="./store-update.css?v=20261028-store" />
     <link rel="stylesheet" href="./pickup-update.css?v=20261029-pickup" />
     <link rel="stylesheet" href="./map-update.css?v=20261029-map" />
+    <link rel="stylesheet" href="./my-update.css?v=20261029-my" />
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -497,48 +498,52 @@
         </nav>
       </section>
 
-      <section class="app-screen" data-screen="my" aria-label="마이페이지">
+      <section class="app-screen my-v2" data-screen="my" aria-label="마이페이지">
         <div class="status-bar plain"><strong>9:41</strong><div class="status-icons"><img src="./icons/status/cellular/black.svg" alt="" /><img src="./icons/status/wifi/black.svg" alt="" /><img src="./icons/status/battery/black.svg" alt="" /></div></div>
         <header class="title-header my-title-header"><span class="header-spacer"></span><h1>MY</h1><div class="header-actions"><button type="button" aria-label="알림"><img src="./icons/24/bell.svg" alt="" /></button><button type="button" data-target="cart" aria-label="장바구니"><img src="./icons/24/shopping-cart-02.svg" alt="" /></button></div></header>
         <section class="scroll-area my-page-scroll checkout-bg">
           <section class="my-profile-section">
             <div class="my-profile-row">
               <div>
-                <h2>간식조아 <img src="./icons/20/chevron-right.svg" alt="" /></h2>
+                <h2><button class="my-profile-edit" type="button" data-my-action="profile"><span id="myNickname">간식조아</span><img src="./icons/20/chevron-right.svg" alt="" /></button></h2>
                 <p><strong>LV1</strong> 행운 만땅 이웃</p>
               </div>
-              <button type="button">멤버십 혜택 보기</button>
+              <button type="button" data-my-action="membership">멤버십 혜택 보기</button>
             </div>
             <div class="my-progress-card">
-              <p><strong>3번 더 주문하면</strong> 3000원 쿠폰 지급!</p>
-              <div class="my-progress-row"><span><i></i></span><b>3/6</b></div>
+              <p><strong>3번 더 주문하면</strong> <em>3000원</em> 쿠폰 지급!</p>
+              <div class="my-progress-row"><span role="progressbar" aria-label="주문 혜택 진행률" aria-valuemin="0" aria-valuemax="6" aria-valuenow="3"><img src="./assets/images/my-20261029/a5d25.svg" alt="" /></span><b>3/6</b></div>
             </div>
-            <button class="my-address-card" type="button">
-              <span><img src="./icons/icon_drafts/20/map-pin.svg" alt="" /><span><small>현재 주소</small>경기 수원시 팔달구 정자천로 32번길</span></span>
+            <button class="my-address-card" type="button" data-modal="store-address">
+              <span><img src="./assets/images/my-20261029/3aabc.svg" alt="" /><span><small>현재 주소</small><b id="myAddressText">경기 수원시 영통구 광교로</b></span></span>
               <img src="./icons/20/chevron-right.svg" alt="" />
             </button>
             <div class="my-quick-grid">
-              <button type="button"><span><img src="./assets/images/decor/thumbs-up-bubble.png" alt="" /></span><b>리뷰 관리</b></button>
-              <button type="button"><span><img src="./assets/images/decor/coin.png" alt="" /></span><b>결제수단</b></button>
-              <button type="button"><span><img src="./assets/images/decor/megaphone.png" alt="" /></span><b>배달특급 스토리</b></button>
-              <button type="button" data-modal="coupon-sheet"><span><img src="./assets/images/decor/heart-orbit.png" alt="" /></span><b>사장님 쿠폰</b></button>
+              <button type="button" data-my-action="reviews"><span><img src="./assets/images/my-20261029/bfcb7.png" alt="" /></span><b>리뷰 관리</b></button>
+              <button type="button" data-my-action="payments"><span><img src="./assets/images/my-20261029/2590a.png" alt="" /></span><b>결제수단</b></button>
+              <button type="button" data-my-action="story"><span><img src="./assets/images/my-20261029/eaced.png" alt="" /></span><b>배달특급 스토리</b></button>
+              <button type="button" data-target="benefit-list" data-slug="coupon" data-label="사장님 쿠폰"><span><img src="./assets/images/my-20261029/bd4d6.png" alt="" /></span><b>사장님 쿠폰</b></button>
             </div>
+            <section class="my-frequency-card"><header><h2>4월 프리퀀시</h2><button type="button" data-my-action="couponbook">쿠폰 북 확인</button></header><div class="my-frequency-badges"><img class="my-frequency-line" src="./assets/images/home-20261028/3ce57.svg" alt="" /><span class="my-frequency-badge my-frequency-badge-first"><img src="./assets/images/my-20261029/b520a.svg" alt="첫 번째 배지 획득" /></span><span class="my-frequency-badge my-frequency-badge-second"><img src="./assets/images/home-20261028/77314.svg" alt="두 번째 배지 획득" /></span><span class="my-frequency-badge my-frequency-badge-third"><img src="./assets/images/my-20261029/a4b15.svg" alt="세 번째 배지 획득" /></span><span class="my-frequency-badge my-frequency-badge-locked"><img class="my-locked-shield" src="./assets/images/home-20261028/7584a.svg" alt="쿠폰 배지 미획득" /><span class="my-locked-ticket"><img src="./assets/images/home-20261028/dde22.svg" alt="" /></span><small>coupon</small></span></div></section>
           </section>
           <section class="my-list-section">
-            <button type="button" data-modal="coupon-sheet">쿠폰함 <img src="./icons/20/chevron-right.svg" alt="" /></button>
-            <button type="button">혜택 모아보기 <img src="./icons/20/chevron-right.svg" alt="" /></button>
-            <button type="button">공지사항 <img src="./icons/20/chevron-right.svg" alt="" /></button>
-            <button type="button">진행중인 이벤트 <img src="./icons/20/chevron-right.svg" alt="" /></button>
-            <button type="button">고객센터 <img src="./icons/20/chevron-right.svg" alt="" /></button>
-            <button type="button">자주 묻는 질문 <img src="./icons/20/chevron-right.svg" alt="" /></button>
-            <button type="button">약관 및 정책 <img src="./icons/20/chevron-right.svg" alt="" /></button>
-            <button type="button">현재버전 <img src="./icons/20/chevron-right.svg" alt="" /></button>
+            <button type="button" data-my-action="coupons">쿠폰함 <img src="./icons/20/chevron-right.svg" alt="" /></button>
+            <button type="button" data-target="benefit-list" data-slug="coupon" data-label="혜택 모아보기">혜택 모아보기 <img src="./icons/20/chevron-right.svg" alt="" /></button>
+            <button type="button" data-my-action="notices">공지사항 <img src="./icons/20/chevron-right.svg" alt="" /></button>
+            <button type="button" data-target="benefit-list" data-slug="event" data-label="이벤트">진행중인 이벤트 <img src="./icons/20/chevron-right.svg" alt="" /></button>
+            <button type="button" data-my-action="support">고객센터 <img src="./icons/20/chevron-right.svg" alt="" /></button>
+            <button type="button" data-my-action="faq">자주 묻는 질문 <img src="./icons/20/chevron-right.svg" alt="" /></button>
+            <button type="button" data-my-action="terms">약관 및 정책 <img src="./icons/20/chevron-right.svg" alt="" /></button>
+            <button type="button" data-my-action="version">현재버전 <img src="./icons/20/chevron-right.svg" alt="" /></button>
           </section>
         </section>
         <nav class="bottom-nav" aria-label="MY 하단 탭">
           <button type="button" data-target="home"><img data-active="./icons/28/bottom-nav/home-solid.svg" data-line="./icons/28/bottom-nav/home-line.svg" src="./icons/28/bottom-nav/home-line.svg" alt="" /><span>홈</span></button><button type="button" data-target="search"><img data-active="./icons/28/bottom-nav/search-solid.svg" data-line="./icons/28/bottom-nav/search-line.svg" src="./icons/28/bottom-nav/search-line.svg" alt="" /><span>검색</span></button><button type="button" data-target="favorites"><img data-active="./icons/28/bottom-nav/like-solid.svg" data-line="./icons/28/bottom-nav/like-line.svg" src="./icons/28/bottom-nav/like-line.svg" alt="" /><span>찜</span></button><button type="button" data-target="orders"><img data-active="./icons/28/bottom-nav/file-solid.svg" data-line="./icons/28/bottom-nav/file-line.svg" src="./icons/28/bottom-nav/file-line.svg" alt="" /><span>주문내역</span></button><button class="active" type="button" data-target="my"><img data-active="./icons/28/bottom-nav/user-solid.svg" data-line="./icons/28/bottom-nav/user-line.svg" src="./icons/28/bottom-nav/user-solid.svg" alt="" /><span>MY</span></button>
         </nav>
+        <span class="my-home-indicator" aria-hidden="true"></span>
       </section>
+
+      <div class="modal-layer" data-overlay="my-detail" role="dialog" aria-modal="true" aria-labelledby="myDetailTitle"><section class="bottom-sheet my-detail-sheet"><header class="sheet-title-bar"><span></span><h2 id="myDetailTitle">MY</h2><button type="button" data-close-modal aria-label="닫기"><img src="./icons/32/delete.svg" alt="" /></button></header><div id="myDetailBody" class="my-detail-body"></div></section></div>
 
       <div class="modal-layer" data-overlay="store-info">
         <section class="bottom-sheet ingredient-sheet">
@@ -635,8 +640,9 @@
     </main>
     <script src="./asset-map.js?v=20260927-figma-home-layout"></script>
     <script src="./assets/vendor/leaflet/leaflet.js"></script>
-    <script src="./script.js?v=20261029-map"></script>
+    <script src="./script.js?v=20261029-my"></script>
     <script src="./home-update.js?v=20261028-ranking"></script>
     <script src="./map-update.js?v=20261029-map"></script>
+    <script src="./my-update.js?v=20261029-my"></script>
   </body>
 </html>
