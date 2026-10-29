@@ -1,0 +1,21 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="83.2735" height="90.3232" viewBox="0 0 83.2735 90.3232" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Union">
+<use xlink:href="#stroke0_0_152" fill="url(#paint0_linear_0_152)"/>
+<mask id="stroke1_0_152" maskUnits="userSpaceOnUse" x="-0.2" y="-0.557289" width="84" height="91" fill="black">
+<rect fill="white" x="-0.2" y="-0.557289" width="84" height="91"/>
+<use xlink:href="#stroke0_0_152"/>
+</mask>
+<path d="M36.8952 85.3281L9.05929 70.3407C5.82003 68.5966 3.8 65.2148 3.8 61.5358V28.7874C3.8 25.1084 5.82003 21.7266 9.05929 19.9825L36.8952 4.99513C39.8547 3.40166 43.4168 3.40162 46.3764 4.99503L74.214 19.9826C77.4534 21.7266 79.4735 25.1085 79.4735 28.7875V61.5357C79.4735 65.2147 77.4533 68.5966 74.214 70.3407L46.3764 85.3282C43.4168 86.9216 39.8547 86.9215 36.8952 85.3281Z" stroke-width="7.6" stroke="url(#paint1_linear_0_152)" mask="url(#stroke1_0_152)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_152" x1="41.6367" y1="2.44271" x2="41.6367" y2="87.8805" gradientUnits="userSpaceOnUse">
+<stop stop-color="#E4E4E4"/>
+<stop offset="1" stop-color="#F2F2F2"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_152" x1="41.6367" y1="2.44271" x2="41.6367" y2="87.8805" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#F4F4F4"/>
+</linearGradient>
+<path id="stroke0_0_152" d="M9.05929 70.3407L36.8952 85.3281C39.8547 86.9215 43.4168 86.9216 46.3764 85.3282L74.214 70.3407C77.4533 68.5966 79.4735 65.2147 79.4735 61.5357V28.7875C79.4735 25.1085 77.4534 21.7266 74.214 19.9826L46.3764 4.99503C43.4168 3.40162 39.8547 3.40166 36.8952 4.99513L9.05929 19.9825C5.82003 21.7266 3.8 25.1084 3.8 28.7874V61.5358C3.8 65.2148 5.82003 68.5966 9.05929 70.3407Z"/>
+</defs>
+</svg>

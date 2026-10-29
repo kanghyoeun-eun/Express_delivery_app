@@ -1,0 +1,35 @@
+.couponbook-v2 { background: linear-gradient(180deg,#ecffec 2.3%,#60ca60 52.973%); }
+.couponbook-v2 .book-background { position:absolute; left:9.74%; top:-15.74px; transform:rotate(-12.97deg); pointer-events:none; }
+.couponbook-v2 .book-status { position:relative; display:flex; flex:0 0 50px; height:50px; padding:21px 34px 7px 55px; background:transparent; z-index:2; }
+.couponbook-v2 .book-status strong { width:auto; font-size:17px; line-height:22px; }
+.couponbook-v2 .status-icons { gap:7px; }
+.couponbook-v2 .status-icons img { width:auto; height:auto; }
+.book-header { position:relative; z-index:2; display:flex; flex:0 0 50px; align-items:center; justify-content:space-between; padding:0 20px; }
+.book-header h1 { position:absolute; left:50%; transform:translateX(-50%); margin:0; font-size:20px; font-weight:600; line-height:28px; }
+.book-header button { display:grid; place-items:center; width:24px; height:32px; padding:0; border:0; background:transparent; }
+.book-header > div { display:flex; gap:8px; }
+.couponbook-v2 .book-scroll { position:relative; padding:0 0 34px; overflow-x:hidden; background:transparent; }
+.book-intro { position:relative; height:128px; padding:21px 27px 0; }
+.book-intro h2 { position:relative; z-index:1; width:max-content; margin:0; font-size:22px; line-height:28px; font-weight:700; }
+.book-intro h2::before { content:""; position:absolute; z-index:-1; left:0; top:8.29px; width:116.51px; height:19.707px; background:linear-gradient(104.42deg,#50c466 4.93%,#47c3c4 108.68%); }
+.book-intro p { position:relative; z-index:1; margin:7px 0 0; font-size:16px; line-height:22px; color:#43423c; }
+.book-megaphone { position:absolute; left:56.98%; top:10.18px; width:144.588px; height:139.219px; object-fit:contain; object-position:bottom; transform:rotate(6.18deg) scaleX(-1); filter:drop-shadow(0 7px 21px rgba(147,209,147,.84)); }
+.book-board { position:relative; height:642px; border-radius:32px 32px 0 0; overflow:hidden; background:#fff; }
+.book-path { position:absolute; width:279.052px; height:137.082px; }
+.book-path img { position:absolute; left:0; top:-7px; max-width:none; }
+.book-path-0 { left:23.817%; top:93.67px; }
+.book-path-1 { left:5.178%; top:230.75px; transform:scaleX(-1); }
+.book-path-2 { left:23.817%; top:367.83px; }
+.book-path-3 { left:5.178%; top:504.92px; transform:rotate(180deg); }
+.book-earned,.book-locked,.book-coupon { position:absolute; left:var(--x); top:var(--y); transform:translate(-50%,-50%); width:75.673px; height:85.438px; }
+.book-earned-image { position:absolute; left:50%; top:-12.346px; transform:translateX(-50%); max-width:none; }
+.book-badge-label { position:absolute; top:94.809px; left:50%; transform:translateX(-50%); padding:1px 6px; border-radius:999px; background:#f5f5f5; color:#5c5b54; font-size:11px; font-weight:500; line-height:18px; white-space:nowrap; }
+.book-locked > img { position:absolute; top:-2.443px; left:-3.8px; max-width:none; filter:drop-shadow(0 0 4px rgba(0,0,0,.12)); }
+.book-locked b { position:absolute; inset:0; display:grid; place-items:center; padding-top:1.06px; font-size:32px; line-height:18px; font-weight:700; color:#c9c9c9; }
+.book-ticket { position:absolute; left:50%; top:50%; width:47.472px; height:26.634px; transform:translate(-50%,-50%) rotate(-20.49deg); }
+.book-ticket img { position:absolute; left:-5px; top:-2px; max-width:none; }
+.book-ticket small { position:absolute; inset:0; display:grid; place-items:center; font-size:8px; line-height:18px; font-weight:500; color:#fff; }
+.book-reward { position:absolute; left:67.524%; top:177.38px; width:75px; }
+.book-reward > span { display:flex; align-items:center; justify-content:center; height:22px; padding:0 8px 1px; border-radius:999px; background:linear-gradient(131deg,#50c566 19.16%,#47c3c4 83.428%); color:#fff; font-size:11px; line-height:18px; font-weight:500; white-space:nowrap; filter:drop-shadow(0 0 2.5px rgba(0,0,0,.06)); }
+.book-reward img { display:block; margin-top:-4px; }
+.book-home-indicator { position:absolute; z-index:3; bottom:0; left:0; width:100%; height:34px; object-fit:cover; pointer-events:none; }

@@ -51,7 +51,7 @@
       showDetail('프로필', '<form id="myProfileForm"><label for="myNicknameInput">닉네임</label><input id="myNicknameInput" type="text" required maxlength="12" /><button class="my-detail-apply" type="submit">저장</button></form>',button);
       body.querySelector('input').value = nickname;
     } else if (action === 'membership') showDetail('멤버십 혜택','<p><b>LV1 행운 만땅 이웃</b></p><p>주문 3/6</p><p>3번 더 주문하면 3000원 쿠폰 지급!</p>',button);
-    else if (action === 'couponbook') showDetail('4월 프리퀀시',`${root.querySelector('.my-frequency-badges').outerHTML}<p>3번 더 주문하면 3000원 쿠폰 지급!</p><p>발급된 프리퀀시 쿠폰이 없어요.</p>`,button);
+    else if (action === 'couponbook') return;
     else if (action === 'coupons') showDetail('쿠폰함',couponMarkup(),button);
     else if (action === 'payments') {
       showDetail('결제수단',`<form id="myPaymentForm">${['신용/체크카드','지역화폐','온누리 상품권'].map((name,index) => `<label class="my-payment-choice"><input type="radio" name="myPayment" value="${name}" ${payment === name ? 'checked' : ''} />${name}</label>`).join('')}<button class="my-detail-apply" type="submit">선택</button></form>`,button);
