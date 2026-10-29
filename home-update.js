@@ -51,7 +51,7 @@
 
   const stamp = home.querySelector('.stamp-section');
   stamp.querySelector('h2').innerHTML = `4월 프리퀀시 현황 ${arrow}`;
-  stamp.querySelector('.stamp-row').innerHTML = ['8d30f.svg','77314.svg','8d690.svg'].map(file => `<img src="${asset(file)}" alt="수집한 배지" />`).join('') + `<span class="home-locked-badge"><img src="${asset('7584a.svg')}" alt="다음 쿠폰 배지" /><img src="${asset('dde22.svg')}" alt="" /></span>`;
+  stamp.querySelector('.stamp-row').innerHTML = `<img class="home-badge-line" src="${asset('3ce57.svg')}" alt="" />` + ['8d30f.svg','77314.svg','8d690.svg'].map((file,index) => `<span class="home-earned-badge home-earned-badge-${index}"><img src="${asset(file)}" alt="수집한 배지" /></span>`).join('') + `<span class="home-locked-badge"><img class="home-locked-shield" src="${asset('7584a.svg')}" alt="다음 쿠폰 배지" /><span class="home-locked-ticket"><img src="${asset('dde22.svg')}" alt="" /><small>coupon</small></span></span>`;
   stamp.querySelector('button').addEventListener('click', () => showScreen('my'));
   hot.after(stamp);
   const famousSection = home.querySelector('.famous-section');
