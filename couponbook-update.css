@@ -41,4 +41,4 @@
 .book-reward { position:absolute; left:67.524%; top:177.38px; width:75px; }
 .book-reward > span { display:flex; align-items:center; justify-content:center; height:22px; padding:0 8px 1px; border-radius:999px; background:linear-gradient(131deg,#50c566 19.16%,#47c3c4 83.428%); color:#fff; font-size:11px; line-height:18px; font-weight:500; white-space:nowrap; filter:drop-shadow(0 0 2.5px rgba(0,0,0,.06)); }
 .book-reward img { display:block; margin-top:-4px; }
-.book-home-indicator { position:absolute; z-index:3; bottom:0; left:0; width:100%; height:34px; object-fit:fill; background:#60ca60; pointer-events:none; }
+.book-home-indicator { position:absolute; z-index:3; bottom:0; left:0; width:100%; height:34px; object-fit:fill; background:transparent; transform:scaleY(-1); pointer-events:none; }
