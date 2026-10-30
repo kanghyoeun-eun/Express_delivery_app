@@ -4,6 +4,8 @@
 .home-v2 .hero-glow { background: none; right: -1px; }
 .home-v2 .hero-glow img { width: 241px; height: 156px; }
 .home-v2 .hero-promo h1 { font-weight: 700; }
+.home-v2 .hero-ticket-frame { position:absolute; top:-4px; right:0; width:139px; height:112px; overflow:hidden; pointer-events:none; }
+.home-v2 .hero-ticket { top:7.03px; left:1.97px; right:auto; width:141.052px; height:97.942px; object-fit:fill; object-position:bottom; filter:drop-shadow(0 4px 6.1px rgba(115,86,20,.08)); }
 .home-v2 .search-box { margin-top: 12px; }
 .app-screen.home-v2 .benefit-wrap { padding: 20px; overflow: hidden; }
 .app-screen.home-v2 .benefit-grid { width: 350px; max-width: 100%; grid-template-columns: repeat(5,minmax(0,62px)); gap: 10px; }

@@ -7,6 +7,11 @@
   home.querySelector('.location span').textContent = '집';
   home.querySelector('.hero-detail-button').innerHTML = `최대 3만원 발급받기 ${arrow}`;
   home.querySelector('.hero-ticket').src = asset('83cbe.png');
+  const couponFrame = document.createElement('span');
+  couponFrame.className = 'hero-ticket-frame';
+  const heroCoupon = home.querySelector('.hero-ticket');
+  heroCoupon.before(couponFrame);
+  couponFrame.append(heroCoupon);
   home.querySelector('.hero-glow').innerHTML = `<img src="${asset('d4db4.svg')}" alt="" />`;
 
   const categoryFiles = ['98f13.png','977e2.png','63722.png','ec115.png','8676b.png','83ac6.png','41cbf.png','82fef.png','d6e17.png','ba2d9.png'];
