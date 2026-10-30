@@ -1,4 +1,4 @@
-const CACHE_NAME = "baedal-prototype-v75-book-gradient-oct30";
+const CACHE_NAME = "baedal-prototype-v76-hero-coupon-oct30";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -6,8 +6,8 @@ const APP_SHELL = [
   "/script.js?v=20261029-full-book",
   "/asset-map.js?v=20260927-figma-home-layout",
   "/manifest.json?v=20260927-figma-home-layout",
-  "/home-update.css?v=20261029-badge",
-  "/home-update.js?v=20261029-third-store",
+  "/home-update.css?v=20261030-hero-coupon",
+  "/home-update.js?v=20261030-hero-coupon",
   "/category-update.css?v=20261028-category",
   "/store-update.css?v=20261028-store",
   "/pickup-update.css?v=20261029-pickup",
