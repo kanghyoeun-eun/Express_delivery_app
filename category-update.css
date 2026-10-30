@@ -33,13 +33,24 @@
 .category-ribbon > img { width:7.251px; height:28px; flex-shrink:0; }
 .category-store-copy { display:flex; flex-direction:column; gap:6px; padding-top:12px; }
 .category-store-heading { display:flex; align-items:center; justify-content:space-between; gap:8px; height:26px; }
+.category-store-heading > strong { width:213px; max-width:calc(100% - 76px); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:18px; line-height:26px; font-weight:600; }
 .category-store-title { min-width:0; display:flex; align-items:center; gap:4px; }
 .category-store-title > strong { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:18px; line-height:26px; font-weight:600; }
 .category-rating { display:flex; align-items:center; flex-shrink:0; height:22px; }
 .category-rating > img { width:14px; height:14px; }
 .category-rating b { font-size:14px; line-height:20px; font-weight:700; }
 .category-rating small { color:#5c5b54; font-size:12px; line-height:18px; font-weight:400; }
-.category-store-time { display:flex; align-items:center; flex-shrink:0; gap:2px; font-size:12px; line-height:18px; font-weight:500; }
+.category-store-time { display:flex; align-items:center; flex-wrap:wrap; gap:2px; font-size:12px; line-height:18px; font-weight:500; }
+.category-store-time em { font-style:normal; font-weight:400; color:#5c5b54; }
+.category-store-time i { font-style:normal; font-weight:400; }
+.category-owner-coupon { position:absolute; top:0; left:0; display:flex; align-items:center; justify-content:center; width:194px; max-width:100%; height:28px; padding:0 8px; border-radius:0 0 12px 0; background:#ff6a00; color:#fff; font-size:14px; line-height:20px; font-weight:700; }
+.category-payment-badges { position:absolute; right:8.906px; bottom:8.78px; display:flex; gap:3.726px; height:48.441px; }
+.category-payment-badge { position:relative; width:47.094px; height:48.441px; }
+.category-payment-shield { position:absolute; left:-1.346px; top:-2.44px; }
+.category-payment-art { position:absolute; left:5.254px; top:0; width:40.585px; height:40.585px; object-fit:cover; }
+.category-payment-label { position:absolute; left:-1.516px; top:26.44px; }
+.category-payment-badge b { position:absolute; top:26.653px; left:0; width:47.094px; color:#005cac; text-align:center; font-size:12px; line-height:18px; font-weight:600; }
+.category-payment-onnuri b { color:#ff6a00; }
 .category-store-time img { width:14px; height:14px; }
 .category-v2 .tags { margin:0; display:flex; flex-wrap:wrap; gap:4px; align-items:center; min-height:20px; }
 .category-v2 .tags > span { display:inline-flex; align-items:center; justify-content:center; height:20px; padding:0 6px; border-radius:4px; font-size:12px; line-height:18px; font-weight:500; white-space:nowrap; }

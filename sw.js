@@ -1,14 +1,14 @@
-const CACHE_NAME = "baedal-prototype-v76-hero-coupon-oct30";
+const CACHE_NAME = "baedal-prototype-v77-category-cards-oct30";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/styles.css?v=20260927-figma-home-layout",
-  "/script.js?v=20261029-full-book",
+  "/script.js?v=20261030-cards",
   "/asset-map.js?v=20260927-figma-home-layout",
   "/manifest.json?v=20260927-figma-home-layout",
   "/home-update.css?v=20261030-hero-coupon",
   "/home-update.js?v=20261030-hero-coupon",
-  "/category-update.css?v=20261028-category",
+  "/category-update.css?v=20261030-cards",
   "/store-update.css?v=20261028-store",
   "/pickup-update.css?v=20261029-pickup",
   "/map-update.css?v=20261029-map",
