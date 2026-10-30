@@ -15,6 +15,7 @@
 .app-screen.home-v2 .benefit-item[data-slug="gdream"] { background: #f7ffdf; border-color: #cbe3d2; }
 .app-screen.home-v2 .benefit-item[data-slug="event"] { background: #fcf6fe; border-color: #e6daea; }
 .app-screen.home-v2 .benefit-art { background: none; border: 0; border-radius: 999px; flex-shrink: 0; }
+.home-v2 .benefit-wrap button:disabled { opacity:1; cursor:default; }
 .app-screen.home-v2 .benefit-item em { top: -10px; left: 50%; transform: translateX(-50%); width: max-content; min-width: 56px; padding: 0 6px; font-size: 11px; }
 .home-charge-links { display: flex; gap: 8px; margin-top: 16px; overflow-x: auto; scrollbar-width: none; padding-bottom: 1px; }
 .home-charge-links button { display: flex; align-items: center; gap: 8px; border: .6px solid #6bb3ff; border-radius: 999px; padding: 8px 12px; white-space: nowrap; flex: 0 0 auto; font-size: 12px; color: #5c5b54; }

@@ -1,4 +1,4 @@
-const CACHE_NAME = "baedal-prototype-v77-category-cards-oct30";
+const CACHE_NAME = "baedal-prototype-v78-onnuri-only-oct30";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -6,8 +6,8 @@ const APP_SHELL = [
   "/script.js?v=20261030-cards",
   "/asset-map.js?v=20260927-figma-home-layout",
   "/manifest.json?v=20260927-figma-home-layout",
-  "/home-update.css?v=20261030-hero-coupon",
-  "/home-update.js?v=20261030-hero-coupon",
+  "/home-update.css?v=20261030-onnuri-only",
+  "/home-update.js?v=20261030-onnuri-only",
   "/category-update.css?v=20261030-cards",
   "/store-update.css?v=20261028-store",
   "/pickup-update.css?v=20261029-pickup",

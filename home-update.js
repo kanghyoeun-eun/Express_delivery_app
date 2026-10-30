@@ -22,11 +22,17 @@
     const button = benefitGrid.querySelector(`[data-slug="${slug}"]`);
     button.querySelector('img').src = asset(benefitFiles[slug]);
     if (slug === 'onnuri') button.querySelector('em').textContent = '선착순 무료';
+    else {
+      button.disabled = true;
+      button.removeAttribute('data-target');
+    }
     benefitGrid.append(button);
   });
   const chargeLinks = document.createElement('div');
   chargeLinks.className = 'home-charge-links';
   chargeLinks.innerHTML = `<button type="button" data-target="benefit-list" data-slug="local" data-label="지역화폐"><img src="${asset('e1c46.svg')}" alt="" /><span>지역화폐 충전하고 <strong>10% 싸게 먹기!</strong></span>${arrow}</button><button type="button" data-target="benefit-list" data-slug="onnuri" data-label="온누리"><img src="${asset('8bf71.svg')}" alt="" /><span>온누리 쿠폰 발급받고 <strong>무료로 먹기!</strong></span>${arrow}</button>`;
+  chargeLinks.querySelector('[data-slug="local"]').disabled = true;
+  chargeLinks.querySelector('[data-slug="local"]').removeAttribute('data-target');
   home.querySelector('.benefit-wrap').append(chargeLinks);
 
   const promotion = home.querySelector('.event-card');
