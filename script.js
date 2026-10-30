@@ -285,25 +285,38 @@ const saladResults = [
     deliveryTime: "25~30분",
     pickupTime: "20분",
     pickupDiscount: 6000,
-    rating: "5.0(432)",
-    time: "35분 소요",
-    discount: "최대 3000원 할인",
-    image: "category-20261028/600c6.png",
-    labels: ["온누리 쿠폰"],
+    rating: "4.9(200)",
+    time: "30분 소요",
+    pickupWalkMinutes: 40,
+    pickupDriveMinutes: 30,
+    paymentMethods: ["local", "onnuri"],
+    onnuriBadgeLabel: "category-card-20261030/4395b.svg",
+    couponLabel: "4000원 쿠폰",
+    discount: "최대 4000원 할인",
+    image: "home-20261028/83cc0.png",
+    labels: ["수원페이", "온누리 쿠폰"],
     ribbon: "배달특급 10% 즉시 할인 매장",
   },
   {
     name: "샐러리아 호매실점",
+    ownerCoupon: 3000,
     rating: "5.0(342)",
-    time: "35분 소요",
+    time: "20분 소요",
+    pickupWalkMinutes: 35,
+    pickupDriveMinutes: 25,
+    paymentMethods: ["local", "onnuri"],
     discount: "최대 3000원 할인",
     image: "category-20261028/068cf.png",
     labels: ["수원페이"],
   },
   {
     name: "Poke all day 포케&샐러드 호매실점",
+    ownerCoupon: 3000,
     rating: "5.0(342)",
-    time: "35분 소요",
+    time: "20분 소요",
+    pickupWalkMinutes: 35,
+    pickupDriveMinutes: 25,
+    paymentMethods: ["local", "onnuri"],
     discount: "최대 3000원 할인",
     image: "category-20261028/fe306.png",
     labels: ["수원페이"],
@@ -1443,8 +1456,16 @@ function storeModeLabel(mode) {
 
 function categoryStoreCard(store) {
   const rating = String(store.rating).match(/^([\d.]+)(.*)$/);
-  const ribbon = store.ribbon && store.ribbon.includes("배달특급") ? `<span class="category-ribbon"><span>${store.ribbon}</span><img src="./assets/images/category-20261028/eb3e5.svg" alt="" /></span>` : "";
-  return `<button class="large-store-card" type="button" data-target="store" data-store-slug="${getStoreSlug(store)}"><span class="large-store-media"><img src="${imageRoot}${store.image}" alt="${store.name}" loading="lazy" decoding="async" />${ribbon}</span><span class="category-store-copy"><span class="category-store-heading"><span class="category-store-title"><strong>${store.name}</strong><span class="category-rating"><img src="./icons/14/star.svg" alt="별점" /><b>${rating ? rating[1] : store.rating}</b><small>${rating ? rating[2] : ""}</small></span></span><span class="category-store-time"><img src="./icons/14/clock.svg" alt="" />${store.time}</span></span><span class="tags">${renderBenefitTags(store)}${renderDiscountTag(store)}</span></span></button>`;
+  const ribbon = store.ownerCoupon ? `<span class="category-owner-coupon">사장님 쿠폰 ${store.ownerCoupon}원</span>` : "";
+  const labels = [...(store.labels || []),...(store.detailLabels || [])].join(' ');
+  const methods = store.paymentMethods || ['local','onnuri'].filter(method => method === 'local' ? /수원페이|지역화폐/.test(labels) : /온누리/.test(labels));
+  const badges = methods.filter(method => ['local','onnuri'].includes(method)).map(method => {
+    const local = method === 'local';
+    const label = local ? 'pickup-20261029/50033.svg' : store.onnuriBadgeLabel || 'pickup-20261029/e472d.svg';
+    return `<span class="category-payment-badge category-payment-${method}" role="img" aria-label="${local?'수원페이':'온누리상품권'} 사용 가능"><img class="category-payment-shield" src="${imageRoot}pickup-20261029/${local?'38fde.svg':'a7d48.svg'}" alt="" /><img class="category-payment-art" src="${imageRoot}home-20261028/${local?'b9fe0.png':'af9df.png'}" alt="" /><img class="category-payment-label" src="${imageRoot}${label}" alt="" /><b>${local?'수원':'온누리'}</b></span>`;
+  }).join('');
+  const travel = [store.deliveryAvailable===false?'':`<span><em>배달</em> ${store.time}</span>`,Number.isFinite(store.pickupWalkMinutes)?`<span><em>도보</em> ${store.pickupWalkMinutes}분 소요</span>`:'',Number.isFinite(store.pickupDriveMinutes)?`<span><em>자동차</em> ${store.pickupDriveMinutes}분 소요</span>`:''].filter(Boolean).join('<i aria-hidden="true">·</i>');
+  return `<button class="large-store-card" type="button" data-target="store" data-store-slug="${getStoreSlug(store)}"><span class="large-store-media"><img src="${imageRoot}${store.image}" alt="${store.name}" loading="lazy" decoding="async" />${ribbon}<span class="category-payment-badges">${badges}</span></span><span class="category-store-copy"><span class="category-store-heading"><strong>${store.name}</strong><span class="category-rating"><img src="./assets/images/home-20261028/6fad9.svg" alt="별점" /><b>${rating ? rating[1] : store.rating}</b><small>${rating ? rating[2] : ""}</small></span></span><span class="category-store-time">${travel}</span><span class="tags">${renderBenefitTags(store)}${renderDiscountTag(store,'./assets/images/onnuri-20261029/06d4b.svg')}</span></span></button>`;
 }
 
 function pickupStoreCard(store) {
@@ -1858,9 +1879,9 @@ function renderBenefitTags(store) {
   return `${paymentTag}${renderStoreLabels(store)}${couponTag}`;
 }
 
-function renderDiscountTag(store) {
+function renderDiscountTag(store, iconSrc = './icons/14/wavy-check.svg') {
   if (!hasVisibleBenefit(store) || String(store.discount || "").includes("혜택 없음")) return "";
-  return `<span class="discount"><img src="./icons/14/wavy-check.svg" alt="" />${store.discount}</span>`;
+  return `<span class="discount"><img src="${iconSrc}" alt="" />${store.discount}</span>`;
 }
 
 function largeStoreCard(store) {
