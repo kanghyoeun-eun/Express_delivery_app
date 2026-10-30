@@ -1,4 +1,4 @@
-const CACHE_NAME = "baedal-prototype-v74-book-endpoint-oct30";
+const CACHE_NAME = "baedal-prototype-v75-book-gradient-oct30";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -15,7 +15,7 @@ const APP_SHELL = [
   "/map-update.js?v=20261029-map",
   "/my-update.css?v=20261029-my",
   "/my-update.js?v=20261029-book",
-  "/couponbook-update.css?v=20261030-endpoint",
+  "/couponbook-update.css?v=20261030-footer-gradient",
   "/couponbook-update.js?v=20261029-full-book",
   "/currency-guide.css?v=20261029-guide",
   "/currency-guide.js?v=20261029-guide",
