@@ -3,7 +3,7 @@ const APP_SHELL = [
   "/",
   "/index.html",
   "/styles.css?v=20260927-figma-home-layout",
-  "/script.js?v=20261030-cards",
+  "/script.js?v=20261030-onnuri-only",
   "/asset-map.js?v=20260927-figma-home-layout",
   "/manifest.json?v=20260927-figma-home-layout",
   "/home-update.css?v=20261030-onnuri-only",

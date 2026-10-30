@@ -2400,7 +2400,7 @@ function bindInteractions() {
 
   document.querySelector("#benefitGrid").addEventListener("click", (event) => {
     const item = event.target.closest(".benefit-item");
-    if (!item) return;
+    if (!item || item.disabled) return;
     event.stopPropagation();
     document.querySelectorAll(".benefit-item").forEach((node) => node.classList.remove("selected"));
     item.classList.add("selected");
